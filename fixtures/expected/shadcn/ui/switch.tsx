@@ -13,6 +13,8 @@ function Switch({
 }) {
   return (
     <SwitchPrimitive.Root
+      // TODO(native): `after:absolute after:-inset-x-3 after:-inset-y-2`: `::after` pseudo-elements do not exist on native, so this content is lost there.
+
       data-slot="switch"
       data-size={size}
       className={cn(

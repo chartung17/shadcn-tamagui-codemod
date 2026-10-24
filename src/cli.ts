@@ -120,7 +120,7 @@ export async function runCli(argv: readonly string[], io: CliIO): Promise<number
 
   const { totals } = report
   const verb = write ? 'changed' : 'would change'
-  const summary = `${totals.files} file(s) scanned, ${totals.changedFiles} ${verb}; ${totals.diagnostics.todo} TODO(s), ${totals.diagnostics.warning} warning(s)`
+  const summary = `${totals.files} file(s) scanned, ${totals.changedFiles} ${verb}; ${totals.diagnostics.todo} TODO(s), ${totals.diagnostics.warning} warning(s); auto-converted ${totals.autoConvertedPercent}%`
   io.stderr(`${io.color ? pc.bold(summary) : summary}\n`)
   if (!write && totals.changedFiles > 0) {
     io.stderr('Dry run: no files were written. Re-run with --write to apply.\n')

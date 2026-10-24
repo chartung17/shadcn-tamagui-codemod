@@ -12,6 +12,8 @@ function Avatar({
 }) {
   return (
     <AvatarPrimitive.Root
+      // TODO(native): `after:absolute after:inset-0 after:rounded-full after:border after:border-bor...`: `::after` pseudo-elements do not exist on native, so this content is lost there.
+
       data-slot="avatar"
       data-size={size}
       className={cn(
