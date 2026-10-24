@@ -100,12 +100,12 @@ clsx object keys, but not comparison operands), `cva()` bases and variants,
 and `styled()` from `@tamagui/tailwind`. Classes are left as written; each one
 is classified against `src/data/tailwind-support.json`:
 
-| Status | Meaning | Severity |
-| --- | --- | --- |
-| `supported` | Resolved by Tamagui on web and native. | none |
-| `web-only` | Works on web (Tamagui or Tailwind CSS), dropped on native. | warning |
-| `unknown` | Not a utility/token the table knows (custom CSS class, Tailwind v4 value without a config token). | warning |
-| `unsupported` | Its meaning is lost on native and needs a human (`before:`/`after:` content). | TODO |
+| Status        | Meaning                                                                                           | Severity |
+| ------------- | ------------------------------------------------------------------------------------------------- | -------- |
+| `supported`   | Resolved by Tamagui on web and native.                                                            | none     |
+| `web-only`    | Works on web (Tamagui or Tailwind CSS), dropped on native.                                        | warning  |
+| `unknown`     | Not a utility/token the table knows (custom CSS class, Tailwind v4 value without a config token). | warning  |
+| `unsupported` | Its meaning is lost on native and needs a human (`before:`/`after:` content).                     | TODO     |
 
 Class names assembled at runtime (`` `text-${color}-500` ``) get a TODO.
 
