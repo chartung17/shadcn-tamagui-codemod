@@ -1,3 +1,4 @@
+// TODO(native): `Collapsible (CollapsiblePrimitive)`: There is no Tamagui mapping for Radix `Collapsible` yet, so it stays on Radix, which is web-only.
 import { Collapsible as CollapsiblePrimitive } from "radix-ui"
 
 function Collapsible({

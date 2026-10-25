@@ -14,7 +14,7 @@ Anything it cannot convert safely is left in place, marked with a
 `// TODO(native): ...` comment, and listed in the report.
 
 > **Status:** under construction. Implemented passes: `imports`, `elements`,
-> `classes`, `cn-cva`, `selectors`, `radix` (`asChild`/`Slot` only so far) and
+> `classes`, `cn-cva`, `selectors`, `radix` (Dialog, Popover, Tooltip, Tabs, Checkbox, Switch, `asChild`) and
 > the report. The other passes land milestone by milestone.
 
 ## Usage
@@ -187,6 +187,55 @@ a cross-platform form:
 `<html.button asChild={asChild} ...>`: Tamagui components implement `asChild`
 on web and native, while Radix `Slot` is DOM-only. Other `Slot` uses get a TODO.
 
+### Radix components
+
+Radix primitives are replaced with Tamagui's unstyled UI primitives from
+`tamagui/unstyled` (shadcn supplies all styling as classes), using the mapping
+table in `src/mappings/radix.ts`:
+
+| Radix                                                                       | Tamagui                   | Notes                                                                                                                           |
+| --------------------------------------------------------------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| Dialog (Root, Trigger, Portal, Overlay, Content, Title, Description, Close) | `Dialog`                  | `onOpenAutoFocus`/`onCloseAutoFocus` removed (Tamagui uses `Dialog.FocusScope`)                                                 |
+| Popover (Root, Trigger, Anchor, Content, Close, Arrow; Portal removed)      | `Popover`                 | Content positioning props (`side`, `align`, `sideOffset`, ...) removed; Tamagui positions from the root (`placement`, `offset`) |
+| Tooltip (Provider, Root, Trigger, Content, Arrow; Portal removed)           | `TooltipGroup`, `Tooltip` | `delayDuration` becomes `delay`; Tooltip only provides accessibility output on native                                           |
+| Tabs (Root, List, Trigger, Content)                                         | `Tabs`                    | `Trigger` becomes `Tabs.Tab`                                                                                                    |
+| Checkbox (Root, Indicator)                                                  | `Checkbox`                |                                                                                                                                 |
+| Switch (Root, Thumb)                                                        | `Switch`                  |                                                                                                                                 |
+
+The import keeps its local name (`import { Dialog as DialogPrimitive } from
+"tamagui/unstyled"`), so `DialogPrimitive.Root` becomes `DialogPrimitive` and
+`React.ComponentProps<typeof DialogPrimitive.Content>` keeps working. Both
+`radix-ui` and namespace imports of `@radix-ui/react-*` are handled.
+
+**Classes on primitives.** Tamagui UI primitives use the style-props frontend:
+a raw `className` on them is passed through to the DOM but not parsed, so it
+would be lost on native. Every part that receives `className` is therefore
+wrapped once per file with `styled()` from `@tamagui/tailwind`, through a small
+typed helper the codemod adds:
+
+```tsx
+const tw = <C extends React.ComponentType<any>>(component: C) =>
+  styled(component as never) as unknown as React.ComponentType<React.ComponentProps<C>>
+const StyledDialogContent = tw(DialogPrimitive.Content)
+```
+
+`test/runtime.test.ts` pins this behavior (and that Tamagui still sets
+`data-state`, which shadcn's `data-open:`/`data-checked:` variants use on web).
+Tamagui does not document `styled()` over UI kit components in Tailwind mode,
+so this is the part of the output most likely to need attention after a
+Tamagui upgrade.
+
+Radix CSS variables are renamed where Tamagui has an equivalent
+(`--radix-popover-trigger-width` to `--tamagui-popper-anchor-width`,
+`...-content-available-height` to `--tamagui-popper-available-height`); the
+others are reported. Radix components without a mapping (or imported part by
+part) stay on Radix and get a TODO.
+
+To extend the mappings, add an entry to `RADIX_MAPPINGS` (Tamagui part names
+come from the component docs and the `tamagui/unstyled` exports), run
+`pnpm test` (`test/mappings.test.ts` fails if a part does not exist), and add a
+fixture.
+
 ### Imports
 
 The `imports` pass records where every identifier came from, so later passes
@@ -224,6 +273,9 @@ Tests are fixture-driven:
 - `fixtures/input/**`: source files (vendored shadcn sources and hand-written cases)
 - `fixtures/expected/**`: hand-reviewed expected output
 - `fixtures/reports/**`: Markdown report snapshots
+
+`pnpm typecheck:fixtures` type-checks the converted fixtures listed in
+`fixtures/tsconfig.typecheck.json` against the real Tamagui packages.
 
 Every fixture is also checked for idempotency (running the codemod on the
 expected output changes nothing). Files in `fixtures/input/safety/` contain no

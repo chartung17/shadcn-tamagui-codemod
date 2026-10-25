@@ -2,19 +2,26 @@
 
 import * as React from "react"
 import { cn } from "cn"
-import { Switch as SwitchPrimitive } from "radix-ui"
+import { Switch as SwitchPrimitive } from "tamagui/unstyled"
+import { styled } from "@tamagui/tailwind"
+// Lets Tailwind classes (className) style a Tamagui UI primitive on web and native.
+const tw = <C extends React.ComponentType<any>>(component: C) =>
+  styled(component as never) as unknown as React.ComponentType<
+    React.ComponentProps<C>
+  >
+const StyledSwitch = tw(SwitchPrimitive)
+const StyledSwitchThumb = tw(SwitchPrimitive.Thumb)
 
 function Switch({
   className,
   size = "default",
   ...props
-}: React.ComponentProps<typeof SwitchPrimitive.Root> & {
+}: React.ComponentProps<typeof SwitchPrimitive> & {
   size?: "sm" | "default"
 }) {
   return (
-    <SwitchPrimitive.Root
+    <StyledSwitch
       // TODO(native): `after:absolute after:-inset-x-3 after:-inset-y-2`: `::after` pseudo-elements do not exist on native, so this content is lost there.
-
       data-slot="switch"
       data-size={size}
       className={cn(
@@ -23,11 +30,11 @@ function Switch({
       )}
       {...props}
     >
-      <SwitchPrimitive.Thumb
+      <StyledSwitchThumb
         data-slot="switch-thumb"
         className="pointer-events-none block rounded-full bg-background ring-0 transition-transform group-data-[size=default]/switch:size-4 group-data-[size=sm]/switch:size-3 group-data-[size=default]/switch:data-checked:translate-x-[calc(100%-2px)] group-data-[size=sm]/switch:data-checked:translate-x-[calc(100%-2px)] dark:data-checked:bg-primary-foreground group-data-[size=default]/switch:data-unchecked:translate-x-0 group-data-[size=sm]/switch:data-unchecked:translate-x-0 dark:data-unchecked:bg-foreground"
       />
-    </SwitchPrimitive.Root>
+    </StyledSwitch>
   )
 }
 

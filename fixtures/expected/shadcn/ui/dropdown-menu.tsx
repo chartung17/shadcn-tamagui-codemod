@@ -1,5 +1,6 @@
 import * as React from "react"
 import { cn } from "cn"
+// TODO(native): `DropdownMenu (DropdownMenuPrimitive)`: There is no Tamagui mapping for Radix `DropdownMenu` yet, so it stays on Radix, which is web-only.
 import { DropdownMenu as DropdownMenuPrimitive } from "radix-ui"
 import { CheckIcon, ChevronRightIcon } from "lucide-react"
 import { View, html } from "@tamagui/tailwind"

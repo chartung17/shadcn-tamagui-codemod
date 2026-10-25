@@ -4,13 +4,13 @@
 | --- | ---: |
 | Files scanned | 1 |
 | Files changed | 1 |
-| **Auto-converted** | **90.5%** |
+| **Auto-converted** | **89.3%** |
 | Native class coverage | 62% |
-| TODOs | 1 |
+| TODOs | 2 |
 | Warnings | 12 |
 | Notes | 1 |
 | Classes (supported / web-only / unknown / unsupported) | 44 / 20 / 0 / 7 |
-| Constructs (converted / flagged) | 3 / 0 |
+| Constructs (converted / flagged) | 3 / 1 |
 
 *Auto-converted*: classes and constructs (elements, components, imports) that needed no `TODO(native)`.
 *Native class coverage*: class occurrences that resolve on native as well as web.
@@ -20,15 +20,17 @@
 | Code | Severity | Count |
 | --- | --- | ---: |
 | `class/unsupported` | todo | 1 |
+| `radix/unmapped` | todo | 1 |
 | `class/web-only` | warning | 12 |
 | `selector/rewrite` | info | 1 |
 
 ## shadcn/ui/avatar.tsx
 
-Auto-converted 90.5% · 1 TODO(s) · 12 warning(s)
+Auto-converted 89.3% · 2 TODO(s) · 12 warning(s)
 
 | Line | Severity | Code | Construct | Reason | Suggested fix |
 | ---: | --- | --- | --- | --- | --- |
+| 4 | todo | `radix/unmapped` | `Avatar (AvatarPrimitive)` | There is no Tamagui mapping for Radix `Avatar` yet, so it stays on Radix, which is web-only. | Rebuild it from Tamagui primitives, or keep this component web-only in a `.web.tsx` file. |
 | 20 | todo | `class/unsupported` | `after:absolute after:inset-0 after:rounded-full after:border after:border-border after:mix-blend-darken dark:after:mix-blend-lighten` | `::after` pseudo-elements do not exist on native, so this content is lost there. | Render the decoration as a real child element (e.g. an absolutely positioned `View`). |
 | 20 | warning | `class/web-only` | `data-[size=lg]:size-10 data-[size=sm]:size-6` | `data-*` attribute selectors are web-only, so this style does not apply on native. | Drive the style from a prop or state instead (e.g. a styled() variant). |
 | 36 | warning | `class/web-only` | `object-cover` | `object-fit` is dropped on native. | Use the Image `resizeMode`/`objectFit` prop on native. |

@@ -2,16 +2,22 @@
 
 import * as React from "react"
 import { cn } from "cn"
-import { Dialog as DialogPrimitive } from "radix-ui"
-
 import { Button } from "@/components/ui/button"
 import { XIcon } from "lucide-react"
-import { html } from "@tamagui/tailwind"
+import { html, styled } from "@tamagui/tailwind"
+import { Dialog as DialogPrimitive } from "tamagui/unstyled"
+// Lets Tailwind classes (className) style a Tamagui UI primitive on web and native.
+const tw = <C extends React.ComponentType<any>>(component: C) =>
+  styled(component as never) as unknown as React.ComponentType<
+    React.ComponentProps<C>
+  >
+const StyledDialogOverlay = tw(DialogPrimitive.Overlay)
+const StyledDialogContent = tw(DialogPrimitive.Content)
+const StyledDialogTitle = tw(DialogPrimitive.Title)
+const StyledDialogDescription = tw(DialogPrimitive.Description)
 
-function Dialog({
-  ...props
-}: React.ComponentProps<typeof DialogPrimitive.Root>) {
-  return <DialogPrimitive.Root data-slot="dialog" {...props} />
+function Dialog({ ...props }: React.ComponentProps<typeof DialogPrimitive>) {
+  return <DialogPrimitive data-slot="dialog" {...props} />
 }
 
 function DialogTrigger({
@@ -37,7 +43,7 @@ function DialogOverlay({
   ...props
 }: React.ComponentProps<typeof DialogPrimitive.Overlay>) {
   return (
-    <DialogPrimitive.Overlay
+    <StyledDialogOverlay
       data-slot="dialog-overlay"
       className={cn(
         "fixed inset-0 isolate z-50 bg-black/10 duration-100 supports-backdrop-filter:backdrop-blur-xs data-open:animate-in data-open:fade-in-0 data-closed:animate-out data-closed:fade-out-0",
@@ -59,7 +65,7 @@ function DialogContent({
   return (
     <DialogPortal>
       <DialogOverlay />
-      <DialogPrimitive.Content
+      <StyledDialogContent
         data-slot="dialog-content"
         className={cn(
           "fixed top-1/2 left-1/2 z-50 grid w-full max-w-[calc(100%-2rem)] -translate-x-1/2 -translate-y-1/2 gap-6 rounded-xl bg-popover p-6 text-sm text-popover-foreground ring-1 ring-foreground/10 duration-100 outline-none sm:max-w-md data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
@@ -80,7 +86,7 @@ function DialogContent({
             </Button>
           </DialogPrimitive.Close>
         )}
-      </DialogPrimitive.Content>
+      </StyledDialogContent>
     </DialogPortal>
   )
 }
@@ -130,7 +136,7 @@ function DialogTitle({
   ...props
 }: React.ComponentProps<typeof DialogPrimitive.Title>) {
   return (
-    <DialogPrimitive.Title
+    <StyledDialogTitle
       data-slot="dialog-title"
       className={cn("font-heading leading-none font-medium", className)}
       {...props}
@@ -143,7 +149,7 @@ function DialogDescription({
   ...props
 }: React.ComponentProps<typeof DialogPrimitive.Description>) {
   return (
-    <DialogPrimitive.Description
+    <StyledDialogDescription
       data-slot="dialog-description"
       className={cn(
         "text-sm text-muted-foreground *:[a]:underline *:[a]:underline-offset-3 *:[a]:hover:text-foreground",

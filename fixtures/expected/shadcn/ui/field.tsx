@@ -30,7 +30,6 @@ function FieldLegend({
   return (
     <legend
       // TODO(native): `<legend>`: `<legend>` has no `html.*` equivalent, so it renders on web only.
-
       data-slot="field-legend"
       data-variant={variant}
       className={cn(

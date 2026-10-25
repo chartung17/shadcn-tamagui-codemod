@@ -285,7 +285,6 @@ function SidebarRail({
     <html.button
       // TODO(native): `after:absolute after:inset-y-0 after:start-1/2 after:w-[2px] hover:after:bg-s...`: `::after` pseudo-elements do not exist on native, so this content is lost there.
       // TODO(native): `group-data-[collapsible=offcanvas]:after:left-full`: `::after` pseudo-elements do not exist on native, so this content is lost there.
-
       data-sidebar="rail"
       data-slot="sidebar-rail"
       aria-label="Toggle Sidebar"
@@ -436,7 +435,6 @@ function SidebarGroupAction({
   return (
     <html.button
       // TODO(native): `after:absolute after:-inset-2 md:after:hidden`: `::after` pseudo-elements do not exist on native, so this content is lost there.
-
       data-slot="sidebar-group-action"
       data-sidebar="group-action"
       className={cn(
@@ -575,7 +573,6 @@ function SidebarMenuAction({
   return (
     <html.button
       // TODO(native): `after:absolute after:-inset-2 md:after:hidden`: `::after` pseudo-elements do not exist on native, so this content is lost there.
-
       data-slot="sidebar-menu-action"
       data-sidebar="menu-action"
       className={cn(

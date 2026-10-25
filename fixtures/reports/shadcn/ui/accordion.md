@@ -4,13 +4,13 @@
 | --- | ---: |
 | Files scanned | 1 |
 | Files changed | 1 |
-| **Auto-converted** | **98%** |
+| **Auto-converted** | **96%** |
 | Native class coverage | 68.8% |
-| TODOs | 1 |
+| TODOs | 2 |
 | Warnings | 8 |
 | Notes | 0 |
 | Classes (supported / web-only / unknown / unsupported) | 33 / 14 / 0 / 1 |
-| Constructs (converted / flagged) | 1 / 0 |
+| Constructs (converted / flagged) | 1 / 1 |
 
 *Auto-converted*: classes and constructs (elements, components, imports) that needed no `TODO(native)`.
 *Native class coverage*: class occurrences that resolve on native as well as web.
@@ -20,15 +20,17 @@
 | Code | Severity | Count |
 | --- | --- | ---: |
 | `class/unsupported` | todo | 1 |
+| `radix/unmapped` | todo | 1 |
 | `class/web-only` | warning | 8 |
 
 ## shadcn/ui/accordion.tsx
 
-Auto-converted 98% · 1 TODO(s) · 8 warning(s)
+Auto-converted 96% · 2 TODO(s) · 8 warning(s)
 
 | Line | Severity | Code | Construct | Reason | Suggested fix |
 | ---: | --- | --- | --- | --- | --- |
-| 29 | warning | `class/web-only` | `not-last:border-b` | `:not()` selectors are web-only. |  |
+| 6 | todo | `radix/unmapped` | `Accordion (AccordionPrimitive)` | There is no Tamagui mapping for Radix `Accordion` yet, so it stays on Radix, which is web-only. | Rebuild it from Tamagui primitives, or keep this component web-only in a `.web.tsx` file. |
+| 30 | warning | `class/web-only` | `not-last:border-b` | `:not()` selectors are web-only. |  |
 | 47 | todo | `class/unsupported` | `focus-visible:after:border-ring` | `::after` pseudo-elements do not exist on native, so this content is lost there. | Render the decoration as a real child element (e.g. an absolutely positioned `View`). |
 | 47 | warning | `class/web-only` | `transition-all` | CSS transitions are web-only. | Use Tamagui's `transition` prop with an animation driver for native. |
 | 47 | warning | `class/web-only` | `**:data-[slot=accordion-trigger-icon]:ml-auto **:data-[slot=accordion-trigger-icon]:size-4 **:data-[slot=accordion-trigger-icon]:text-muted-foreground` | Descendant selectors (`**:`) are web-only. |  |

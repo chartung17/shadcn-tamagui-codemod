@@ -1,0 +1,35 @@
+{
+  "//": "Type-checks converted fixtures against the real Tamagui packages: pnpm typecheck:fixtures",
+  "compilerOptions": {
+    "strict": true,
+    "jsx": "react-jsx",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "target": "es2022",
+    "lib": ["es2022", "dom"],
+    "skipLibCheck": true,
+    "noEmit": true,
+    "types": [],
+    "paths": {
+      "@/components/ui/*": ["./expected/shadcn/ui/*"],
+      "@/lib/utils": ["./typecheck/lib-utils.ts"]
+    }
+  },
+  "files": [
+    "expected/shadcn/ui/badge.tsx",
+    "expected/shadcn/ui/button.tsx",
+    "expected/shadcn/ui/card.tsx",
+    "expected/shadcn/ui/checkbox.tsx",
+    "expected/shadcn/ui/dialog.tsx",
+    "expected/shadcn/ui/input.tsx",
+    "expected/shadcn/ui/label.tsx",
+    "expected/shadcn/ui/popover.tsx",
+    "expected/shadcn/ui/separator.tsx",
+    "expected/shadcn/ui/switch.tsx",
+    "expected/shadcn/ui/tabs.tsx",
+    "expected/shadcn/ui/tooltip.tsx",
+    "expected/cases/cn-cva/cva-styled.tsx",
+    "expected/cases/cn-cva/inline-cn.tsx",
+    "expected/cases/elements/layout.tsx"
+  ]
+}
