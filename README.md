@@ -13,8 +13,8 @@ The tool rewrites source files in place and is meant to be reviewed as a diff.
 Anything it cannot convert safely is left in place, marked with a
 `// TODO(native): ...` comment, and listed in the report.
 
-> **Status:** under construction. Implemented passes: `imports`, `elements`.
-> The other passes land milestone by milestone.
+> **Status:** under construction. Implemented passes: `imports`, `elements`,
+> `classes`, and the report. The other passes land milestone by milestone.
 
 ## Usage
 
@@ -91,6 +91,59 @@ fails if it drifts from the installed version.
 
 > `html.*` on native requires the Tamagui compiler; see the Tamagui docs on
 > HTML elements.
+
+### Class analysis and the support table
+
+The `classes` pass reads every static class: `className` (and `*ClassName`)
+props, `cn()`/`clsx()` arguments (following conditionals, `&&`, arrays and
+clsx object keys, but not comparison operands), `cva()` bases and variants,
+and `styled()` from `@tamagui/tailwind`. Classes are left as written; each one
+is classified against `src/data/tailwind-support.json`:
+
+| Status        | Meaning                                                                                           | Severity |
+| ------------- | ------------------------------------------------------------------------------------------------- | -------- |
+| `supported`   | Resolved by Tamagui on web and native.                                                            | none     |
+| `web-only`    | Works on web (Tamagui or Tailwind CSS), dropped on native.                                        | warning  |
+| `unknown`     | Not a utility/token the table knows (custom CSS class, Tailwind v4 value without a config token). | warning  |
+| `unsupported` | Its meaning is lost on native and needs a human (`before:`/`after:` content).                     | TODO     |
+
+Class names assembled at runtime (`` `text-${color}-500` ``) get a TODO.
+
+The table has three parts:
+
+- **Utilities**: exact classes (`flex`, `grid`, `sr-only`, ...).
+- **Prefix rules**: a prefix plus the value kinds it accepts (spacing tokens,
+  colors, fractions, arbitrary values, ...).
+- **Variants**: interaction states, themes, media queries, platforms, `group-*`.
+
+Values are checked against the token, theme and media names of the config the
+theme pass generates: `@tamagui/config/v6` (see `src/data/config-tokens.json`,
+generated) extended with shadcn's theme variables and Tailwind's `2xl`
+breakpoint. Arbitrary values that use `var()`, `min()`, `color-mix()` and
+similar functions are web-only because native cannot evaluate them; `calc()`,
+`clamp()`, `rem` and viewport units do resolve on native.
+
+**The table is tested against Tamagui itself.** `test/support-oracle.test.ts`
+resolves every class in the fixtures (plus `test/oracle/extra-classes.json`)
+with `@tamagui/tailwind`'s react-native build and fails if a class produces
+native styles but the table does not call it `supported`, or the other way
+round. Utilities and variants are checked separately.
+
+To extend the table, add an entry, add example classes to
+`test/oracle/extra-classes.json`, and run `pnpm test`.
+
+### Report
+
+`--report <file>` writes `<file>.json` and `<file>.md`. Each diagnostic has
+the file, line and column (in the output file), severity, code, the class or
+construct, the reason and a suggested fix. Totals include:
+
+- **Auto-converted %**: classes and constructs (elements, components, imports)
+  that needed no TODO, as a share of all of them.
+- **Native class coverage %**: class occurrences that resolve on native as well
+  as web.
+
+Diagnostics for the same string and reason are grouped into one row.
 
 ### Imports
 

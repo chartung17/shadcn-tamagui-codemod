@@ -19,7 +19,7 @@ import { isInScope } from '../ast/scope.js'
 import htmlElements from '../data/html-elements.json' with { type: 'json' }
 import { DiagnosticCollector } from '../diagnostics.js'
 import { splitClasses } from '../tailwind/tokenize.js'
-import type { FilePass } from '../types.js'
+import type { FilePass, PassContext } from '../types.js'
 
 type ElementNode = JsxOpeningElement | JsxSelfClosingElement
 
@@ -315,6 +315,7 @@ export const elementsPass: FilePass = {
       if (plan.kind === 'unsupported') {
         // One TODO per unsupported subtree: <table> but not each <tr>/<td>.
         if (ancestors.some((t) => !TAGS[t])) continue
+        context.metrics.constructs.flagged++
         diagnostics.todo(element, {
           code: 'element/unsupported',
           construct: `<${plan.tag}>`,
@@ -324,7 +325,8 @@ export const elementsPass: FilePass = {
         continue
       }
 
-      reportCaveats(element, plan.tag, ancestors, diagnostics)
+      const flagged = reportCaveats(element, plan.tag, ancestors, diagnostics)
+      context.metrics.constructs[flagged ? 'flagged' : 'converted']++
       if (plan.kind === 'view') {
         if (plan.addRow) addFlexRow(element)
         renameElement(element, view())
@@ -339,7 +341,7 @@ export const elementsPass: FilePass = {
       changed = true
     }
 
-    changed = rewriteTagVariables(sourceFile, html, diagnostics) || changed
+    changed = rewriteTagVariables(sourceFile, html, diagnostics, context) || changed
     changed = rewritePropsTypes(sourceFile, html) || changed
     return { changed, diagnostics: diagnostics.items }
   },
@@ -359,11 +361,11 @@ function reportCaveats(
   tag: string,
   ancestors: readonly string[],
   diagnostics: DiagnosticCollector,
-): void {
+): boolean {
   const info = TAGS[tag]!
   if (!info.nativeSupported) {
     // Flag the <select>, not every <option> inside it.
-    if (tag !== 'select' && ancestors.some((t) => SELECT_FAMILY.has(t))) return
+    if (tag !== 'select' && ancestors.some((t) => SELECT_FAMILY.has(t))) return false
     diagnostics.todo(element, {
       code: 'element/select',
       construct: `<${tag}>`,
@@ -371,15 +373,17 @@ function reportCaveats(
       suggestion:
         'Use the shadcn `Select` component, which the radix pass maps to Tamagui `Select`.',
     })
-    return
+    return true
   }
   if (tag === 'input') {
+    let flagged = false
     const typeAttr = getAttribute(element, 'type')
     const init =
       typeAttr && Node.isJsxAttribute(typeAttr) ? typeAttr.getInitializer() : undefined
     if (init && Node.isStringLiteral(init)) {
       const type = init.getLiteralText()
       if (!NATIVE_INPUT_TYPES.has(type)) {
+        flagged = true
         diagnostics.todo(element, {
           code: 'element/input-type',
           construct: `<input type="${type}">`,
@@ -395,7 +399,7 @@ function reportCaveats(
         reason: `\`html.input\` renders a TextInput on native; only ${[...NATIVE_INPUT_TYPES].join(', ')} types work there.`,
       })
     }
-    return
+    return flagged
   }
   const triggers = NOTE_TRIGGERS[tag]
   if (info.note && triggers?.some((name) => getAttribute(element, name))) {
@@ -405,6 +409,7 @@ function reportCaveats(
       reason: `Native caveat: ${info.note}.`,
     })
   }
+  return false
 }
 
 /** `const Comp = asChild ? Slot.Root : "button"` -> `... : html.button` */
@@ -412,6 +417,7 @@ function rewriteTagVariables(
   sourceFile: SourceFile,
   html: () => string,
   diagnostics: DiagnosticCollector,
+  context: PassContext,
 ): boolean {
   let changed = false
   const seen = new Set<Node>()
@@ -425,6 +431,7 @@ function rewriteTagVariables(
         const tag = literal.getLiteralText()
         if (!/^[a-z][A-Za-z0-9]*$/.test(tag)) continue
         if (!TAGS[tag]) {
+          context.metrics.constructs.flagged++
           diagnostics.todo(literal, {
             code: 'element/unsupported',
             construct: `"${tag}"`,
@@ -434,6 +441,7 @@ function rewriteTagVariables(
           continue
         }
         literal.replaceWithText(`${html()}.${tag}`)
+        context.metrics.constructs.converted++
         changed = true
       }
     }

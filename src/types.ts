@@ -66,6 +66,24 @@ export interface CodemodOptions {
   passes?: readonly FilePass[]
 }
 
+/** How Tailwind classes fare on native; see `src/tailwind/support.ts`. */
+export type ClassStatus = 'supported' | 'web-only' | 'unsupported' | 'unknown'
+
+/** Counters for the report's conversion percentages. */
+export interface FileMetrics {
+  /** Class occurrences by support status. */
+  classes: Record<ClassStatus, number>
+  /** Elements, components and imports a pass rewrote, or flagged with a TODO. */
+  constructs: { converted: number; flagged: number }
+}
+
+export function emptyMetrics(): FileMetrics {
+  return {
+    classes: { supported: 0, 'web-only': 0, unsupported: 0, unknown: 0 },
+    constructs: { converted: 0, flagged: 0 },
+  }
+}
+
 export interface PassContext {
   /** Path of the file being transformed, relative to `options.cwd`. */
   filePath: string
@@ -75,6 +93,7 @@ export interface PassContext {
    * module of an imported identifier after the imports pass rewrote it.
    */
   shared: Map<string, unknown>
+  metrics: FileMetrics
 }
 
 /**
@@ -113,4 +132,5 @@ export interface FileResult {
   output: string
   changed: boolean
   diagnostics: Diagnostic[]
+  metrics: FileMetrics
 }

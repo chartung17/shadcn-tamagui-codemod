@@ -37,6 +37,7 @@ export const importsPass: FilePass = {
         .map((name) => REACT_DOM_SUGGESTIONS[name])
         .filter(Boolean)
         .join(' ')
+      context.metrics.constructs.flagged++
       diagnostics.todo(decl, {
         code: 'import/react-dom',
         construct: names.length ? `${names.join(', ')} from "${module}"` : `"${module}"`,

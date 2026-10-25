@@ -5,13 +5,14 @@ import { Project, ts } from 'ts-morph'
 import { placeTodos } from './diagnostics.js'
 import { FILE_PASSES } from './passes/index.js'
 import { createOffsetMapper, lineColumnAt } from './positions.js'
-import type {
-  CodemodOptions,
-  Diagnostic,
-  DiagnosticDraft,
-  FilePass,
-  FileResult,
-  PassContext,
+import {
+  emptyMetrics,
+  type CodemodOptions,
+  type Diagnostic,
+  type DiagnosticDraft,
+  type FilePass,
+  type FileResult,
+  type PassContext,
 } from './types.js'
 
 export function selectPasses(
@@ -58,7 +59,12 @@ export async function transformSource(
   const sourceFile = project.createSourceFile(virtualPath, source, { overwrite: true })
 
   try {
-    const context: PassContext = { filePath: relative, options, shared: new Map() }
+    const context: PassContext = {
+      filePath: relative,
+      options,
+      shared: new Map(),
+      metrics: emptyMetrics(),
+    }
     const drafts: DiagnosticDraft[] = []
     let changed = false
     for (const pass of selectPasses(options.only, options.passes)) {
@@ -77,6 +83,7 @@ export async function transformSource(
         diagnostics: drafts.map((d) =>
           finalize(d, relative, lineColumnAt(source, d.pos)),
         ),
+        metrics: context.metrics,
       }
     }
 
@@ -105,6 +112,7 @@ export async function transformSource(
       output,
       changed: output !== source,
       diagnostics,
+      metrics: context.metrics,
     }
   } finally {
     project.removeSourceFile(sourceFile)

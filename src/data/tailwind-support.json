@@ -1,0 +1,1888 @@
+{
+  "$comment": "Hand-maintained support table for Tailwind classes under @tamagui/tailwind. Sources: the Tailwind docs page (tamagui.dev/docs/core/tailwind), the claimed-utility grammar of @tamagui/style-grammar, and the native gating rules in @tamagui/tailwind's candidate resolver. test/support-oracle.test.ts checks it against the real resolver. Values are checked against src/data/config-tokens.json plus the theme and media names below, i.e. the config the theme pass generates.",
+  "source": "@tamagui/tailwind@3.1.3",
+  "assumedConfig": {
+    "description": "@tamagui/config/v6 defaultConfig, with light/dark themes extended by the shadcn theme variables and Tailwind's 2xl breakpoint added (what the theme pass generates).",
+    "themeNames": ["light", "dark"],
+    "extraThemeKeys": [
+      "background",
+      "foreground",
+      "card",
+      "card-foreground",
+      "popover",
+      "popover-foreground",
+      "primary",
+      "primary-foreground",
+      "secondary",
+      "secondary-foreground",
+      "muted",
+      "muted-foreground",
+      "accent",
+      "accent-foreground",
+      "destructive",
+      "border",
+      "input",
+      "ring",
+      "chart-1",
+      "chart-2",
+      "chart-3",
+      "chart-4",
+      "chart-5",
+      "sidebar",
+      "sidebar-foreground",
+      "sidebar-primary",
+      "sidebar-primary-foreground",
+      "sidebar-accent",
+      "sidebar-accent-foreground",
+      "sidebar-border",
+      "sidebar-ring"
+    ],
+    "extraMedia": ["2xl", "max-2xl"]
+  },
+  "valueKeywords": {
+    "color": ["transparent", "black", "white"],
+    "sizing": ["full", "auto", "screen", "svh", "lvh", "dvh", "svw", "lvw", "dvw", "px"],
+    "nativeUnsupportedSizing": ["min", "max", "fit"],
+    "fontWeight": [
+      "thin",
+      "extralight",
+      "light",
+      "normal",
+      "medium",
+      "semibold",
+      "bold",
+      "extrabold",
+      "black"
+    ],
+    "fontFamily": ["sans", "serif", "mono"],
+    "leading": ["none", "tight", "snug", "normal", "relaxed", "loose"],
+    "tracking": ["tighter", "tight", "normal", "wide", "wider", "widest"],
+    "align": [
+      "start",
+      "end",
+      "center",
+      "between",
+      "around",
+      "evenly",
+      "stretch",
+      "baseline",
+      "normal"
+    ],
+    "textAlign": ["left", "center", "right", "justify", "start", "end"],
+    "colorWebOnly": ["current", "inherit"]
+  },
+  "utilities": {
+    "flex": "supported",
+    "hidden": "supported",
+    "contents": "supported",
+    "block": {
+      "status": "web-only",
+      "reason": "React Native has no block layout; `display: block` is dropped on native."
+    },
+    "inline": {
+      "status": "web-only",
+      "reason": "React Native has no inline layout; `display: inline` is dropped on native."
+    },
+    "inline-block": {
+      "status": "web-only",
+      "reason": "React Native has no inline layout."
+    },
+    "inline-flex": {
+      "status": "web-only",
+      "reason": "`display: inline-flex` is dropped on native, where elements are flex containers anyway."
+    },
+    "grid": {
+      "status": "web-only",
+      "reason": "CSS grid is not available on native; grid classes are dropped there.",
+      "suggestion": "Use flex rows/columns (or `web:grid native:flex`) for layouts that must match on native."
+    },
+    "inline-grid": {
+      "status": "web-only",
+      "reason": "CSS grid is not available on native."
+    },
+    "table": {
+      "status": "web-only",
+      "reason": "Table display has no native equivalent."
+    },
+    "relative": "supported",
+    "absolute": "supported",
+    "static": "supported",
+    "fixed": {
+      "status": "web-only",
+      "reason": "`position: fixed` is dropped on native.",
+      "suggestion": "Use `absolute` inside a full-screen container, or a Tamagui overlay/Portal."
+    },
+    "sticky": {
+      "status": "web-only",
+      "reason": "`position: sticky` is dropped on native."
+    },
+    "visible": {
+      "status": "web-only",
+      "reason": "`visibility` is not supported on native."
+    },
+    "invisible": {
+      "status": "web-only",
+      "reason": "`visibility` is not supported on native.",
+      "suggestion": "Use `opacity-0` (and `pointer-events-none`) to hide without removing layout."
+    },
+    "collapse": {
+      "status": "web-only",
+      "reason": "`visibility` is not supported on native."
+    },
+    "truncate": {
+      "status": "web-only",
+      "reason": "`truncate` sets text-overflow and white-space, which native drops.",
+      "suggestion": "Use `line-clamp-1` for single-line truncation on native."
+    },
+    "text-ellipsis": {
+      "status": "web-only",
+      "reason": "`text-overflow` is not supported on native.",
+      "suggestion": "Use `line-clamp-1`."
+    },
+    "text-clip": {
+      "status": "web-only",
+      "reason": "`text-overflow` is not supported on native."
+    },
+    "overflow-hidden": "supported",
+    "overflow-visible": "supported",
+    "overflow-scroll": "supported",
+    "overflow-auto": {
+      "status": "web-only",
+      "reason": "`overflow: auto` is dropped on native; views do not scroll.",
+      "suggestion": "Wrap scrollable content in a ScrollView."
+    },
+    "flex-1": "supported",
+    "flex-auto": "supported",
+    "flex-initial": "supported",
+    "flex-none": "supported",
+    "flex-row": "supported",
+    "flex-row-reverse": "supported",
+    "flex-col": "supported",
+    "flex-col-reverse": "supported",
+    "flex-wrap": "supported",
+    "flex-wrap-reverse": "supported",
+    "flex-nowrap": "supported",
+    "grow": "supported",
+    "grow-0": "supported",
+    "shrink": "supported",
+    "shrink-0": "supported",
+    "italic": "supported",
+    "not-italic": "supported",
+    "uppercase": "supported",
+    "lowercase": "supported",
+    "capitalize": "supported",
+    "normal-case": "supported",
+    "underline": "supported",
+    "line-through": "supported",
+    "no-underline": "supported",
+    "border": "supported",
+    "border-x": "supported",
+    "border-y": "supported",
+    "border-t": "supported",
+    "border-r": "supported",
+    "border-b": "supported",
+    "border-l": "supported",
+    "border-s": "supported",
+    "border-e": "supported",
+    "border-solid": "supported",
+    "border-dashed": "supported",
+    "border-dotted": "supported",
+    "border-none": "supported",
+    "rounded": "supported",
+    "rounded-t": "supported",
+    "rounded-r": "supported",
+    "rounded-b": "supported",
+    "rounded-l": "supported",
+    "rounded-s": "supported",
+    "rounded-e": "supported",
+    "rounded-tl": "supported",
+    "rounded-tr": "supported",
+    "rounded-bl": "supported",
+    "rounded-br": "supported",
+    "shadow": "supported",
+    "shadow-none": "supported",
+    "outline": "supported",
+    "outline-none": "supported",
+    "outline-hidden": "supported",
+    "outline-solid": "supported",
+    "outline-dashed": "supported",
+    "outline-dotted": "supported",
+    "ring": "supported",
+    "ring-inset": "supported",
+    "inset-ring": "supported",
+    "select-none": "supported",
+    "select-text": "supported",
+    "select-all": "supported",
+    "select-auto": "supported",
+    "pointer-events-none": "supported",
+    "pointer-events-auto": "supported",
+    "pointer-events-box-none": "supported",
+    "pointer-events-box-only": "supported",
+    "cursor-pointer": "supported",
+    "cursor-auto": "supported",
+    "aspect-square": "supported",
+    "aspect-video": "supported",
+    "aspect-auto": {
+      "status": "web-only",
+      "reason": "`aspect-ratio: auto` is not a native value."
+    },
+    "backface-hidden": "supported",
+    "backface-visible": "supported",
+    "box-border": "supported",
+    "box-content": "supported",
+    "isolate": "supported",
+    "isolation-auto": "supported",
+    "transform-none": "supported",
+    "translate-none": "supported",
+    "rotate-none": "supported",
+    "scale-none": "supported",
+    "bg-none": "supported",
+    "line-clamp-none": "supported",
+    "group": "supported",
+    "@container": "supported",
+    "sr-only": {
+      "status": "web-only",
+      "reason": "`sr-only` relies on clipping CSS that native drops, so the element becomes visible.",
+      "suggestion": "Render the text only on web (e.g. `web:sr-only native:hidden`) or move it into `aria-label`."
+    },
+    "not-sr-only": {
+      "status": "web-only",
+      "reason": "Pairs with `sr-only`, which is web-only."
+    },
+    "antialiased": {
+      "status": "web-only",
+      "reason": "Font smoothing is a web-only CSS property."
+    },
+    "subpixel-antialiased": {
+      "status": "web-only",
+      "reason": "Font smoothing is a web-only CSS property."
+    },
+    "tabular-nums": {
+      "status": "web-only",
+      "reason": "`font-variant-numeric` is not mapped on native."
+    },
+    "oldstyle-nums": {
+      "status": "web-only",
+      "reason": "`font-variant-numeric` is not mapped on native."
+    },
+    "lining-nums": {
+      "status": "web-only",
+      "reason": "`font-variant-numeric` is not mapped on native."
+    },
+    "proportional-nums": {
+      "status": "web-only",
+      "reason": "`font-variant-numeric` is not mapped on native."
+    },
+    "slashed-zero": {
+      "status": "web-only",
+      "reason": "`font-variant-numeric` is not mapped on native."
+    },
+    "touch-none": {
+      "status": "web-only",
+      "reason": "`touch-action` is web-only."
+    },
+    "touch-manipulation": {
+      "status": "web-only",
+      "reason": "`touch-action` is web-only."
+    },
+    "touch-auto": {
+      "status": "web-only",
+      "reason": "`touch-action` is web-only."
+    },
+    "touch-pan-x": {
+      "status": "web-only",
+      "reason": "`touch-action` is web-only."
+    },
+    "touch-pan-y": {
+      "status": "web-only",
+      "reason": "`touch-action` is web-only."
+    },
+    "resize": {
+      "status": "web-only",
+      "reason": "`resize` is web-only."
+    },
+    "resize-none": {
+      "status": "web-only",
+      "reason": "`resize` is web-only."
+    },
+    "resize-x": {
+      "status": "web-only",
+      "reason": "`resize` is web-only."
+    },
+    "resize-y": {
+      "status": "web-only",
+      "reason": "`resize` is web-only."
+    },
+    "appearance-none": {
+      "status": "web-only",
+      "reason": "`appearance` is web-only."
+    },
+    "appearance-auto": {
+      "status": "web-only",
+      "reason": "`appearance` is web-only."
+    },
+    "list-none": {
+      "status": "web-only",
+      "reason": "List markers do not exist on native."
+    },
+    "list-disc": {
+      "status": "web-only",
+      "reason": "List markers are not rendered on native (or by `html.li`)."
+    },
+    "list-decimal": {
+      "status": "web-only",
+      "reason": "List markers are not rendered on native (or by `html.li`)."
+    },
+    "list-inside": {
+      "status": "web-only",
+      "reason": "List markers do not exist on native."
+    },
+    "list-outside": {
+      "status": "web-only",
+      "reason": "List markers do not exist on native."
+    },
+    "transition": {
+      "status": "web-only",
+      "reason": "CSS transitions are web-only.",
+      "suggestion": "Use Tamagui's `transition` prop with an animation driver for native."
+    },
+    "transition-all": {
+      "status": "web-only",
+      "reason": "CSS transitions are web-only.",
+      "suggestion": "Use Tamagui's `transition` prop with an animation driver for native."
+    },
+    "transition-colors": {
+      "status": "web-only",
+      "reason": "CSS transitions are web-only.",
+      "suggestion": "Use Tamagui's `transition` prop with an animation driver for native."
+    },
+    "transition-opacity": {
+      "status": "web-only",
+      "reason": "CSS transitions are web-only.",
+      "suggestion": "Use Tamagui's `transition` prop with an animation driver for native."
+    },
+    "transition-shadow": {
+      "status": "web-only",
+      "reason": "CSS transitions are web-only.",
+      "suggestion": "Use Tamagui's `transition` prop with an animation driver for native."
+    },
+    "transition-transform": {
+      "status": "web-only",
+      "reason": "CSS transitions are web-only.",
+      "suggestion": "Use Tamagui's `transition` prop with an animation driver for native."
+    },
+    "transition-none": {
+      "status": "web-only",
+      "reason": "CSS transitions are web-only."
+    },
+    "will-change-transform": {
+      "status": "web-only",
+      "reason": "`will-change` is web-only."
+    },
+    "bg-clip-padding": {
+      "status": "web-only",
+      "reason": "`background-clip` is web-only."
+    },
+    "bg-clip-border": {
+      "status": "web-only",
+      "reason": "`background-clip` is web-only."
+    },
+    "bg-clip-content": {
+      "status": "web-only",
+      "reason": "`background-clip` is web-only."
+    },
+    "bg-clip-text": {
+      "status": "web-only",
+      "reason": "`background-clip: text` is web-only."
+    },
+    "break-words": {
+      "status": "web-only",
+      "reason": "Word breaking rules are web-only."
+    },
+    "break-all": {
+      "status": "web-only",
+      "reason": "Word breaking rules are web-only."
+    },
+    "break-normal": {
+      "status": "web-only",
+      "reason": "Word breaking rules are web-only."
+    },
+    "text-balance": {
+      "status": "web-only",
+      "reason": "`text-wrap` is web-only."
+    },
+    "text-pretty": {
+      "status": "web-only",
+      "reason": "`text-wrap` is web-only."
+    },
+    "text-wrap": {
+      "status": "web-only",
+      "reason": "`text-wrap` is web-only."
+    },
+    "text-nowrap": {
+      "status": "web-only",
+      "reason": "`text-wrap` is web-only.",
+      "suggestion": "Use `line-clamp-1` on native."
+    },
+    "field-sizing-content": {
+      "status": "web-only",
+      "reason": "`field-sizing` is web-only."
+    },
+    "field-sizing-fixed": {
+      "status": "web-only",
+      "reason": "`field-sizing` is web-only."
+    },
+    "scroll-smooth": {
+      "status": "web-only",
+      "reason": "Scroll behavior is web-only."
+    },
+    "scroll-auto": {
+      "status": "web-only",
+      "reason": "Scroll behavior is web-only."
+    },
+    "no-scrollbar": {
+      "status": "web-only",
+      "reason": "Scrollbar styling is web-only."
+    },
+    "outline-offset-0": "supported",
+    "peer": {
+      "status": "web-only",
+      "reason": "`peer` markers drive sibling selectors, which native does not have."
+    },
+    "z-auto": {
+      "status": "web-only",
+      "reason": "`z-index: auto` is not resolved on native."
+    },
+    "max-w-none": {
+      "status": "web-only",
+      "reason": "`max-width: none` is not resolved on native."
+    },
+    "max-h-none": {
+      "status": "web-only",
+      "reason": "`max-height: none` is not resolved on native."
+    },
+    "grayscale": {
+      "status": "web-only",
+      "reason": "Filters are dropped on native."
+    },
+    "invert": {
+      "status": "web-only",
+      "reason": "Filters are dropped on native."
+    },
+    "sepia": {
+      "status": "web-only",
+      "reason": "Filters are dropped on native."
+    },
+    "caption-top": {
+      "status": "web-only",
+      "reason": "Table captions are web-only."
+    },
+    "caption-bottom": {
+      "status": "web-only",
+      "reason": "Table captions are web-only."
+    },
+    "rounded-none": "supported",
+    "rounded-t-none": "supported",
+    "rounded-b-none": "supported",
+    "rounded-l-none": "supported",
+    "rounded-r-none": "supported"
+  },
+  "prefixes": [
+    {
+      "prefix": "p",
+      "values": ["space", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "px",
+      "values": ["space", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "py",
+      "values": ["space", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "pt",
+      "values": ["space", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "pr",
+      "values": ["space", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "pb",
+      "values": ["space", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "pl",
+      "values": ["space", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "ps",
+      "values": ["space", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "pe",
+      "values": ["space", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "m",
+      "values": ["space", "auto", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "mx",
+      "values": ["space", "auto", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "my",
+      "values": ["space", "auto", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "mt",
+      "values": ["space", "auto", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "mr",
+      "values": ["space", "auto", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "mb",
+      "values": ["space", "auto", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "ml",
+      "values": ["space", "auto", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "ms",
+      "values": ["space", "auto", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "me",
+      "values": ["space", "auto", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "gap",
+      "values": ["space", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "gap-x",
+      "values": ["space", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "gap-y",
+      "values": ["space", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "inset",
+      "values": ["space", "sizing", "fraction", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "inset-x",
+      "values": ["space", "sizing", "fraction", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "inset-y",
+      "values": ["space", "sizing", "fraction", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "top",
+      "values": ["space", "sizing", "fraction", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "right",
+      "values": ["space", "sizing", "fraction", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "bottom",
+      "values": ["space", "sizing", "fraction", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "left",
+      "values": ["space", "sizing", "fraction", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "start",
+      "values": ["space", "sizing", "fraction", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "end",
+      "values": ["space", "sizing", "fraction", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "w",
+      "values": ["width", "sizing", "fraction", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "h",
+      "values": ["size", "sizing", "fraction", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "size",
+      "values": ["size", "sizing", "fraction", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "min-w",
+      "values": ["minWidth", "sizing", "fraction", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "max-w",
+      "values": ["maxWidth", "sizing", "fraction", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "min-h",
+      "values": ["size", "sizing", "fraction", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "max-h",
+      "values": ["size", "sizing", "fraction", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "basis",
+      "values": ["flexBasis", "sizing", "fraction", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "flex",
+      "values": ["fraction", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "grow",
+      "values": ["arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "shrink",
+      "values": ["arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "items",
+      "values": ["align"],
+      "status": "supported"
+    },
+    {
+      "prefix": "justify",
+      "values": ["align"],
+      "status": "supported"
+    },
+    {
+      "prefix": "content",
+      "values": ["align"],
+      "status": "supported"
+    },
+    {
+      "prefix": "self",
+      "values": ["align", "auto"],
+      "status": "supported"
+    },
+    {
+      "prefix": "bg",
+      "values": ["color", "arbitrary-color"],
+      "status": "supported"
+    },
+    {
+      "prefix": "text",
+      "values": ["fontSize", "textAlign", "color", "arbitrary-size", "arbitrary-color"],
+      "status": "supported"
+    },
+    {
+      "prefix": "color",
+      "values": ["color", "arbitrary-color"],
+      "status": "supported"
+    },
+    {
+      "prefix": "fill",
+      "values": ["color", "arbitrary-color"],
+      "status": "supported"
+    },
+    {
+      "prefix": "stroke",
+      "values": ["color", "integer", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "decoration",
+      "values": ["color", "arbitrary-color"],
+      "status": "supported"
+    },
+    {
+      "prefix": "placeholder",
+      "values": ["color", "arbitrary-color"],
+      "status": "supported"
+    },
+    {
+      "prefix": "border",
+      "values": ["borderWidth", "color", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "border-x",
+      "values": ["borderWidth", "color", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "border-y",
+      "values": ["borderWidth", "color", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "border-t",
+      "values": ["borderWidth", "color", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "border-r",
+      "values": ["borderWidth", "color", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "border-b",
+      "values": ["borderWidth", "color", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "border-l",
+      "values": ["borderWidth", "color", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "border-s",
+      "values": ["borderWidth", "color", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "border-e",
+      "values": ["borderWidth", "color", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "outline",
+      "values": ["outlineWidth", "color", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "outline-offset",
+      "values": ["outlineOffset", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "rounded",
+      "values": ["radius", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "rounded-t",
+      "values": ["radius", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "rounded-r",
+      "values": ["radius", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "rounded-b",
+      "values": ["radius", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "rounded-l",
+      "values": ["radius", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "rounded-s",
+      "values": ["radius", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "rounded-e",
+      "values": ["radius", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "rounded-tl",
+      "values": ["radius", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "rounded-tr",
+      "values": ["radius", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "rounded-bl",
+      "values": ["radius", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "rounded-br",
+      "values": ["radius", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "shadow",
+      "values": ["boxShadow", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "shadow",
+      "values": ["color"],
+      "status": "web-only",
+      "reason": "Shadow colors (`shadow-<color>`) are not applied on native.",
+      "suggestion": "Use an arbitrary shadow such as `shadow-[0_1px_2px_rgba(0,0,0,0.05)]`."
+    },
+    {
+      "prefix": "ring",
+      "values": ["integer", "color", "arbitrary"],
+      "status": "supported",
+      "composedColor": true
+    },
+    {
+      "prefix": "ring-offset",
+      "values": ["integer", "color", "arbitrary"],
+      "status": "supported",
+      "composedColor": true
+    },
+    {
+      "prefix": "inset-ring",
+      "values": ["integer", "color", "arbitrary"],
+      "status": "supported",
+      "composedColor": true
+    },
+    {
+      "prefix": "font",
+      "values": ["fontWeight", "fontFamily", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "leading",
+      "values": ["leading", "number", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "tracking",
+      "values": ["tracking", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "line-clamp",
+      "values": ["integer"],
+      "status": "supported"
+    },
+    {
+      "prefix": "opacity",
+      "values": ["integer", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "z",
+      "values": ["integer", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "aspect",
+      "values": ["arbitrary"],
+      "status": "supported",
+      "webOnlyKinds": {
+        "kinds": ["fraction"],
+        "reason": "Unbracketed ratios (`aspect-4/3`) are not resolved on native.",
+        "suggestion": "Use `aspect-[4/3]`."
+      }
+    },
+    {
+      "prefix": "rotate",
+      "values": ["integer", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "rotate-x",
+      "values": ["integer", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "rotate-y",
+      "values": ["integer", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "rotate-z",
+      "values": ["integer", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "scale",
+      "values": ["integer", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "scale-x",
+      "values": ["integer", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "scale-y",
+      "values": ["integer", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "skew",
+      "values": ["integer", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "skew-x",
+      "values": ["integer", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "skew-y",
+      "values": ["integer", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "translate-x",
+      "values": ["space", "sizing", "fraction", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "translate-y",
+      "values": ["space", "sizing", "fraction", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "origin",
+      "values": [
+        "keyword:center,top,top-right,right,bottom-right,bottom,bottom-left,left,top-left",
+        "arbitrary"
+      ],
+      "status": "supported"
+    },
+    {
+      "prefix": "perspective",
+      "values": ["perspective", "arbitrary"],
+      "status": "supported"
+    },
+    {
+      "prefix": "mix-blend",
+      "values": [
+        "keyword:normal,multiply,screen,overlay,darken,lighten,color-dodge,color-burn,hard-light,soft-light,difference,exclusion,hue,saturation,color,luminosity,plus-darker,plus-lighter"
+      ],
+      "status": "supported"
+    },
+    {
+      "prefix": "cursor",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "Cursors other than `auto`/`pointer` are dropped on native."
+    },
+    {
+      "prefix": "object",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "`object-fit` is dropped on native.",
+      "suggestion": "Use the Image `resizeMode`/`objectFit` prop on native."
+    },
+    {
+      "prefix": "order",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "`order` is not supported on native."
+    },
+    {
+      "prefix": "overflow-x",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "`overflow-x` is not supported on native.",
+      "suggestion": "Use a horizontal ScrollView."
+    },
+    {
+      "prefix": "overflow-y",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "`overflow-y` is not supported on native.",
+      "suggestion": "Use a ScrollView."
+    },
+    {
+      "prefix": "whitespace",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "`white-space` is not supported on native.",
+      "suggestion": "Use `line-clamp-*` to limit lines on native."
+    },
+    {
+      "prefix": "grid-cols",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "CSS grid is not available on native."
+    },
+    {
+      "prefix": "grid-rows",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "CSS grid is not available on native."
+    },
+    {
+      "prefix": "grid-flow",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "CSS grid is not available on native."
+    },
+    {
+      "prefix": "col",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "CSS grid is not available on native."
+    },
+    {
+      "prefix": "row",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "CSS grid is not available on native."
+    },
+    {
+      "prefix": "auto-cols",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "CSS grid is not available on native."
+    },
+    {
+      "prefix": "auto-rows",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "CSS grid is not available on native."
+    },
+    {
+      "prefix": "place-content",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "`place-*` is a grid shorthand; not available on native."
+    },
+    {
+      "prefix": "place-items",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "`place-*` is a grid shorthand; not available on native."
+    },
+    {
+      "prefix": "place-self",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "`place-*` is a grid shorthand; not available on native."
+    },
+    {
+      "prefix": "justify-items",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "`justify-items` applies to grid; not available on native."
+    },
+    {
+      "prefix": "justify-self",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "`justify-self` applies to grid; not available on native."
+    },
+    {
+      "prefix": "columns",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "Multi-column layout is web-only."
+    },
+    {
+      "prefix": "space-x",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "`space-*` uses child selectors, which native does not have.",
+      "suggestion": "Use `gap-x-*` on a flex container instead."
+    },
+    {
+      "prefix": "space-y",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "`space-*` uses child selectors, which native does not have.",
+      "suggestion": "Use `gap-y-*` on a flex container instead."
+    },
+    {
+      "prefix": "divide-x",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "`divide-*` uses child selectors, which native does not have."
+    },
+    {
+      "prefix": "divide-y",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "`divide-*` uses child selectors, which native does not have."
+    },
+    {
+      "prefix": "divide",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "`divide-*` uses child selectors, which native does not have."
+    },
+    {
+      "prefix": "animate",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "CSS keyframe animations are web-only.",
+      "suggestion": "Use Tamagui's `transition` prop (and enter/exit styles) for native animation."
+    },
+    {
+      "prefix": "transition",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "CSS transitions are web-only.",
+      "suggestion": "Use Tamagui's `transition` prop with an animation driver for native."
+    },
+    {
+      "prefix": "duration",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "CSS transitions are web-only."
+    },
+    {
+      "prefix": "ease",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "CSS transitions are web-only."
+    },
+    {
+      "prefix": "delay",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "CSS transitions are web-only."
+    },
+    {
+      "prefix": "fade-in",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "tw-animate-css enter/exit animations are web-only.",
+      "suggestion": "Use Tamagui enter/exit styles with the `transition` prop."
+    },
+    {
+      "prefix": "fade-out",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "tw-animate-css enter/exit animations are web-only.",
+      "suggestion": "Use Tamagui enter/exit styles with the `transition` prop."
+    },
+    {
+      "prefix": "zoom-in",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "tw-animate-css enter/exit animations are web-only.",
+      "suggestion": "Use Tamagui enter/exit styles with the `transition` prop."
+    },
+    {
+      "prefix": "zoom-out",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "tw-animate-css enter/exit animations are web-only.",
+      "suggestion": "Use Tamagui enter/exit styles with the `transition` prop."
+    },
+    {
+      "prefix": "slide-in-from",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "tw-animate-css enter/exit animations are web-only.",
+      "suggestion": "Use Tamagui enter/exit styles with the `transition` prop."
+    },
+    {
+      "prefix": "slide-out-to",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "tw-animate-css enter/exit animations are web-only.",
+      "suggestion": "Use Tamagui enter/exit styles with the `transition` prop."
+    },
+    {
+      "prefix": "spin-in",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "tw-animate-css enter/exit animations are web-only."
+    },
+    {
+      "prefix": "spin-out",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "tw-animate-css enter/exit animations are web-only."
+    },
+    {
+      "prefix": "from",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "Gradients are dropped on native.",
+      "suggestion": "Use `@tamagui/linear-gradient` for native gradients."
+    },
+    {
+      "prefix": "via",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "Gradients are dropped on native.",
+      "suggestion": "Use `@tamagui/linear-gradient` for native gradients."
+    },
+    {
+      "prefix": "to",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "Gradients are dropped on native.",
+      "suggestion": "Use `@tamagui/linear-gradient` for native gradients."
+    },
+    {
+      "prefix": "bg-linear",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "Gradients are dropped on native.",
+      "suggestion": "Use `@tamagui/linear-gradient` for native gradients."
+    },
+    {
+      "prefix": "bg-gradient",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "Gradients are dropped on native.",
+      "suggestion": "Use `@tamagui/linear-gradient` for native gradients."
+    },
+    {
+      "prefix": "bg-radial",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "Gradients are dropped on native."
+    },
+    {
+      "prefix": "bg-conic",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "Gradients are dropped on native."
+    },
+    {
+      "prefix": "blur",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "Filters are dropped on native."
+    },
+    {
+      "prefix": "brightness",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "Filters are dropped on native."
+    },
+    {
+      "prefix": "contrast",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "Filters are dropped on native."
+    },
+    {
+      "prefix": "grayscale",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "Filters are dropped on native."
+    },
+    {
+      "prefix": "hue-rotate",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "Filters are dropped on native."
+    },
+    {
+      "prefix": "invert",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "Filters are dropped on native."
+    },
+    {
+      "prefix": "saturate",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "Filters are dropped on native."
+    },
+    {
+      "prefix": "sepia",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "Filters are dropped on native."
+    },
+    {
+      "prefix": "drop-shadow",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "Filters are dropped on native.",
+      "suggestion": "Use `shadow-*` for a box shadow on native."
+    },
+    {
+      "prefix": "backdrop",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "Backdrop filters are web-only."
+    },
+    {
+      "prefix": "bg-blend",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "Blend modes are web-only."
+    },
+    {
+      "prefix": "underline-offset",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "`text-underline-offset` is web-only."
+    },
+    {
+      "prefix": "text-shadow",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "Text shadows composed from classes are dropped on native."
+    },
+    {
+      "prefix": "inset-shadow",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "Inset shadows are dropped on native."
+    },
+    {
+      "prefix": "scroll-m",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "Scroll snapping/margins are web-only."
+    },
+    {
+      "prefix": "scroll-p",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "Scroll snapping/padding are web-only."
+    },
+    {
+      "prefix": "scroll-my",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "Scroll snapping/margins are web-only."
+    },
+    {
+      "prefix": "scroll-py",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "Scroll snapping/padding are web-only."
+    },
+    {
+      "prefix": "snap",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "Scroll snapping is web-only."
+    },
+    {
+      "prefix": "overscroll",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "Overscroll behavior is web-only."
+    },
+    {
+      "prefix": "accent",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "`accent-color` is web-only."
+    },
+    {
+      "prefix": "caret",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "`caret-color` is web-only."
+    },
+    {
+      "prefix": "will-change",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "`will-change` is web-only."
+    },
+    {
+      "prefix": "content",
+      "values": ["arbitrary"],
+      "status": "unsupported",
+      "reason": "Generated `content` only exists on pseudo-elements, which native does not have."
+    },
+    {
+      "prefix": "align",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "`vertical-align` is web-only."
+    },
+    {
+      "prefix": "indent",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "`text-indent` is web-only."
+    },
+    {
+      "prefix": "decoration",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "Text decoration thickness/style variants other than color are web-only."
+    },
+    {
+      "prefix": "font-stretch",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "`font-stretch` is web-only."
+    },
+    {
+      "prefix": "mask",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "CSS masks are web-only."
+    },
+    {
+      "prefix": "bg",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "Background images, sizes and positions are web-only."
+    },
+    {
+      "prefix": "table",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "Table layout is web-only."
+    },
+    {
+      "prefix": "border-spacing",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "Table layout is web-only."
+    },
+    {
+      "prefix": "list",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "List markers are web-only."
+    },
+    {
+      "prefix": "hyphens",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "Hyphenation is web-only."
+    },
+    {
+      "prefix": "wrap",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "`overflow-wrap` is web-only."
+    },
+    {
+      "prefix": "fill",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "SVG fill values other than colors are web-only."
+    },
+    {
+      "prefix": "stroke",
+      "values": ["any"],
+      "status": "web-only",
+      "reason": "SVG stroke values other than colors/widths are web-only."
+    }
+  ],
+  "variants": {
+    "exact": {
+      "hover": "supported",
+      "press": "supported",
+      "active": {
+        "status": "supported",
+        "alias": "press"
+      },
+      "pressed": {
+        "status": "supported",
+        "alias": "press"
+      },
+      "focus": "supported",
+      "focus-visible": "supported",
+      "focus-within": "supported",
+      "disabled": "supported",
+      "enter": "supported",
+      "exit": "supported",
+      "starting": {
+        "status": "supported",
+        "alias": "enter"
+      },
+      "ending": {
+        "status": "supported",
+        "alias": "exit"
+      },
+      "web": "supported",
+      "native": "supported",
+      "ios": "supported",
+      "android": "supported",
+      "dark": "supported",
+      "light": "supported",
+      "before": {
+        "status": "unsupported",
+        "reason": "`::before` pseudo-elements do not exist on native, so this content is lost there.",
+        "suggestion": "Render the decoration as a real child element (e.g. an absolutely positioned `View`)."
+      },
+      "after": {
+        "status": "unsupported",
+        "reason": "`::after` pseudo-elements do not exist on native, so this content is lost there.",
+        "suggestion": "Render the decoration as a real child element (e.g. an absolutely positioned `View`)."
+      },
+      "placeholder": {
+        "status": "web-only",
+        "reason": "The `placeholder:` variant styles `::placeholder`, which native does not have.",
+        "suggestion": "Use the `placeholder-<color>` utility, which maps to `placeholderTextColor` on native."
+      },
+      "file": {
+        "status": "web-only",
+        "reason": "`file:` styles the file selector button, which native does not have."
+      },
+      "selection": {
+        "status": "web-only",
+        "reason": "`selection:` styles `::selection`, which native does not have."
+      },
+      "marker": {
+        "status": "web-only",
+        "reason": "List markers do not exist on native."
+      },
+      "backdrop": {
+        "status": "web-only",
+        "reason": "`::backdrop` does not exist on native."
+      },
+      "first-letter": {
+        "status": "web-only",
+        "reason": "Pseudo-elements do not exist on native."
+      },
+      "first-line": {
+        "status": "web-only",
+        "reason": "Pseudo-elements do not exist on native."
+      },
+      "first": {
+        "status": "web-only",
+        "reason": "Structural pseudo-classes (`:first-child`) are web-only."
+      },
+      "last": {
+        "status": "web-only",
+        "reason": "Structural pseudo-classes (`:last-child`) are web-only."
+      },
+      "only": {
+        "status": "web-only",
+        "reason": "Structural pseudo-classes are web-only."
+      },
+      "odd": {
+        "status": "web-only",
+        "reason": "Structural pseudo-classes are web-only."
+      },
+      "even": {
+        "status": "web-only",
+        "reason": "Structural pseudo-classes are web-only."
+      },
+      "empty": {
+        "status": "web-only",
+        "reason": "Structural pseudo-classes are web-only."
+      },
+      "first-of-type": {
+        "status": "web-only",
+        "reason": "Structural pseudo-classes are web-only."
+      },
+      "last-of-type": {
+        "status": "web-only",
+        "reason": "Structural pseudo-classes are web-only."
+      },
+      "*": {
+        "status": "web-only",
+        "reason": "Child selectors (`*:`) are web-only."
+      },
+      "**": {
+        "status": "web-only",
+        "reason": "Descendant selectors (`**:`) are web-only."
+      },
+      "open": {
+        "status": "web-only",
+        "reason": "`:open` is web-only."
+      },
+      "checked": {
+        "status": "web-only",
+        "reason": "`:checked` is web-only; Tamagui Checkbox/Switch expose checked state through props."
+      },
+      "indeterminate": {
+        "status": "web-only",
+        "reason": "`:indeterminate` is web-only."
+      },
+      "required": {
+        "status": "web-only",
+        "reason": "Form validation pseudo-classes are web-only."
+      },
+      "invalid": {
+        "status": "web-only",
+        "reason": "Form validation pseudo-classes are web-only."
+      },
+      "valid": {
+        "status": "web-only",
+        "reason": "Form validation pseudo-classes are web-only."
+      },
+      "user-invalid": {
+        "status": "web-only",
+        "reason": "Form validation pseudo-classes are web-only."
+      },
+      "user-valid": {
+        "status": "web-only",
+        "reason": "Form validation pseudo-classes are web-only."
+      },
+      "read-only": {
+        "status": "web-only",
+        "reason": "`:read-only` is web-only."
+      },
+      "enabled": {
+        "status": "web-only",
+        "reason": "`:enabled` is web-only; use `disabled:` for the inverse."
+      },
+      "placeholder-shown": {
+        "status": "web-only",
+        "reason": "`:placeholder-shown` is web-only."
+      },
+      "autofill": {
+        "status": "web-only",
+        "reason": "`:autofill` is web-only."
+      },
+      "target": {
+        "status": "web-only",
+        "reason": "`:target` is web-only."
+      },
+      "visited": {
+        "status": "web-only",
+        "reason": "`:visited` is web-only."
+      },
+      "inert": {
+        "status": "web-only",
+        "reason": "`inert` is web-only."
+      },
+      "motion-safe": {
+        "status": "web-only",
+        "reason": "Reduced-motion media queries are web-only."
+      },
+      "motion-reduce": {
+        "status": "web-only",
+        "reason": "Reduced-motion media queries are web-only."
+      },
+      "contrast-more": {
+        "status": "web-only",
+        "reason": "Contrast media queries are web-only."
+      },
+      "contrast-less": {
+        "status": "web-only",
+        "reason": "Contrast media queries are web-only."
+      },
+      "forced-colors": {
+        "status": "web-only",
+        "reason": "Forced-colors media queries are web-only."
+      },
+      "print": {
+        "status": "web-only",
+        "reason": "Print styles are web-only."
+      },
+      "portrait": {
+        "status": "web-only",
+        "reason": "Orientation media queries are not configured; add them to your Tamagui media config to use them on native."
+      },
+      "landscape": {
+        "status": "web-only",
+        "reason": "Orientation media queries are not configured; add them to your Tamagui media config to use them on native."
+      },
+      "rtl": {
+        "status": "web-only",
+        "reason": "`rtl:` uses a `[dir]` selector, which is web-only."
+      },
+      "ltr": {
+        "status": "web-only",
+        "reason": "`ltr:` uses a `[dir]` selector, which is web-only."
+      },
+      "pointer-fine": {
+        "status": "web-only",
+        "reason": "Pointer media queries are web-only."
+      },
+      "pointer-coarse": {
+        "status": "web-only",
+        "reason": "Pointer media queries are web-only."
+      },
+      "noscript": {
+        "status": "web-only",
+        "reason": "`noscript` is web-only."
+      }
+    },
+    "prefixes": [
+      {
+        "prefix": "group-",
+        "match": "^group-(hover|press|active|pressed|focus|focus-visible|focus-within|disabled)$",
+        "status": "supported"
+      },
+      {
+        "prefix": "group-",
+        "status": "web-only",
+        "reason": "`group-*` variants other than interaction states (hover, press, focus, focus-visible, focus-within, disabled) use selectors that native does not have."
+      },
+      {
+        "prefix": "peer-",
+        "status": "web-only",
+        "reason": "`peer-*` variants use sibling selectors, which native does not have."
+      },
+      {
+        "prefix": "data-",
+        "status": "web-only",
+        "reason": "`data-*` attribute selectors are web-only, so this style does not apply on native.",
+        "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+      },
+      {
+        "prefix": "aria-",
+        "status": "web-only",
+        "reason": "`aria-*` attribute selectors are web-only, so this style does not apply on native.",
+        "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+      },
+      {
+        "prefix": "has-",
+        "status": "web-only",
+        "reason": "`:has()` selectors are web-only."
+      },
+      {
+        "prefix": "in-",
+        "status": "web-only",
+        "reason": "`in-*` (ancestor) selectors are web-only."
+      },
+      {
+        "prefix": "not-",
+        "status": "web-only",
+        "reason": "`:not()` selectors are web-only."
+      },
+      {
+        "prefix": "nth-",
+        "status": "web-only",
+        "reason": "Structural pseudo-classes are web-only."
+      },
+      {
+        "prefix": "supports-",
+        "status": "web-only",
+        "reason": "`@supports` queries are web-only."
+      },
+      {
+        "prefix": "any-pointer-",
+        "status": "web-only",
+        "reason": "Pointer media queries are web-only."
+      },
+      {
+        "prefix": "min-",
+        "status": "web-only",
+        "reason": "Arbitrary min-width breakpoints are web-only; use a configured media query."
+      },
+      {
+        "prefix": "max-",
+        "status": "web-only",
+        "reason": "Only configured `max-*` media queries (max-sm, max-md, ...) work on native."
+      },
+      {
+        "prefix": "@",
+        "status": "web-only",
+        "reason": "Only container queries named after configured media queries work on native."
+      }
+    ],
+    "arbitrary": {
+      "status": "web-only",
+      "reason": "Arbitrary selector variants are web-only, so this style does not apply on native."
+    },
+    "containerWarning": "Tamagui resolves `@<size>:` container queries against the media query of that name (e.g. `@md` is 768px), while Tailwind's container sizes are smaller (`@md` is 28rem); check the breakpoint."
+  },
+  "arbitraryValues": {
+    "webOnlyFunctions": [
+      "var(",
+      "min(",
+      "max(",
+      "theme(",
+      "env(",
+      "url(",
+      "attr(",
+      "--spacing(",
+      "color-mix(",
+      "oklch(",
+      "oklab(",
+      "lab(",
+      "lch("
+    ],
+    "reason": "CSS variables and functions other than `calc()`/`clamp()` do not resolve on native.",
+    "suggestion": "Use a token or a plain value (px, %, rem) that native can resolve."
+  },
+  "important": {
+    "status": "web-only",
+    "reason": "`!important` classes are not resolved by Tamagui; they pass through to CSS on web and are dropped on native.",
+    "suggestion": "Remove the `!` and rely on class order (the last class wins in Tamagui)."
+  },
+  "spacingPrefixes": [
+    "p",
+    "px",
+    "py",
+    "pt",
+    "pr",
+    "pb",
+    "pl",
+    "ps",
+    "pe",
+    "m",
+    "mx",
+    "my",
+    "mt",
+    "mr",
+    "mb",
+    "ml",
+    "ms",
+    "me",
+    "gap",
+    "gap-x",
+    "gap-y",
+    "inset",
+    "inset-x",
+    "inset-y",
+    "top",
+    "right",
+    "bottom",
+    "left",
+    "start",
+    "end",
+    "w",
+    "h",
+    "size",
+    "min-w",
+    "max-w",
+    "min-h",
+    "max-h",
+    "basis",
+    "translate-x",
+    "translate-y"
+  ]
+}
