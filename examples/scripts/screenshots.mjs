@@ -22,6 +22,7 @@ const OVERLAYS = [
   ["tooltip", "Hover for tooltip", "hover"],
   ["dropdown-menu", "Open menu", "click"],
   ["select", "Select a fruit", "click"],
+  ["toggle-pressed", "Bookmark", "click"],
 ]
 
 const browser = await chromium.launch({

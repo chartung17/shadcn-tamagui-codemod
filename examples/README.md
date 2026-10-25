@@ -88,16 +88,12 @@ What is left, from `screenshots/` (web):
 
 On native (not covered by the screenshots):
 
-6. **`toggle.tsx` stays on Radix**, since Tamagui has no `Toggle`. The codemod
-   flags it with a TODO. `ToggleGroup` imports `toggleVariants` from it, so
-   `radix-ui` ends up in the native bundle. The bundle compiles; whether the
-   app runs on a device is part of the on-device check.
-7. **State styling is dropped.** `data-*`/`aria-*` classes (the checked
+6. **State styling is dropped.** `data-*`/`aria-*` classes (the checked
    checkbox, the active tab, open/closed states) only apply on web; the report
    lists them.
-8. **Icon colors** are the theme color, not the surrounding text color: pass
+7. **Icon colors** are the theme color, not the surrounding text color: pass
    `color` to an icon on a colored background (the `+` in the primary icon
    button).
 
-The native bundles compile (`npm run export:native`). The screenshots do not
-cover how the app looks on a device.
+The native bundles compile (`npm run export:native`) and contain no
+`radix-ui` code. The screenshots do not cover how the app looks on a device.

@@ -1,4 +1,5 @@
 export { BoldIcon } from './BoldIcon'
+export { BookmarkIcon } from './BookmarkIcon'
 export { CheckIcon } from './CheckIcon'
 export { ChevronDownIcon } from './ChevronDownIcon'
 export { ChevronRightIcon } from './ChevronRightIcon'

@@ -1,11 +1,28 @@
 {
   "name": "shadcn-tamagui-codemod",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Codemod that rewrites Tailwind/shadcn React components into Tamagui v3 components for web and native",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chartung17/shadcn-tamagui-codemod.git"
+  },
+  "homepage": "https://github.com/chartung17/shadcn-tamagui-codemod#readme",
+  "bugs": {
+    "url": "https://github.com/chartung17/shadcn-tamagui-codemod/issues"
+  },
+  "keywords": [
+    "codemod",
+    "shadcn",
+    "shadcn-ui",
+    "tamagui",
+    "tailwind",
+    "react-native",
+    "expo"
+  ],
   "type": "module",
   "bin": {
-    "shadcn-tamagui-codemod": "./dist/bin.js"
+    "shadcn-tamagui-codemod": "dist/bin.js"
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -16,8 +33,7 @@
     }
   },
   "files": [
-    "dist",
-    "data"
+    "dist"
   ],
   "engines": {
     "node": ">=20.19"
@@ -33,7 +49,9 @@
     "test:watch": "vitest",
     "check": "pnpm typecheck && pnpm typecheck:fixtures && pnpm lint && pnpm format:check && pnpm test",
     "generate:data": "node scripts/generate-data.ts",
-    "typecheck:fixtures": "tsc -p fixtures/tsconfig.typecheck.json"
+    "typecheck:fixtures": "tsc -p fixtures/tsconfig.typecheck.json",
+    "clean": "node -e \"require('node:fs').rmSync('dist', { recursive: true, force: true })\"",
+    "prepublishOnly": "pnpm check && pnpm clean && pnpm build"
   },
   "dependencies": {
     "diff": "^9.0.0",

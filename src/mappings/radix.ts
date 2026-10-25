@@ -484,3 +484,69 @@ export function findMapping(radixExport: string): RadixMapping | undefined {
 export function findMappingByPackage(pkg: string): RadixMapping | undefined {
   return RADIX_MAPPINGS.find((m) => m.package === pkg)
 }
+
+/**
+ * A Radix primitive with no Tamagui counterpart that is small enough to
+ * rebuild from `html.*` elements. The codemod writes `code` into the file under
+ * the import's local name, so `Local.Root` and `typeof Local.Root` keep working.
+ */
+export interface LocalComponent {
+  /** Export name in the unified `radix-ui` package. */
+  radix: string
+  /** Standalone package, e.g. `@radix-ui/react-toggle`. */
+  package: string
+  /**
+   * Source of the replacement. `$LOCAL` is the import's local name; `$HTML`,
+   * `$COMPONENT_PROPS` and `$USE_STATE` are replaced with the names in scope for
+   * `html`, `React.ComponentProps` and `React.useState`.
+   */
+  code: string
+}
+
+export const LOCAL_COMPONENTS: LocalComponent[] = [
+  {
+    radix: 'Toggle',
+    package: '@radix-ui/react-toggle',
+    // Same API and attributes as Radix Toggle.Root (pressed, defaultPressed,
+    // onPressedChange; aria-pressed, data-state="on" | "off", data-disabled).
+    code: `// Radix Toggle has no Tamagui counterpart: a button with a pressed state,
+// setting the same aria-pressed and data-state attributes.
+const $LOCAL = {
+  Root: function ToggleRoot({
+    pressed: pressedProp,
+    defaultPressed = false,
+    onPressedChange,
+    onClick,
+    ...props
+  }: $COMPONENT_PROPS<typeof $HTML.button> & {
+    pressed?: boolean
+    defaultPressed?: boolean
+    onPressedChange?: (pressed: boolean) => void
+  }) {
+    const [uncontrolled, setUncontrolled] = $USE_STATE(defaultPressed)
+    const pressed = pressedProp ?? uncontrolled
+    return (
+      <$HTML.button
+        type="button"
+        aria-pressed={pressed}
+        data-state={pressed ? "on" : "off"}
+        data-disabled={props.disabled ? "" : undefined}
+        onClick={(event) => {
+          onClick?.(event)
+          if (event?.defaultPrevented || props.disabled) return
+          if (pressedProp === undefined) setUncontrolled(!pressed)
+          onPressedChange?.(!pressed)
+        }}
+        {...props}
+      />
+    )
+  },
+}`,
+  },
+]
+
+export function findLocalComponent(radixOrPackage: string): LocalComponent | undefined {
+  return LOCAL_COMPONENTS.find(
+    (c) => c.radix === radixOrPackage || c.package === radixOrPackage,
+  )
+}

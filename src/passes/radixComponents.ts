@@ -18,6 +18,7 @@ import { declaredNames, ensureNamedImport, TAMAGUI_TAILWIND } from '../ast/impor
 import type { ElementNode } from '../ast/jsx.js'
 import type { DiagnosticCollector } from '../diagnostics.js'
 import {
+  findLocalComponent,
   findMapping,
   findMappingByPackage,
   TAMAGUI_PRIMITIVES_MODULE,
@@ -75,12 +76,13 @@ function collectBindings(
   return out
 }
 
-function reactNames(sourceFile: SourceFile): {
-  ComponentType: string
-  ComponentProps: string
-  ReactNode: string
-  Children: string
-} {
+const REACT_TYPES = new Set(['ComponentType', 'ComponentProps', 'ReactNode'])
+
+/**
+ * `React.<name>` when the file has `import * as React`, else a named import
+ * from `react` (type-only for types), added on first use.
+ */
+function reactName(sourceFile: SourceFile, name: string): string {
   const hasReactNamespace = sourceFile
     .getImportDeclarations()
     .some(
@@ -88,22 +90,8 @@ function reactNames(sourceFile: SourceFile): {
         d.getModuleSpecifierValue() === 'react' &&
         d.getNamespaceImport()?.getText() === 'React',
     )
-  if (hasReactNamespace) {
-    return {
-      ComponentType: 'React.ComponentType',
-      ComponentProps: 'React.ComponentProps',
-      ReactNode: 'React.ReactNode',
-      Children: 'React.Children',
-    }
-  }
-  const type = (name: string) =>
-    ensureNamedImport(sourceFile, 'react', name, { typeOnly: true })
-  return {
-    ComponentType: type('ComponentType'),
-    ComponentProps: type('ComponentProps'),
-    ReactNode: type('ReactNode'),
-    Children: ensureNamedImport(sourceFile, 'react', 'Children'),
-  }
+  if (hasReactNamespace) return `React.${name}`
+  return ensureNamedImport(sourceFile, 'react', name, { typeOnly: REACT_TYPES.has(name) })
 }
 
 function freeName(sourceFile: SourceFile, base: string): string {
@@ -119,7 +107,8 @@ function wrapperHelper(sourceFile: SourceFile, shared: Map<string, unknown>): st
   if (typeof existing === 'string') return existing
   const styledLocal = ensureNamedImport(sourceFile, TAMAGUI_TAILWIND, 'styled')
   const name = freeName(sourceFile, 'tw')
-  const { ComponentType, ComponentProps } = reactNames(sourceFile)
+  const ComponentType = reactName(sourceFile, 'ComponentType')
+  const ComponentProps = reactName(sourceFile, 'ComponentProps')
   const imports = sourceFile.getImportDeclarations()
   const index = imports[imports.length - 1]!.getChildIndex() + 1
   sourceFile.insertStatements(
@@ -147,7 +136,10 @@ function textWrapperHelper(sourceFile: SourceFile, shared: Map<string, unknown>)
   const tw = wrapperHelper(sourceFile, shared)
   const html = ensureNamedImport(sourceFile, TAMAGUI_TAILWIND, 'html')
   const name = freeName(sourceFile, 'twText')
-  const { ComponentType, ComponentProps, ReactNode, Children } = reactNames(sourceFile)
+  const ComponentType = reactName(sourceFile, 'ComponentType')
+  const ComponentProps = reactName(sourceFile, 'ComponentProps')
+  const ReactNode = reactName(sourceFile, 'ReactNode')
+  const Children = reactName(sourceFile, 'Children')
   const twDecl = sourceFile.getVariableStatement((s) =>
     s.getDeclarations().some((d) => d.getName() === tw),
   )!
@@ -221,6 +213,40 @@ function ensureWrapper(
   return name
 }
 
+/** Remove `local` from its `radix-ui` import, or the whole `@radix-ui/*` import. */
+function removeRadixImport(decl: ImportDeclaration, local: string): void {
+  if (decl.getModuleSpecifierValue() !== 'radix-ui') {
+    decl.remove()
+    return
+  }
+  decl
+    .getNamedImports()
+    .find((s) => (s.getAliasNode()?.getText() ?? s.getName()) === local)
+    ?.remove()
+  if (
+    !decl.getDefaultImport() &&
+    !decl.getNamespaceImport() &&
+    decl.getNamedImports().length === 0
+  )
+    decl.remove()
+}
+
+/** Write a `LOCAL_COMPONENTS` replacement after the imports, under `local`. */
+function insertLocalComponent(sourceFile: SourceFile, local: string, code: string): void {
+  const html = ensureNamedImport(sourceFile, TAMAGUI_TAILWIND, 'html')
+  const ComponentProps = reactName(sourceFile, 'ComponentProps')
+  const useState = reactName(sourceFile, 'useState')
+  const imports = sourceFile.getImportDeclarations()
+  sourceFile.insertStatements(
+    imports[imports.length - 1]!.getChildIndex() + 1,
+    code
+      .replaceAll('$LOCAL', local)
+      .replaceAll('$HTML', html)
+      .replaceAll('$COMPONENT_PROPS', ComponentProps)
+      .replaceAll('$USE_STATE', useState),
+  )
+}
+
 function attributesOf(element: ElementNode): JsxAttribute[] {
   return element.getAttributes().filter((a): a is JsxAttribute => Node.isJsxAttribute(a))
 }
@@ -242,6 +268,19 @@ export function rewriteRadixComponents(
 
   for (const binding of bindings) {
     const { mapping, local } = binding
+    const localComponent = mapping ? undefined : findLocalComponent(binding.radix)
+    if (localComponent) {
+      removeRadixImport(binding.decl, local)
+      insertLocalComponent(sourceFile, local, localComponent.code)
+      context.metrics.constructs.converted++
+      diagnostics.info(sourceFile.getVariableDeclarationOrThrow(local), {
+        code: 'radix/local-component',
+        construct: `${binding.radix} (${local})`,
+        reason: `Tamagui has no \`${binding.radix}\`, so a small replacement built on \`html.*\` was added to this file in place of the Radix import.`,
+      })
+      changed = true
+      continue
+    }
     if (!mapping) {
       context.metrics.constructs.flagged++
       diagnostics.todo(binding.decl, {
@@ -255,21 +294,7 @@ export function rewriteRadixComponents(
     }
 
     // 1. Imports: the Tamagui export takes over the same local name.
-    const decl = binding.decl
-    if (decl.getModuleSpecifierValue() === 'radix-ui') {
-      decl
-        .getNamedImports()
-        .find((s) => (s.getAliasNode()?.getText() ?? s.getName()) === local)
-        ?.remove()
-      if (
-        !decl.getDefaultImport() &&
-        !decl.getNamespaceImport() &&
-        decl.getNamedImports().length === 0
-      )
-        decl.remove()
-    } else {
-      decl.remove()
-    }
+    removeRadixImport(binding.decl, local)
     const spec =
       local === mapping.tamagui ? local : { name: mapping.tamagui, alias: local }
     const existing = sourceFile

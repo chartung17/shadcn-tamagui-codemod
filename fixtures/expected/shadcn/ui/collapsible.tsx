@@ -2,6 +2,7 @@ import { Collapsible as CollapsiblePrimitive } from "tamagui/unstyled"
 import { styled, html } from "@tamagui/tailwind"
 import type { ComponentType, ComponentProps, ReactNode } from "react"
 import { Children } from "react"
+
 // Lets Tailwind classes (className) style a Tamagui UI primitive on web and native.
 const tw = <C extends ComponentType<any>>(component: C) =>
   styled(component as never) as unknown as ComponentType<
