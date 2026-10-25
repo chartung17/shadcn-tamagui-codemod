@@ -1,0 +1,34 @@
+name: Examples
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  examples:
+    name: Build examples
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - run: npm ci
+        working-directory: examples
+      # The committed codemod output must match what the current codemod writes.
+      - run: npm run sync && git diff --exit-code -- examples
+        working-directory: examples
+      - run: npm run typecheck
+        working-directory: examples
+      - run: npm run build
+        working-directory: examples
+      - run: npm run export:native
+        working-directory: examples

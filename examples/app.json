@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "shadcn-tamagui-codemod example",
+    "slug": "shadcn-tamagui-codemod-example",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "platforms": ["ios", "android"]
+  }
+}

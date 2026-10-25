@@ -5,3 +5,14 @@ pnpm-lock.yaml
 fixtures
 **/__snapshots__
 examples/*/dist
+# examples: vendored shadcn sources and codemod output
+examples/node_modules
+examples/dist-native
+examples/package-lock.json
+examples/screenshots
+examples/original/src/components
+examples/original/src/index.css
+examples/converted/src
+examples/converted/tamagui.config.ts
+examples/converted/codemod-report.*
+examples/**/.tamagui

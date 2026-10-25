@@ -336,6 +336,16 @@ Tailwind or shadcn usage and must come out byte-for-byte unchanged.
 output, and `pnpm test -u` updates report snapshots. Review every regenerated
 file before committing.
 
+### Examples
+
+[`examples/`](examples/README.md) renders a shadcn/ui gallery and the
+`login-01` block three ways: the original shadcn app, the codemod's output on web
+(Vite), and the same output on iOS and Android (Expo). It has a screenshot
+script for comparing the two web apps and lists the differences found so far.
+After a change to the codemod's output, run `npm run sync` in `examples/` and
+commit the result. The Examples CI workflow fails when the committed output is
+stale.
+
 ## License
 
 MIT, see [LICENSE](LICENSE).

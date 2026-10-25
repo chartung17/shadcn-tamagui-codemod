@@ -1,0 +1,15 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "paths": { "@/*": ["./converted/src/*"] }
+  },
+  "include": [
+    "index.ts",
+    "native-app.tsx",
+    "converted/src",
+    "converted/tamagui.config.ts"
+  ]
+}
