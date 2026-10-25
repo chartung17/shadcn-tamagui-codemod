@@ -1,0 +1,4 @@
+# Check out text files with LF on every platform (Prettier and the generated
+# fixtures expect LF; Git for Windows would otherwise convert them to CRLF).
+* text=auto eol=lf
+*.png binary
