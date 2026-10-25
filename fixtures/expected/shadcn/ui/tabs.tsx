@@ -6,7 +6,7 @@ import { styled } from "@tamagui/tailwind"
 // Lets Tailwind classes (className) style a Tamagui UI primitive on web and native.
 const tw = <C extends React.ComponentType<any>>(component: C) =>
   styled(component as never) as unknown as React.ComponentType<
-    React.ComponentProps<C>
+    React.ComponentProps<C> & { className?: string }
   >
 const StyledTabs = tw(TabsPrimitive)
 const StyledTabsList = tw(TabsPrimitive.List)

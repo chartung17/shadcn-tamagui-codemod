@@ -2,17 +2,26 @@
 
 import * as React from "react"
 import { cn } from "cn"
-// TODO(native): `Accordion (AccordionPrimitive)`: There is no Tamagui mapping for Radix `Accordion` yet, so it stays on Radix, which is web-only.
-import { Accordion as AccordionPrimitive } from "radix-ui"
 import { ChevronDownIcon, ChevronUpIcon } from "lucide-react"
-import { html } from "@tamagui/tailwind"
+import { html, styled } from "@tamagui/tailwind"
+import { Accordion as AccordionPrimitive } from "tamagui/unstyled"
+// Lets Tailwind classes (className) style a Tamagui UI primitive on web and native.
+const tw = <C extends React.ComponentType<any>>(component: C) =>
+  styled(component as never) as unknown as React.ComponentType<
+    React.ComponentProps<C> & { className?: string }
+  >
+const StyledAccordion = tw(AccordionPrimitive)
+const StyledAccordionItem = tw(AccordionPrimitive.Item)
+const StyledAccordionHeader = tw(AccordionPrimitive.Header)
+const StyledAccordionTrigger = tw(AccordionPrimitive.Trigger)
+const StyledAccordionContent = tw(AccordionPrimitive.Content)
 
 function Accordion({
   className,
   ...props
-}: React.ComponentProps<typeof AccordionPrimitive.Root>) {
+}: React.ComponentProps<typeof AccordionPrimitive>) {
   return (
-    <AccordionPrimitive.Root
+    <StyledAccordion
       data-slot="accordion"
       className={cn("flex w-full flex-col", className)}
       {...props}
@@ -25,7 +34,7 @@ function AccordionItem({
   ...props
 }: React.ComponentProps<typeof AccordionPrimitive.Item>) {
   return (
-    <AccordionPrimitive.Item
+    <StyledAccordionItem
       data-slot="accordion-item"
       className={cn("not-last:border-b", className)}
       {...props}
@@ -39,8 +48,8 @@ function AccordionTrigger({
   ...props
 }: React.ComponentProps<typeof AccordionPrimitive.Trigger>) {
   return (
-    <AccordionPrimitive.Header className="flex">
-      <AccordionPrimitive.Trigger
+    <StyledAccordionHeader className="flex">
+      <StyledAccordionTrigger
         // TODO(native): `focus-visible:after:border-ring`: `::after` pseudo-elements do not exist on native, so this content is lost there.
         data-slot="accordion-trigger"
         className={cn(
@@ -58,8 +67,8 @@ function AccordionTrigger({
           data-slot="accordion-trigger-icon"
           className="pointer-events-none hidden shrink-0 group-aria-expanded/accordion-trigger:inline"
         />
-      </AccordionPrimitive.Trigger>
-    </AccordionPrimitive.Header>
+      </StyledAccordionTrigger>
+    </StyledAccordionHeader>
   )
 }
 
@@ -69,7 +78,7 @@ function AccordionContent({
   ...props
 }: React.ComponentProps<typeof AccordionPrimitive.Content>) {
   return (
-    <AccordionPrimitive.Content
+    <StyledAccordionContent
       data-slot="accordion-content"
       className="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up"
       {...props}
@@ -82,7 +91,7 @@ function AccordionContent({
       >
         {children}
       </html.div>
-    </AccordionPrimitive.Content>
+    </StyledAccordionContent>
   )
 }
 

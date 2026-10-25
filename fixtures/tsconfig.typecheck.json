@@ -1,5 +1,5 @@
 {
-  "//": "Type-checks converted fixtures against the real Tamagui packages: pnpm typecheck:fixtures",
+  "//": "Type-checks converted fixtures against the real Tamagui packages: pnpm typecheck:fixtures. Not listed: sidebar.tsx (4 known type errors that need manual fixes, see README), chart/drawer/sonner and the blocks (need recharts, vaul, sonner, next-themes, dnd-kit).",
   "compilerOptions": {
     "strict": true,
     "jsx": "react-jsx",
@@ -12,11 +12,28 @@
     "types": [],
     "paths": {
       "@/components/ui/*": ["./expected/shadcn/ui/*"],
-      "@/lib/utils": ["./typecheck/lib-utils.ts"]
+      "@/lib/utils": ["./typecheck/lib-utils.ts"],
+      "@/hooks/*": ["./expected/shadcn/blocks/dashboard-01/hooks/*"]
     }
   },
   "files": [
     "expected/shadcn/ui/badge.tsx",
+    "expected/shadcn/ui/textarea.tsx",
+    "expected/shadcn/ui/table.tsx",
+    "expected/shadcn/ui/skeleton.tsx",
+    "expected/shadcn/ui/field.tsx",
+    "expected/shadcn/ui/breadcrumb.tsx",
+    "expected/shadcn/ui/toggle-group.tsx",
+    "expected/shadcn/ui/toggle.tsx",
+    "expected/shadcn/ui/slider.tsx",
+    "expected/shadcn/ui/sheet.tsx",
+    "expected/shadcn/ui/select.tsx",
+    "expected/shadcn/ui/radio-group.tsx",
+    "expected/shadcn/ui/dropdown-menu.tsx",
+    "expected/shadcn/ui/collapsible.tsx",
+    "expected/shadcn/ui/avatar.tsx",
+    "expected/shadcn/ui/alert-dialog.tsx",
+    "expected/shadcn/ui/accordion.tsx",
     "expected/shadcn/ui/button.tsx",
     "expected/shadcn/ui/card.tsx",
     "expected/shadcn/ui/checkbox.tsx",

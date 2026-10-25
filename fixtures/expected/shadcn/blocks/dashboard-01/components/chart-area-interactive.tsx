@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+// TODO(native): `"recharts"`: recharts renders SVG through the DOM and does not run on native.
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts"
 
 import { useIsMobile } from "@/hooks/use-mobile"

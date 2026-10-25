@@ -40,6 +40,8 @@ export interface PartMapping {
    * the prop is added back to the wrapper's props type so its API is unchanged.
    */
   radixTypes?: Record<string, string>
+  /** Add this prop from the element's `key` when it is missing (Slider.Thumb `index`). */
+  propFromKey?: string
 }
 
 export interface RadixMapping {
@@ -61,6 +63,19 @@ const POSITIONING =
 
 const FOCUS =
   'Tamagui controls focus through `<X.FocusScope onMountAutoFocus onUnmountAutoFocus>`'
+
+const POSITIONING_TYPES: Record<string, string> = {
+  side: '"top" | "right" | "bottom" | "left"',
+  sideOffset: 'number',
+  align: '"start" | "center" | "end"',
+  alignOffset: 'number',
+  avoidCollisions: 'boolean',
+  collisionPadding: 'number',
+}
+
+const POSITIONING_PROPS: Record<string, string> = Object.fromEntries(
+  Object.keys(POSITIONING_TYPES).map((prop) => [prop, POSITIONING]),
+)
 
 /** CSS variables Tamagui's popper sets on the wrapper of positioned content. */
 function popperVariables(radixName: string): Record<string, string | null> {
@@ -246,6 +261,195 @@ export const RADIX_MAPPINGS: readonly RadixMapping[] = [
     tamagui: 'Label',
     parts: {
       Root: { part: '' },
+    },
+  },
+  {
+    radix: 'AlertDialog',
+    package: '@radix-ui/react-alert-dialog',
+    tamagui: 'AlertDialog',
+    parts: {
+      Root: { part: '' },
+      Trigger: { part: 'Trigger' },
+      Portal: { part: 'Portal' },
+      Overlay: { part: 'Overlay' },
+      Content: {
+        part: 'Content',
+        unsupported: {
+          onOpenAutoFocus: FOCUS.replace('X', 'AlertDialog'),
+          onCloseAutoFocus: FOCUS.replace('X', 'AlertDialog'),
+        },
+        radixTypes: {
+          onOpenAutoFocus: '(event: Event) => void',
+          onCloseAutoFocus: '(event: Event) => void',
+        },
+      },
+      Title: { part: 'Title' },
+      Description: { part: 'Description' },
+      Action: { part: 'Action' },
+      Cancel: { part: 'Cancel' },
+    },
+  },
+  {
+    radix: 'DropdownMenu',
+    package: '@radix-ui/react-dropdown-menu',
+    tamagui: 'Menu',
+    parts: {
+      Root: { part: '' },
+      Trigger: { part: 'Trigger' },
+      Portal: { part: 'Portal' },
+      Content: {
+        part: 'Content',
+        unsupported: POSITIONING_PROPS,
+        radixTypes: POSITIONING_TYPES,
+      },
+      Group: { part: 'Group' },
+      Label: { part: 'Label' },
+      Item: { part: 'Item' },
+      CheckboxItem: { part: 'CheckboxItem' },
+      RadioGroup: { part: 'RadioGroup' },
+      RadioItem: { part: 'RadioItem' },
+      ItemIndicator: { part: 'ItemIndicator' },
+      Separator: { part: 'Separator' },
+      Arrow: { part: 'Arrow' },
+      Sub: { part: 'Sub' },
+      SubTrigger: { part: 'SubTrigger' },
+      SubContent: {
+        part: 'SubContent',
+        unsupported: POSITIONING_PROPS,
+        radixTypes: POSITIONING_TYPES,
+      },
+    },
+    caveats: [
+      'Tamagui Menu highlights items with `focus:` (shadcn already uses it); Radix `data-highlighted` and `data-side` attributes are not set.',
+      'On native, Tamagui Menu renders a popover by default; platform-native menus need the Expo UI or Zeego adapter (see the Tamagui Menu docs).',
+    ],
+    cssVariables: {
+      '--radix-dropdown-menu-content-transform-origin':
+        '--tamagui-menu-content-transform-origin',
+      '--radix-dropdown-menu-content-available-width':
+        '--tamagui-menu-content-available-width',
+      '--radix-dropdown-menu-content-available-height':
+        '--tamagui-menu-content-available-height',
+      '--radix-dropdown-menu-trigger-width': '--tamagui-menu-trigger-width',
+      '--radix-dropdown-menu-trigger-height': '--tamagui-menu-trigger-height',
+    },
+  },
+  {
+    radix: 'Select',
+    package: '@radix-ui/react-select',
+    tamagui: 'Select',
+    parts: {
+      Root: { part: '' },
+      Trigger: { part: 'Trigger' },
+      Value: { part: 'Value' },
+      Icon: { part: 'Icon' },
+      Portal: { part: null },
+      Content: {
+        part: 'Content',
+        unsupported: {
+          ...POSITIONING_PROPS,
+          position: 'Tamagui Select always renders a floating list (or an adapted Sheet)',
+        },
+        // Tamagui's Select.Content props have no className (it still renders
+        // the classes through the styled() wrapper).
+        radixTypes: {
+          ...POSITIONING_TYPES,
+          position: '"item-aligned" | "popper"',
+          className: 'string',
+        },
+      },
+      Viewport: { part: 'Viewport' },
+      Group: { part: 'Group' },
+      Label: { part: 'Label' },
+      Item: { part: 'Item' },
+      ItemText: { part: 'ItemText' },
+      ItemIndicator: { part: 'ItemIndicator' },
+      ScrollUpButton: { part: 'ScrollUpButton' },
+      ScrollDownButton: { part: 'ScrollDownButton' },
+      Separator: { part: 'Separator' },
+    },
+    caveats: [
+      'On native, Tamagui Select renders its items inline unless an `Adapt` target (e.g. a Sheet) is active; add `<Select.Adapt>` for a native picker experience.',
+    ],
+    cssVariables: {
+      '--radix-select-trigger-width': null,
+      '--radix-select-trigger-height': null,
+      '--radix-select-content-available-height': null,
+      '--radix-select-content-available-width': null,
+      '--radix-select-content-transform-origin': null,
+    },
+  },
+  {
+    radix: 'Accordion',
+    package: '@radix-ui/react-accordion',
+    tamagui: 'Accordion',
+    parts: {
+      Root: { part: '' },
+      Item: { part: 'Item' },
+      Header: { part: 'Header' },
+      Trigger: { part: 'Trigger' },
+      Content: { part: 'Content' },
+    },
+    cssVariables: {
+      '--radix-accordion-content-height': null,
+      '--radix-accordion-content-width': null,
+    },
+  },
+  {
+    radix: 'RadioGroup',
+    package: '@radix-ui/react-radio-group',
+    tamagui: 'RadioGroup',
+    parts: {
+      Root: { part: '' },
+      Item: { part: 'Item' },
+      Indicator: { part: 'Indicator' },
+    },
+  },
+  {
+    radix: 'Slider',
+    package: '@radix-ui/react-slider',
+    tamagui: 'Slider',
+    parts: {
+      Root: { part: '' },
+      Track: { part: 'Track' },
+      Range: { part: 'TrackActive' },
+      Thumb: { part: 'Thumb', propFromKey: 'index' },
+    },
+  },
+  {
+    radix: 'Avatar',
+    package: '@radix-ui/react-avatar',
+    tamagui: 'Avatar',
+    parts: {
+      Root: { part: '' },
+      Image: { part: 'Image' },
+      Fallback: {
+        part: 'Fallback',
+        rename: { delayMs: 'delay' },
+        radixTypes: { delayMs: 'number' },
+      },
+    },
+  },
+  {
+    radix: 'ToggleGroup',
+    package: '@radix-ui/react-toggle-group',
+    tamagui: 'ToggleGroup',
+    parts: {
+      Root: { part: '' },
+      Item: { part: 'Item' },
+    },
+  },
+  {
+    // No v3 docs page; parts and props from @tamagui/collapsible's types.
+    radix: 'Collapsible',
+    package: '@radix-ui/react-collapsible',
+    tamagui: 'Collapsible',
+    parts: {
+      Root: { part: '' },
+      Trigger: { part: 'Trigger' },
+      Content: { part: 'Content' },
+      CollapsibleTrigger: { part: 'Trigger' },
+      CollapsibleContent: { part: 'Content' },
     },
   },
 ]

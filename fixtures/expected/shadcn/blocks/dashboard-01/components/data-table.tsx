@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+// TODO(native): `"@dnd-kit/core"`: @dnd-kit uses DOM pointer events and does not run on native.
 import {
   closestCenter,
   DndContext,
@@ -12,13 +13,16 @@ import {
   type DragEndEvent,
   type UniqueIdentifier,
 } from "@dnd-kit/core"
+// TODO(native): `"@dnd-kit/modifiers"`: @dnd-kit uses DOM pointer events and does not run on native.
 import { restrictToVerticalAxis } from "@dnd-kit/modifiers"
+// TODO(native): `"@dnd-kit/sortable"`: @dnd-kit uses DOM pointer events and does not run on native.
 import {
   arrayMove,
   SortableContext,
   useSortable,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable"
+// TODO(native): `"@dnd-kit/utilities"`: @dnd-kit uses DOM pointer events and does not run on native.
 import { CSS } from "@dnd-kit/utilities"
 import {
   columnFilteringFeature,
@@ -38,7 +42,9 @@ import {
   type Row,
   type SortingState,
 } from "@tanstack/react-table"
+// TODO(native): `"recharts"`: recharts renders SVG through the DOM and does not run on native.
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts"
+// TODO(native): `"sonner"`: sonner (toasts) renders DOM elements and does not run on native.
 import { toast } from "sonner"
 import { z } from "zod"
 

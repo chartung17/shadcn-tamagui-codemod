@@ -1,0 +1,43 @@
+{
+  "$comment": "Hand-maintained: packages shadcn/ui code commonly uses that depend on the DOM and do not run in React Native. The imports pass flags imports of these with a TODO.",
+  "packages": {
+    "vaul": {
+      "reason": "vaul (Drawer) is built on the DOM and does not run on native.",
+      "suggestion": "Use Tamagui `Sheet` for a drawer that works on web and native."
+    },
+    "sonner": {
+      "reason": "sonner (toasts) renders DOM elements and does not run on native.",
+      "suggestion": "Use Tamagui `Toast` (`tamagui/toast`)."
+    },
+    "recharts": {
+      "reason": "recharts renders SVG through the DOM and does not run on native.",
+      "suggestion": "Use a React Native charting library (e.g. victory-native) for native, or keep charts web-only in a `.web.tsx` file."
+    },
+    "next-themes": {
+      "reason": "next-themes reads and writes the DOM (`document`, `localStorage`) and does not run on native.",
+      "suggestion": "Switch themes with Tamagui's `TamaguiProvider defaultTheme` / `Theme` and the platform color scheme."
+    },
+    "@dnd-kit/core": {
+      "reason": "@dnd-kit uses DOM pointer events and does not run on native.",
+      "suggestion": "Use react-native-gesture-handler/reanimated based drag and drop on native, or keep this web-only."
+    },
+    "@dnd-kit/sortable": {
+      "reason": "@dnd-kit uses DOM pointer events and does not run on native.",
+      "suggestion": "Use react-native-gesture-handler/reanimated based drag and drop on native, or keep this web-only."
+    },
+    "@dnd-kit/modifiers": {
+      "reason": "@dnd-kit uses DOM pointer events and does not run on native."
+    },
+    "@dnd-kit/utilities": {
+      "reason": "@dnd-kit uses DOM pointer events and does not run on native."
+    },
+    "next/link": {
+      "reason": "next/link renders an `<a>` for the Next.js router and does not run on native.",
+      "suggestion": "Use your cross-platform router's link (e.g. Expo Router or One `Link`)."
+    },
+    "next/image": {
+      "reason": "next/image is specific to Next.js on web.",
+      "suggestion": "Use `html.img` or Tamagui `Image`."
+    }
+  }
+}

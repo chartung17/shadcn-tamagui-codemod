@@ -3,10 +3,16 @@
 import * as React from "react"
 import { type VariantProps } from "class-variance-authority"
 import { cn } from "cn"
-// TODO(native): `ToggleGroup (ToggleGroupPrimitive)`: There is no Tamagui mapping for Radix `ToggleGroup` yet, so it stays on Radix, which is web-only.
-import { ToggleGroup as ToggleGroupPrimitive } from "radix-ui"
-
 import { toggleVariants } from "@/components/ui/toggle"
+import { ToggleGroup as ToggleGroupPrimitive } from "tamagui/unstyled"
+import { styled } from "@tamagui/tailwind"
+// Lets Tailwind classes (className) style a Tamagui UI primitive on web and native.
+const tw = <C extends React.ComponentType<any>>(component: C) =>
+  styled(component as never) as unknown as React.ComponentType<
+    React.ComponentProps<C> & { className?: string }
+  >
+const StyledToggleGroup = tw(ToggleGroupPrimitive)
+const StyledToggleGroupItem = tw(ToggleGroupPrimitive.Item)
 
 const ToggleGroupContext = React.createContext<
   VariantProps<typeof toggleVariants> & {
@@ -28,13 +34,13 @@ function ToggleGroup({
   orientation = "horizontal",
   children,
   ...props
-}: React.ComponentProps<typeof ToggleGroupPrimitive.Root> &
+}: React.ComponentProps<typeof ToggleGroupPrimitive> &
   VariantProps<typeof toggleVariants> & {
     spacing?: number
     orientation?: "horizontal" | "vertical"
   }) {
   return (
-    <ToggleGroupPrimitive.Root
+    <StyledToggleGroup
       data-slot="toggle-group"
       data-variant={variant}
       data-size={size}
@@ -52,7 +58,7 @@ function ToggleGroup({
       >
         {children}
       </ToggleGroupContext.Provider>
-    </ToggleGroupPrimitive.Root>
+    </StyledToggleGroup>
   )
 }
 
@@ -67,7 +73,7 @@ function ToggleGroupItem({
   const context = React.useContext(ToggleGroupContext)
 
   return (
-    <ToggleGroupPrimitive.Item
+    <StyledToggleGroupItem
       data-slot="toggle-group-item"
       data-variant={context.variant || variant}
       data-size={context.size || size}
@@ -83,7 +89,7 @@ function ToggleGroupItem({
       {...props}
     >
       {children}
-    </ToggleGroupPrimitive.Item>
+    </StyledToggleGroupItem>
   )
 }
 
