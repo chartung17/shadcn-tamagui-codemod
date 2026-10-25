@@ -3,8 +3,40 @@
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "cn"
-// TODO(native): `Toggle (TogglePrimitive)`: There is no Tamagui mapping for Radix `Toggle` yet, so it stays on Radix, which is web-only.
-import { Toggle as TogglePrimitive } from "radix-ui"
+import { html } from "@tamagui/tailwind"
+// Radix Toggle has no Tamagui counterpart: a button with a pressed state,
+// setting the same aria-pressed and data-state attributes.
+const TogglePrimitive = {
+  Root: function ToggleRoot({
+    pressed: pressedProp,
+    defaultPressed = false,
+    onPressedChange,
+    onClick,
+    ...props
+  }: React.ComponentProps<typeof html.button> & {
+    pressed?: boolean
+    defaultPressed?: boolean
+    onPressedChange?: (pressed: boolean) => void
+  }) {
+    const [uncontrolled, setUncontrolled] = React.useState(defaultPressed)
+    const pressed = pressedProp ?? uncontrolled
+    return (
+      <html.button
+        type="button"
+        aria-pressed={pressed}
+        data-state={pressed ? "on" : "off"}
+        data-disabled={props.disabled ? "" : undefined}
+        onClick={(event) => {
+          onClick?.(event)
+          if (event?.defaultPrevented || props.disabled) return
+          if (pressedProp === undefined) setUncontrolled(!pressed)
+          onPressedChange?.(!pressed)
+        }}
+        {...props}
+      />
+    )
+  },
+}
 
 const toggleVariants = cva(
   "group/toggle inline-flex flex-row items-center justify-center gap-1 rounded-md text-sm font-medium whitespace-nowrap transition-[color,box-shadow] outline-none hover:bg-muted hover:text-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-(--ring)/50 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-(--destructive)! aria-invalid:ring-(--destructive)/20! aria-pressed:bg-(--muted)! in-[.t_dark]:aria-invalid:ring-(--destructive)/40! [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",

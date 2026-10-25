@@ -1,4 +1,5 @@
 import {
+  BookmarkIcon,
   PlusIcon,
   MailIcon,
   BoldIcon,
@@ -76,6 +77,7 @@ import { Slider } from "@/components/ui/slider"
 import { Switch } from "@/components/ui/switch"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Textarea } from "@/components/ui/textarea"
+import { Toggle } from "@/components/ui/toggle"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import {
   Tooltip,
@@ -228,7 +230,7 @@ export function App() {
           </Accordion>
         </Section>
 
-        <Section title="Avatar, separator and toggle group">
+        <Section title="Avatar, separator, toggle group and toggle">
           <div className="flex items-center gap-4">
             <Avatar>
               <AvatarFallback>CN</AvatarFallback>
@@ -252,6 +254,9 @@ export function App() {
                 <UnderlineIcon />
               </ToggleGroupItem>
             </ToggleGroup>
+            <Toggle variant="outline" aria-label="Toggle bookmark">
+              <BookmarkIcon /> Bookmark
+            </Toggle>
           </div>
           <Separator />
         </Section>

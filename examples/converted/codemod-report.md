@@ -4,13 +4,13 @@
 | --- | ---: |
 | Files scanned | 25 |
 | Files changed | 25 |
-| **Auto-converted** | **98.1%** |
+| **Auto-converted** | **98.2%** |
 | Native class coverage | 58.9% |
-| TODOs | 8 |
+| TODOs | 7 |
 | Warnings | 294 |
-| Notes | 199 |
+| Notes | 200 |
 | Classes (supported / web-only / unknown / unsupported) | 832 / 552 / 0 / 28 |
-| Constructs (converted / flagged) | 162 / 2 |
+| Constructs (converted / flagged) | 164 / 1 |
 
 *Auto-converted*: classes and constructs (elements, components, imports) that needed no `TODO(native)`.
 *Native class coverage*: class occurrences that resolve on native as well as web.
@@ -26,7 +26,7 @@
 The converted files import Tamagui-generated icons. Generate them (they need `react-native-svg` and `@tamagui/helpers-icon`):
 
 ```sh
-npx @tamagui/cli icons add BoldIcon=Bold CheckIcon=Check ChevronDownIcon=ChevronDown ChevronRightIcon=ChevronRight ChevronUpIcon=ChevronUp ItalicIcon=Italic MailIcon=Mail PlusIcon=Plus UnderlineIcon=Underline XIcon=X
+npx @tamagui/cli icons add BoldIcon=Bold BookmarkIcon=Bookmark CheckIcon=Check ChevronDownIcon=ChevronDown ChevronRightIcon=ChevronRight ChevronUpIcon=ChevronUp ItalicIcon=Italic MailIcon=Mail PlusIcon=Plus UnderlineIcon=Underline XIcon=X
 ```
 
 ## Diagnostics by code
@@ -35,7 +35,6 @@ npx @tamagui/cli icons add BoldIcon=Bold CheckIcon=Check ChevronDownIcon=Chevron
 | --- | --- | ---: |
 | `class/unsupported` | todo | 6 |
 | `element/unsupported` | todo | 1 |
-| `radix/unmapped` | todo | 1 |
 | `class/web-only` | warning | 267 |
 | `radix/unsupported-prop` | warning | 8 |
 | `radix/css-variable` | warning | 7 |
@@ -56,6 +55,7 @@ npx @tamagui/cli icons add BoldIcon=Bold CheckIcon=Check ChevronDownIcon=Chevron
 | `cva/styled` | info | 1 |
 | `radix/class-moved` | info | 1 |
 | `radix/font-size` | info | 1 |
+| `radix/local-component` | info | 1 |
 
 ## converted/src/App.tsx
 
@@ -63,16 +63,16 @@ Auto-converted 100% · 0 TODO(s) · 0 warning(s)
 
 | Line | Severity | Code | Construct | Reason | Suggested fix |
 | ---: | --- | --- | --- | --- | --- |
-| 110 | info | `element/view` | `<div>` | Flex container converted to `View`; `flex-row` added because `View` is a column by default. |  |
-| 118 | info | `element/view` | `<div>` | Flex container converted to `View`; `flex-row` added because `View` is a column by default. |  |
-| 133 | info | `element/view` | `<div>` | Flex container converted to `View`; `flex-row` added because `View` is a column by default. |  |
-| 153 | info | `selector/rewrite` | `flex-row` | Added `flex-row`: Tamagui views and native lay out a `flex` container as a column. |  |
-| 161 | info | `element/view` | `<div>` | Flex container converted to `View`; `flex-row` added because `View` is a column by default. |  |
-| 165 | info | `element/view` | `<div>` | Flex container converted to `View`; `flex-row` added because `View` is a column by default. |  |
-| 170 | info | `element/view` | `<div>` | Flex container converted to `View`; `flex-row` added because `View` is a column by default. |  |
-| 174 | info | `element/view` | `<div>` | Flex container converted to `View`; `flex-row` added because `View` is a column by default. |  |
-| 234 | info | `element/view` | `<div>` | Flex container converted to `View`; `flex-row` added because `View` is a column by default. |  |
-| 262 | info | `element/view` | `<div>` | Flex container converted to `View`; `flex-row` added because `View` is a column by default. |  |
+| 112 | info | `element/view` | `<div>` | Flex container converted to `View`; `flex-row` added because `View` is a column by default. |  |
+| 120 | info | `element/view` | `<div>` | Flex container converted to `View`; `flex-row` added because `View` is a column by default. |  |
+| 135 | info | `element/view` | `<div>` | Flex container converted to `View`; `flex-row` added because `View` is a column by default. |  |
+| 155 | info | `selector/rewrite` | `flex-row` | Added `flex-row`: Tamagui views and native lay out a `flex` container as a column. |  |
+| 163 | info | `element/view` | `<div>` | Flex container converted to `View`; `flex-row` added because `View` is a column by default. |  |
+| 167 | info | `element/view` | `<div>` | Flex container converted to `View`; `flex-row` added because `View` is a column by default. |  |
+| 172 | info | `element/view` | `<div>` | Flex container converted to `View`; `flex-row` added because `View` is a column by default. |  |
+| 176 | info | `element/view` | `<div>` | Flex container converted to `View`; `flex-row` added because `View` is a column by default. |  |
+| 236 | info | `element/view` | `<div>` | Flex container converted to `View`; `flex-row` added because `View` is a column by default. |  |
+| 268 | info | `element/view` | `<div>` | Flex container converted to `View`; `flex-row` added because `View` is a column by default. |  |
 
 ## converted/src/components/login-form.tsx
 
@@ -693,25 +693,25 @@ Auto-converted 100% · 0 TODO(s) · 5 warning(s)
 
 ## converted/src/components/ui/toggle.tsx
 
-Auto-converted 97.9% · 1 TODO(s) · 9 warning(s)
+Auto-converted 100% · 0 TODO(s) · 9 warning(s)
 
 | Line | Severity | Code | Construct | Reason | Suggested fix |
 | ---: | --- | --- | --- | --- | --- |
-| 7 | todo | `radix/unmapped` | `Toggle (TogglePrimitive)` | There is no Tamagui mapping for Radix `Toggle` yet, so it stays on Radix, which is web-only. | Rebuild it from Tamagui primitives, or keep this component web-only in a `.web.tsx` file. |
-| 9 | warning | `cva/kept` | `toggleVariants = cva(...)` | Kept as cva(): it is exported, so other modules may call it for class strings. Its classes still apply at runtime through className. | Convert it to `styled()` from `@tamagui/tailwind` by hand if it can be simplified. |
-| 10 | warning | `class/web-only` | `inline-flex` | `display: inline-flex` is dropped on native, where elements are flex containers anyway. |  |
-| 10 | warning | `class/web-only` | `whitespace-nowrap` | `white-space` is not supported on native. | Use `line-clamp-*` to limit lines on native. |
-| 10 | warning | `class/web-only` | `transition-[color,box-shadow]` | CSS transitions are web-only. | Use Tamagui's `transition` prop with an animation driver for native. |
-| 10 | warning | `class/web-only` | `aria-invalid:border-destructive aria-invalid:ring-destructive/20 aria-pressed:bg-muted dark:aria-invalid:ring-destructive/40` | `aria-*` attribute selectors are web-only, so this style does not apply on native. | Drive the style from a prop or state instead (e.g. a styled() variant). |
-| 10 | warning | `class/web-only` | `[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4` | Arbitrary selector variants are web-only, so this style does not apply on native. |  |
-| 10 | info | `selector/rewrite` | `flex-row` | Added `flex-row`: Tamagui views and native lay out a `flex` container as a column. |  |
-| 10 | info | `selector/web-color` | `focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 aria-pressed:bg-muted dark:aria-invalid:ring-destructive/40` | Theme colors in classes Tamagui leaves to Tailwind on web now read Tamagui's theme variables (`bg-(--primary)`): Tailwind compiles them with its default theme, which has no shadcn colors. |  |
-| 19 | warning | `class/web-only` | `has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2` | `:has()` selectors are web-only. |  |
-| 19 | info | `selector/web-state` | `has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2` | Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web. |  |
-| 20 | warning | `class/web-only` | `has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5` | `:has()` selectors are web-only. |  |
-| 20 | info | `selector/web-state` | `has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5` | Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web. |  |
-| 21 | warning | `class/web-only` | `has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2` | `:has()` selectors are web-only. |  |
-| 21 | info | `selector/web-state` | `has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2` | Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web. |  |
+| 9 | info | `radix/local-component` | `Toggle (TogglePrimitive)` | Tamagui has no `Toggle`, so a small replacement built on `html.*` was added to this file in place of the Radix import. |  |
+| 41 | warning | `cva/kept` | `toggleVariants = cva(...)` | Kept as cva(): it is exported, so other modules may call it for class strings. Its classes still apply at runtime through className. | Convert it to `styled()` from `@tamagui/tailwind` by hand if it can be simplified. |
+| 42 | warning | `class/web-only` | `inline-flex` | `display: inline-flex` is dropped on native, where elements are flex containers anyway. |  |
+| 42 | warning | `class/web-only` | `whitespace-nowrap` | `white-space` is not supported on native. | Use `line-clamp-*` to limit lines on native. |
+| 42 | warning | `class/web-only` | `transition-[color,box-shadow]` | CSS transitions are web-only. | Use Tamagui's `transition` prop with an animation driver for native. |
+| 42 | warning | `class/web-only` | `aria-invalid:border-destructive aria-invalid:ring-destructive/20 aria-pressed:bg-muted dark:aria-invalid:ring-destructive/40` | `aria-*` attribute selectors are web-only, so this style does not apply on native. | Drive the style from a prop or state instead (e.g. a styled() variant). |
+| 42 | warning | `class/web-only` | `[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4` | Arbitrary selector variants are web-only, so this style does not apply on native. |  |
+| 42 | info | `selector/rewrite` | `flex-row` | Added `flex-row`: Tamagui views and native lay out a `flex` container as a column. |  |
+| 42 | info | `selector/web-color` | `focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 aria-pressed:bg-muted dark:aria-invalid:ring-destructive/40` | Theme colors in classes Tamagui leaves to Tailwind on web now read Tamagui's theme variables (`bg-(--primary)`): Tailwind compiles them with its default theme, which has no shadcn colors. |  |
+| 51 | warning | `class/web-only` | `has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2` | `:has()` selectors are web-only. |  |
+| 51 | info | `selector/web-state` | `has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2` | Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web. |  |
+| 52 | warning | `class/web-only` | `has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5` | `:has()` selectors are web-only. |  |
+| 52 | info | `selector/web-state` | `has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5` | Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web. |  |
+| 53 | warning | `class/web-only` | `has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2` | `:has()` selectors are web-only. |  |
+| 53 | info | `selector/web-state` | `has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2` | Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web. |  |
 
 ## converted/src/components/ui/tooltip.tsx
 

@@ -2,8 +2,7 @@ import { cva } from "class-variance-authority"
 import { cn } from "cn"
 import { html, styled } from "@tamagui/tailwind"
 import { Tabs as TabsPrimitive } from "tamagui/unstyled"
-import type { ComponentType, ComponentProps, ReactNode } from "react"
-import { Children } from "react"
+import type { ComponentType, ComponentProps } from "react"
 // Lets Tailwind classes (className) style a Tamagui UI primitive on web and native.
 const tw = <C extends ComponentType<any>>(component: C) =>
   styled(component as never) as unknown as ComponentType<
