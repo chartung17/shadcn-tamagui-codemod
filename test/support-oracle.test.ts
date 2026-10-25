@@ -11,6 +11,7 @@ import { execFileSync } from 'node:child_process'
 import { mkdtempSync, readFileSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
+import { pathToFileURL } from 'node:url'
 import { Project } from 'ts-morph'
 import { describe, expect, it } from 'vitest'
 import { collectClassSources } from '../src/ast/classNames.js'
@@ -51,7 +52,8 @@ function resolveOnNative(
     process.execPath,
     [
       '--import',
-      path.join(ROOT, 'test/oracle/register.mjs'),
+      // --import takes a URL; a Windows path (C:\...) would read as scheme `c:`
+      pathToFileURL(path.join(ROOT, 'test/oracle/register.mjs')).href,
       '--conditions=react-native',
       path.join(ROOT, 'test/oracle/resolve.mjs'),
       input,
