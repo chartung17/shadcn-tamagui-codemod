@@ -293,4 +293,4 @@ file before committing.
 
 ## License
 
-MIT
+MIT, see [LICENSE](LICENSE).
