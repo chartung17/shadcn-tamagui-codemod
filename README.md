@@ -14,7 +14,8 @@ Anything it cannot convert safely is left in place, marked with a
 `// TODO(native): ...` comment, and listed in the report.
 
 > **Status:** under construction. Implemented passes: `imports`, `elements`,
-> `classes`, and the report. The other passes land milestone by milestone.
+> `classes`, `cn-cva`, `selectors`, `radix` (`asChild`/`Slot` only so far) and
+> the report. The other passes land milestone by milestone.
 
 ## Usage
 
@@ -144,6 +145,47 @@ construct, the reason and a suggested fix. Totals include:
   as web.
 
 Diagnostics for the same string and reason are grouped into one row.
+
+### cn() and cva()
+
+- `cn()`/`clsx()` calls whose arguments are all static strings are inlined
+  (`className={cn("a", "b")}` becomes `className="a b"`). Calls with
+  conditions keep a runtime `cn()`: it returns a class string, which Tamagui
+  resolves at runtime on web and native (the last class wins, as with
+  `tailwind-merge`). Unused `cn` imports are removed.
+- `cva()` becomes `styled(<element>, base, { variants, defaultVariants })` from
+  `@tamagui/tailwind` when it is static, has no `compoundVariants`, uses no
+  TODO-level classes, is not exported, and styles exactly one `html.*`/`View`
+  element. The element gets the variant props, `VariantProps<typeof x>`
+  becomes `GetTailwindVariantProps<typeof Frame>`, and `cva`/`cn` imports are
+  cleaned up. Otherwise the `cva()` is kept, with a warning naming the reason;
+  its classes still apply at runtime through `className`.
+- **`asChild` components keep `cva()`.** Tamagui's `asChild` forwards styles
+  that come from `className`, but not a `styled()` component's base or variant
+  styles (`test/runtime.test.ts` pins this). So shadcn's `Button`, `Badge`
+  and `SidebarMenuButton` keep their `cva()` class strings and render
+  `<html.button asChild={asChild} className={cn(buttonVariants(...))}>`.
+
+### Selectors and state variants
+
+`hover:`, `active:` (Tamagui's `press:`), `focus:`, `focus-visible:`,
+`focus-within:`, `disabled:`, `dark:`, configured breakpoints and `group-hover:`
+style states work as written. The `selectors` pass rewrites two cases that have
+a cross-platform form:
+
+- `inline-flex` without a direction gets `flex-row`, because native drops
+  `inline-flex` and would lay the children out as a column.
+- `placeholder:text-<color>` gets a `placeholder-<color>` twin, which maps to
+  `placeholderTextColor` on native. The original stays for web.
+
+`group-*` (other states), `peer-*`, `data-*`, `aria-*`, `has-*` and arbitrary
+`[&...]` variants are reported as web-only; `before:`/`after:` get a TODO.
+
+### asChild and Slot
+
+`const Comp = asChild ? Slot.Root : html.button` plus `<Comp ...>` becomes
+`<html.button asChild={asChild} ...>`: Tamagui components implement `asChild`
+on web and native, while Radix `Slot` is DOM-only. Other `Slot` uses get a TODO.
 
 ### Imports
 

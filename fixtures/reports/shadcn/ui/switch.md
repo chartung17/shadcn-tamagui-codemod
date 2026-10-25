@@ -8,7 +8,7 @@
 | Native class coverage | 33.3% |
 | TODOs | 1 |
 | Warnings | 10 |
-| Notes | 0 |
+| Notes | 1 |
 | Classes (supported / web-only / unknown / unsupported) | 16 / 29 / 0 / 3 |
 | Constructs (converted / flagged) | 0 / 0 |
 
@@ -21,6 +21,7 @@
 | --- | --- | ---: |
 | `class/unsupported` | todo | 1 |
 | `class/web-only` | warning | 10 |
+| `selector/rewrite` | info | 1 |
 
 ## shadcn/ui/switch.tsx
 
@@ -35,6 +36,7 @@ Auto-converted 93.8% · 1 TODO(s) · 10 warning(s)
 | 21 | warning | `class/web-only` | `group-has-[:focus-visible]/field-label:border-transparent group-has-[:focus-visible]/field-label:ring-0` | `group-*` variants other than interaction states (hover, press, focus, focus-visible, focus-within, disabled) use selectors that native does not have. |  |
 | 21 | warning | `class/web-only` | `aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40` | `aria-*` attribute selectors are web-only, so this style does not apply on native. | Drive the style from a prop or state instead (e.g. a styled() variant). |
 | 21 | warning | `class/web-only` | `data-[size=default]:h-[18.4px] data-[size=default]:w-[32px] data-[size=sm]:h-[14px] data-[size=sm]:w-[24px] data-checked:bg-primary data-unchecked:bg-input dark:data-unchecked:bg-input/80 data-disabled:cursor-not-allowed data-disabled:opacity-50` | `data-*` attribute selectors are web-only, so this style does not apply on native. | Drive the style from a prop or state instead (e.g. a styled() variant). |
+| 21 | info | `selector/rewrite` | `flex-row` | Added `flex-row`: native drops `inline-flex` and would lay the children out as a column. |  |
 | 28 | warning | `class/web-only` | `block` | React Native has no block layout; `display: block` is dropped on native. |  |
 | 28 | warning | `class/web-only` | `transition-transform` | CSS transitions are web-only. | Use Tamagui's `transition` prop with an animation driver for native. |
 | 28 | warning | `class/web-only` | `group-data-[size=default]/switch:size-4 group-data-[size=sm]/switch:size-3 group-data-[size=default]/switch:data-checked:translate-x-[calc(100%-2px)] group-data-[size=sm]/switch:data-checked:translate-x-[calc(100%-2px)] group-data-[size=default]/switch:data-unchecked:translate-x-0 group-data-[size=sm]/switch:data-unchecked:translate-x-0` | `group-*` variants other than interaction states (hover, press, focus, focus-visible, focus-within, disabled) use selectors that native does not have. |  |

@@ -8,7 +8,7 @@
 | Native class coverage | 48.6% |
 | TODOs | 0 |
 | Warnings | 20 |
-| Notes | 0 |
+| Notes | 1 |
 | Classes (supported / web-only / unknown / unsupported) | 36 / 38 / 0 / 0 |
 | Constructs (converted / flagged) | 3 / 0 |
 
@@ -20,6 +20,7 @@
 | Code | Severity | Count |
 | --- | --- | ---: |
 | `class/web-only` | warning | 20 |
+| `selector/rewrite` | info | 1 |
 
 ## shadcn/ui/alert-dialog.tsx
 
@@ -44,6 +45,7 @@ Auto-converted 100% · 0 TODO(s) · 20 warning(s)
 | 109 | warning | `class/web-only` | `inline-flex` | `display: inline-flex` is dropped on native, where elements are flex containers anyway. |  |
 | 109 | warning | `class/web-only` | `sm:group-data-[size=default]/alert-dialog-content:row-span-2` | `group-*` variants other than interaction states (hover, press, focus, focus-visible, focus-within, disabled) use selectors that native does not have. |  |
 | 109 | warning | `class/web-only` | `*:[svg:not([class*='size-'])]:size-8` | Child selectors (`*:`) are web-only. |  |
+| 109 | info | `selector/rewrite` | `flex-row` | Added `flex-row`: native drops `inline-flex` and would lay the children out as a column. |  |
 | 125 | warning | `class/web-only` | `sm:group-data-[size=default]/alert-dialog-content:group-has-data-[slot=alert-dialog-media]/alert-dialog-content:col-start-2` | `group-*` variants other than interaction states (hover, press, focus, focus-visible, focus-within, disabled) use selectors that native does not have. |  |
 | 141 | warning | `class/web-only` | `text-balance md:text-pretty` | `text-wrap` is web-only. |  |
 | 141 | warning | `class/web-only` | `*:[a]:underline *:[a]:underline-offset-3 *:[a]:hover:text-foreground` | Child selectors (`*:`) are web-only. |  |

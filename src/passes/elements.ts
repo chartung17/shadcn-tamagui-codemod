@@ -1,10 +1,4 @@
-import {
-  Node,
-  SyntaxKind,
-  type JsxOpeningElement,
-  type JsxSelfClosingElement,
-  type SourceFile,
-} from 'ts-morph'
+import { Node, SyntaxKind, type SourceFile } from 'ts-morph'
 import {
   getAttributeExpression,
   getClassNameAttribute,
@@ -15,13 +9,17 @@ import {
   type StaticString,
 } from '../ast/classNames.js'
 import { ensureNamedImport, TAMAGUI_TAILWIND } from '../ast/imports.js'
+import {
+  collectElements,
+  getAttribute,
+  renameElement,
+  type ElementNode,
+} from '../ast/jsx.js'
 import { isInScope } from '../ast/scope.js'
 import htmlElements from '../data/html-elements.json' with { type: 'json' }
 import { DiagnosticCollector } from '../diagnostics.js'
 import { splitClasses } from '../tailwind/tokenize.js'
 import type { FilePass, PassContext } from '../types.js'
-
-type ElementNode = JsxOpeningElement | JsxSelfClosingElement
 
 interface TagInfo {
   backing: string
@@ -120,12 +118,6 @@ function intrinsicAncestors(element: ElementNode): string[] {
     }
   }
   return tags
-}
-
-function getAttribute(element: ElementNode, name: string) {
-  return element
-    .getAttributes()
-    .find((attr) => Node.isJsxAttribute(attr) && attr.getNameNode().getText() === name)
 }
 
 function hasSpread(element: ElementNode): boolean {
@@ -249,15 +241,6 @@ function addFlexRow(element: ElementNode): boolean {
   return false
 }
 
-function renameElement(element: ElementNode, name: string): void {
-  element.getTagNameNode().replaceWithText(name)
-  if (Node.isJsxOpeningElement(element)) {
-    const parent = element.getParent()
-    if (Node.isJsxElement(parent))
-      parent.getClosingElement().getTagNameNode().replaceWithText(name)
-  }
-}
-
 /** String literals a component variable may evaluate to: `asChild ? Slot : "button"`. */
 function tagLiterals(node: Node | undefined): StaticString[] {
   if (!node) return []
@@ -345,15 +328,6 @@ export const elementsPass: FilePass = {
     changed = rewritePropsTypes(sourceFile, html) || changed
     return { changed, diagnostics: diagnostics.items }
   },
-}
-
-function collectElements(sourceFile: SourceFile): ElementNode[] {
-  const out: ElementNode[] = []
-  sourceFile.forEachDescendant((node) => {
-    if (Node.isJsxOpeningElement(node) || Node.isJsxSelfClosingElement(node))
-      out.push(node)
-  })
-  return out
 }
 
 function reportCaveats(

@@ -1,6 +1,5 @@
 import * as React from "react"
 import { cn } from "cn"
-import { Slot } from "radix-ui"
 import { ChevronRightIcon, MoreHorizontalIcon } from "lucide-react"
 import { html } from "@tamagui/tailwind"
 
@@ -41,7 +40,7 @@ function BreadcrumbItem({
   return (
     <html.li
       data-slot="breadcrumb-item"
-      className={cn("inline-flex items-center gap-1.5", className)}
+      className={cn("inline-flex flex-row items-center gap-1.5", className)}
       {...props}
     />
   )
@@ -54,13 +53,12 @@ function BreadcrumbLink({
 }: React.ComponentProps<typeof html.a> & {
   asChild?: boolean
 }) {
-  const Comp = asChild ? Slot.Root : html.a
-
   return (
-    <Comp
+    <html.a
       data-slot="breadcrumb-link"
       className={cn("transition-colors hover:text-foreground", className)}
       {...props}
+      asChild={asChild}
     />
   )
 }

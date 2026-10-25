@@ -8,7 +8,7 @@
 | Native class coverage | 62% |
 | TODOs | 1 |
 | Warnings | 12 |
-| Notes | 0 |
+| Notes | 1 |
 | Classes (supported / web-only / unknown / unsupported) | 44 / 20 / 0 / 7 |
 | Constructs (converted / flagged) | 3 / 0 |
 
@@ -21,6 +21,7 @@
 | --- | --- | ---: |
 | `class/unsupported` | todo | 1 |
 | `class/web-only` | warning | 12 |
+| `selector/rewrite` | info | 1 |
 
 ## shadcn/ui/avatar.tsx
 
@@ -34,6 +35,7 @@ Auto-converted 90.5% · 1 TODO(s) · 12 warning(s)
 | 52 | warning | `class/web-only` | `group-data-[size=sm]/avatar:text-xs` | `group-*` variants other than interaction states (hover, press, focus, focus-visible, focus-within, disabled) use selectors that native does not have. |  |
 | 68 | warning | `class/web-only` | `inline-flex` | `display: inline-flex` is dropped on native, where elements are flex containers anyway. |  |
 | 68 | warning | `class/web-only` | `bg-blend-color` | Blend modes are web-only. |  |
+| 68 | info | `selector/rewrite` | `flex-row` | Added `flex-row`: native drops `inline-flex` and would lay the children out as a column. |  |
 | 69 | warning | `class/web-only` | `group-data-[size=sm]/avatar:size-2 group-data-[size=sm]/avatar:[&>svg]:hidden` | `group-*` variants other than interaction states (hover, press, focus, focus-visible, focus-within, disabled) use selectors that native does not have. |  |
 | 70 | warning | `class/web-only` | `group-data-[size=default]/avatar:size-2.5 group-data-[size=default]/avatar:[&>svg]:size-2` | `group-*` variants other than interaction states (hover, press, focus, focus-visible, focus-within, disabled) use selectors that native does not have. |  |
 | 71 | warning | `class/web-only` | `group-data-[size=lg]/avatar:size-3 group-data-[size=lg]/avatar:[&>svg]:size-2` | `group-*` variants other than interaction states (hover, press, focus, focus-visible, focus-within, disabled) use selectors that native does not have. |  |
