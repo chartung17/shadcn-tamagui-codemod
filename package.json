@@ -1,0 +1,51 @@
+{
+  "name": "shadcn-tamagui-codemod",
+  "version": "0.0.0",
+  "description": "Codemod that rewrites Tailwind/shadcn React components into Tamagui v3 components for web and native",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "shadcn-tamagui-codemod": "./dist/bin.js"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "data"
+  ],
+  "engines": {
+    "node": ">=20.19"
+  },
+  "packageManager": "pnpm@10.28.0",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "check": "pnpm typecheck && pnpm lint && pnpm format:check && pnpm test"
+  },
+  "dependencies": {
+    "diff": "^9.0.0",
+    "picocolors": "^1.1.1",
+    "prettier": "^3.9.10",
+    "tinyglobby": "^0.2.17",
+    "ts-morph": "^28.0.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^20.19.0",
+    "eslint": "^10.13.0",
+    "typescript": "~6.0.3",
+    "typescript-eslint": "^8.72.0",
+    "vitest": "^4.1.12"
+  }
+}
