@@ -92,10 +92,17 @@ const tokenSets = new Map<string, Set<string>>(
   Object.entries(TOKENS).map(([category, names]) => [category, new Set(names)]),
 )
 
-export function defaultSupportContext(): SupportContext {
+/** The generated config's names, plus theme keys read from `--theme-css`. */
+export function defaultSupportContext(
+  extraThemeKeys: readonly string[] = [],
+): SupportContext {
   const assumed = supportData.assumedConfig
   return {
-    themeColors: new Set([...configTokens.themeKeys, ...assumed.extraThemeKeys]),
+    themeColors: new Set([
+      ...configTokens.themeKeys,
+      ...assumed.extraThemeKeys,
+      ...extraThemeKeys,
+    ]),
     media: new Set([...configTokens.media, ...assumed.extraMedia]),
     themes: new Set(assumed.themeNames),
   }

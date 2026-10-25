@@ -213,6 +213,7 @@ export function rewriteRadixComponents(
 
     // Keep Radix-only props in wrapper signatures (`orientation` on Separator).
     restoreRadixPropTypes(sourceFile, local, mapping)
+    omitShadowedProps(sourceFile, local)
 
     // 2. References: `Local.Part` in JSX tags, types and values.
     const accesses = sourceFile
@@ -449,6 +450,48 @@ function restoreRadixPropTypes(
         )
       : base
     typeNode.replaceWithText(`${typed} & { ${members} }`)
+  }
+}
+
+/**
+ * `({ size, ...props }: React.ComponentProps<typeof Avatar> & { size?: "sm" | "lg" })`:
+ * the wrapper declares its own `size`, which may clash with the Tamagui
+ * primitive's prop of the same name, so that name is omitted from the
+ * primitive's props.
+ */
+function omitShadowedProps(sourceFile: SourceFile, local: string): void {
+  const propsRef = new RegExp(
+    `^(React\\.)?ComponentProps(WithoutRef|WithRef)?<typeof ${local}(\\.\\w+)?>$`,
+  )
+  const params = sourceFile.getDescendants().filter((n) => Node.isParameterDeclaration(n))
+  for (const param of params) {
+    if (param.wasForgotten() || !Node.isParameterDeclaration(param)) continue
+    const binding = param.getNameNode()
+    const typeNode = param.getTypeNode()
+    if (
+      !Node.isObjectBindingPattern(binding) ||
+      !typeNode ||
+      !Node.isIntersectionTypeNode(typeNode)
+    )
+      continue
+    const destructured = new Set(
+      binding
+        .getElements()
+        .map((el) => (el.getPropertyNameNode() ?? el.getNameNode()).getText()),
+    )
+    const own = typeNode
+      .getTypeNodes()
+      .filter((t) => Node.isTypeLiteral(t))
+      .flatMap((t) => (Node.isTypeLiteral(t) ? t.getMembers() : []))
+      .map((m) => (Node.isPropertySignature(m) ? m.getName() : undefined))
+      .filter(
+        (name): name is string =>
+          !!name && destructured.has(name) && name !== 'className',
+      )
+    if (own.length === 0) continue
+    const ref = typeNode.getTypeNodes().find((t) => propsRef.test(t.getText()))
+    if (!ref) continue
+    ref.replaceWithText(`Omit<${ref.getText()}, ${own.map((n) => `"${n}"`).join(' | ')}>`)
   }
 }
 

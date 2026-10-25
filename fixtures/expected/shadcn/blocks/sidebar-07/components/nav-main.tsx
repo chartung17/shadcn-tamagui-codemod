@@ -15,8 +15,8 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar"
-import { ChevronRightIcon } from "lucide-react"
-import { html } from "@tamagui/tailwind"
+import { html, View } from "@tamagui/tailwind"
+import { ChevronRightIcon } from "@/components/icons"
 
 export function NavMain({
   items,
@@ -48,7 +48,12 @@ export function NavMain({
                 <SidebarMenuButton tooltip={item.title}>
                   {item.icon}
                   <html.span>{item.title}</html.span>
-                  <ChevronRightIcon className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+                  <View
+                    asChild
+                    className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90"
+                  >
+                    <ChevronRightIcon />
+                  </View>
                 </SidebarMenuButton>
               </CollapsibleTrigger>
               <CollapsibleContent>

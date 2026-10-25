@@ -15,7 +15,7 @@ function Avatar({
   className,
   size = "default",
   ...props
-}: React.ComponentProps<typeof AvatarPrimitive> & {
+}: Omit<React.ComponentProps<typeof AvatarPrimitive>, "size"> & {
   size?: "default" | "sm" | "lg"
 }) {
   return (

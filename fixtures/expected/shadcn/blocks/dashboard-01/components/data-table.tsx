@@ -96,6 +96,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { html, View } from "@tamagui/tailwind"
 import {
   GripVerticalIcon,
   CircleCheckIcon,
@@ -109,8 +110,7 @@ import {
   ChevronRightIcon,
   ChevronsRightIcon,
   TrendingUpIcon,
-} from "lucide-react"
-import { html, View } from "@tamagui/tailwind"
+} from "@/components/icons"
 
 // New in v9: declare the features this table uses — anything you don't
 // register is tree-shaken out of the bundle.
@@ -154,7 +154,7 @@ function DragHandle({ id }: { id: number }) {
       size="icon"
       className="size-7 text-muted-foreground hover:bg-transparent"
     >
-      <GripVerticalIcon className="size-3 text-muted-foreground" />
+      <GripVerticalIcon size={12} color="muted-foreground" />
       <html.span className="sr-only">Drag to reorder</html.span>
     </Button>
   )
@@ -214,7 +214,9 @@ const columns = columnHelper.columns([
     cell: ({ row }) => (
       <Badge variant="outline" className="px-1.5 text-muted-foreground">
         {row.original.status === "Done" ? (
-          <CircleCheckIcon className="fill-green-500 dark:fill-green-400" />
+          <View asChild className="dark:fill-green-400">
+            <CircleCheckIcon fill="green-500" />
+          </View>
         ) : (
           <LoaderIcon />
         )}
@@ -727,8 +729,7 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
               <Separator />
               <html.div className="grid gap-2">
                 <html.div className="flex gap-2 leading-none font-medium">
-                  Trending up by 5.2% this month{" "}
-                  <TrendingUpIcon className="size-4" />
+                  Trending up by 5.2% this month <TrendingUpIcon size={16} />
                 </html.div>
                 <html.div className="text-muted-foreground">
                   Showing total visitors for the last 6 months. This is just

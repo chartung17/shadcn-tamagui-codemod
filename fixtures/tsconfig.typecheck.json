@@ -13,10 +13,13 @@
     "paths": {
       "@/components/ui/*": ["./expected/shadcn/ui/*"],
       "@/lib/utils": ["./typecheck/lib-utils.ts"],
+      "@/components/icons": ["./typecheck/components/icons/index.ts"],
       "@/hooks/*": ["./expected/shadcn/blocks/dashboard-01/hooks/*"]
     }
   },
   "files": [
+    "theme/expected/next-globals.tamagui.config.ts",
+    "theme/expected/vite-index.tamagui.config.ts",
     "expected/shadcn/ui/badge.tsx",
     "expected/shadcn/ui/textarea.tsx",
     "expected/shadcn/ui/table.tsx",

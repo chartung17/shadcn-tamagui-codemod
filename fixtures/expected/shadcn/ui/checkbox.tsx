@@ -1,8 +1,9 @@
 import * as React from "react"
 import { cn } from "cn"
-import { CheckIcon } from "lucide-react"
 import { Checkbox as CheckboxPrimitive } from "tamagui/unstyled"
 import { styled } from "@tamagui/tailwind"
+import { CheckIcon } from "@/components/icons"
+
 // Lets Tailwind classes (className) style a Tamagui UI primitive on web and native.
 const tw = <C extends React.ComponentType<any>>(component: C) =>
   styled(component as never) as unknown as React.ComponentType<

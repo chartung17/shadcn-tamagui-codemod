@@ -1,8 +1,9 @@
 import * as React from "react"
 import { cn } from "cn"
-import { CheckIcon, ChevronRightIcon } from "lucide-react"
 import { View, html, styled } from "@tamagui/tailwind"
 import { Menu as DropdownMenuPrimitive } from "tamagui/unstyled"
+import { CheckIcon, ChevronRightIcon } from "@/components/icons"
+
 // Lets Tailwind classes (className) style a Tamagui UI primitive on web and native.
 const tw = <C extends React.ComponentType<any>>(component: C) =>
   styled(component as never) as unknown as React.ComponentType<
@@ -47,10 +48,10 @@ function DropdownMenuContent({
   align = "start",
   sideOffset = 4,
   ...props
-}: React.ComponentProps<typeof DropdownMenuPrimitive.Content> & {
-  align?: "start" | "center" | "end"
-  sideOffset?: number
-}) {
+}: Omit<
+  React.ComponentProps<typeof DropdownMenuPrimitive.Content>,
+  "align" | "sideOffset"
+> & { align?: "start" | "center" | "end"; sideOffset?: number }) {
   return (
     <DropdownMenuPrimitive.Portal>
       <StyledDropdownMenuContent
@@ -78,7 +79,10 @@ function DropdownMenuItem({
   inset,
   variant = "default",
   ...props
-}: React.ComponentProps<typeof DropdownMenuPrimitive.Item> & {
+}: Omit<
+  React.ComponentProps<typeof DropdownMenuPrimitive.Item>,
+  "inset" | "variant"
+> & {
   inset?: boolean
   variant?: "default" | "destructive"
 }) {
@@ -102,7 +106,10 @@ function DropdownMenuCheckboxItem({
   checked,
   inset,
   ...props
-}: React.ComponentProps<typeof DropdownMenuPrimitive.CheckboxItem> & {
+}: Omit<
+  React.ComponentProps<typeof DropdownMenuPrimitive.CheckboxItem>,
+  "inset"
+> & {
   inset?: boolean
 }) {
   return (
@@ -145,7 +152,10 @@ function DropdownMenuRadioItem({
   children,
   inset,
   ...props
-}: React.ComponentProps<typeof DropdownMenuPrimitive.RadioItem> & {
+}: Omit<
+  React.ComponentProps<typeof DropdownMenuPrimitive.RadioItem>,
+  "inset"
+> & {
   inset?: boolean
 }) {
   return (
@@ -175,7 +185,7 @@ function DropdownMenuLabel({
   className,
   inset,
   ...props
-}: React.ComponentProps<typeof DropdownMenuPrimitive.Label> & {
+}: Omit<React.ComponentProps<typeof DropdownMenuPrimitive.Label>, "inset"> & {
   inset?: boolean
 }) {
   return (
@@ -231,7 +241,10 @@ function DropdownMenuSubTrigger({
   inset,
   children,
   ...props
-}: React.ComponentProps<typeof DropdownMenuPrimitive.SubTrigger> & {
+}: Omit<
+  React.ComponentProps<typeof DropdownMenuPrimitive.SubTrigger>,
+  "inset"
+> & {
   inset?: boolean
 }) {
   return (
@@ -245,7 +258,9 @@ function DropdownMenuSubTrigger({
       {...props}
     >
       {children}
-      <ChevronRightIcon className="ml-auto" />
+      <View asChild className="ml-auto">
+        <ChevronRightIcon />
+      </View>
     </StyledDropdownMenuSubTrigger>
   )
 }

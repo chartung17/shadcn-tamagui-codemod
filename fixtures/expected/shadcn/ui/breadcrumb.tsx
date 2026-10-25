@@ -1,7 +1,7 @@
 import * as React from "react"
 import { cn } from "cn"
-import { ChevronRightIcon, MoreHorizontalIcon } from "lucide-react"
 import { html } from "@tamagui/tailwind"
+import { ChevronRightIcon, MoreHorizontalIcon } from "@/components/icons"
 
 function Breadcrumb({
   className,

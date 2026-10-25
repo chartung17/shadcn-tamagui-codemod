@@ -15,6 +15,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
+import { html, View } from "@tamagui/tailwind"
 import {
   LayoutDashboardIcon,
   ListIcon,
@@ -30,8 +31,7 @@ import {
   FileChartColumnIcon,
   FileIcon,
   CommandIcon,
-} from "lucide-react"
-import { html } from "@tamagui/tailwind"
+} from "@/components/icons"
 
 const data = {
   user: {
@@ -161,7 +161,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               className="data-[slot=sidebar-menu-button]:p-1.5!"
             >
               <html.a href="#">
-                <CommandIcon className="size-5!" />
+                <View asChild className="size-5!">
+                  <CommandIcon />
+                </View>
                 <html.span className="text-base font-semibold">
                   Acme Inc.
                 </html.span>

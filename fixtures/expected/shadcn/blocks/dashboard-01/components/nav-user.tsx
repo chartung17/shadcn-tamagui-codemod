@@ -16,14 +16,14 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar"
+import { html, View } from "@tamagui/tailwind"
 import {
   EllipsisVerticalIcon,
   CircleUserRoundIcon,
   CreditCardIcon,
   BellIcon,
   LogOutIcon,
-} from "lucide-react"
-import { html, View } from "@tamagui/tailwind"
+} from "@/components/icons"
 
 export function NavUser({
   user,
@@ -57,7 +57,9 @@ export function NavUser({
                   {user.email}
                 </html.span>
               </html.div>
-              <EllipsisVerticalIcon className="ml-auto size-4" />
+              <View asChild className="ml-auto">
+                <EllipsisVerticalIcon size={16} />
+              </View>
             </SidebarMenuButton>
           </DropdownMenuTrigger>
           <DropdownMenuContent

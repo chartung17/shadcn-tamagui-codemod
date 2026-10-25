@@ -62,6 +62,10 @@ export interface CodemodOptions {
    * formatting.
    */
   prettier?: PrettierOptions | 'resolve' | false
+  /** Module the generated Tamagui icons are imported from (default `@/components/icons`). */
+  iconsImport?: string
+  /** Extra theme keys (from `--theme-css`) the class analysis treats as colors. */
+  themeKeys?: readonly string[]
   /** Override the per-file pass list (used by tests and extensions). */
   passes?: readonly FilePass[]
 }
@@ -133,4 +137,6 @@ export interface FileResult {
   changed: boolean
   diagnostics: Diagnostic[]
   metrics: FileMetrics
+  /** Icons the file uses: generated component name -> Lucide source name. */
+  icons: Record<string, string>
 }
