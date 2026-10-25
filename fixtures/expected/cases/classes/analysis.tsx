@@ -1,16 +1,19 @@
-import { cva } from "class-variance-authority"
 import { cn } from "@/lib/utils"
-import { html } from "@tamagui/tailwind"
+import { html, styled } from "@tamagui/tailwind"
 
-const chip = cva("inline-flex items-center rounded-full px-2 text-xs", {
-  variants: {
-    tone: {
-      neutral: "bg-muted text-muted-foreground",
-      brand: "bg-primary text-primary-foreground hover:bg-primary/90",
+const ExampleFrame = styled(
+  html.span,
+  "inline-flex flex-row items-center rounded-full px-2 text-xs",
+  {
+    variants: {
+      tone: {
+        neutral: "bg-muted text-muted-foreground",
+        brand: "bg-primary text-primary-foreground hover:bg-primary/90",
+      },
     },
-  },
-  defaultVariants: { tone: "neutral" },
-})
+    defaultVariants: { tone: "neutral" },
+  }
+)
 
 export function Example({
   active,
@@ -45,8 +48,8 @@ export function Example({
       <html.p className="data-[state=open]:font-bold aria-invalid:text-destructive">
         Selector variants
       </html.p>
-      <html.input className="placeholder:text-muted-foreground w-38 my-custom-class" />
-      <html.span className={chip({ tone: "brand" })}>Chip</html.span>
+      <html.input className="placeholder:text-muted-foreground placeholder-muted-foreground w-38 my-custom-class" />
+      <ExampleFrame tone={"brand"}>Chip</ExampleFrame>
     </html.div>
   )
 }

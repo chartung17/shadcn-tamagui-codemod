@@ -1,5 +1,4 @@
 import * as React from "react"
-import { Slot } from "radix-ui"
 import { html } from "@tamagui/tailwind"
 
 function Pill({
@@ -7,8 +6,14 @@ function Pill({
   className,
   ...props
 }: React.ComponentProps<typeof html.span> & { asChild?: boolean }) {
-  const Comp = asChild ? Slot.Root : html.span
-  return <Comp data-slot="pill" className={className} {...props} />
+  return (
+    <html.span
+      data-slot="pill"
+      className={className}
+      {...props}
+      asChild={asChild}
+    />
+  )
 }
 
 function Cell(props: React.ComponentPropsWithoutRef<"td">) {

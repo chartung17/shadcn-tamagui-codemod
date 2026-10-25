@@ -1,10 +1,10 @@
 import { useMemo } from "react"
-import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "cn"
 
 import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
-import { html } from "@tamagui/tailwind"
+import { html, styled } from "@tamagui/tailwind"
+import type { GetTailwindVariantProps } from "@tamagui/tailwind"
 
 function FieldSet({
   className,
@@ -58,7 +58,8 @@ function FieldGroup({
   )
 }
 
-const fieldVariants = cva(
+const FieldFrame = styled(
+  html.div,
   "group/field flex w-full gap-3 data-[invalid=true]:text-destructive",
   {
     variants: {
@@ -80,13 +81,15 @@ function Field({
   className,
   orientation = "vertical",
   ...props
-}: React.ComponentProps<typeof html.div> & VariantProps<typeof fieldVariants>) {
+}: React.ComponentProps<typeof html.div> &
+  GetTailwindVariantProps<typeof FieldFrame>) {
   return (
-    <html.div
+    <FieldFrame
       role="group"
       data-slot="field"
       data-orientation={orientation}
-      className={cn(fieldVariants({ orientation }), className)}
+      orientation={orientation}
+      className={className}
       {...props}
     />
   )

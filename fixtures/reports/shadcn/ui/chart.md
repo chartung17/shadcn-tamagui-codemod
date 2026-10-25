@@ -39,4 +39,4 @@ Auto-converted 99% · 1 TODO(s) · 8 warning(s)
 | 253 | warning | `class/web-only` | `grid` | CSS grid is not available on native; grid classes are dropped there. | Use flex rows/columns (or `web:grid native:flex`) for layouts that must match on native. |
 | 260 | warning | `class/web-only` | `tabular-nums` | `font-variant-numeric` is not mapped on native. |  |
 | 296 | info | `element/view` | `<div>` | Flex container converted to `View`; `flex-row` added because `View` is a column by default. |  |
-| 313 | warning | `class/web-only` | `[&>svg]:h-3 [&>svg]:w-3 [&>svg]:text-muted-foreground` | Arbitrary selector variants are web-only, so this style does not apply on native. |  |
+| 312 | warning | `class/web-only` | `[&>svg]:h-3 [&>svg]:w-3 [&>svg]:text-muted-foreground` | Arbitrary selector variants are web-only, so this style does not apply on native. |  |

@@ -1,8 +1,6 @@
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "cn"
-import { Slot } from "radix-ui"
-
 import { useIsMobile } from "@/hooks/use-mobile"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -416,10 +414,8 @@ function SidebarGroupLabel({
   asChild = false,
   ...props
 }: React.ComponentProps<typeof html.div> & { asChild?: boolean }) {
-  const Comp = asChild ? Slot.Root : html.div
-
   return (
-    <Comp
+    <html.div
       data-slot="sidebar-group-label"
       data-sidebar="group-label"
       className={cn(
@@ -427,6 +423,7 @@ function SidebarGroupLabel({
         className
       )}
       {...props}
+      asChild={asChild}
     />
   )
 }
@@ -436,10 +433,8 @@ function SidebarGroupAction({
   asChild = false,
   ...props
 }: React.ComponentProps<typeof html.button> & { asChild?: boolean }) {
-  const Comp = asChild ? Slot.Root : html.button
-
   return (
-    <Comp
+    <html.button
       // TODO(native): `after:absolute after:-inset-2 md:after:hidden`: `::after` pseudo-elements do not exist on native, so this content is lost there.
 
       data-slot="sidebar-group-action"
@@ -449,6 +444,7 @@ function SidebarGroupAction({
         className
       )}
       {...props}
+      asChild={asChild}
     />
   )
 }
@@ -530,17 +526,17 @@ function SidebarMenuButton({
   isActive?: boolean
   tooltip?: string | React.ComponentProps<typeof TooltipContent>
 } & VariantProps<typeof sidebarMenuButtonVariants>) {
-  const Comp = asChild ? Slot.Root : html.button
   const { isMobile, state } = useSidebar()
 
   const button = (
-    <Comp
+    <html.button
       data-slot="sidebar-menu-button"
       data-sidebar="menu-button"
       data-size={size}
       data-active={isActive}
       className={cn(sidebarMenuButtonVariants({ variant, size }), className)}
       {...props}
+      asChild={asChild}
     />
   )
 
@@ -576,10 +572,8 @@ function SidebarMenuAction({
   asChild?: boolean
   showOnHover?: boolean
 }) {
-  const Comp = asChild ? Slot.Root : html.button
-
   return (
-    <Comp
+    <html.button
       // TODO(native): `after:absolute after:-inset-2 md:after:hidden`: `::after` pseudo-elements do not exist on native, so this content is lost there.
 
       data-slot="sidebar-menu-action"
@@ -591,6 +585,7 @@ function SidebarMenuAction({
         className
       )}
       {...props}
+      asChild={asChild}
     />
   )
 }
@@ -692,10 +687,8 @@ function SidebarMenuSubButton({
   size?: "sm" | "md"
   isActive?: boolean
 }) {
-  const Comp = asChild ? Slot.Root : html.a
-
   return (
-    <Comp
+    <html.a
       data-slot="sidebar-menu-sub-button"
       data-sidebar="menu-sub-button"
       data-size={size}
@@ -705,6 +698,7 @@ function SidebarMenuSubButton({
         className
       )}
       {...props}
+      asChild={asChild}
     />
   )
 }
