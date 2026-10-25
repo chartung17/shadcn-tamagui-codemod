@@ -48,7 +48,7 @@ export const classesPass: FilePass = {
         styled.add(local)
     }
 
-    const support = defaultSupportContext()
+    const support = defaultSupportContext(context.options.themeKeys)
     for (const source of collectClassSources(sourceFile, { cva, styled })) {
       for (const interpolation of source.interpolations) {
         context.metrics.constructs.flagged++

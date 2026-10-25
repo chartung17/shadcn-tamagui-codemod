@@ -8,12 +8,20 @@
 | Native class coverage | 86.4% |
 | TODOs | 0 |
 | Warnings | 5 |
-| Notes | 1 |
+| Notes | 2 |
 | Classes (supported / web-only / unknown / unsupported) | 38 / 6 / 0 / 0 |
-| Constructs (converted / flagged) | 7 / 0 |
+| Constructs (converted / flagged) | 9 / 0 |
 
 *Auto-converted*: classes and constructs (elements, components, imports) that needed no `TODO(native)`.
 *Native class coverage*: class occurrences that resolve on native as well as web.
+
+## Icons
+
+The converted files import Tamagui-generated icons. Generate them (they need `react-native-svg` and `@tamagui/helpers-icon`):
+
+```sh
+npx @tamagui/cli icons add ChevronsUpDownIcon=ChevronsUpDown PlusIcon=Plus
+```
 
 ## Diagnostics by code
 
@@ -21,6 +29,7 @@
 | --- | --- | ---: |
 | `class/web-only` | warning | 5 |
 | `element/view` | info | 1 |
+| `icon/wrapped` | info | 1 |
 
 ## shadcn/blocks/sidebar-07/components/team-switcher.tsx
 
@@ -32,5 +41,6 @@ Auto-converted 100% · 0 TODO(s) · 5 warning(s)
 | 51 | warning | `class/web-only` | `grid` | CSS grid is not available on native; grid classes are dropped there. | Use flex rows/columns (or `web:grid native:flex`) for layouts that must match on native. |
 | 52 | warning | `class/web-only` | `truncate` | `truncate` sets text-overflow and white-space, which native drops. | Use `line-clamp-1` for single-line truncation on native. |
 | 55 | warning | `class/web-only` | `truncate` | `truncate` sets text-overflow and white-space, which native drops. | Use `line-clamp-1` for single-line truncation on native. |
-| 63 | warning | `class/web-only` | `w-fit` | `min-content`/`max-content`/`fit-content` sizing is dropped on native. |  |
-| 86 | info | `element/view` | `<div>` | Flex container converted to `View`; `flex-row` added because `View` is a column by default. |  |
+| 59 | info | `icon/wrapped` | `ml-auto` | Tamagui icons take size and color as props, not classes; the other classes moved to a `View asChild` wrapper. |  |
+| 65 | warning | `class/web-only` | `w-fit` | `min-content`/`max-content`/`fit-content` sizing is dropped on native. |  |
+| 88 | info | `element/view` | `<div>` | Flex container converted to `View`; `flex-row` added because `View` is a column by default. |  |

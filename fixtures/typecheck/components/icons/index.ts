@@ -1,0 +1,6 @@
+export { CheckIcon } from './CheckIcon'
+export { ChevronDownIcon } from './ChevronDownIcon'
+export { ChevronRightIcon } from './ChevronRightIcon'
+export { ChevronUpIcon } from './ChevronUpIcon'
+export { MoreHorizontalIcon } from './MoreHorizontalIcon'
+export { XIcon } from './XIcon'

@@ -24,10 +24,10 @@ function PopoverContent({
   align = "center",
   sideOffset = 4,
   ...props
-}: React.ComponentProps<typeof PopoverPrimitive.Content> & {
-  align?: "start" | "center" | "end"
-  sideOffset?: number
-}) {
+}: Omit<
+  React.ComponentProps<typeof PopoverPrimitive.Content>,
+  "align" | "sideOffset"
+> & { align?: "start" | "center" | "end"; sideOffset?: number }) {
   return (
     <StyledPopoverContent
       data-slot="popover-content"

@@ -3,9 +3,10 @@
 import * as React from "react"
 import { cn } from "cn"
 import { Button } from "@/components/ui/button"
-import { XIcon } from "lucide-react"
 import { html, styled } from "@tamagui/tailwind"
 import { Dialog as DialogPrimitive } from "tamagui/unstyled"
+import { XIcon } from "@/components/icons"
+
 // Lets Tailwind classes (className) style a Tamagui UI primitive on web and native.
 const tw = <C extends React.ComponentType<any>>(component: C) =>
   styled(component as never) as unknown as React.ComponentType<
@@ -59,7 +60,10 @@ function DialogContent({
   children,
   showCloseButton = true,
   ...props
-}: React.ComponentProps<typeof DialogPrimitive.Content> & {
+}: Omit<
+  React.ComponentProps<typeof DialogPrimitive.Content>,
+  "showCloseButton"
+> & {
   showCloseButton?: boolean
 }) {
   return (

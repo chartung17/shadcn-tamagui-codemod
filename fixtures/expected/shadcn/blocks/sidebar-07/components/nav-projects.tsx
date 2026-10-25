@@ -16,13 +16,13 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar"
+import { html, View } from "@tamagui/tailwind"
 import {
   MoreHorizontalIcon,
   FolderIcon,
   ArrowRightIcon,
   Trash2Icon,
-} from "lucide-react"
-import { html } from "@tamagui/tailwind"
+} from "@/components/icons"
 
 export function NavProjects({
   projects,
@@ -81,7 +81,9 @@ export function NavProjects({
         ))}
         <SidebarMenuItem>
           <SidebarMenuButton className="text-sidebar-foreground/70">
-            <MoreHorizontalIcon className="text-sidebar-foreground/70" />
+            <View asChild className="text-sidebar-foreground/70">
+              <MoreHorizontalIcon />
+            </View>
             <html.span>More</html.span>
           </SidebarMenuButton>
         </SidebarMenuItem>

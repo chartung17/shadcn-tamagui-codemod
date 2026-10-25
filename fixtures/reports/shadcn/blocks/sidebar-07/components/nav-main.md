@@ -8,12 +8,20 @@
 | Native class coverage | 40% |
 | TODOs | 0 |
 | Warnings | 4 |
-| Notes | 0 |
+| Notes | 1 |
 | Classes (supported / web-only / unknown / unsupported) | 2 / 3 / 0 / 0 |
-| Constructs (converted / flagged) | 3 / 0 |
+| Constructs (converted / flagged) | 4 / 0 |
 
 *Auto-converted*: classes and constructs (elements, components, imports) that needed no `TODO(native)`.
 *Native class coverage*: class occurrences that resolve on native as well as web.
+
+## Icons
+
+The converted files import Tamagui-generated icons. Generate them (they need `react-native-svg` and `@tamagui/helpers-icon`):
+
+```sh
+npx @tamagui/cli icons add ChevronRightIcon=ChevronRight
+```
 
 ## Diagnostics by code
 
@@ -21,6 +29,7 @@
 | --- | --- | ---: |
 | `class/web-only` | warning | 3 |
 | `element/native-caveat` | warning | 1 |
+| `icon/wrapped` | info | 1 |
 
 ## shadcn/blocks/sidebar-07/components/nav-main.tsx
 
@@ -28,7 +37,8 @@ Auto-converted 100% · 0 TODO(s) · 4 warning(s)
 
 | Line | Severity | Code | Construct | Reason | Suggested fix |
 | ---: | --- | --- | --- | --- | --- |
-| 51 | warning | `class/web-only` | `transition-transform` | CSS transitions are web-only. | Use Tamagui's `transition` prop with an animation driver for native. |
-| 51 | warning | `class/web-only` | `duration-200` | CSS transitions are web-only. |  |
-| 51 | warning | `class/web-only` | `group-data-[state=open]/collapsible:rotate-90` | `group-*` variants other than interaction states (hover, press, focus, focus-visible, focus-within, disabled) use selectors that native does not have. |  |
-| 59 | warning | `element/native-caveat` | `<a>` | Native caveat: native has no navigation for href, target, rel, download or referrerPolicy. |  |
+| 51 | info | `icon/wrapped` | `ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90` | Tamagui icons take size and color as props, not classes; the other classes moved to a `View asChild` wrapper. |  |
+| 53 | warning | `class/web-only` | `transition-transform` | CSS transitions are web-only. | Use Tamagui's `transition` prop with an animation driver for native. |
+| 53 | warning | `class/web-only` | `duration-200` | CSS transitions are web-only. |  |
+| 53 | warning | `class/web-only` | `group-data-[state=open]/collapsible:rotate-90` | `group-*` variants other than interaction states (hover, press, focus, focus-visible, focus-within, disabled) use selectors that native does not have. |  |
+| 64 | warning | `element/native-caveat` | `<a>` | Native caveat: native has no navigation for href, target, rel, download or referrerPolicy. |  |

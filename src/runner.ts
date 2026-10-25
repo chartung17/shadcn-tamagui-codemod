@@ -84,6 +84,9 @@ export async function transformSource(
           finalize(d, relative, lineColumnAt(source, d.pos)),
         ),
         metrics: context.metrics,
+        icons: Object.fromEntries(
+          (context.shared.get('icons:used') as Map<string, string> | undefined) ?? [],
+        ),
       }
     }
 
@@ -113,6 +116,9 @@ export async function transformSource(
       changed: output !== source,
       diagnostics,
       metrics: context.metrics,
+      icons: Object.fromEntries(
+        (context.shared.get('icons:used') as Map<string, string> | undefined) ?? [],
+      ),
     }
   } finally {
     project.removeSourceFile(sourceFile)

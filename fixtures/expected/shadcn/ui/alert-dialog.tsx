@@ -57,7 +57,7 @@ function AlertDialogContent({
   className,
   size = "default",
   ...props
-}: React.ComponentProps<typeof AlertDialogPrimitive.Content> & {
+}: Omit<React.ComponentProps<typeof AlertDialogPrimitive.Content>, "size"> & {
   size?: "default" | "sm"
 }) {
   return (

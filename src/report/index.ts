@@ -1,3 +1,5 @@
+import type { ThemeNote } from '../theme/generate.js'
+import type { ThemeResult } from '../theme/index.js'
 import {
   emptyMetrics,
   type Diagnostic,
@@ -26,7 +28,20 @@ export interface Report {
     nativeClassCoveragePercent: number
   }
   byCode: { code: string; severity: Severity; count: number }[]
+  /** Tamagui-generated icons the converted files import. */
+  icons: { names: Record<string, string>; command: string | null }
+  theme?: { source: string; output: string; themeKeys: string[]; notes: ThemeNote[] }
   files: FileReport[]
+}
+
+/** `npx @tamagui/cli icons add ChevronDownIcon=ChevronDown X ...` */
+export function iconsCommand(names: Record<string, string>): string | null {
+  const entries = Object.entries(names).sort(([a], [b]) => a.localeCompare(b))
+  if (entries.length === 0) return null
+  const args = entries.map(([name, source]) =>
+    name === source ? name : `${name}=${source}`,
+  )
+  return `npx @tamagui/cli icons add ${args.join(' ')}`
 }
 
 function percent(part: number, whole: number): number {
@@ -58,14 +73,19 @@ function compareDiagnostics(a: Diagnostic, b: Diagnostic): number {
   return a.line - b.line || a.column - b.column || a.code.localeCompare(b.code)
 }
 
-export function buildReport(results: readonly FileResult[]): Report {
+export function buildReport(
+  results: readonly FileResult[],
+  theme?: Pick<ThemeResult, 'source' | 'output' | 'themeKeys' | 'notes'>,
+): Report {
   const diagnostics: Record<Severity, number> = { todo: 0, warning: 0, info: 0 }
   const metrics = emptyMetrics()
   const byCode = new Map<string, { code: string; severity: Severity; count: number }>()
   const files: FileReport[] = []
+  const icons: Record<string, string> = {}
 
   for (const result of results) {
     addMetrics(metrics, result.metrics)
+    Object.assign(icons, result.icons)
     for (const d of result.diagnostics) {
       diagnostics[d.severity]++
       const key = `${d.severity}:${d.code}`
@@ -97,6 +117,17 @@ export function buildReport(results: readonly FileResult[]): Report {
         b.count - a.count ||
         a.code.localeCompare(b.code),
     ),
+    icons: { names: icons, command: iconsCommand(icons) },
+    ...(theme
+      ? {
+          theme: {
+            source: theme.source,
+            output: theme.output,
+            themeKeys: theme.themeKeys,
+            notes: theme.notes,
+          },
+        }
+      : {}),
     files,
   }
 }
@@ -134,6 +165,30 @@ export function reportToMarkdown(report: Report): string {
     '*Native class coverage*: class occurrences that resolve on native as well as web.',
     '',
   ]
+  if (report.theme) {
+    const { theme } = report
+    lines.push(
+      '## Theme',
+      '',
+      `\`${theme.output}\` was generated from \`${theme.source}\` with ${theme.themeKeys.length} theme colors.`,
+      '',
+    )
+    for (const note of theme.notes)
+      lines.push(`- ${note.severity}: \`${note.construct}\`: ${escapeCell(note.reason)}`)
+    if (theme.notes.length) lines.push('')
+  }
+  if (report.icons.command) {
+    lines.push(
+      '## Icons',
+      '',
+      'The converted files import Tamagui-generated icons. Generate them (they need `react-native-svg` and `@tamagui/helpers-icon`):',
+      '',
+      '```sh',
+      report.icons.command,
+      '```',
+      '',
+    )
+  }
   if (report.byCode.length) {
     lines.push(
       '## Diagnostics by code',

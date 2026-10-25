@@ -33,7 +33,7 @@ Auto-converted 100% · 0 TODO(s) · 10 warning(s)
 | ---: | --- | --- | --- | --- | --- |
 | 5 | warning | `radix/caveat` | `Tooltip` | Tamagui Tooltip does not render on native; there it only provides accessibility output. |  |
 | 5 | warning | `radix/caveat` | `Tooltip` | Tamagui Tooltip sets `data-placement` instead of Radix `data-side`, so `data-[side=...]:` classes no longer match. |  |
-| 31 | warning | `radix/unsupported-prop` | `Tooltip.Content sideOffset` | Removed `sideOffset`: Tamagui positions this content from the root (`placement`, `offset`, `allowFlip`, `stayInFrame` on the root component). |  |
+| 34 | warning | `radix/unsupported-prop` | `Tooltip.Content sideOffset` | Removed `sideOffset`: Tamagui positions this content from the root (`placement`, `offset`, `allowFlip`, `stayInFrame` on the root component). |  |
 | 36 | warning | `class/web-only` | `inline-flex` | `display: inline-flex` is dropped on native, where elements are flex containers anyway. |  |
 | 36 | warning | `class/web-only` | `w-fit` | `min-content`/`max-content`/`fit-content` sizing is dropped on native. |  |
 | 36 | warning | `class/web-only` | `origin-(--radix-tooltip-content-transform-origin)` | CSS variables and functions other than `calc()`/`clamp()` do not resolve on native. | Use a token or a plain value (px, %, rem) that native can resolve. |

@@ -8,8 +8,8 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
-import { CirclePlusIcon, MailIcon } from "lucide-react"
 import { html } from "@tamagui/tailwind"
+import { CirclePlusIcon, MailIcon } from "@/components/icons"
 
 export function NavMain({
   items,

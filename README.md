@@ -14,7 +14,7 @@ Anything it cannot convert safely is left in place, marked with a
 `// TODO(native): ...` comment, and listed in the report.
 
 > **Status:** under construction. Implemented passes: `imports`, `elements`,
-> `classes`, `cn-cva`, `selectors`, `radix` and the report. Theme generation and icons come next. The other passes land milestone by milestone.
+> `classes`, `cn-cva`, `selectors`, `radix`, `icons`, theme generation and the report. Example apps come next. The other passes land milestone by milestone.
 
 ## Usage
 
@@ -22,13 +22,15 @@ Anything it cannot convert safely is left in place, marked with a
 npx shadcn-tamagui-codemod <paths/globs...> [options]
 ```
 
-| Option               | Description                                        |
-| -------------------- | -------------------------------------------------- |
-| `--dry-run`          | Print diffs, write nothing (default).              |
-| `--write`            | Apply changes in place.                            |
-| `--report <file>`    | Write `<file>.json` and `<file>.md` reports.       |
-| `--only <passes>`    | Comma-separated subset of passes to run.           |
-| `--theme-css <file>` | Path to shadcn `globals.css` for theme generation. |
+| Option                    | Description                                                                  |
+| ------------------------- | ---------------------------------------------------------------------------- |
+| `--dry-run`               | Print diffs, write nothing (default).                                        |
+| `--write`                 | Apply changes in place.                                                      |
+| `--report <file>`         | Write `<file>.json` and `<file>.md` reports.                                 |
+| `--only <passes>`         | Comma-separated subset of passes to run.                                     |
+| `--theme-css <file>`      | Path to shadcn `globals.css` for theme generation.                           |
+| `--theme-out <file>`      | Where to write the generated Tamagui config (default `tamagui.config.ts`).   |
+| `--icons-import <module>` | Module the generated icons are imported from (default `@/components/icons`). |
 
 Paths can be files, directories (scanned for `.tsx`, `.ts`, `.jsx`, `.js`) or
 globs. `node_modules`, `dist`, `build`, `.next` and `.d.ts` files are skipped.
@@ -234,6 +236,49 @@ To extend the mappings, add an entry to `RADIX_MAPPINGS` (Tamagui part names
 come from the component docs and the `tamagui/unstyled` exports), run
 `pnpm test` (`test/mappings.test.ts` fails if a part does not exist), and add a
 fixture.
+
+### Icons
+
+Tamagui v3 ships no icon package: you generate typed icon components for the
+icons you use with `npx @tamagui/cli icons add ...` (they need
+`react-native-svg` and `@tamagui/helpers-icon`). The `icons` pass:
+
+- points `lucide-react` imports at the generated icons
+  (`--icons-import`, default `@/components/icons`), keeping every imported
+  name, and prints the generation command, e.g.
+  `npx @tamagui/cli icons add ChevronDownIcon=ChevronDown XIcon=X`, in the CLI
+  output and the report (`Name=Source` keeps shadcn's `...Icon` names);
+- turns icon classes into icon props (`size-4` to `size={16}`,
+  `text-muted-foreground` to `color="muted-foreground"`, `fill-*`,
+  `opacity-*`, `stroke-*`). Tamagui icons do not take classes, so any other
+  classes move to a `<View asChild className="...">` wrapper, which applies
+  them to the icon on web and native;
+- maps the `LucideIcon`/`LucideProps` types to `IconProps` from
+  `@tamagui/helpers-icon`.
+
+Known limitation: shadcn sizes icons inside some components with
+`[&_svg:not([class*='size-'])]:size-4`. An icon whose size became a prop no
+longer has a `size-*` class, so on web that rule overrides it.
+
+### Theme
+
+`--theme-css <file>` reads the shadcn `globals.css` (`:root`, `.dark`,
+`@theme inline`) and generates a Tamagui config (`--theme-out`, default
+`tamagui.config.ts`; printed as a diff in dry runs):
+
+- `@tamagui/config/v6` (Tailwind-aligned tokens and breakpoints) as the base;
+- every shadcn color variable added to every light and dark theme (sub-themes
+  included), so `bg-primary` and `dark:bg-sidebar` resolve. `oklch()`/`oklab()`
+  colors are converted to hex (or `rgba()` with alpha) because native cannot
+  parse them; bare HSL channels from older shadcn themes become `hsl()`;
+- radius tokens from `--radius-*` (`calc(var(--radius) * 0.6)` is evaluated);
+- Tailwind's `2xl`/`max-2xl` breakpoints;
+- `--font-sans`/`--font-heading` as the body and heading font families (these
+  must also be loaded on native).
+
+The theme's color names are also fed into the class analysis. The generated
+configs for the vendored CSS are in `fixtures/theme/expected` and are
+type-checked by `pnpm typecheck:fixtures`.
 
 ### Imports
 

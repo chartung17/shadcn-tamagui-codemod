@@ -70,6 +70,33 @@ describe('cli', () => {
     expect(existsSync(path.join(dir, 'out/report.md'))).toBe(true)
   })
 
+  it('generates a theme config from --theme-css', async () => {
+    const { dir, io, out, err } = setup()
+    writeFileSync(
+      path.join(dir, 'globals.css'),
+      ':root { --primary: oklch(0.205 0 0); --radius: 0.5rem; }\n.dark { --primary: oklch(0.922 0 0); }\n@theme inline { --radius-lg: var(--radius); }\n',
+    )
+    await runCli(['src', '--theme-css', 'globals.css'], io)
+    expect(out.join('')).toContain('+++ b/tamagui.config.ts')
+    expect(existsSync(path.join(dir, 'tamagui.config.ts'))).toBe(false)
+    expect(err.join('')).toContain('Would write tamagui.config.ts from globals.css')
+
+    await runCli(
+      [
+        'src',
+        '--theme-css',
+        'globals.css',
+        '--theme-out',
+        'config/tamagui.config.ts',
+        '--write',
+      ],
+      io,
+    )
+    const written = readFileSync(path.join(dir, 'config/tamagui.config.ts'), 'utf8')
+    expect(written).toMatch(/primary: ["']#171717["']/)
+    expect(written).toContain('lg: 8')
+  })
+
   it('derives report paths', () => {
     expect(reportPaths('r')).toEqual({ json: 'r.json', markdown: 'r.md' })
     expect(reportPaths('r.md')).toEqual({ json: 'r.json', markdown: 'r.md' })

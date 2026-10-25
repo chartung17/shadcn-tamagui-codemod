@@ -16,6 +16,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar"
+import { html, View } from "@tamagui/tailwind"
 import {
   ChevronsUpDownIcon,
   SparklesIcon,
@@ -23,8 +24,7 @@ import {
   CreditCardIcon,
   BellIcon,
   LogOutIcon,
-} from "lucide-react"
-import { html, View } from "@tamagui/tailwind"
+} from "@/components/icons"
 
 export function NavUser({
   user,
@@ -56,7 +56,9 @@ export function NavUser({
                 </html.span>
                 <html.span className="truncate text-xs">{user.email}</html.span>
               </html.div>
-              <ChevronsUpDownIcon className="ml-auto size-4" />
+              <View asChild className="ml-auto">
+                <ChevronsUpDownIcon size={16} />
+              </View>
             </SidebarMenuButton>
           </DropdownMenuTrigger>
           <DropdownMenuContent

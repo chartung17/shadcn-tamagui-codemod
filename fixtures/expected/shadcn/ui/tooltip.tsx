@@ -42,7 +42,7 @@ function TooltipContent({
   sideOffset = 0,
   children,
   ...props
-}: React.ComponentProps<typeof TooltipPrimitive.Content> & {
+}: Omit<React.ComponentProps<typeof TooltipPrimitive.Content>, "sideOffset"> & {
   sideOffset?: number
 }) {
   return (

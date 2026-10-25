@@ -7,6 +7,7 @@ import { colorizeDiff, unifiedDiff } from './diff.js'
 import { expandPaths } from './files.js'
 import { buildReport, reportToMarkdown } from './report/index.js'
 import { transformFiles } from './runner.js'
+import { DEFAULT_THEME_OUT, generateTheme } from './theme/index.js'
 import { ALL_PASS_NAMES, type PassName } from './types.js'
 
 const HELP = `Usage: shadcn-tamagui-codemod <paths/globs...> [options]
@@ -20,6 +21,10 @@ Options:
   --only <passes>      comma-separated subset of passes to run:
                        ${ALL_PASS_NAMES.join(', ')}
   --theme-css <file>   path to shadcn globals.css for theme generation
+  --theme-out <file>   where to write the generated Tamagui config
+                       (default: tamagui.config.ts)
+  --icons-import <mod> module the generated icons are imported from
+                       (default: @/components/icons)
   -h, --help           show this help
   -v, --version        show the version
 `
@@ -67,6 +72,8 @@ export async function runCli(argv: readonly string[], io: CliIO): Promise<number
       report: { type: 'string' },
       only: { type: 'string' },
       'theme-css': { type: 'string' },
+      'theme-out': { type: 'string' },
+      'icons-import': { type: 'string' },
       help: { type: 'boolean', short: 'h' },
       version: { type: 'boolean', short: 'v' },
     },
@@ -94,11 +101,36 @@ export async function runCli(argv: readonly string[], io: CliIO): Promise<number
     throw new CliError(`No source files matched: ${positionals.join(' ')}`)
   }
 
+  const runTheme = values['theme-css'] && (!only || only.includes('theme'))
+  const theme = runTheme
+    ? await generateTheme(
+        values['theme-css']!,
+        values['theme-out'] ?? DEFAULT_THEME_OUT,
+        io.cwd,
+      )
+    : undefined
+  if (theme) {
+    if (write) {
+      const target = path.resolve(io.cwd, theme.output)
+      await mkdir(path.dirname(target), { recursive: true })
+      await writeFile(target, theme.code)
+    } else if (theme.previous !== theme.code) {
+      const patch = unifiedDiff({
+        filePath: theme.output,
+        original: theme.previous ?? '',
+        output: theme.code,
+      })
+      io.stdout(`${io.color ? colorizeDiff(patch) : patch}\n`)
+    }
+  }
+
   const results = await transformFiles(files, {
     cwd: io.cwd,
     write,
     only,
     themeCss: values['theme-css'],
+    ...(theme ? { themeKeys: theme.themeKeys } : {}),
+    ...(values['icons-import'] ? { iconsImport: values['icons-import'] } : {}),
     prettier: 'resolve',
   })
 
@@ -110,7 +142,7 @@ export async function runCli(argv: readonly string[], io: CliIO): Promise<number
     }
   }
 
-  const report = buildReport(results)
+  const report = buildReport(results, theme)
   if (values.report) {
     const target = reportPaths(path.resolve(io.cwd, values.report))
     await mkdir(path.dirname(target.json), { recursive: true })
@@ -122,6 +154,14 @@ export async function runCli(argv: readonly string[], io: CliIO): Promise<number
   const verb = write ? 'changed' : 'would change'
   const summary = `${totals.files} file(s) scanned, ${totals.changedFiles} ${verb}; ${totals.diagnostics.todo} TODO(s), ${totals.diagnostics.warning} warning(s); auto-converted ${totals.autoConvertedPercent}%`
   io.stderr(`${io.color ? pc.bold(summary) : summary}\n`)
+  if (theme) {
+    io.stderr(`${write ? 'Wrote' : 'Would write'} ${theme.output} from ${theme.source}\n`)
+  }
+  if (report.icons.command) {
+    io.stderr(
+      `Generate the icons the converted files import:\n  ${report.icons.command}\n`,
+    )
+  }
   if (!write && totals.changedFiles > 0) {
     io.stderr('Dry run: no files were written. Re-run with --write to apply.\n')
   }

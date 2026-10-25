@@ -9,8 +9,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { TrendingUpIcon, TrendingDownIcon } from "lucide-react"
 import { html } from "@tamagui/tailwind"
+import { TrendingUpIcon, TrendingDownIcon } from "@/components/icons"
 
 export function SectionCards() {
   return (
@@ -30,7 +30,7 @@ export function SectionCards() {
         </CardHeader>
         <CardFooter className="flex-col items-start gap-1.5 text-sm">
           <html.div className="line-clamp-1 flex gap-2 font-medium">
-            Trending up this month <TrendingUpIcon className="size-4" />
+            Trending up this month <TrendingUpIcon size={16} />
           </html.div>
           <html.div className="text-muted-foreground">
             Visitors for the last 6 months
@@ -52,7 +52,7 @@ export function SectionCards() {
         </CardHeader>
         <CardFooter className="flex-col items-start gap-1.5 text-sm">
           <html.div className="line-clamp-1 flex gap-2 font-medium">
-            Down 20% this period <TrendingDownIcon className="size-4" />
+            Down 20% this period <TrendingDownIcon size={16} />
           </html.div>
           <html.div className="text-muted-foreground">
             Acquisition needs attention
@@ -74,7 +74,7 @@ export function SectionCards() {
         </CardHeader>
         <CardFooter className="flex-col items-start gap-1.5 text-sm">
           <html.div className="line-clamp-1 flex gap-2 font-medium">
-            Strong user retention <TrendingUpIcon className="size-4" />
+            Strong user retention <TrendingUpIcon size={16} />
           </html.div>
           <html.div className="text-muted-foreground">
             Engagement exceed targets
@@ -96,7 +96,7 @@ export function SectionCards() {
         </CardHeader>
         <CardFooter className="flex-col items-start gap-1.5 text-sm">
           <html.div className="line-clamp-1 flex gap-2 font-medium">
-            Steady performance increase <TrendingUpIcon className="size-4" />
+            Steady performance increase <TrendingUpIcon size={16} />
           </html.div>
           <html.div className="text-muted-foreground">
             Meets growth projections

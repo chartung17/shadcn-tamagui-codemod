@@ -16,10 +16,10 @@ function Separator({
   orientation = "horizontal",
   decorative = true,
   ...props
-}: React.ComponentProps<typeof SeparatorPrimitive> & {
-  orientation?: "horizontal" | "vertical"
-  decorative?: boolean
-}) {
+}: Omit<
+  React.ComponentProps<typeof SeparatorPrimitive>,
+  "orientation" | "decorative"
+> & { orientation?: "horizontal" | "vertical"; decorative?: boolean }) {
   return (
     <StyledSeparator
       data-slot="separator"

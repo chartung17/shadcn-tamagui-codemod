@@ -17,8 +17,8 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar"
-import { ChevronsUpDownIcon, PlusIcon } from "lucide-react"
 import { html, View } from "@tamagui/tailwind"
+import { ChevronsUpDownIcon, PlusIcon } from "@/components/icons"
 
 export function TeamSwitcher({
   teams,
@@ -56,7 +56,9 @@ export function TeamSwitcher({
                   {activeTeam.plan}
                 </html.span>
               </html.div>
-              <ChevronsUpDownIcon className="ml-auto" />
+              <View asChild className="ml-auto">
+                <ChevronsUpDownIcon />
+              </View>
             </SidebarMenuButton>
           </DropdownMenuTrigger>
           <DropdownMenuContent
@@ -84,7 +86,7 @@ export function TeamSwitcher({
             <DropdownMenuSeparator />
             <DropdownMenuItem className="gap-2 p-2">
               <View className="flex flex-row size-6 items-center justify-center rounded-md border bg-transparent">
-                <PlusIcon className="size-4" />
+                <PlusIcon size={16} />
               </View>
               <html.div className="font-medium text-muted-foreground">
                 Add team

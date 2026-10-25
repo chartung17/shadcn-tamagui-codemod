@@ -10,10 +10,18 @@
 | Warnings | 67 |
 | Notes | 6 |
 | Classes (supported / web-only / unknown / unsupported) | 210 / 114 / 0 / 12 |
-| Constructs (converted / flagged) | 31 / 0 |
+| Constructs (converted / flagged) | 32 / 0 |
 
 *Auto-converted*: classes and constructs (elements, components, imports) that needed no `TODO(native)`.
 *Native class coverage*: class occurrences that resolve on native as well as web.
+
+## Icons
+
+The converted files import Tamagui-generated icons. Generate them (they need `react-native-svg` and `@tamagui/helpers-icon`):
+
+```sh
+npx @tamagui/cli icons add PanelLeftIcon=PanelLeft
+```
 
 ## Diagnostics by code
 

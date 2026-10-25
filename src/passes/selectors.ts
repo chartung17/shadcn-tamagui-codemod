@@ -69,7 +69,7 @@ export const selectorsPass: FilePass = {
       }
     }
 
-    const support = defaultSupportContext()
+    const support = defaultSupportContext(context.options.themeKeys)
     let changed = false
     for (const source of collectClassSources(sourceFile, { cva, styled })) {
       if (!isStaticString(source.node)) continue

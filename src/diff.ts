@@ -2,7 +2,9 @@ import { createTwoFilesPatch } from 'diff'
 import pc from 'picocolors'
 import type { FileResult } from './types.js'
 
-export function unifiedDiff(result: FileResult): string {
+export function unifiedDiff(
+  result: Pick<FileResult, 'filePath' | 'original' | 'output'>,
+): string {
   return createTwoFilesPatch(
     `a/${result.filePath}`,
     `b/${result.filePath}`,

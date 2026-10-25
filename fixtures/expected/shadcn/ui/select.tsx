@@ -2,9 +2,10 @@
 
 import * as React from "react"
 import { cn } from "cn"
-import { ChevronDownIcon, CheckIcon, ChevronUpIcon } from "lucide-react"
 import { View, styled } from "@tamagui/tailwind"
 import { Select as SelectPrimitive } from "tamagui/unstyled"
+import { ChevronDownIcon, CheckIcon, ChevronUpIcon } from "@/components/icons"
+
 // Lets Tailwind classes (className) style a Tamagui UI primitive on web and native.
 const tw = <C extends React.ComponentType<any>>(component: C) =>
   styled(component as never) as unknown as React.ComponentType<
@@ -48,7 +49,7 @@ function SelectTrigger({
   size = "default",
   children,
   ...props
-}: React.ComponentProps<typeof SelectPrimitive.Trigger> & {
+}: Omit<React.ComponentProps<typeof SelectPrimitive.Trigger>, "size"> & {
   size?: "sm" | "default"
 }) {
   return (
@@ -63,7 +64,9 @@ function SelectTrigger({
     >
       {children}
       <SelectPrimitive.Icon asChild>
-        <ChevronDownIcon className="pointer-events-none size-4 text-muted-foreground" />
+        <View asChild className="pointer-events-none">
+          <ChevronDownIcon size={16} color="muted-foreground" />
+        </View>
       </SelectPrimitive.Icon>
     </StyledSelectTrigger>
   )
@@ -75,7 +78,10 @@ function SelectContent({
   position = "item-aligned",
   align = "center",
   ...props
-}: React.ComponentProps<typeof SelectPrimitive.Content> & {
+}: Omit<
+  React.ComponentProps<typeof SelectPrimitive.Content>,
+  "position" | "align"
+> & {
   className?: string
   position?: "item-aligned" | "popper"
   align?: "start" | "center" | "end"
@@ -136,7 +142,9 @@ function SelectItem({
     >
       <View className="pointer-events-none absolute right-2 flex flex-row size-4 items-center justify-center">
         <SelectPrimitive.ItemIndicator>
-          <CheckIcon className="pointer-events-none" />
+          <View asChild className="pointer-events-none">
+            <CheckIcon />
+          </View>
         </SelectPrimitive.ItemIndicator>
       </View>
       <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>

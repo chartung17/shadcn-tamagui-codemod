@@ -16,7 +16,7 @@ function Switch({
   className,
   size = "default",
   ...props
-}: React.ComponentProps<typeof SwitchPrimitive> & {
+}: Omit<React.ComponentProps<typeof SwitchPrimitive>, "size"> & {
   size?: "sm" | "default"
 }) {
   return (

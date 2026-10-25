@@ -2,9 +2,10 @@
 
 import * as React from "react"
 import { cn } from "cn"
-import { ChevronDownIcon, ChevronUpIcon } from "lucide-react"
-import { html, styled } from "@tamagui/tailwind"
+import { html, styled, View } from "@tamagui/tailwind"
 import { Accordion as AccordionPrimitive } from "tamagui/unstyled"
+import { ChevronDownIcon, ChevronUpIcon } from "@/components/icons"
+
 // Lets Tailwind classes (className) style a Tamagui UI primitive on web and native.
 const tw = <C extends React.ComponentType<any>>(component: C) =>
   styled(component as never) as unknown as React.ComponentType<
@@ -59,14 +60,18 @@ function AccordionTrigger({
         {...props}
       >
         {children}
-        <ChevronDownIcon
-          data-slot="accordion-trigger-icon"
+        <View
+          asChild
           className="pointer-events-none shrink-0 group-aria-expanded/accordion-trigger:hidden"
-        />
-        <ChevronUpIcon
-          data-slot="accordion-trigger-icon"
+        >
+          <ChevronDownIcon data-slot="accordion-trigger-icon" />
+        </View>
+        <View
+          asChild
           className="pointer-events-none hidden shrink-0 group-aria-expanded/accordion-trigger:inline"
-        />
+        >
+          <ChevronUpIcon data-slot="accordion-trigger-icon" />
+        </View>
       </StyledAccordionTrigger>
     </StyledAccordionHeader>
   )
