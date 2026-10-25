@@ -1,15 +1,22 @@
 import * as React from "react"
 import { cn } from "cn"
-// TODO(native): `RadioGroup (RadioGroupPrimitive)`: There is no Tamagui mapping for Radix `RadioGroup` yet, so it stays on Radix, which is web-only.
-import { RadioGroup as RadioGroupPrimitive } from "radix-ui"
-import { html } from "@tamagui/tailwind"
+import { html, styled } from "@tamagui/tailwind"
+import { RadioGroup as RadioGroupPrimitive } from "tamagui/unstyled"
+// Lets Tailwind classes (className) style a Tamagui UI primitive on web and native.
+const tw = <C extends React.ComponentType<any>>(component: C) =>
+  styled(component as never) as unknown as React.ComponentType<
+    React.ComponentProps<C> & { className?: string }
+  >
+const StyledRadioGroup = tw(RadioGroupPrimitive)
+const StyledRadioGroupItem = tw(RadioGroupPrimitive.Item)
+const StyledRadioGroupIndicator = tw(RadioGroupPrimitive.Indicator)
 
 function RadioGroup({
   className,
   ...props
-}: React.ComponentProps<typeof RadioGroupPrimitive.Root>) {
+}: React.ComponentProps<typeof RadioGroupPrimitive>) {
   return (
-    <RadioGroupPrimitive.Root
+    <StyledRadioGroup
       data-slot="radio-group"
       className={cn("grid w-full gap-3", className)}
       {...props}
@@ -22,7 +29,7 @@ function RadioGroupItem({
   ...props
 }: React.ComponentProps<typeof RadioGroupPrimitive.Item>) {
   return (
-    <RadioGroupPrimitive.Item
+    <StyledRadioGroupItem
       // TODO(native): `after:absolute after:-inset-x-3 after:-inset-y-2`: `::after` pseudo-elements do not exist on native, so this content is lost there.
       data-slot="radio-group-item"
       className={cn(
@@ -31,13 +38,13 @@ function RadioGroupItem({
       )}
       {...props}
     >
-      <RadioGroupPrimitive.Indicator
+      <StyledRadioGroupIndicator
         data-slot="radio-group-indicator"
         className="flex size-4 items-center justify-center"
       >
         <html.span className="absolute top-1/2 left-1/2 size-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary-foreground" />
-      </RadioGroupPrimitive.Indicator>
-    </RadioGroupPrimitive.Item>
+      </StyledRadioGroupIndicator>
+    </StyledRadioGroupItem>
   )
 }
 

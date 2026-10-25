@@ -1,14 +1,26 @@
 import * as React from "react"
 import { cn } from "cn"
-// TODO(native): `DropdownMenu (DropdownMenuPrimitive)`: There is no Tamagui mapping for Radix `DropdownMenu` yet, so it stays on Radix, which is web-only.
-import { DropdownMenu as DropdownMenuPrimitive } from "radix-ui"
 import { CheckIcon, ChevronRightIcon } from "lucide-react"
-import { View, html } from "@tamagui/tailwind"
+import { View, html, styled } from "@tamagui/tailwind"
+import { Menu as DropdownMenuPrimitive } from "tamagui/unstyled"
+// Lets Tailwind classes (className) style a Tamagui UI primitive on web and native.
+const tw = <C extends React.ComponentType<any>>(component: C) =>
+  styled(component as never) as unknown as React.ComponentType<
+    React.ComponentProps<C> & { className?: string }
+  >
+const StyledDropdownMenuContent = tw(DropdownMenuPrimitive.Content)
+const StyledDropdownMenuItem = tw(DropdownMenuPrimitive.Item)
+const StyledDropdownMenuCheckboxItem = tw(DropdownMenuPrimitive.CheckboxItem)
+const StyledDropdownMenuRadioItem = tw(DropdownMenuPrimitive.RadioItem)
+const StyledDropdownMenuLabel = tw(DropdownMenuPrimitive.Label)
+const StyledDropdownMenuSeparator = tw(DropdownMenuPrimitive.Separator)
+const StyledDropdownMenuSubTrigger = tw(DropdownMenuPrimitive.SubTrigger)
+const StyledDropdownMenuSubContent = tw(DropdownMenuPrimitive.SubContent)
 
 function DropdownMenu({
   ...props
-}: React.ComponentProps<typeof DropdownMenuPrimitive.Root>) {
-  return <DropdownMenuPrimitive.Root data-slot="dropdown-menu" {...props} />
+}: React.ComponentProps<typeof DropdownMenuPrimitive>) {
+  return <DropdownMenuPrimitive data-slot="dropdown-menu" {...props} />
 }
 
 function DropdownMenuPortal({
@@ -35,15 +47,16 @@ function DropdownMenuContent({
   align = "start",
   sideOffset = 4,
   ...props
-}: React.ComponentProps<typeof DropdownMenuPrimitive.Content>) {
+}: React.ComponentProps<typeof DropdownMenuPrimitive.Content> & {
+  align?: "start" | "center" | "end"
+  sideOffset?: number
+}) {
   return (
     <DropdownMenuPrimitive.Portal>
-      <DropdownMenuPrimitive.Content
+      <StyledDropdownMenuContent
         data-slot="dropdown-menu-content"
-        sideOffset={sideOffset}
-        align={align}
         className={cn(
-          "z-50 max-h-(--radix-dropdown-menu-content-available-height) w-(--radix-dropdown-menu-trigger-width) min-w-32 origin-(--radix-dropdown-menu-content-transform-origin) overflow-x-hidden overflow-y-auto rounded-md bg-popover p-1 text-popover-foreground shadow-md ring-1 ring-foreground/10 duration-100 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-[state=closed]:overflow-hidden data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
+          "z-50 max-h-(--tamagui-menu-content-available-height) w-(--tamagui-menu-trigger-width) min-w-32 origin-(--tamagui-menu-content-transform-origin) overflow-x-hidden overflow-y-auto rounded-md bg-popover p-1 text-popover-foreground shadow-md ring-1 ring-foreground/10 duration-100 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-[state=closed]:overflow-hidden data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
           className
         )}
         {...props}
@@ -70,7 +83,7 @@ function DropdownMenuItem({
   variant?: "default" | "destructive"
 }) {
   return (
-    <DropdownMenuPrimitive.Item
+    <StyledDropdownMenuItem
       data-slot="dropdown-menu-item"
       data-inset={inset}
       data-variant={variant}
@@ -93,7 +106,7 @@ function DropdownMenuCheckboxItem({
   inset?: boolean
 }) {
   return (
-    <DropdownMenuPrimitive.CheckboxItem
+    <StyledDropdownMenuCheckboxItem
       data-slot="dropdown-menu-checkbox-item"
       data-inset={inset}
       className={cn(
@@ -112,7 +125,7 @@ function DropdownMenuCheckboxItem({
         </DropdownMenuPrimitive.ItemIndicator>
       </View>
       {children}
-    </DropdownMenuPrimitive.CheckboxItem>
+    </StyledDropdownMenuCheckboxItem>
   )
 }
 
@@ -136,7 +149,7 @@ function DropdownMenuRadioItem({
   inset?: boolean
 }) {
   return (
-    <DropdownMenuPrimitive.RadioItem
+    <StyledDropdownMenuRadioItem
       data-slot="dropdown-menu-radio-item"
       data-inset={inset}
       className={cn(
@@ -154,7 +167,7 @@ function DropdownMenuRadioItem({
         </DropdownMenuPrimitive.ItemIndicator>
       </View>
       {children}
-    </DropdownMenuPrimitive.RadioItem>
+    </StyledDropdownMenuRadioItem>
   )
 }
 
@@ -166,7 +179,7 @@ function DropdownMenuLabel({
   inset?: boolean
 }) {
   return (
-    <DropdownMenuPrimitive.Label
+    <StyledDropdownMenuLabel
       data-slot="dropdown-menu-label"
       data-inset={inset}
       className={cn(
@@ -183,7 +196,7 @@ function DropdownMenuSeparator({
   ...props
 }: React.ComponentProps<typeof DropdownMenuPrimitive.Separator>) {
   return (
-    <DropdownMenuPrimitive.Separator
+    <StyledDropdownMenuSeparator
       data-slot="dropdown-menu-separator"
       className={cn("-mx-1 my-1 h-px bg-border", className)}
       {...props}
@@ -222,7 +235,7 @@ function DropdownMenuSubTrigger({
   inset?: boolean
 }) {
   return (
-    <DropdownMenuPrimitive.SubTrigger
+    <StyledDropdownMenuSubTrigger
       data-slot="dropdown-menu-sub-trigger"
       data-inset={inset}
       className={cn(
@@ -233,7 +246,7 @@ function DropdownMenuSubTrigger({
     >
       {children}
       <ChevronRightIcon className="ml-auto" />
-    </DropdownMenuPrimitive.SubTrigger>
+    </StyledDropdownMenuSubTrigger>
   )
 }
 
@@ -242,10 +255,10 @@ function DropdownMenuSubContent({
   ...props
 }: React.ComponentProps<typeof DropdownMenuPrimitive.SubContent>) {
   return (
-    <DropdownMenuPrimitive.SubContent
+    <StyledDropdownMenuSubContent
       data-slot="dropdown-menu-sub-content"
       className={cn(
-        "z-50 min-w-[96px] origin-(--radix-dropdown-menu-content-transform-origin) overflow-hidden rounded-md bg-popover p-1 text-popover-foreground shadow-lg ring-1 ring-foreground/10 duration-100 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
+        "z-50 min-w-[96px] origin-(--tamagui-menu-content-transform-origin) overflow-hidden rounded-md bg-popover p-1 text-popover-foreground shadow-lg ring-1 ring-foreground/10 duration-100 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
         className
       )}
       {...props}

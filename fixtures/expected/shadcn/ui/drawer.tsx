@@ -1,5 +1,6 @@
 import * as React from "react"
 import { cn } from "cn"
+// TODO(native): `"vaul"`: vaul (Drawer) is built on the DOM and does not run on native.
 import { Drawer as DrawerPrimitive } from "vaul"
 import { html } from "@tamagui/tailwind"
 

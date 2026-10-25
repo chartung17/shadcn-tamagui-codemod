@@ -30,11 +30,11 @@ Auto-converted 84.2% · 2 TODO(s) · 5 warning(s)
 
 | Line | Severity | Code | Construct | Reason | Suggested fix |
 | ---: | --- | --- | --- | --- | --- |
-| 12 | warning | `cva/kept` | `chipVariants = cva(...)` | Kept as cva(): it is exported, so other modules may call it for class strings. Its classes still apply at runtime through className. | Convert it to `styled()` from `@tamagui/tailwind` by hand if it can be simplified. |
-| 17 | warning | `cva/kept` | `boxVariants = cva(...)` | Kept as cva(): `styled()` has no `compoundVariants`. Its classes still apply at runtime through className. | Convert it to `styled()` from `@tamagui/tailwind` by hand if it can be simplified. |
-| 23 | warning | `cva/kept` | `listVariants = cva(...)` | Kept as cva(): it styles `TabsPrimitive.List`, which is not an `html.*` element or `View`. Its classes still apply at runtime through className. | Convert it to `styled()` from `@tamagui/tailwind` by hand if it can be simplified. |
-| 23 | warning | `class/web-only` | `inline-flex` | `display: inline-flex` is dropped on native, where elements are flex containers anyway. |  |
-| 23 | info | `selector/rewrite` | `flex-row` | Added `flex-row`: native drops `inline-flex` and would lay the children out as a column. |  |
-| 29 | warning | `cva/kept` | `markVariants = cva(...)` | Kept as cva(): it uses `after:absolute`, which cannot be converted. Its classes still apply at runtime through className. | Convert it to `styled()` from `@tamagui/tailwind` by hand if it can be simplified. |
-| 29 | todo | `class/unsupported` | `after:absolute after:inset-0` | `::after` pseudo-elements do not exist on native, so this content is lost there. | Render the decoration as a real child element (e.g. an absolutely positioned `View`). |
-| 33 | todo | `class/unsupported` | `after:bg-primary` | `::after` pseudo-elements do not exist on native, so this content is lost there. | Render the decoration as a real child element (e.g. an absolutely positioned `View`). |
+| 14 | warning | `cva/kept` | `chipVariants = cva(...)` | Kept as cva(): it is exported, so other modules may call it for class strings. Its classes still apply at runtime through className. | Convert it to `styled()` from `@tamagui/tailwind` by hand if it can be simplified. |
+| 19 | warning | `cva/kept` | `boxVariants = cva(...)` | Kept as cva(): `styled()` has no `compoundVariants`. Its classes still apply at runtime through className. | Convert it to `styled()` from `@tamagui/tailwind` by hand if it can be simplified. |
+| 25 | warning | `cva/kept` | `listVariants = cva(...)` | Kept as cva(): it styles `TabsPrimitive.List`, which is not an `html.*` element or `View`. Its classes still apply at runtime through className. | Convert it to `styled()` from `@tamagui/tailwind` by hand if it can be simplified. |
+| 25 | warning | `class/web-only` | `inline-flex` | `display: inline-flex` is dropped on native, where elements are flex containers anyway. |  |
+| 25 | info | `selector/rewrite` | `flex-row` | Added `flex-row`: native drops `inline-flex` and would lay the children out as a column. |  |
+| 31 | warning | `cva/kept` | `markVariants = cva(...)` | Kept as cva(): it uses `after:absolute`, which cannot be converted. Its classes still apply at runtime through className. | Convert it to `styled()` from `@tamagui/tailwind` by hand if it can be simplified. |
+| 31 | todo | `class/unsupported` | `after:absolute after:inset-0` | `::after` pseudo-elements do not exist on native, so this content is lost there. | Render the decoration as a real child element (e.g. an absolutely positioned `View`). |
+| 35 | todo | `class/unsupported` | `after:bg-primary` | `::after` pseudo-elements do not exist on native, so this content is lost there. | Render the decoration as a real child element (e.g. an absolutely positioned `View`). |

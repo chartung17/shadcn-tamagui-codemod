@@ -2,8 +2,17 @@
 
 import * as React from "react"
 import { cn } from "cn"
-// TODO(native): `Slider (SliderPrimitive)`: There is no Tamagui mapping for Radix `Slider` yet, so it stays on Radix, which is web-only.
-import { Slider as SliderPrimitive } from "radix-ui"
+import { Slider as SliderPrimitive } from "tamagui/unstyled"
+import { styled } from "@tamagui/tailwind"
+// Lets Tailwind classes (className) style a Tamagui UI primitive on web and native.
+const tw = <C extends React.ComponentType<any>>(component: C) =>
+  styled(component as never) as unknown as React.ComponentType<
+    React.ComponentProps<C> & { className?: string }
+  >
+const StyledSlider = tw(SliderPrimitive)
+const StyledSliderTrack = tw(SliderPrimitive.Track)
+const StyledSliderTrackActive = tw(SliderPrimitive.TrackActive)
+const StyledSliderThumb = tw(SliderPrimitive.Thumb)
 
 function Slider({
   className,
@@ -12,7 +21,7 @@ function Slider({
   min = 0,
   max = 100,
   ...props
-}: React.ComponentProps<typeof SliderPrimitive.Root>) {
+}: React.ComponentProps<typeof SliderPrimitive>) {
   const _values = React.useMemo(
     () =>
       Array.isArray(value)
@@ -24,7 +33,7 @@ function Slider({
   )
 
   return (
-    <SliderPrimitive.Root
+    <StyledSlider
       data-slot="slider"
       defaultValue={defaultValue}
       value={value}
@@ -36,23 +45,24 @@ function Slider({
       )}
       {...props}
     >
-      <SliderPrimitive.Track
+      <StyledSliderTrack
         data-slot="slider-track"
         className="relative grow overflow-hidden rounded-full bg-muted data-horizontal:h-1.5 data-horizontal:w-full data-vertical:h-full data-vertical:w-1.5"
       >
-        <SliderPrimitive.Range
+        <StyledSliderTrackActive
           data-slot="slider-range"
           className="absolute bg-primary select-none data-horizontal:h-full data-vertical:w-full"
         />
-      </SliderPrimitive.Track>
+      </StyledSliderTrack>
       {Array.from({ length: _values.length }, (_, index) => (
-        <SliderPrimitive.Thumb
+        <StyledSliderThumb
           data-slot="slider-thumb"
           key={index}
           className="block size-4 shrink-0 rounded-full border border-primary bg-white shadow-sm ring-ring/50 transition-[color,box-shadow] select-none hover:ring-4 focus-visible:ring-4 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50"
+          index={index}
         />
       ))}
-    </SliderPrimitive.Root>
+    </StyledSlider>
   )
 }
 

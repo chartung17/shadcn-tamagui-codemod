@@ -14,8 +14,7 @@ Anything it cannot convert safely is left in place, marked with a
 `// TODO(native): ...` comment, and listed in the report.
 
 > **Status:** under construction. Implemented passes: `imports`, `elements`,
-> `classes`, `cn-cva`, `selectors`, `radix` (Dialog, Popover, Tooltip, Tabs, Checkbox, Switch, `asChild`) and
-> the report. The other passes land milestone by milestone.
+> `classes`, `cn-cva`, `selectors`, `radix` and the report. Theme generation and icons come next. The other passes land milestone by milestone.
 
 ## Usage
 
@@ -240,7 +239,9 @@ fixture.
 
 The `imports` pass records where every identifier came from, so later passes
 can still recognize e.g. Radix primitives after their imports are rewritten.
-It flags `react-dom` imports (`createPortal`, `flushSync`, ...) as TODOs.
+It flags `react-dom` imports (`createPortal`, `flushSync`, ...) and DOM-only
+packages that shadcn code commonly uses (vaul, sonner, recharts, next-themes,
+@dnd-kit, next/link; see `src/data/web-only-packages.json`) as TODOs.
 `@/components/ui/*` imports are kept: the shadcn components themselves are
 converted in place, so their import paths stay valid.
 
@@ -275,7 +276,12 @@ Tests are fixture-driven:
 - `fixtures/reports/**`: Markdown report snapshots
 
 `pnpm typecheck:fixtures` type-checks the converted fixtures listed in
-`fixtures/tsconfig.typecheck.json` against the real Tamagui packages.
+`fixtures/tsconfig.typecheck.json` (28 shadcn ui components and several cases)
+against the real Tamagui packages. Not listed: `sidebar.tsx`, whose converted
+output has four type errors that need a manual fix (DOM-typed `{...props}`
+spread onto the Sheet root, `dir` typed as `string`, `hidden` on
+`TooltipContent`, and a `CSSProperties` cast on a wider `style` type), and files
+that need recharts, vaul, sonner, next-themes or dnd-kit.
 
 Every fixture is also checked for idempotency (running the codemod on the
 expected output changes nothing). Files in `fixtures/input/safety/` contain no

@@ -99,7 +99,7 @@ function wrapperHelper(sourceFile: SourceFile, shared: Map<string, unknown>): st
     [
       '// Lets Tailwind classes (className) style a Tamagui UI primitive on web and native.',
       `const ${name} = <C extends ${ComponentType}<any>>(component: C) =>`,
-      `  ${styledLocal}(component as never) as unknown as ${ComponentType}<${ComponentProps}<C>>`,
+      `  ${styledLocal}(component as never) as unknown as ${ComponentType}<${ComponentProps}<C> & { className?: string }>`,
     ].join('\n'),
   )
   shared.set(key, name)
@@ -280,6 +280,29 @@ export function rewriteRadixComponents(
               reason: `Removed \`${name}\`: ${reason}.`,
             })
             attr.remove()
+          }
+        }
+        if (
+          part.propFromKey &&
+          !attributesOf(element).some(
+            (a) => a.getNameNode().getText() === part.propFromKey,
+          )
+        ) {
+          const key = attributesOf(element).find(
+            (a) => a.getNameNode().getText() === 'key',
+          )
+          const init = key?.getInitializer()
+          if (init && Node.isJsxExpression(init) && init.getExpression()) {
+            element.addAttribute({
+              name: part.propFromKey,
+              initializer: `{${init.getExpression()!.getText()}}`,
+            })
+          } else {
+            diagnostics.todo(element, {
+              code: 'radix/required-prop',
+              construct: `${binding.radix}.${partName}`,
+              reason: `Tamagui \`${mapping.tamagui}.${part.part}\` needs an \`${part.propFromKey}\` prop.`,
+            })
           }
         }
         const styledTag = attributesOf(element).some(

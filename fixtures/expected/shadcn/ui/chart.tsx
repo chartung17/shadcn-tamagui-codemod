@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import { cn } from "cn"
+// TODO(native): `"recharts"`: recharts renders SVG through the DOM and does not run on native.
 import * as RechartsPrimitive from "recharts"
 import type { TooltipValueType } from "recharts"
 import { html, View } from "@tamagui/tailwind"

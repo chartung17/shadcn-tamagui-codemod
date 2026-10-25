@@ -1,18 +1,25 @@
 import * as React from "react"
 import { cn } from "cn"
-// TODO(native): `Avatar (AvatarPrimitive)`: There is no Tamagui mapping for Radix `Avatar` yet, so it stays on Radix, which is web-only.
-import { Avatar as AvatarPrimitive } from "radix-ui"
-import { html } from "@tamagui/tailwind"
+import { html, styled } from "@tamagui/tailwind"
+import { Avatar as AvatarPrimitive } from "tamagui/unstyled"
+// Lets Tailwind classes (className) style a Tamagui UI primitive on web and native.
+const tw = <C extends React.ComponentType<any>>(component: C) =>
+  styled(component as never) as unknown as React.ComponentType<
+    React.ComponentProps<C> & { className?: string }
+  >
+const StyledAvatar = tw(AvatarPrimitive)
+const StyledAvatarImage = tw(AvatarPrimitive.Image)
+const StyledAvatarFallback = tw(AvatarPrimitive.Fallback)
 
 function Avatar({
   className,
   size = "default",
   ...props
-}: React.ComponentProps<typeof AvatarPrimitive.Root> & {
+}: React.ComponentProps<typeof AvatarPrimitive> & {
   size?: "default" | "sm" | "lg"
 }) {
   return (
-    <AvatarPrimitive.Root
+    <StyledAvatar
       // TODO(native): `after:absolute after:inset-0 after:rounded-full after:border after:border-bor...`: `::after` pseudo-elements do not exist on native, so this content is lost there.
       data-slot="avatar"
       data-size={size}
@@ -30,7 +37,7 @@ function AvatarImage({
   ...props
 }: React.ComponentProps<typeof AvatarPrimitive.Image>) {
   return (
-    <AvatarPrimitive.Image
+    <StyledAvatarImage
       data-slot="avatar-image"
       className={cn(
         "aspect-square size-full rounded-full object-cover",
@@ -46,7 +53,7 @@ function AvatarFallback({
   ...props
 }: React.ComponentProps<typeof AvatarPrimitive.Fallback>) {
   return (
-    <AvatarPrimitive.Fallback
+    <StyledAvatarFallback
       data-slot="avatar-fallback"
       className={cn(
         "flex size-full items-center justify-center rounded-full bg-muted text-sm text-muted-foreground group-data-[size=sm]/avatar:text-xs",
