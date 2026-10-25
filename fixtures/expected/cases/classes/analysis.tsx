@@ -28,7 +28,7 @@ export function Example({
     <html.div
       className={cn(
         "grid gap-4 p-4 md:grid-cols-2",
-        active && "ring-2 ring-ring",
+        active && "ring-2 ring-(--ring) ring-ring",
         variant === "outline" ? "border border-input" : "bg-secondary",
         { "opacity-50": !active }
       )}
@@ -45,10 +45,10 @@ export function Example({
       >
         Interpolated
       </html.p>
-      <html.p className="data-[state=open]:font-bold aria-invalid:text-destructive">
+      <html.p className="data-[state=open]:font-bold! aria-invalid:text-(--destructive)!">
         Selector variants
       </html.p>
-      <html.input className="placeholder:text-muted-foreground placeholder-muted-foreground w-38 my-custom-class" />
+      <html.input className="placeholder:text-(--muted-foreground) placeholder-muted-foreground w-38 my-custom-class" />
       <ExampleFrame tone={"brand"}>Chip</ExampleFrame>
     </html.div>
   )

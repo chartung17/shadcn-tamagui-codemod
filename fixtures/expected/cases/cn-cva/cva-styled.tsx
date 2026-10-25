@@ -4,7 +4,7 @@ import type { GetTailwindVariantProps } from "@tamagui/tailwind"
 
 const AlertFrame = styled(
   html.div,
-  "relative grid w-full rounded-lg border px-4 py-3 text-sm",
+  "relative grid w-full rounded-lg border border-border px-4 py-3 text-sm",
   {
     variants: {
       variant: {

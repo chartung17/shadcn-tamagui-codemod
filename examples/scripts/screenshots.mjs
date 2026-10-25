@@ -2,6 +2,7 @@
 //
 //   npm run build && npm run screenshots
 //
+// Takes the gallery in the light and dark themes, then opens each overlay.
 // Uses playwright-core; point CHROMIUM_PATH at a Chromium binary, or run
 // `npx playwright-core install chromium` once. Writes screenshots/<app>/*.png
 // and prints any console errors from the page.
@@ -45,10 +46,15 @@ for (const [index, app] of APPS.entries()) {
   })
   page.on("pageerror", (error) => errors.push(String(error)))
 
-  const open = async () => {
-    await page.goto(url, { waitUntil: "networkidle" })
+  const open = async (query = "") => {
+    await page.goto(url + query, { waitUntil: "networkidle" })
     await page.evaluate(() => document.fonts.ready)
   }
+  await open("?theme=dark")
+  await page.screenshot({
+    path: path.join(out, "gallery-dark.png"),
+    fullPage: true,
+  })
   await open()
   await page.screenshot({ path: path.join(out, "gallery.png"), fullPage: true })
 

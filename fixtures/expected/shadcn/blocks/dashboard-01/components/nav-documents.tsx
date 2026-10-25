@@ -23,6 +23,7 @@ import {
   ShareIcon,
   Trash2Icon,
 } from "@/components/icons"
+import { isWeb } from "tamagui"
 
 export function NavDocuments({
   items,
@@ -36,7 +37,7 @@ export function NavDocuments({
   const { isMobile } = useSidebar()
 
   return (
-    <SidebarGroup className="group-data-[collapsible=icon]:hidden">
+    <SidebarGroup className="group-data-[collapsible=icon]:hidden!">
       <SidebarGroupLabel>Documents</SidebarGroupLabel>
       <SidebarMenu>
         {items.map((item) => (
@@ -51,9 +52,11 @@ export function NavDocuments({
               <DropdownMenuTrigger asChild>
                 <SidebarMenuAction
                   showOnHover
-                  className="rounded-sm data-[state=open]:bg-accent"
+                  className="rounded-sm data-[state=open]:bg-(--accent)!"
                 >
-                  <MoreHorizontalIcon />
+                  <MoreHorizontalIcon
+                    stroke={isWeb ? "currentColor" : undefined}
+                  />
                   <html.span className="sr-only">More</html.span>
                 </SidebarMenuAction>
               </DropdownMenuTrigger>
@@ -63,16 +66,16 @@ export function NavDocuments({
                 align={isMobile ? "end" : "start"}
               >
                 <DropdownMenuItem>
-                  <FolderIcon />
+                  <FolderIcon stroke={isWeb ? "currentColor" : undefined} />
                   <html.span>Open</html.span>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                  <ShareIcon />
+                  <ShareIcon stroke={isWeb ? "currentColor" : undefined} />
                   <html.span>Share</html.span>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem variant="destructive">
-                  <Trash2Icon />
+                  <Trash2Icon stroke={isWeb ? "currentColor" : undefined} />
                   <html.span>Delete</html.span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
@@ -82,7 +85,7 @@ export function NavDocuments({
         <SidebarMenuItem>
           <SidebarMenuButton className="text-sidebar-foreground/70">
             <View asChild className="text-sidebar-foreground/70">
-              <MoreHorizontalIcon />
+              <MoreHorizontalIcon stroke={isWeb ? "currentColor" : undefined} />
             </View>
             <html.span>More</html.span>
           </SidebarMenuButton>

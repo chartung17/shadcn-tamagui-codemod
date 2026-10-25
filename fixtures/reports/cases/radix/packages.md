@@ -33,5 +33,5 @@ Auto-converted 90.5% · 2 TODO(s) · 3 warning(s)
 | 3 | todo | `radix/import-style` | `import { Root as CheckboxRoot } from "@radix-ui/react-checkbox"` | Only namespace imports (`import * as X from "@radix-ui/react-..."`) of Radix packages are converted. | Switch to a namespace import and re-run, or convert this component by hand. |
 | 5 | todo | `radix/unmapped` | `HoverCard (HoverCardPrimitive)` | There is no Tamagui mapping for Radix `HoverCard` yet, so it stays on Radix, which is web-only. | Rebuild it from Tamagui primitives, or keep this component web-only in a `.web.tsx` file. |
 | 17 | warning | `class/web-only` | `fixed` | `position: fixed` is dropped on native. | Use `absolute` inside a full-screen container, or a Tamagui overlay/Portal. |
-| 30 | warning | `class/web-only` | `fixed` | `position: fixed` is dropped on native. | Use `absolute` inside a full-screen container, or a Tamagui overlay/Portal. |
-| 31 | warning | `radix/unsupported-prop` | `Dialog.Content onOpenAutoFocus` | Removed `onOpenAutoFocus`: Tamagui controls focus through `<Dialog.FocusScope onMountAutoFocus onUnmountAutoFocus>`. |  |
+| 67 | warning | `class/web-only` | `fixed` | `position: fixed` is dropped on native. | Use `absolute` inside a full-screen container, or a Tamagui overlay/Portal. |
+| 68 | warning | `radix/unsupported-prop` | `Dialog.Content onOpenAutoFocus` | Removed `onOpenAutoFocus`: Tamagui controls focus through `<Dialog.FocusScope onMountAutoFocus onUnmountAutoFocus>`. |  |

@@ -8,7 +8,7 @@
 | Native class coverage | 66.7% |
 | TODOs | 0 |
 | Warnings | 3 |
-| Notes | 2 |
+| Notes | 3 |
 | Classes (supported / web-only / unknown / unsupported) | 8 / 4 / 0 / 0 |
 | Constructs (converted / flagged) | 4 / 0 |
 
@@ -21,6 +21,7 @@
 | --- | --- | ---: |
 | `class/web-only` | warning | 3 |
 | `selector/rewrite` | info | 2 |
+| `selector/web-color` | info | 1 |
 
 ## cases/selectors/rewrites.tsx
 
@@ -29,7 +30,8 @@ Auto-converted 100% · 0 TODO(s) · 3 warning(s)
 | Line | Severity | Code | Construct | Reason | Suggested fix |
 | ---: | --- | --- | --- | --- | --- |
 | 6 | warning | `class/web-only` | `inline-flex` | `display: inline-flex` is dropped on native, where elements are flex containers anyway. |  |
-| 6 | info | `selector/rewrite` | `flex-row` | Added `flex-row`: native drops `inline-flex` and would lay the children out as a column. |  |
+| 6 | info | `selector/rewrite` | `flex-row` | Added `flex-row`: Tamagui views and native lay out a `flex` container as a column. |  |
 | 9 | warning | `class/web-only` | `placeholder:text-muted-foreground placeholder:text-sm` | The `placeholder:` variant styles `::placeholder`, which native does not have. | Use the `placeholder-<color>` utility, which maps to `placeholderTextColor` on native. |
 | 9 | info | `selector/rewrite` | `placeholder-muted-foreground` | Added `placeholder-*`, which maps to `placeholderTextColor` on native. |  |
+| 9 | info | `selector/web-color` | `placeholder:text-muted-foreground` | Theme colors in classes Tamagui leaves to Tailwind on web now read Tamagui's theme variables (`bg-(--primary)`): Tailwind compiles them with its default theme, which has no shadcn colors. |  |
 | 13 | warning | `class/web-only` | `inline-flex` | `display: inline-flex` is dropped on native, where elements are flex containers anyway. |  |

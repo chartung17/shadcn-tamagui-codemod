@@ -5,7 +5,7 @@
     "diagnostics": {
       "todo": 8,
       "warning": 294,
-      "info": 34
+      "info": 199
     },
     "metrics": {
       "classes": {
@@ -79,17 +79,37 @@
       "count": 1
     },
     {
+      "code": "selector/web-state",
+      "severity": "info",
+      "count": 67
+    },
+    {
+      "code": "selector/web-color",
+      "severity": "info",
+      "count": 46
+    },
+    {
+      "code": "selector/rewrite",
+      "severity": "info",
+      "count": 32
+    },
+    {
+      "code": "selector/web-variant",
+      "severity": "info",
+      "count": 24
+    },
+    {
       "code": "element/view",
       "severity": "info",
       "count": 13
     },
     {
-      "code": "selector/rewrite",
+      "code": "icon/wrapped",
       "severity": "info",
-      "count": 11
+      "count": 5
     },
     {
-      "code": "icon/wrapped",
+      "code": "selector/native-orientation",
       "severity": "info",
       "count": 5
     },
@@ -105,6 +125,16 @@
     },
     {
       "code": "cva/styled",
+      "severity": "info",
+      "count": 1
+    },
+    {
+      "code": "radix/class-moved",
+      "severity": "info",
+      "count": 1
+    },
+    {
+      "code": "radix/font-size",
       "severity": "info",
       "count": 1
     }
@@ -189,7 +219,7 @@
         {
           "pass": "elements",
           "file": "converted/src/App.tsx",
-          "line": 109,
+          "line": 110,
           "column": 11,
           "severity": "info",
           "code": "element/view",
@@ -199,7 +229,7 @@
         {
           "pass": "elements",
           "file": "converted/src/App.tsx",
-          "line": 117,
+          "line": 118,
           "column": 11,
           "severity": "info",
           "code": "element/view",
@@ -209,7 +239,27 @@
         {
           "pass": "elements",
           "file": "converted/src/App.tsx",
-          "line": 131,
+          "line": 133,
+          "column": 11,
+          "severity": "info",
+          "code": "element/view",
+          "construct": "<div>",
+          "reason": "Flex container converted to `View`; `flex-row` added because `View` is a column by default."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/App.tsx",
+          "line": 153,
+          "column": 35,
+          "severity": "info",
+          "code": "selector/rewrite",
+          "construct": "flex-row",
+          "reason": "Added `flex-row`: Tamagui views and native lay out a `flex` container as a column."
+        },
+        {
+          "pass": "elements",
+          "file": "converted/src/App.tsx",
+          "line": 161,
           "column": 11,
           "severity": "info",
           "code": "element/view",
@@ -219,7 +269,7 @@
         {
           "pass": "elements",
           "file": "converted/src/App.tsx",
-          "line": 159,
+          "line": 165,
           "column": 11,
           "severity": "info",
           "code": "element/view",
@@ -229,17 +279,7 @@
         {
           "pass": "elements",
           "file": "converted/src/App.tsx",
-          "line": 163,
-          "column": 11,
-          "severity": "info",
-          "code": "element/view",
-          "construct": "<div>",
-          "reason": "Flex container converted to `View`; `flex-row` added because `View` is a column by default."
-        },
-        {
-          "pass": "elements",
-          "file": "converted/src/App.tsx",
-          "line": 168,
+          "line": 170,
           "column": 13,
           "severity": "info",
           "code": "element/view",
@@ -249,7 +289,7 @@
         {
           "pass": "elements",
           "file": "converted/src/App.tsx",
-          "line": 172,
+          "line": 174,
           "column": 13,
           "severity": "info",
           "code": "element/view",
@@ -259,7 +299,7 @@
         {
           "pass": "elements",
           "file": "converted/src/App.tsx",
-          "line": 232,
+          "line": 234,
           "column": 11,
           "severity": "info",
           "code": "element/view",
@@ -269,7 +309,7 @@
         {
           "pass": "elements",
           "file": "converted/src/App.tsx",
-          "line": 260,
+          "line": 262,
           "column": 11,
           "severity": "info",
           "code": "element/view",
@@ -367,7 +407,47 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/accordion.tsx",
-          "line": 40,
+          "line": 52,
+          "column": 46,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "group-aria-expanded/accordion-trigger:hidden",
+          "reason": "`group-*` variants other than interaction states (hover, press, focus, focus-visible, focus-within, disabled) use selectors that native does not have."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/accordion.tsx",
+          "line": 54,
+          "column": 2,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "group-aria-expanded/accordion-trigger:hidden",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/accordion.tsx",
+          "line": 55,
+          "column": 11,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "group-aria-expanded/accordion-trigger:inline",
+          "reason": "`group-*` variants other than interaction states (hover, press, focus, focus-visible, focus-within, disabled) use selectors that native does not have."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/accordion.tsx",
+          "line": 57,
+          "column": 17,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "group-aria-expanded/accordion-trigger:inline",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/accordion.tsx",
+          "line": 77,
           "column": 21,
           "severity": "warning",
           "code": "class/web-only",
@@ -375,9 +455,39 @@
           "reason": "`:not()` selectors are web-only."
         },
         {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/accordion.tsx",
+          "line": 77,
+          "column": 21,
+          "severity": "info",
+          "code": "selector/rewrite",
+          "construct": "border-border",
+          "reason": "Added `border-border`: shadcn gives every border that color in its base CSS, and native defaults to black."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/accordion.tsx",
+          "line": 77,
+          "column": 21,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "not-last:border-b",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/accordion.tsx",
+          "line": 89,
+          "column": 38,
+          "severity": "info",
+          "code": "selector/rewrite",
+          "construct": "flex-row",
+          "reason": "Added `flex-row`: Tamagui views and native lay out a `flex` container as a column."
+        },
+        {
           "pass": "classes",
           "file": "converted/src/components/ui/accordion.tsx",
-          "line": 57,
+          "line": 94,
           "column": 11,
           "severity": "todo",
           "code": "class/unsupported",
@@ -388,7 +498,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/accordion.tsx",
-          "line": 57,
+          "line": 94,
           "column": 11,
           "severity": "warning",
           "code": "class/web-only",
@@ -399,7 +509,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/accordion.tsx",
-          "line": 57,
+          "line": 94,
           "column": 11,
           "severity": "warning",
           "code": "class/web-only",
@@ -407,49 +517,49 @@
           "reason": "Descendant selectors (`**:`) are web-only."
         },
         {
-          "pass": "classes",
+          "pass": "selectors",
           "file": "converted/src/components/ui/accordion.tsx",
-          "line": 57,
-          "column": 100,
-          "severity": "warning",
-          "code": "class/web-only",
-          "construct": "group-aria-expanded/accordion-trigger:hidden",
-          "reason": "`group-*` variants other than interaction states (hover, press, focus, focus-visible, focus-within, disabled) use selectors that native does not have."
+          "line": 94,
+          "column": 11,
+          "severity": "info",
+          "code": "selector/rewrite",
+          "construct": "flex-row",
+          "reason": "Added `flex-row`: Tamagui views and native lay out a `flex` container as a column."
         },
         {
-          "pass": "classes",
+          "pass": "selectors",
           "file": "converted/src/components/ui/accordion.tsx",
-          "line": 57,
-          "column": 248,
-          "severity": "warning",
-          "code": "class/web-only",
-          "construct": "group-aria-expanded/accordion-trigger:inline",
-          "reason": "`group-*` variants other than interaction states (hover, press, focus, focus-visible, focus-within, disabled) use selectors that native does not have."
+          "line": 94,
+          "column": 11,
+          "severity": "info",
+          "code": "selector/web-color",
+          "construct": "focus-visible:ring-ring/50 focus-visible:after:border-ring **:data-[slot=accordion-trigger-icon]:text-muted-foreground",
+          "reason": "Theme colors in classes Tamagui leaves to Tailwind on web now read Tamagui's theme variables (`bg-(--primary)`): Tailwind compiles them with its default theme, which has no shadcn colors."
         },
         {
           "pass": "icons",
           "file": "converted/src/components/ui/accordion.tsx",
-          "line": 63,
+          "line": 100,
           "column": 9,
           "severity": "info",
           "code": "icon/wrapped",
-          "construct": "pointer-events-none shrink-0 group-aria-expanded/accordion-trigger:hidden",
+          "construct": "pointer-events-none shrink-0 group-aria-expanded/accordion-trigger:hidden!",
           "reason": "Tamagui icons take size and color as props, not classes; the other classes moved to a `View asChild` wrapper."
         },
         {
           "pass": "icons",
           "file": "converted/src/components/ui/accordion.tsx",
-          "line": 67,
-          "column": 54,
+          "line": 105,
+          "column": 39,
           "severity": "info",
           "code": "icon/wrapped",
-          "construct": "pointer-events-none hidden shrink-0 group-aria-expanded/accordion-trigger:inline",
+          "construct": "pointer-events-none hidden shrink-0 group-aria-expanded/accordion-trigger:inline!",
           "reason": "Tamagui icons take size and color as props, not classes; the other classes moved to a `View asChild` wrapper."
         },
         {
           "pass": "classes",
           "file": "converted/src/components/ui/accordion.tsx",
-          "line": 88,
+          "line": 131,
           "column": 17,
           "severity": "warning",
           "code": "class/web-only",
@@ -458,9 +568,19 @@
           "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
         },
         {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/accordion.tsx",
+          "line": 131,
+          "column": 17,
+          "severity": "info",
+          "code": "selector/web-variant",
+          "construct": "data-open:animate-accordion-down data-closed:animate-accordion-up",
+          "reason": "Rewrote shadcn's custom variants (`data-open:`, `data-checked:`, ...) to the attributes Tamagui sets, and `dark:` to Tamagui's dark theme class: on web Tailwind compiles these classes without shadcn's CSS."
+        },
+        {
           "pass": "classes",
           "file": "converted/src/components/ui/accordion.tsx",
-          "line": 93,
+          "line": 136,
           "column": 11,
           "severity": "warning",
           "code": "class/web-only",
@@ -471,7 +591,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/accordion.tsx",
-          "line": 93,
+          "line": 136,
           "column": 11,
           "severity": "warning",
           "code": "class/web-only",
@@ -481,12 +601,22 @@
         {
           "pass": "radix",
           "file": "converted/src/components/ui/accordion.tsx",
-          "line": 93,
+          "line": 136,
           "column": 11,
           "severity": "warning",
           "code": "radix/css-variable",
           "construct": "--radix-accordion-content-height",
           "reason": "Tamagui `Accordion` does not set `--radix-accordion-content-height`, so classes using it fall back to their defaults."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/accordion.tsx",
+          "line": 136,
+          "column": 11,
+          "severity": "info",
+          "code": "selector/web-color",
+          "construct": "[&_a]:hover:text-foreground",
+          "reason": "Theme colors in classes Tamagui leaves to Tailwind on web now read Tamagui's theme variables (`bg-(--primary)`): Tailwind compiles them with its default theme, which has no shadcn colors."
         }
       ]
     },
@@ -510,7 +640,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/alert-dialog.tsx",
-          "line": 48,
+          "line": 85,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -521,7 +651,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/alert-dialog.tsx",
-          "line": 48,
+          "line": 85,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -531,7 +661,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/alert-dialog.tsx",
-          "line": 48,
+          "line": 85,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -541,7 +671,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/alert-dialog.tsx",
-          "line": 48,
+          "line": 85,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -550,9 +680,29 @@
           "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
         },
         {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/alert-dialog.tsx",
+          "line": 85,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "supports-backdrop-filter:backdrop-blur-xs",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/alert-dialog.tsx",
+          "line": 85,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-variant",
+          "construct": "data-open:animate-in data-open:fade-in-0 data-closed:animate-out data-closed:fade-out-0",
+          "reason": "Rewrote shadcn's custom variants (`data-open:`, `data-checked:`, ...) to the attributes Tamagui sets, and `dark:` to Tamagui's dark theme class: on web Tailwind compiles these classes without shadcn's CSS."
+        },
+        {
           "pass": "classes",
           "file": "converted/src/components/ui/alert-dialog.tsx",
-          "line": 70,
+          "line": 107,
           "column": 11,
           "severity": "warning",
           "code": "class/web-only",
@@ -563,7 +713,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/alert-dialog.tsx",
-          "line": 70,
+          "line": 107,
           "column": 11,
           "severity": "warning",
           "code": "class/web-only",
@@ -574,7 +724,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/alert-dialog.tsx",
-          "line": 70,
+          "line": 107,
           "column": 11,
           "severity": "warning",
           "code": "class/web-only",
@@ -584,7 +734,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/alert-dialog.tsx",
-          "line": 70,
+          "line": 107,
           "column": 11,
           "severity": "warning",
           "code": "class/web-only",
@@ -593,9 +743,39 @@
           "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
         },
         {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/alert-dialog.tsx",
+          "line": 107,
+          "column": 11,
+          "severity": "info",
+          "code": "selector/web-color",
+          "construct": "ring-foreground/10",
+          "reason": "Theme colors in classes Tamagui leaves to Tailwind on web now read Tamagui's theme variables (`bg-(--primary)`): Tailwind compiles them with its default theme, which has no shadcn colors."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/alert-dialog.tsx",
+          "line": 107,
+          "column": 11,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "data-[size=default]:max-w-xs data-[size=sm]:max-w-xs data-[size=default]:sm:max-w-lg",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/alert-dialog.tsx",
+          "line": 107,
+          "column": 11,
+          "severity": "info",
+          "code": "selector/web-variant",
+          "construct": "data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
+          "reason": "Rewrote shadcn's custom variants (`data-open:`, `data-checked:`, ...) to the attributes Tamagui sets, and `dark:` to Tamagui's dark theme class: on web Tailwind compiles these classes without shadcn's CSS."
+        },
+        {
           "pass": "classes",
           "file": "converted/src/components/ui/alert-dialog.tsx",
-          "line": 87,
+          "line": 124,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -606,7 +786,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/alert-dialog.tsx",
-          "line": 87,
+          "line": 124,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -616,7 +796,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/alert-dialog.tsx",
-          "line": 87,
+          "line": 124,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -626,7 +806,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/alert-dialog.tsx",
-          "line": 87,
+          "line": 124,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -636,7 +816,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/alert-dialog.tsx",
-          "line": 87,
+          "line": 124,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -644,9 +824,19 @@
           "reason": "`group-*` variants other than interaction states (hover, press, focus, focus-visible, focus-within, disabled) use selectors that native does not have."
         },
         {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/alert-dialog.tsx",
+          "line": 124,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "has-data-[slot=alert-dialog-media]:grid-rows-[auto_auto_1fr] has-data-[slot=alert-dialog-media]:gap-x-6 sm:group-data-[size=default]/alert-dialog-content:place-items-start sm:group-data-[size=default]/alert-dialog-content:text-left sm:group-data-[size=default]/alert-dialog-content:has-data-[slot=alert-dialog-media]:grid-rows-[auto_1fr]",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
+        },
+        {
           "pass": "classes",
           "file": "converted/src/components/ui/alert-dialog.tsx",
-          "line": 103,
+          "line": 140,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -654,9 +844,19 @@
           "reason": "`group-*` variants other than interaction states (hover, press, focus, focus-visible, focus-within, disabled) use selectors that native does not have."
         },
         {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/alert-dialog.tsx",
+          "line": 140,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "group-data-[size=sm]/alert-dialog-content:grid group-data-[size=sm]/alert-dialog-content:grid-cols-2",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
+        },
+        {
           "pass": "classes",
           "file": "converted/src/components/ui/alert-dialog.tsx",
-          "line": 119,
+          "line": 156,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -666,7 +866,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/alert-dialog.tsx",
-          "line": 119,
+          "line": 156,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -676,7 +876,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/alert-dialog.tsx",
-          "line": 119,
+          "line": 156,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -686,17 +886,27 @@
         {
           "pass": "selectors",
           "file": "converted/src/components/ui/alert-dialog.tsx",
-          "line": 119,
+          "line": 156,
           "column": 9,
           "severity": "info",
           "code": "selector/rewrite",
           "construct": "flex-row",
-          "reason": "Added `flex-row`: native drops `inline-flex` and would lay the children out as a column."
+          "reason": "Added `flex-row`: Tamagui views and native lay out a `flex` container as a column."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/alert-dialog.tsx",
+          "line": 156,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "sm:group-data-[size=default]/alert-dialog-content:row-span-2",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
         },
         {
           "pass": "classes",
           "file": "converted/src/components/ui/alert-dialog.tsx",
-          "line": 135,
+          "line": 172,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -704,9 +914,19 @@
           "reason": "`group-*` variants other than interaction states (hover, press, focus, focus-visible, focus-within, disabled) use selectors that native does not have."
         },
         {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/alert-dialog.tsx",
+          "line": 172,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "sm:group-data-[size=default]/alert-dialog-content:group-has-data-[slot=alert-dialog-media]/alert-dialog-content:col-start-2",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
+        },
+        {
           "pass": "classes",
           "file": "converted/src/components/ui/alert-dialog.tsx",
-          "line": 151,
+          "line": 188,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -716,12 +936,22 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/alert-dialog.tsx",
-          "line": 151,
+          "line": 188,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
           "construct": "*:[a]:underline *:[a]:underline-offset-3 *:[a]:hover:text-foreground",
           "reason": "Child selectors (`*:`) are web-only."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/alert-dialog.tsx",
+          "line": 188,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-color",
+          "construct": "*:[a]:hover:text-foreground",
+          "reason": "Theme colors in classes Tamagui leaves to Tailwind on web now read Tamagui's theme variables (`bg-(--primary)`): Tailwind compiles them with its default theme, which has no shadcn colors."
         }
       ]
     },
@@ -745,7 +975,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/avatar.tsx",
-          "line": 27,
+          "line": 63,
           "column": 9,
           "severity": "todo",
           "code": "class/unsupported",
@@ -756,7 +986,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/avatar.tsx",
-          "line": 27,
+          "line": 63,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -765,9 +995,49 @@
           "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
         },
         {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/avatar.tsx",
+          "line": 63,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/rewrite",
+          "construct": "flex-row border-border",
+          "reason": "Added `flex-row`: Tamagui views and native lay out a `flex` container as a column. Added `border-border`: shadcn gives every border that color in its base CSS, and native defaults to black."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/avatar.tsx",
+          "line": 63,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-color",
+          "construct": "after:border-border",
+          "reason": "Theme colors in classes Tamagui leaves to Tailwind on web now read Tamagui's theme variables (`bg-(--primary)`): Tailwind compiles them with its default theme, which has no shadcn colors."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/avatar.tsx",
+          "line": 63,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "data-[size=lg]:size-10 data-[size=sm]:size-6",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/avatar.tsx",
+          "line": 63,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-variant",
+          "construct": "dark:after:mix-blend-lighten",
+          "reason": "Rewrote shadcn's custom variants (`data-open:`, `data-checked:`, ...) to the attributes Tamagui sets, and `dark:` to Tamagui's dark theme class: on web Tailwind compiles these classes without shadcn's CSS."
+        },
+        {
           "pass": "classes",
           "file": "converted/src/components/ui/avatar.tsx",
-          "line": 43,
+          "line": 79,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -778,7 +1048,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/avatar.tsx",
-          "line": 59,
+          "line": 95,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -786,9 +1056,29 @@
           "reason": "`group-*` variants other than interaction states (hover, press, focus, focus-visible, focus-within, disabled) use selectors that native does not have."
         },
         {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/avatar.tsx",
+          "line": 95,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/rewrite",
+          "construct": "flex-row",
+          "reason": "Added `flex-row`: Tamagui views and native lay out a `flex` container as a column."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/avatar.tsx",
+          "line": 95,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "group-data-[size=sm]/avatar:text-xs",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
+        },
+        {
           "pass": "classes",
           "file": "converted/src/components/ui/avatar.tsx",
-          "line": 75,
+          "line": 111,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -798,7 +1088,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/avatar.tsx",
-          "line": 75,
+          "line": 111,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -808,17 +1098,27 @@
         {
           "pass": "selectors",
           "file": "converted/src/components/ui/avatar.tsx",
-          "line": 75,
+          "line": 111,
           "column": 9,
           "severity": "info",
           "code": "selector/rewrite",
           "construct": "flex-row",
-          "reason": "Added `flex-row`: native drops `inline-flex` and would lay the children out as a column."
+          "reason": "Added `flex-row`: Tamagui views and native lay out a `flex` container as a column."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/avatar.tsx",
+          "line": 111,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-color",
+          "construct": "ring-background",
+          "reason": "Theme colors in classes Tamagui leaves to Tailwind on web now read Tamagui's theme variables (`bg-(--primary)`): Tailwind compiles them with its default theme, which has no shadcn colors."
         },
         {
           "pass": "classes",
           "file": "converted/src/components/ui/avatar.tsx",
-          "line": 76,
+          "line": 112,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -826,9 +1126,19 @@
           "reason": "`group-*` variants other than interaction states (hover, press, focus, focus-visible, focus-within, disabled) use selectors that native does not have."
         },
         {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/avatar.tsx",
+          "line": 112,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "group-data-[size=sm]/avatar:size-2",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
+        },
+        {
           "pass": "classes",
           "file": "converted/src/components/ui/avatar.tsx",
-          "line": 77,
+          "line": 113,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -836,9 +1146,19 @@
           "reason": "`group-*` variants other than interaction states (hover, press, focus, focus-visible, focus-within, disabled) use selectors that native does not have."
         },
         {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/avatar.tsx",
+          "line": 113,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "group-data-[size=default]/avatar:size-2.5",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
+        },
+        {
           "pass": "classes",
           "file": "converted/src/components/ui/avatar.tsx",
-          "line": 78,
+          "line": 114,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -846,9 +1166,19 @@
           "reason": "`group-*` variants other than interaction states (hover, press, focus, focus-visible, focus-within, disabled) use selectors that native does not have."
         },
         {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/avatar.tsx",
+          "line": 114,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "group-data-[size=lg]/avatar:size-3",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
+        },
+        {
           "pass": "classes",
           "file": "converted/src/components/ui/avatar.tsx",
-          "line": 94,
+          "line": 130,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -859,7 +1189,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/avatar.tsx",
-          "line": 94,
+          "line": 130,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -867,9 +1197,19 @@
           "reason": "Child selectors (`*:`) are web-only."
         },
         {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/avatar.tsx",
+          "line": 130,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-color",
+          "construct": "*:data-[slot=avatar]:ring-background",
+          "reason": "Theme colors in classes Tamagui leaves to Tailwind on web now read Tamagui's theme variables (`bg-(--primary)`): Tailwind compiles them with its default theme, which has no shadcn colors."
+        },
+        {
           "pass": "classes",
           "file": "converted/src/components/ui/avatar.tsx",
-          "line": 110,
+          "line": 146,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -879,12 +1219,32 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/avatar.tsx",
-          "line": 110,
+          "line": 146,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
           "construct": "[&>svg]:size-4",
           "reason": "Arbitrary selector variants are web-only, so this style does not apply on native."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/avatar.tsx",
+          "line": 146,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-color",
+          "construct": "ring-background",
+          "reason": "Theme colors in classes Tamagui leaves to Tailwind on web now read Tamagui's theme variables (`bg-(--primary)`): Tailwind compiles them with its default theme, which has no shadcn colors."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/avatar.tsx",
+          "line": 146,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "group-has-data-[size=lg]/avatar-group:size-10 group-has-data-[size=sm]/avatar-group:size-6",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
         }
       ]
     },
@@ -996,22 +1356,52 @@
           "severity": "info",
           "code": "selector/rewrite",
           "construct": "flex-row",
-          "reason": "Added `flex-row`: native drops `inline-flex` and would lay the children out as a column."
+          "reason": "Added `flex-row`: Tamagui views and native lay out a `flex` container as a column."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/badge.tsx",
+          "line": 7,
+          "column": 3,
+          "severity": "info",
+          "code": "selector/web-color",
+          "construct": "focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40",
+          "reason": "Theme colors in classes Tamagui leaves to Tailwind on web now read Tamagui's theme variables (`bg-(--primary)`): Tailwind compiles them with its default theme, which has no shadcn colors."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/badge.tsx",
+          "line": 7,
+          "column": 3,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
         },
         {
           "pass": "classes",
           "file": "converted/src/components/ui/badge.tsx",
-          "line": 11,
-          "column": 18,
+          "line": 12,
+          "column": 11,
           "severity": "warning",
           "code": "class/web-only",
           "construct": "[a]:hover:bg-primary/80",
           "reason": "Arbitrary selector variants are web-only, so this style does not apply on native."
         },
         {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/badge.tsx",
+          "line": 12,
+          "column": 11,
+          "severity": "info",
+          "code": "selector/web-color",
+          "construct": "[a]:hover:bg-primary/80",
+          "reason": "Theme colors in classes Tamagui leaves to Tailwind on web now read Tamagui's theme variables (`bg-(--primary)`): Tailwind compiles them with its default theme, which has no shadcn colors."
+        },
+        {
           "pass": "classes",
           "file": "converted/src/components/ui/badge.tsx",
-          "line": 13,
+          "line": 14,
           "column": 11,
           "severity": "warning",
           "code": "class/web-only",
@@ -1019,9 +1409,19 @@
           "reason": "Arbitrary selector variants are web-only, so this style does not apply on native."
         },
         {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/badge.tsx",
+          "line": 14,
+          "column": 11,
+          "severity": "info",
+          "code": "selector/web-color",
+          "construct": "[a]:hover:bg-secondary/80",
+          "reason": "Theme colors in classes Tamagui leaves to Tailwind on web now read Tamagui's theme variables (`bg-(--primary)`): Tailwind compiles them with its default theme, which has no shadcn colors."
+        },
+        {
           "pass": "classes",
           "file": "converted/src/components/ui/badge.tsx",
-          "line": 15,
+          "line": 16,
           "column": 11,
           "severity": "warning",
           "code": "class/web-only",
@@ -1029,9 +1429,19 @@
           "reason": "Arbitrary selector variants are web-only, so this style does not apply on native."
         },
         {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/badge.tsx",
+          "line": 16,
+          "column": 11,
+          "severity": "info",
+          "code": "selector/web-color",
+          "construct": "focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 [a]:hover:bg-destructive/20",
+          "reason": "Theme colors in classes Tamagui leaves to Tailwind on web now read Tamagui's theme variables (`bg-(--primary)`): Tailwind compiles them with its default theme, which has no shadcn colors."
+        },
+        {
           "pass": "classes",
           "file": "converted/src/components/ui/badge.tsx",
-          "line": 17,
+          "line": 18,
           "column": 11,
           "severity": "warning",
           "code": "class/web-only",
@@ -1039,9 +1449,19 @@
           "reason": "Arbitrary selector variants are web-only, so this style does not apply on native."
         },
         {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/badge.tsx",
+          "line": 18,
+          "column": 11,
+          "severity": "info",
+          "code": "selector/web-color",
+          "construct": "[a]:hover:bg-muted [a]:hover:text-muted-foreground",
+          "reason": "Theme colors in classes Tamagui leaves to Tailwind on web now read Tamagui's theme variables (`bg-(--primary)`): Tailwind compiles them with its default theme, which has no shadcn colors."
+        },
+        {
           "pass": "classes",
           "file": "converted/src/components/ui/badge.tsx",
-          "line": 20,
+          "line": 21,
           "column": 15,
           "severity": "warning",
           "code": "class/web-only",
@@ -1051,7 +1471,7 @@
         {
           "pass": "radix",
           "file": "converted/src/components/ui/badge.tsx",
-          "line": 37,
+          "line": 38,
           "column": 5,
           "severity": "info",
           "code": "radix/as-child",
@@ -1168,7 +1588,27 @@
           "severity": "info",
           "code": "selector/rewrite",
           "construct": "flex-row",
-          "reason": "Added `flex-row`: native drops `inline-flex` and would lay the children out as a column."
+          "reason": "Added `flex-row`: Tamagui views and native lay out a `flex` container as a column."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/button.tsx",
+          "line": 7,
+          "column": 3,
+          "severity": "info",
+          "code": "selector/web-color",
+          "construct": "focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40",
+          "reason": "Theme colors in classes Tamagui leaves to Tailwind on web now read Tamagui's theme variables (`bg-(--primary)`): Tailwind compiles them with its default theme, which has no shadcn colors."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/button.tsx",
+          "line": 7,
+          "column": 3,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "active:not-aria-[haspopup]:translate-y-px aria-invalid:ring-3",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
         },
         {
           "pass": "classes",
@@ -1180,6 +1620,16 @@
           "construct": "aria-expanded:bg-muted aria-expanded:text-foreground",
           "reason": "`aria-*` attribute selectors are web-only, so this style does not apply on native.",
           "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/button.tsx",
+          "line": 13,
+          "column": 11,
+          "severity": "info",
+          "code": "selector/web-color",
+          "construct": "aria-expanded:bg-muted aria-expanded:text-foreground",
+          "reason": "Theme colors in classes Tamagui leaves to Tailwind on web now read Tamagui's theme variables (`bg-(--primary)`): Tailwind compiles them with its default theme, which has no shadcn colors."
         },
         {
           "pass": "classes",
@@ -1204,6 +1654,16 @@
           "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
         },
         {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/button.tsx",
+          "line": 15,
+          "column": 11,
+          "severity": "info",
+          "code": "selector/web-color",
+          "construct": "aria-expanded:bg-secondary aria-expanded:text-secondary-foreground",
+          "reason": "Theme colors in classes Tamagui leaves to Tailwind on web now read Tamagui's theme variables (`bg-(--primary)`): Tailwind compiles them with its default theme, which has no shadcn colors."
+        },
+        {
           "pass": "classes",
           "file": "converted/src/components/ui/button.tsx",
           "line": 17,
@@ -1213,6 +1673,26 @@
           "construct": "aria-expanded:bg-muted aria-expanded:text-foreground",
           "reason": "`aria-*` attribute selectors are web-only, so this style does not apply on native.",
           "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/button.tsx",
+          "line": 17,
+          "column": 11,
+          "severity": "info",
+          "code": "selector/web-color",
+          "construct": "aria-expanded:bg-muted aria-expanded:text-foreground",
+          "reason": "Theme colors in classes Tamagui leaves to Tailwind on web now read Tamagui's theme variables (`bg-(--primary)`): Tailwind compiles them with its default theme, which has no shadcn colors."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/button.tsx",
+          "line": 19,
+          "column": 11,
+          "severity": "info",
+          "code": "selector/web-color",
+          "construct": "focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40",
+          "reason": "Theme colors in classes Tamagui leaves to Tailwind on web now read Tamagui's theme variables (`bg-(--primary)`): Tailwind compiles them with its default theme, which has no shadcn colors."
         },
         {
           "pass": "classes",
@@ -1245,6 +1725,16 @@
           "reason": "`:has()` selectors are web-only."
         },
         {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/button.tsx",
+          "line": 24,
+          "column": 11,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "in-data-[slot=button-group]:rounded-md has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
+        },
+        {
           "pass": "classes",
           "file": "converted/src/components/ui/button.tsx",
           "line": 25,
@@ -1286,6 +1776,16 @@
           "reason": "Arbitrary selector variants are web-only, so this style does not apply on native."
         },
         {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/button.tsx",
+          "line": 25,
+          "column": 13,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "in-data-[slot=button-group]:rounded-md has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
+        },
+        {
           "pass": "classes",
           "file": "converted/src/components/ui/button.tsx",
           "line": 26,
@@ -1315,6 +1815,16 @@
           "code": "class/web-only",
           "construct": "has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5",
           "reason": "`:has()` selectors are web-only."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/button.tsx",
+          "line": 26,
+          "column": 13,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "in-data-[slot=button-group]:rounded-md has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
         },
         {
           "pass": "classes",
@@ -1327,6 +1837,16 @@
           "reason": "`:has()` selectors are web-only."
         },
         {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/button.tsx",
+          "line": 27,
+          "column": 13,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
+        },
+        {
           "pass": "classes",
           "file": "converted/src/components/ui/button.tsx",
           "line": 30,
@@ -1358,6 +1878,16 @@
           "reason": "Arbitrary selector variants are web-only, so this style does not apply on native."
         },
         {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/button.tsx",
+          "line": 30,
+          "column": 11,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "in-data-[slot=button-group]:rounded-md",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
+        },
+        {
           "pass": "classes",
           "file": "converted/src/components/ui/button.tsx",
           "line": 32,
@@ -1377,6 +1907,16 @@
           "code": "class/web-only",
           "construct": "in-data-[slot=button-group]:rounded-md",
           "reason": "`in-*` (ancestor) selectors are web-only."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/button.tsx",
+          "line": 32,
+          "column": 11,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "in-data-[slot=button-group]:rounded-md",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
         },
         {
           "pass": "radix",
@@ -1460,6 +2000,26 @@
           "reason": "Child selectors (`*:`) are web-only."
         },
         {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/card.tsx",
+          "line": 15,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-color",
+          "construct": "ring-foreground/10",
+          "reason": "Theme colors in classes Tamagui leaves to Tailwind on web now read Tamagui's theme variables (`bg-(--primary)`): Tailwind compiles them with its default theme, which has no shadcn colors."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/card.tsx",
+          "line": 15,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "has-[>img:first-child]:pt-0 data-[size=sm]:[--card-spacing:--spacing(4)]",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
+        },
+        {
           "pass": "classes",
           "file": "converted/src/components/ui/card.tsx",
           "line": 31,
@@ -1512,6 +2072,16 @@
           "reason": "Arbitrary selector variants are web-only, so this style does not apply on native."
         },
         {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/card.tsx",
+          "line": 31,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "has-data-[slot=card-action]:grid-cols-[1fr_auto] has-data-[slot=card-description]:grid-rows-[auto_auto]",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
+        },
+        {
           "pass": "classes",
           "file": "converted/src/components/ui/card.tsx",
           "line": 47,
@@ -1520,6 +2090,16 @@
           "code": "class/web-only",
           "construct": "group-data-[size=sm]/card:text-sm",
           "reason": "`group-*` variants other than interaction states (hover, press, focus, focus-visible, focus-within, disabled) use selectors that native does not have."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/card.tsx",
+          "line": 47,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "group-data-[size=sm]/card:text-sm",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
         },
         {
           "pass": "classes",
@@ -1595,7 +2175,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/checkbox.tsx",
-          "line": 24,
+          "line": 25,
           "column": 9,
           "severity": "todo",
           "code": "class/unsupported",
@@ -1606,7 +2186,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/checkbox.tsx",
-          "line": 24,
+          "line": 25,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -1616,7 +2196,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/checkbox.tsx",
-          "line": 24,
+          "line": 25,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -1627,7 +2207,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/checkbox.tsx",
-          "line": 24,
+          "line": 25,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -1637,7 +2217,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/checkbox.tsx",
-          "line": 24,
+          "line": 25,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -1647,7 +2227,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/checkbox.tsx",
-          "line": 24,
+          "line": 25,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -1658,7 +2238,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/checkbox.tsx",
-          "line": 24,
+          "line": 25,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -1667,9 +2247,39 @@
           "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
         },
         {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/checkbox.tsx",
+          "line": 25,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/rewrite",
+          "construct": "flex-row",
+          "reason": "Added `flex-row`: Tamagui views and native lay out a `flex` container as a column."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/checkbox.tsx",
+          "line": 25,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-color",
+          "construct": "group-has-[:focus-visible]/field-label:not-data-checked:border-input focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 aria-invalid:aria-checked:border-primary dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 data-checked:border-primary data-checked:bg-primary data-checked:text-primary-foreground group-has-[:focus-visible]/field-label:data-checked:border-primary dark:data-checked:bg-primary",
+          "reason": "Theme colors in classes Tamagui leaves to Tailwind on web now read Tamagui's theme variables (`bg-(--primary)`): Tailwind compiles them with its default theme, which has no shadcn colors."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/checkbox.tsx",
+          "line": 25,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "group-has-disabled/field:opacity-50 group-has-[:focus-visible]/field-label:ring-0 aria-invalid:ring-3",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
+        },
+        {
           "pass": "classes",
           "file": "converted/src/components/ui/checkbox.tsx",
-          "line": 31,
+          "line": 32,
           "column": 19,
           "severity": "warning",
           "code": "class/web-only",
@@ -1680,7 +2290,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/checkbox.tsx",
-          "line": 31,
+          "line": 32,
           "column": 19,
           "severity": "warning",
           "code": "class/web-only",
@@ -1690,7 +2300,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/checkbox.tsx",
-          "line": 31,
+          "line": 32,
           "column": 19,
           "severity": "warning",
           "code": "class/web-only",
@@ -1701,7 +2311,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/checkbox.tsx",
-          "line": 31,
+          "line": 32,
           "column": 19,
           "severity": "warning",
           "code": "class/web-only",
@@ -1711,7 +2321,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/checkbox.tsx",
-          "line": 31,
+          "line": 32,
           "column": 19,
           "severity": "warning",
           "code": "class/web-only",
@@ -1740,7 +2350,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/dialog.tsx",
-          "line": 50,
+          "line": 89,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -1751,7 +2361,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/dialog.tsx",
-          "line": 50,
+          "line": 89,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -1761,7 +2371,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/dialog.tsx",
-          "line": 50,
+          "line": 89,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -1771,7 +2381,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/dialog.tsx",
-          "line": 50,
+          "line": 89,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -1780,9 +2390,29 @@
           "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
         },
         {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/dialog.tsx",
+          "line": 89,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "supports-backdrop-filter:backdrop-blur-xs",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/dialog.tsx",
+          "line": 89,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-variant",
+          "construct": "data-open:animate-in data-open:fade-in-0 data-closed:animate-out data-closed:fade-out-0",
+          "reason": "Rewrote shadcn's custom variants (`data-open:`, `data-checked:`, ...) to the attributes Tamagui sets, and `dark:` to Tamagui's dark theme class: on web Tailwind compiles these classes without shadcn's CSS."
+        },
+        {
           "pass": "classes",
           "file": "converted/src/components/ui/dialog.tsx",
-          "line": 75,
+          "line": 114,
           "column": 11,
           "severity": "warning",
           "code": "class/web-only",
@@ -1793,7 +2423,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/dialog.tsx",
-          "line": 75,
+          "line": 114,
           "column": 11,
           "severity": "warning",
           "code": "class/web-only",
@@ -1804,7 +2434,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/dialog.tsx",
-          "line": 75,
+          "line": 114,
           "column": 11,
           "severity": "warning",
           "code": "class/web-only",
@@ -1814,7 +2444,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/dialog.tsx",
-          "line": 75,
+          "line": 114,
           "column": 11,
           "severity": "warning",
           "code": "class/web-only",
@@ -1823,9 +2453,29 @@
           "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
         },
         {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/dialog.tsx",
+          "line": 114,
+          "column": 11,
+          "severity": "info",
+          "code": "selector/web-color",
+          "construct": "ring-foreground/10",
+          "reason": "Theme colors in classes Tamagui leaves to Tailwind on web now read Tamagui's theme variables (`bg-(--primary)`): Tailwind compiles them with its default theme, which has no shadcn colors."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/dialog.tsx",
+          "line": 114,
+          "column": 11,
+          "severity": "info",
+          "code": "selector/web-variant",
+          "construct": "data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
+          "reason": "Rewrote shadcn's custom variants (`data-open:`, `data-checked:`, ...) to the attributes Tamagui sets, and `dark:` to Tamagui's dark theme class: on web Tailwind compiles these classes without shadcn's CSS."
+        },
+        {
           "pass": "classes",
           "file": "converted/src/components/ui/dialog.tsx",
-          "line": 89,
+          "line": 128,
           "column": 36,
           "severity": "warning",
           "code": "class/web-only",
@@ -1834,14 +2484,34 @@
           "suggestion": "Render the text only on web (e.g. `web:sr-only native:hidden`) or move it into `aria-label`."
         },
         {
+          "pass": "radix",
+          "file": "converted/src/components/ui/dialog.tsx",
+          "line": 182,
+          "column": 5,
+          "severity": "info",
+          "code": "radix/font-size",
+          "construct": "text-sm",
+          "reason": "Added `text-sm`: the Tamagui part has a font size of its own, while the Radix part inherits this one from its content."
+        },
+        {
           "pass": "classes",
           "file": "converted/src/components/ui/dialog.tsx",
-          "line": 159,
+          "line": 198,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
           "construct": "*:[a]:underline *:[a]:underline-offset-3 *:[a]:hover:text-foreground",
           "reason": "Child selectors (`*:`) are web-only."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/dialog.tsx",
+          "line": 198,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-color",
+          "construct": "*:[a]:hover:text-foreground",
+          "reason": "Theme colors in classes Tamagui leaves to Tailwind on web now read Tamagui's theme variables (`bg-(--primary)`): Tailwind compiles them with its default theme, which has no shadcn colors."
         }
       ]
     },
@@ -1885,7 +2555,7 @@
         {
           "pass": "radix",
           "file": "converted/src/components/ui/dropdown-menu.tsx",
-          "line": 57,
+          "line": 96,
           "column": 7,
           "severity": "warning",
           "code": "radix/unsupported-prop",
@@ -1895,7 +2565,7 @@
         {
           "pass": "radix",
           "file": "converted/src/components/ui/dropdown-menu.tsx",
-          "line": 57,
+          "line": 96,
           "column": 7,
           "severity": "warning",
           "code": "radix/unsupported-prop",
@@ -1905,7 +2575,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/dropdown-menu.tsx",
-          "line": 60,
+          "line": 99,
           "column": 11,
           "severity": "warning",
           "code": "class/web-only",
@@ -1916,7 +2586,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/dropdown-menu.tsx",
-          "line": 60,
+          "line": 99,
           "column": 11,
           "severity": "warning",
           "code": "class/web-only",
@@ -1927,7 +2597,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/dropdown-menu.tsx",
-          "line": 60,
+          "line": 99,
           "column": 11,
           "severity": "warning",
           "code": "class/web-only",
@@ -1938,7 +2608,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/dropdown-menu.tsx",
-          "line": 60,
+          "line": 99,
           "column": 11,
           "severity": "warning",
           "code": "class/web-only",
@@ -1948,7 +2618,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/dropdown-menu.tsx",
-          "line": 60,
+          "line": 99,
           "column": 11,
           "severity": "warning",
           "code": "class/web-only",
@@ -1957,9 +2627,39 @@
           "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
         },
         {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/dropdown-menu.tsx",
+          "line": 99,
+          "column": 11,
+          "severity": "info",
+          "code": "selector/web-color",
+          "construct": "ring-foreground/10",
+          "reason": "Theme colors in classes Tamagui leaves to Tailwind on web now read Tamagui's theme variables (`bg-(--primary)`): Tailwind compiles them with its default theme, which has no shadcn colors."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/dropdown-menu.tsx",
+          "line": 99,
+          "column": 11,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-[state=closed]:overflow-hidden",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/dropdown-menu.tsx",
+          "line": 99,
+          "column": 11,
+          "severity": "info",
+          "code": "selector/web-variant",
+          "construct": "data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
+          "reason": "Rewrote shadcn's custom variants (`data-open:`, `data-checked:`, ...) to the attributes Tamagui sets, and `dark:` to Tamagui's dark theme class: on web Tailwind compiles these classes without shadcn's CSS."
+        },
+        {
           "pass": "classes",
           "file": "converted/src/components/ui/dropdown-menu.tsx",
-          "line": 95,
+          "line": 134,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -1969,7 +2669,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/dropdown-menu.tsx",
-          "line": 95,
+          "line": 134,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -1979,7 +2679,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/dropdown-menu.tsx",
-          "line": 95,
+          "line": 134,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -1990,7 +2690,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/dropdown-menu.tsx",
-          "line": 95,
+          "line": 134,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -1998,9 +2698,39 @@
           "reason": "Arbitrary selector variants are web-only, so this style does not apply on native."
         },
         {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/dropdown-menu.tsx",
+          "line": 134,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/rewrite",
+          "construct": "flex-row",
+          "reason": "Added `flex-row`: Tamagui views and native lay out a `flex` container as a column."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/dropdown-menu.tsx",
+          "line": 134,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-color",
+          "construct": "not-data-[variant=destructive]:focus:**:text-accent-foreground data-[variant=destructive]:text-destructive data-[variant=destructive]:focus:bg-destructive/10 data-[variant=destructive]:focus:text-destructive dark:data-[variant=destructive]:focus:bg-destructive/20 data-[variant=destructive]:*:[svg]:text-destructive",
+          "reason": "Theme colors in classes Tamagui leaves to Tailwind on web now read Tamagui's theme variables (`bg-(--primary)`): Tailwind compiles them with its default theme, which has no shadcn colors."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/dropdown-menu.tsx",
+          "line": 134,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "data-inset:pl-8 data-disabled:pointer-events-none data-disabled:opacity-50",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
+        },
+        {
           "pass": "classes",
           "file": "converted/src/components/ui/dropdown-menu.tsx",
-          "line": 120,
+          "line": 159,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -2010,7 +2740,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/dropdown-menu.tsx",
-          "line": 120,
+          "line": 159,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -2020,7 +2750,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/dropdown-menu.tsx",
-          "line": 120,
+          "line": 159,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -2031,7 +2761,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/dropdown-menu.tsx",
-          "line": 120,
+          "line": 159,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -2039,9 +2769,39 @@
           "reason": "Arbitrary selector variants are web-only, so this style does not apply on native."
         },
         {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/dropdown-menu.tsx",
+          "line": 159,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/rewrite",
+          "construct": "flex-row",
+          "reason": "Added `flex-row`: Tamagui views and native lay out a `flex` container as a column."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/dropdown-menu.tsx",
+          "line": 159,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-color",
+          "construct": "focus:**:text-accent-foreground",
+          "reason": "Theme colors in classes Tamagui leaves to Tailwind on web now read Tamagui's theme variables (`bg-(--primary)`): Tailwind compiles them with its default theme, which has no shadcn colors."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/dropdown-menu.tsx",
+          "line": 159,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "data-inset:pl-8 data-disabled:pointer-events-none data-disabled:opacity-50",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
+        },
+        {
           "pass": "elements",
           "file": "converted/src/components/ui/dropdown-menu.tsx",
-          "line": 126,
+          "line": 165,
           "column": 7,
           "severity": "info",
           "code": "element/view",
@@ -2051,7 +2811,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/dropdown-menu.tsx",
-          "line": 166,
+          "line": 205,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -2061,7 +2821,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/dropdown-menu.tsx",
-          "line": 166,
+          "line": 205,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -2071,7 +2831,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/dropdown-menu.tsx",
-          "line": 166,
+          "line": 205,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -2082,7 +2842,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/dropdown-menu.tsx",
-          "line": 166,
+          "line": 205,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -2090,9 +2850,39 @@
           "reason": "Arbitrary selector variants are web-only, so this style does not apply on native."
         },
         {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/dropdown-menu.tsx",
+          "line": 205,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/rewrite",
+          "construct": "flex-row",
+          "reason": "Added `flex-row`: Tamagui views and native lay out a `flex` container as a column."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/dropdown-menu.tsx",
+          "line": 205,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-color",
+          "construct": "focus:**:text-accent-foreground",
+          "reason": "Theme colors in classes Tamagui leaves to Tailwind on web now read Tamagui's theme variables (`bg-(--primary)`): Tailwind compiles them with its default theme, which has no shadcn colors."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/dropdown-menu.tsx",
+          "line": 205,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "data-inset:pl-8 data-disabled:pointer-events-none data-disabled:opacity-50",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
+        },
+        {
           "pass": "elements",
           "file": "converted/src/components/ui/dropdown-menu.tsx",
-          "line": 171,
+          "line": 210,
           "column": 7,
           "severity": "info",
           "code": "element/view",
@@ -2102,7 +2892,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/dropdown-menu.tsx",
-          "line": 196,
+          "line": 235,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -2111,9 +2901,19 @@
           "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
         },
         {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/dropdown-menu.tsx",
+          "line": 235,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "data-inset:pl-8",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
+        },
+        {
           "pass": "classes",
           "file": "converted/src/components/ui/dropdown-menu.tsx",
-          "line": 255,
+          "line": 294,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -2123,7 +2923,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/dropdown-menu.tsx",
-          "line": 255,
+          "line": 294,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -2133,7 +2933,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/dropdown-menu.tsx",
-          "line": 255,
+          "line": 294,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -2144,7 +2944,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/dropdown-menu.tsx",
-          "line": 255,
+          "line": 294,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -2152,10 +2952,40 @@
           "reason": "Arbitrary selector variants are web-only, so this style does not apply on native."
         },
         {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/dropdown-menu.tsx",
+          "line": 294,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/rewrite",
+          "construct": "flex-row",
+          "reason": "Added `flex-row`: Tamagui views and native lay out a `flex` container as a column."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/dropdown-menu.tsx",
+          "line": 294,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-color",
+          "construct": "not-data-[variant=destructive]:focus:**:text-accent-foreground data-open:bg-accent data-open:text-accent-foreground",
+          "reason": "Theme colors in classes Tamagui leaves to Tailwind on web now read Tamagui's theme variables (`bg-(--primary)`): Tailwind compiles them with its default theme, which has no shadcn colors."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/dropdown-menu.tsx",
+          "line": 294,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "data-inset:pl-8",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
+        },
+        {
           "pass": "icons",
           "file": "converted/src/components/ui/dropdown-menu.tsx",
-          "line": 261,
-          "column": 7,
+          "line": 294,
+          "column": 393,
           "severity": "info",
           "code": "icon/wrapped",
           "construct": "ml-auto",
@@ -2164,7 +2994,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/dropdown-menu.tsx",
-          "line": 276,
+          "line": 315,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -2175,7 +3005,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/dropdown-menu.tsx",
-          "line": 276,
+          "line": 315,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -2185,13 +3015,43 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/dropdown-menu.tsx",
-          "line": 276,
+          "line": 315,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
           "construct": "data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
           "reason": "`data-*` attribute selectors are web-only, so this style does not apply on native.",
           "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/dropdown-menu.tsx",
+          "line": 315,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-color",
+          "construct": "ring-foreground/10",
+          "reason": "Theme colors in classes Tamagui leaves to Tailwind on web now read Tamagui's theme variables (`bg-(--primary)`): Tailwind compiles them with its default theme, which has no shadcn colors."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/dropdown-menu.tsx",
+          "line": 315,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/dropdown-menu.tsx",
+          "line": 315,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-variant",
+          "construct": "data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
+          "reason": "Rewrote shadcn's custom variants (`data-open:`, `data-checked:`, ...) to the attributes Tamagui sets, and `dark:` to Tamagui's dark theme class: on web Tailwind compiles these classes without shadcn's CSS."
         }
       ]
     },
@@ -2223,6 +3083,16 @@
           "reason": "`:has()` selectors are web-only."
         },
         {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/field.tsx",
+          "line": 17,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "has-[>[data-slot=checkbox-group]]:gap-3 has-[>[data-slot=radio-group]]:gap-3",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
+        },
+        {
           "pass": "elements",
           "file": "converted/src/components/ui/field.tsx",
           "line": 31,
@@ -2243,6 +3113,16 @@
           "construct": "data-[variant=label]:text-sm data-[variant=legend]:text-base",
           "reason": "`data-*` attribute selectors are web-only, so this style does not apply on native.",
           "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/field.tsx",
+          "line": 36,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "data-[variant=label]:text-sm data-[variant=legend]:text-base",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
         },
         {
           "pass": "classes",
@@ -2266,6 +3146,16 @@
           "reason": "Child selectors (`*:`) are web-only."
         },
         {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/field.tsx",
+          "line": 52,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "data-[slot=checkbox-group]:gap-3",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
+        },
+        {
           "pass": "cn-cva",
           "file": "converted/src/components/ui/field.tsx",
           "line": 60,
@@ -2285,6 +3175,16 @@
           "construct": "data-[invalid=true]:text-destructive",
           "reason": "`data-*` attribute selectors are web-only, so this style does not apply on native.",
           "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/field.tsx",
+          "line": 62,
+          "column": 3,
+          "severity": "info",
+          "code": "selector/web-color",
+          "construct": "data-[invalid=true]:text-destructive",
+          "reason": "Theme colors in classes Tamagui leaves to Tailwind on web now read Tamagui's theme variables (`bg-(--primary)`): Tailwind compiles them with its default theme, which has no shadcn colors."
         },
         {
           "pass": "classes",
@@ -2327,6 +3227,16 @@
           "reason": "Child selectors (`*:`) are web-only."
         },
         {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/field.tsx",
+          "line": 68,
+          "column": 11,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "has-[>[data-slot=field-content]]:items-start",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
+        },
+        {
           "pass": "classes",
           "file": "converted/src/components/ui/field.tsx",
           "line": 70,
@@ -2365,6 +3275,16 @@
           "code": "class/web-only",
           "construct": "[&>.sr-only]:w-auto",
           "reason": "Arbitrary selector variants are web-only, so this style does not apply on native."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/field.tsx",
+          "line": 70,
+          "column": 11,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "@md/field-group:has-[>[data-slot=field-content]]:items-start",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
         },
         {
           "pass": "classes",
@@ -2417,6 +3337,36 @@
           "reason": "Child selectors (`*:`) are web-only."
         },
         {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/field.tsx",
+          "line": 121,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/rewrite",
+          "construct": "flex-row border-border",
+          "reason": "Added `flex-row`: Tamagui views and native lay out a `flex` container as a column. Added `border-border`: shadcn gives every border that color in its base CSS, and native defaults to black."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/field.tsx",
+          "line": 121,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-color",
+          "construct": "has-data-checked:border-primary/30 has-data-checked:bg-primary/5 has-[>[data-slot=field]]:not-has-[:disabled,[data-disabled]]:hover:bg-muted/50 has-[>[data-slot=field]]:has-[:focus-visible]:border-ring has-[>[data-slot=field]]:has-[:focus-visible]:ring-ring/50 dark:has-data-checked:border-primary/20 dark:has-data-checked:bg-primary/10",
+          "reason": "Theme colors in classes Tamagui leaves to Tailwind on web now read Tamagui's theme variables (`bg-(--primary)`): Tailwind compiles them with its default theme, which has no shadcn colors."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/field.tsx",
+          "line": 121,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "group-data-[disabled=true]/field:opacity-50 has-[>[data-slot=field]]:rounded-md has-[>[data-slot=field]]:border has-[>[data-slot=field]]:has-[:focus-visible]:ring-3",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
+        },
+        {
           "pass": "classes",
           "file": "converted/src/components/ui/field.tsx",
           "line": 122,
@@ -2425,6 +3375,16 @@
           "code": "class/web-only",
           "construct": "has-[>[data-slot=field]]:w-full has-[>[data-slot=field]]:flex-col",
           "reason": "`:has()` selectors are web-only."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/field.tsx",
+          "line": 122,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "has-[>[data-slot=field]]:w-full has-[>[data-slot=field]]:flex-col",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
         },
         {
           "pass": "classes",
@@ -2447,6 +3407,16 @@
           "reason": "`group-*` variants other than interaction states (hover, press, focus, focus-visible, focus-within, disabled) use selectors that native does not have."
         },
         {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/field.tsx",
+          "line": 138,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "group-data-[disabled=true]/field:opacity-50",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
+        },
+        {
           "pass": "classes",
           "file": "converted/src/components/ui/field.tsx",
           "line": 154,
@@ -2465,6 +3435,16 @@
           "code": "class/web-only",
           "construct": "[[data-variant=legend]+&]:-mt-1.5",
           "reason": "Arbitrary selector variants are web-only, so this style does not apply on native."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/field.tsx",
+          "line": 154,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-variant",
+          "construct": "group-has-data-horizontal/field:text-balance",
+          "reason": "Rewrote shadcn's custom variants (`data-open:`, `data-checked:`, ...) to the attributes Tamagui sets, and `dark:` to Tamagui's dark theme class: on web Tailwind compiles these classes without shadcn's CSS."
         },
         {
           "pass": "classes",
@@ -2487,6 +3467,16 @@
           "reason": "Structural pseudo-classes are web-only."
         },
         {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/field.tsx",
+          "line": 155,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "last:mt-0 nth-last-2:-mt-1",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
+        },
+        {
           "pass": "classes",
           "file": "converted/src/components/ui/field.tsx",
           "line": 156,
@@ -2497,6 +3487,16 @@
           "reason": "Arbitrary selector variants are web-only, so this style does not apply on native."
         },
         {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/field.tsx",
+          "line": 156,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-color",
+          "construct": "[&>a:hover]:text-primary",
+          "reason": "Theme colors in classes Tamagui leaves to Tailwind on web now read Tamagui's theme variables (`bg-(--primary)`): Tailwind compiles them with its default theme, which has no shadcn colors."
+        },
+        {
           "pass": "classes",
           "file": "converted/src/components/ui/field.tsx",
           "line": 176,
@@ -2505,6 +3505,16 @@
           "code": "class/web-only",
           "construct": "group-data-[variant=outline]/field-group:-mb-2",
           "reason": "`group-*` variants other than interaction states (hover, press, focus, focus-visible, focus-within, disabled) use selectors that native does not have."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/field.tsx",
+          "line": 176,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "group-data-[variant=outline]/field-group:-mb-2",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
         },
         {
           "pass": "classes",
@@ -2627,6 +3637,26 @@
           "code": "selector/rewrite",
           "construct": "placeholder-muted-foreground",
           "reason": "Added `placeholder-*`, which maps to `placeholderTextColor` on native."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/input.tsx",
+          "line": 15,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-color",
+          "construct": "file:text-foreground placeholder:text-muted-foreground focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40",
+          "reason": "Theme colors in classes Tamagui leaves to Tailwind on web now read Tamagui's theme variables (`bg-(--primary)`): Tailwind compiles them with its default theme, which has no shadcn colors."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/input.tsx",
+          "line": 15,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "aria-invalid:ring-3",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
         }
       ]
     },
@@ -2666,6 +3696,26 @@
           "code": "class/web-only",
           "construct": "peer-disabled:cursor-not-allowed peer-disabled:opacity-50",
           "reason": "`peer-*` variants use sibling selectors, which native does not have."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/label.tsx",
+          "line": 20,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/rewrite",
+          "construct": "flex-row",
+          "reason": "Added `flex-row`: Tamagui views and native lay out a `flex` container as a column."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/label.tsx",
+          "line": 20,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
         }
       ]
     },
@@ -2699,8 +3749,8 @@
         {
           "pass": "radix",
           "file": "converted/src/components/ui/popover.tsx",
-          "line": 19,
-          "column": 44,
+          "line": 18,
+          "column": 30,
           "severity": "warning",
           "code": "radix/unsupported-prop",
           "construct": "Popover.Content align",
@@ -2709,8 +3759,8 @@
         {
           "pass": "radix",
           "file": "converted/src/components/ui/popover.tsx",
-          "line": 19,
-          "column": 44,
+          "line": 18,
+          "column": 30,
           "severity": "warning",
           "code": "radix/unsupported-prop",
           "construct": "Popover.Content sideOffset",
@@ -2719,8 +3769,8 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/popover.tsx",
-          "line": 22,
-          "column": 17,
+          "line": 21,
+          "column": 4,
           "severity": "warning",
           "code": "class/web-only",
           "construct": "origin-(--radix-popover-content-transform-origin)",
@@ -2730,8 +3780,8 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/popover.tsx",
-          "line": 22,
-          "column": 17,
+          "line": 21,
+          "column": 4,
           "severity": "warning",
           "code": "class/web-only",
           "construct": "duration-100",
@@ -2740,8 +3790,8 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/popover.tsx",
-          "line": 22,
-          "column": 17,
+          "line": 21,
+          "column": 4,
           "severity": "warning",
           "code": "class/web-only",
           "construct": "data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
@@ -2749,9 +3799,39 @@
           "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
         },
         {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/popover.tsx",
+          "line": 21,
+          "column": 4,
+          "severity": "info",
+          "code": "selector/web-color",
+          "construct": "ring-foreground/10",
+          "reason": "Theme colors in classes Tamagui leaves to Tailwind on web now read Tamagui's theme variables (`bg-(--primary)`): Tailwind compiles them with its default theme, which has no shadcn colors."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/popover.tsx",
+          "line": 21,
+          "column": 4,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/popover.tsx",
+          "line": 21,
+          "column": 4,
+          "severity": "info",
+          "code": "selector/web-variant",
+          "construct": "data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
+          "reason": "Rewrote shadcn's custom variants (`data-open:`, `data-checked:`, ...) to the attributes Tamagui sets, and `dark:` to Tamagui's dark theme class: on web Tailwind compiles these classes without shadcn's CSS."
+        },
+        {
           "pass": "radix",
           "file": "converted/src/components/ui/popover.tsx",
-          "line": 35,
+          "line": 71,
           "column": 9,
           "severity": "warning",
           "code": "radix/css-variable",
@@ -2850,6 +3930,46 @@
           "construct": "data-checked:border-primary data-checked:bg-primary data-checked:text-primary-foreground dark:data-checked:bg-primary",
           "reason": "`data-*` attribute selectors are web-only, so this style does not apply on native.",
           "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/radio-group.tsx",
+          "line": 36,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/rewrite",
+          "construct": "flex-row",
+          "reason": "Added `flex-row`: Tamagui views and native lay out a `flex` container as a column."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/radio-group.tsx",
+          "line": 36,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-color",
+          "construct": "group-has-[:focus-visible]/field-label:not-data-checked:border-input focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 aria-invalid:aria-checked:border-primary dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 data-checked:border-primary data-checked:bg-primary data-checked:text-primary-foreground group-has-[:focus-visible]/field-label:data-checked:border-primary dark:data-checked:bg-primary",
+          "reason": "Theme colors in classes Tamagui leaves to Tailwind on web now read Tamagui's theme variables (`bg-(--primary)`): Tailwind compiles them with its default theme, which has no shadcn colors."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/radio-group.tsx",
+          "line": 36,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "group-has-[:focus-visible]/field-label:ring-0 aria-invalid:ring-3",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/radio-group.tsx",
+          "line": 43,
+          "column": 19,
+          "severity": "info",
+          "code": "selector/rewrite",
+          "construct": "flex-row",
+          "reason": "Added `flex-row`: Tamagui views and native lay out a `flex` container as a column."
         }
       ]
     },
@@ -2975,10 +4095,40 @@
           "reason": "Arbitrary selector variants are web-only, so this style does not apply on native."
         },
         {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/select.tsx",
+          "line": 60,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/rewrite",
+          "construct": "flex-row",
+          "reason": "Added `flex-row`: Tamagui views and native lay out a `flex` container as a column."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/select.tsx",
+          "line": 60,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-color",
+          "construct": "focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 data-placeholder:text-muted-foreground dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40",
+          "reason": "Theme colors in classes Tamagui leaves to Tailwind on web now read Tamagui's theme variables (`bg-(--primary)`): Tailwind compiles them with its default theme, which has no shadcn colors."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/select.tsx",
+          "line": 60,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "aria-invalid:ring-3 data-[size=default]:h-9 data-[size=sm]:h-8",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
+        },
+        {
           "pass": "classes",
           "file": "converted/src/components/ui/select.tsx",
           "line": 60,
-          "column": 641,
+          "column": 664,
           "severity": "warning",
           "code": "class/web-only",
           "construct": "max-h-(--radix-select-content-available-height) origin-(--radix-select-content-transform-origin)",
@@ -2989,7 +4139,7 @@
           "pass": "classes",
           "file": "converted/src/components/ui/select.tsx",
           "line": 60,
-          "column": 641,
+          "column": 664,
           "severity": "warning",
           "code": "class/web-only",
           "construct": "overflow-x-hidden",
@@ -3000,7 +4150,7 @@
           "pass": "classes",
           "file": "converted/src/components/ui/select.tsx",
           "line": 60,
-          "column": 641,
+          "column": 664,
           "severity": "warning",
           "code": "class/web-only",
           "construct": "overflow-y-auto",
@@ -3011,7 +4161,7 @@
           "pass": "classes",
           "file": "converted/src/components/ui/select.tsx",
           "line": 60,
-          "column": 641,
+          "column": 664,
           "severity": "warning",
           "code": "class/web-only",
           "construct": "duration-100",
@@ -3021,12 +4171,42 @@
           "pass": "classes",
           "file": "converted/src/components/ui/select.tsx",
           "line": 60,
-          "column": 641,
+          "column": 664,
           "severity": "warning",
           "code": "class/web-only",
           "construct": "data-[align-trigger=true]:animate-none data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
           "reason": "`data-*` attribute selectors are web-only, so this style does not apply on native.",
           "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/select.tsx",
+          "line": 60,
+          "column": 748,
+          "severity": "info",
+          "code": "selector/web-color",
+          "construct": "ring-foreground/10",
+          "reason": "Theme colors in classes Tamagui leaves to Tailwind on web now read Tamagui's theme variables (`bg-(--primary)`): Tailwind compiles them with its default theme, which has no shadcn colors."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/select.tsx",
+          "line": 60,
+          "column": 748,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "data-[align-trigger=true]:animate-none data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/select.tsx",
+          "line": 60,
+          "column": 748,
+          "severity": "info",
+          "code": "selector/web-variant",
+          "construct": "data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
+          "reason": "Rewrote shadcn's custom variants (`data-open:`, `data-checked:`, ...) to the attributes Tamagui sets, and `dark:` to Tamagui's dark theme class: on web Tailwind compiles these classes without shadcn's CSS."
         },
         {
           "pass": "icons",
@@ -3042,7 +4222,7 @@
           "pass": "radix",
           "file": "converted/src/components/ui/select.tsx",
           "line": 68,
-          "column": 29,
+          "column": 52,
           "severity": "warning",
           "code": "radix/unsupported-prop",
           "construct": "Select.Content position",
@@ -3052,7 +4232,7 @@
           "pass": "radix",
           "file": "converted/src/components/ui/select.tsx",
           "line": 68,
-          "column": 29,
+          "column": 52,
           "severity": "warning",
           "code": "radix/unsupported-prop",
           "construct": "Select.Content align",
@@ -3061,8 +4241,8 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/select.tsx",
-          "line": 82,
-          "column": 6,
+          "line": 78,
+          "column": 12,
           "severity": "warning",
           "code": "class/web-only",
           "construct": "data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1",
@@ -3072,28 +4252,28 @@
         {
           "pass": "radix",
           "file": "converted/src/components/ui/select.tsx",
-          "line": 94,
-          "column": 9,
-          "severity": "warning",
-          "code": "radix/css-variable",
-          "construct": "--radix-select-content-available-height",
-          "reason": "Tamagui `Select` does not set `--radix-select-content-available-height`, so classes using it fall back to their defaults."
+          "line": 82,
+          "column": 35,
+          "severity": "info",
+          "code": "radix/class-moved",
+          "construct": "SelectPrimitive.Viewport",
+          "reason": "Moved the classes of the parent part here: in Tamagui the `Viewport` is the visible frame."
         },
         {
-          "pass": "radix",
+          "pass": "selectors",
           "file": "converted/src/components/ui/select.tsx",
-          "line": 94,
-          "column": 9,
-          "severity": "warning",
-          "code": "radix/css-variable",
-          "construct": "--radix-select-content-transform-origin",
-          "reason": "Tamagui `Select` does not set `--radix-select-content-transform-origin`, so classes using it fall back to their defaults."
+          "line": 86,
+          "column": 11,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
         },
         {
           "pass": "classes",
           "file": "converted/src/components/ui/select.tsx",
-          "line": 94,
-          "column": 26,
+          "line": 92,
+          "column": 36,
           "severity": "warning",
           "code": "class/web-only",
           "construct": "data-[position=popper]:h-(--radix-select-trigger-height) data-[position=popper]:w-full data-[position=popper]:min-w-(--radix-select-trigger-width)",
@@ -3101,9 +4281,19 @@
           "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
         },
         {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/select.tsx",
+          "line": 97,
+          "column": 29,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "data-[position=popper]:h-(--radix-select-trigger-height) data-[position=popper]:w-full data-[position=popper]:min-w-(--radix-select-trigger-width)",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
+        },
+        {
           "pass": "radix",
           "file": "converted/src/components/ui/select.tsx",
-          "line": 105,
+          "line": 99,
           "column": 11,
           "severity": "warning",
           "code": "radix/css-variable",
@@ -3113,7 +4303,7 @@
         {
           "pass": "radix",
           "file": "converted/src/components/ui/select.tsx",
-          "line": 105,
+          "line": 99,
           "column": 11,
           "severity": "warning",
           "code": "radix/css-variable",
@@ -3121,9 +4311,29 @@
           "reason": "Tamagui `Select` does not set `--radix-select-trigger-height`, so classes using it fall back to their defaults."
         },
         {
+          "pass": "radix",
+          "file": "converted/src/components/ui/select.tsx",
+          "line": 101,
+          "column": 11,
+          "severity": "warning",
+          "code": "radix/css-variable",
+          "construct": "--radix-select-content-available-height",
+          "reason": "Tamagui `Select` does not set `--radix-select-content-available-height`, so classes using it fall back to their defaults."
+        },
+        {
+          "pass": "radix",
+          "file": "converted/src/components/ui/select.tsx",
+          "line": 101,
+          "column": 11,
+          "severity": "warning",
+          "code": "radix/css-variable",
+          "construct": "--radix-select-content-transform-origin",
+          "reason": "Tamagui `Select` does not set `--radix-select-content-transform-origin`, so classes using it fall back to their defaults."
+        },
+        {
           "pass": "classes",
           "file": "converted/src/components/ui/select.tsx",
-          "line": 138,
+          "line": 136,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -3133,7 +4343,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/select.tsx",
-          "line": 138,
+          "line": 136,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -3143,7 +4353,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/select.tsx",
-          "line": 138,
+          "line": 136,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -3154,7 +4364,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/select.tsx",
-          "line": 138,
+          "line": 136,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -3164,7 +4374,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/select.tsx",
-          "line": 138,
+          "line": 136,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -3172,9 +4382,39 @@
           "reason": "Child selectors (`*:`) are web-only."
         },
         {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/select.tsx",
+          "line": 136,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/rewrite",
+          "construct": "flex-row",
+          "reason": "Added `flex-row`: Tamagui views and native lay out a `flex` container as a column."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/select.tsx",
+          "line": 136,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-color",
+          "construct": "not-data-[variant=destructive]:focus:**:text-accent-foreground",
+          "reason": "Theme colors in classes Tamagui leaves to Tailwind on web now read Tamagui's theme variables (`bg-(--primary)`): Tailwind compiles them with its default theme, which has no shadcn colors."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/select.tsx",
+          "line": 136,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "data-disabled:pointer-events-none data-disabled:opacity-50",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
+        },
+        {
           "pass": "elements",
           "file": "converted/src/components/ui/select.tsx",
-          "line": 143,
+          "line": 141,
           "column": 7,
           "severity": "info",
           "code": "element/view",
@@ -3184,7 +4424,7 @@
         {
           "pass": "icons",
           "file": "converted/src/components/ui/select.tsx",
-          "line": 144,
+          "line": 142,
           "column": 24,
           "severity": "info",
           "code": "icon/wrapped",
@@ -3194,7 +4434,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/select.tsx",
-          "line": 176,
+          "line": 174,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -3204,7 +4444,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/select.tsx",
-          "line": 176,
+          "line": 174,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -3212,9 +4452,19 @@
           "reason": "Arbitrary selector variants are web-only, so this style does not apply on native."
         },
         {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/select.tsx",
+          "line": 174,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/rewrite",
+          "construct": "flex-row",
+          "reason": "Added `flex-row`: Tamagui views and native lay out a `flex` container as a column."
+        },
+        {
           "pass": "classes",
           "file": "converted/src/components/ui/select.tsx",
-          "line": 194,
+          "line": 192,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -3224,12 +4474,22 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/select.tsx",
-          "line": 194,
+          "line": 192,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
           "construct": "[&_svg:not([class*='size-'])]:size-4",
           "reason": "Arbitrary selector variants are web-only, so this style does not apply on native."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/select.tsx",
+          "line": 192,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/rewrite",
+          "construct": "flex-row",
+          "reason": "Added `flex-row`: Tamagui views and native lay out a `flex` container as a column."
         }
       ]
     },
@@ -3270,6 +4530,26 @@
           "construct": "data-horizontal:h-px data-horizontal:w-full data-vertical:w-px data-vertical:self-stretch",
           "reason": "`data-*` attribute selectors are web-only, so this style does not apply on native.",
           "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/separator.tsx",
+          "line": 29,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/native-orientation",
+          "construct": "data-horizontal:h-px data-horizontal:w-full",
+          "reason": "Added a `native:` copy of classes behind `data-horizontal:` (data variants are dropped on native), assuming the default horizontal orientation. Vertical components need those classes adjusted by hand on native."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/separator.tsx",
+          "line": 29,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-variant",
+          "construct": "data-horizontal:h-px data-horizontal:w-full data-vertical:w-px data-vertical:self-stretch",
+          "reason": "Rewrote shadcn's custom variants (`data-open:`, `data-checked:`, ...) to the attributes Tamagui sets, and `dark:` to Tamagui's dark theme class: on web Tailwind compiles these classes without shadcn's CSS."
         }
       ]
     },
@@ -3312,6 +4592,36 @@
           "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
         },
         {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/slider.tsx",
+          "line": 43,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/rewrite",
+          "construct": "flex-row",
+          "reason": "Added `flex-row`: Tamagui views and native lay out a `flex` container as a column."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/slider.tsx",
+          "line": 43,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "data-disabled:opacity-50",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/slider.tsx",
+          "line": 43,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-variant",
+          "construct": "data-vertical:h-full data-vertical:min-h-40 data-vertical:w-auto data-vertical:flex-col",
+          "reason": "Rewrote shadcn's custom variants (`data-open:`, `data-checked:`, ...) to the attributes Tamagui sets, and `dark:` to Tamagui's dark theme class: on web Tailwind compiles these classes without shadcn's CSS."
+        },
+        {
           "pass": "classes",
           "file": "converted/src/components/ui/slider.tsx",
           "line": 50,
@@ -3323,6 +4633,26 @@
           "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
         },
         {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/slider.tsx",
+          "line": 50,
+          "column": 19,
+          "severity": "info",
+          "code": "selector/native-orientation",
+          "construct": "data-horizontal:h-1.5 data-horizontal:w-full",
+          "reason": "Added a `native:` copy of classes behind `data-horizontal:` (data variants are dropped on native), assuming the default horizontal orientation. Vertical components need those classes adjusted by hand on native."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/slider.tsx",
+          "line": 50,
+          "column": 19,
+          "severity": "info",
+          "code": "selector/web-variant",
+          "construct": "data-horizontal:h-1.5 data-horizontal:w-full data-vertical:h-full data-vertical:w-1.5",
+          "reason": "Rewrote shadcn's custom variants (`data-open:`, `data-checked:`, ...) to the attributes Tamagui sets, and `dark:` to Tamagui's dark theme class: on web Tailwind compiles these classes without shadcn's CSS."
+        },
+        {
           "pass": "classes",
           "file": "converted/src/components/ui/slider.tsx",
           "line": 54,
@@ -3332,6 +4662,26 @@
           "construct": "data-horizontal:h-full data-vertical:w-full",
           "reason": "`data-*` attribute selectors are web-only, so this style does not apply on native.",
           "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/slider.tsx",
+          "line": 54,
+          "column": 21,
+          "severity": "info",
+          "code": "selector/native-orientation",
+          "construct": "data-horizontal:h-full",
+          "reason": "Added a `native:` copy of classes behind `data-horizontal:` (data variants are dropped on native), assuming the default horizontal orientation. Vertical components need those classes adjusted by hand on native."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/slider.tsx",
+          "line": 54,
+          "column": 21,
+          "severity": "info",
+          "code": "selector/web-variant",
+          "construct": "data-horizontal:h-full data-vertical:w-full",
+          "reason": "Rewrote shadcn's custom variants (`data-open:`, `data-checked:`, ...) to the attributes Tamagui sets, and `dark:` to Tamagui's dark theme class: on web Tailwind compiles these classes without shadcn's CSS."
         },
         {
           "pass": "classes",
@@ -3353,6 +4703,16 @@
           "construct": "transition-[color,box-shadow]",
           "reason": "CSS transitions are web-only.",
           "suggestion": "Use Tamagui's `transition` prop with an animation driver for native."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/slider.tsx",
+          "line": 61,
+          "column": 21,
+          "severity": "info",
+          "code": "selector/web-color",
+          "construct": "ring-ring/50",
+          "reason": "Theme colors in classes Tamagui leaves to Tailwind on web now read Tamagui's theme variables (`bg-(--primary)`): Tailwind compiles them with its default theme, which has no shadcn colors."
         }
       ]
     },
@@ -3455,7 +4815,27 @@
           "severity": "info",
           "code": "selector/rewrite",
           "construct": "flex-row",
-          "reason": "Added `flex-row`: native drops `inline-flex` and would lay the children out as a column."
+          "reason": "Added `flex-row`: Tamagui views and native lay out a `flex` container as a column."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/switch.tsx",
+          "line": 28,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-color",
+          "construct": "focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 data-checked:bg-primary data-unchecked:bg-input dark:data-unchecked:bg-input/80",
+          "reason": "Theme colors in classes Tamagui leaves to Tailwind on web now read Tamagui's theme variables (`bg-(--primary)`): Tailwind compiles them with its default theme, which has no shadcn colors."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/switch.tsx",
+          "line": 28,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "group-has-[:focus-visible]/field-label:border-transparent group-has-[:focus-visible]/field-label:ring-0 aria-invalid:ring-3 data-[size=default]:h-[18.4px] data-[size=default]:w-[32px] data-[size=sm]:h-[14px] data-[size=sm]:w-[24px] data-disabled:cursor-not-allowed data-disabled:opacity-50",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
         },
         {
           "pass": "classes",
@@ -3498,6 +4878,36 @@
           "construct": "dark:data-checked:bg-primary-foreground dark:data-unchecked:bg-foreground",
           "reason": "`data-*` attribute selectors are web-only, so this style does not apply on native.",
           "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/switch.tsx",
+          "line": 35,
+          "column": 19,
+          "severity": "info",
+          "code": "selector/web-color",
+          "construct": "dark:data-checked:bg-primary-foreground dark:data-unchecked:bg-foreground",
+          "reason": "Theme colors in classes Tamagui leaves to Tailwind on web now read Tamagui's theme variables (`bg-(--primary)`): Tailwind compiles them with its default theme, which has no shadcn colors."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/switch.tsx",
+          "line": 35,
+          "column": 19,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "group-data-[size=default]/switch:size-4 group-data-[size=sm]/switch:size-3",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/switch.tsx",
+          "line": 35,
+          "column": 19,
+          "severity": "info",
+          "code": "selector/web-variant",
+          "construct": "group-data-[size=default]/switch:data-checked:translate-x-[calc(100%-2px)] group-data-[size=sm]/switch:data-checked:translate-x-[calc(100%-2px)] group-data-[size=default]/switch:data-unchecked:translate-x-0 group-data-[size=sm]/switch:data-unchecked:translate-x-0",
+          "reason": "Rewrote shadcn's custom variants (`data-open:`, `data-checked:`, ...) to the attributes Tamagui sets, and `dark:` to Tamagui's dark theme class: on web Tailwind compiles these classes without shadcn's CSS."
         }
       ]
     },
@@ -3521,7 +4931,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/tabs.tsx",
-          "line": 26,
+          "line": 62,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -3530,9 +4940,29 @@
           "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
         },
         {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/tabs.tsx",
+          "line": 62,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/native-orientation",
+          "construct": "data-horizontal:flex-col",
+          "reason": "Added a `native:` copy of classes behind `data-horizontal:` (data variants are dropped on native), assuming the default horizontal orientation. Vertical components need those classes adjusted by hand on native."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/tabs.tsx",
+          "line": 62,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-variant",
+          "construct": "data-horizontal:flex-col",
+          "reason": "Rewrote shadcn's custom variants (`data-open:`, `data-checked:`, ...) to the attributes Tamagui sets, and `dark:` to Tamagui's dark theme class: on web Tailwind compiles these classes without shadcn's CSS."
+        },
+        {
           "pass": "cn-cva",
           "file": "converted/src/components/ui/tabs.tsx",
-          "line": 34,
+          "line": 70,
           "column": 7,
           "severity": "warning",
           "code": "cva/kept",
@@ -3543,7 +4973,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/tabs.tsx",
-          "line": 35,
+          "line": 71,
           "column": 3,
           "severity": "warning",
           "code": "class/web-only",
@@ -3553,7 +4983,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/tabs.tsx",
-          "line": 35,
+          "line": 71,
           "column": 3,
           "severity": "warning",
           "code": "class/web-only",
@@ -3563,7 +4993,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/tabs.tsx",
-          "line": 35,
+          "line": 71,
           "column": 3,
           "severity": "warning",
           "code": "class/web-only",
@@ -3573,7 +5003,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/tabs.tsx",
-          "line": 35,
+          "line": 71,
           "column": 3,
           "severity": "warning",
           "code": "class/web-only",
@@ -3584,17 +5014,47 @@
         {
           "pass": "selectors",
           "file": "converted/src/components/ui/tabs.tsx",
-          "line": 35,
+          "line": 71,
+          "column": 3,
+          "severity": "info",
+          "code": "selector/native-orientation",
+          "construct": "group-data-horizontal/tabs:h-9",
+          "reason": "Added a `native:` copy of classes behind `data-horizontal:` (data variants are dropped on native), assuming the default horizontal orientation. Vertical components need those classes adjusted by hand on native."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/tabs.tsx",
+          "line": 71,
           "column": 3,
           "severity": "info",
           "code": "selector/rewrite",
           "construct": "flex-row",
-          "reason": "Added `flex-row`: native drops `inline-flex` and would lay the children out as a column."
+          "reason": "Added `flex-row`: Tamagui views and native lay out a `flex` container as a column."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/tabs.tsx",
+          "line": 71,
+          "column": 3,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "data-[variant=line]:rounded-none",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/tabs.tsx",
+          "line": 71,
+          "column": 3,
+          "severity": "info",
+          "code": "selector/web-variant",
+          "construct": "group-data-horizontal/tabs:h-9 group-data-vertical/tabs:h-fit group-data-vertical/tabs:flex-col",
+          "reason": "Rewrote shadcn's custom variants (`data-open:`, `data-checked:`, ...) to the attributes Tamagui sets, and `dark:` to Tamagui's dark theme class: on web Tailwind compiles these classes without shadcn's CSS."
         },
         {
           "pass": "classes",
           "file": "converted/src/components/ui/tabs.tsx",
-          "line": 74,
+          "line": 110,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -3604,7 +5064,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/tabs.tsx",
-          "line": 74,
+          "line": 110,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -3615,7 +5075,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/tabs.tsx",
-          "line": 74,
+          "line": 110,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -3626,7 +5086,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/tabs.tsx",
-          "line": 74,
+          "line": 110,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -3636,7 +5096,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/tabs.tsx",
-          "line": 74,
+          "line": 110,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -3646,7 +5106,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/tabs.tsx",
-          "line": 74,
+          "line": 110,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -3656,17 +5116,47 @@
         {
           "pass": "selectors",
           "file": "converted/src/components/ui/tabs.tsx",
-          "line": 74,
+          "line": 110,
           "column": 9,
           "severity": "info",
           "code": "selector/rewrite",
           "construct": "flex-row",
-          "reason": "Added `flex-row`: native drops `inline-flex` and would lay the children out as a column."
+          "reason": "Added `flex-row`: Tamagui views and native lay out a `flex` container as a column."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/tabs.tsx",
+          "line": 110,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-color",
+          "construct": "focus-visible:ring-ring/50",
+          "reason": "Theme colors in classes Tamagui leaves to Tailwind on web now read Tamagui's theme variables (`bg-(--primary)`): Tailwind compiles them with its default theme, which has no shadcn colors."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/tabs.tsx",
+          "line": 110,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/tabs.tsx",
+          "line": 110,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-variant",
+          "construct": "group-data-vertical/tabs:w-full group-data-vertical/tabs:justify-start group-data-[variant=default]/tabs-list:data-active:shadow-sm group-data-[variant=line]/tabs-list:data-active:shadow-none",
+          "reason": "Rewrote shadcn's custom variants (`data-open:`, `data-checked:`, ...) to the attributes Tamagui sets, and `dark:` to Tamagui's dark theme class: on web Tailwind compiles these classes without shadcn's CSS."
         },
         {
           "pass": "classes",
           "file": "converted/src/components/ui/tabs.tsx",
-          "line": 75,
+          "line": 111,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -3674,9 +5164,29 @@
           "reason": "`group-*` variants other than interaction states (hover, press, focus, focus-visible, focus-within, disabled) use selectors that native does not have."
         },
         {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/tabs.tsx",
+          "line": 111,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "group-data-[variant=line]/tabs-list:bg-transparent",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/tabs.tsx",
+          "line": 111,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-variant",
+          "construct": "group-data-[variant=line]/tabs-list:data-active:bg-transparent dark:group-data-[variant=line]/tabs-list:data-active:border-transparent dark:group-data-[variant=line]/tabs-list:data-active:bg-transparent",
+          "reason": "Rewrote shadcn's custom variants (`data-open:`, `data-checked:`, ...) to the attributes Tamagui sets, and `dark:` to Tamagui's dark theme class: on web Tailwind compiles these classes without shadcn's CSS."
+        },
+        {
           "pass": "classes",
           "file": "converted/src/components/ui/tabs.tsx",
-          "line": 76,
+          "line": 112,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -3685,15 +5195,45 @@
           "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
         },
         {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/tabs.tsx",
+          "line": 112,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-color",
+          "construct": "data-active:bg-background data-active:text-foreground dark:data-active:border-input dark:data-active:bg-input/30 dark:data-active:text-foreground",
+          "reason": "Theme colors in classes Tamagui leaves to Tailwind on web now read Tamagui's theme variables (`bg-(--primary)`): Tailwind compiles them with its default theme, which has no shadcn colors."
+        },
+        {
           "pass": "classes",
           "file": "converted/src/components/ui/tabs.tsx",
-          "line": 77,
+          "line": 113,
           "column": 9,
           "severity": "todo",
           "code": "class/unsupported",
           "construct": "after:absolute after:bg-foreground after:opacity-0 after:transition-opacity group-data-horizontal/tabs:after:inset-x-0 group-data-horizontal/tabs:after:bottom-[-5px] group-data-horizontal/tabs:after:h-0.5 group-data-vertical/tabs:after:inset-y-0 group-data-vertical/tabs:after:-right-1 group-data-vertical/tabs:after:w-0.5 group-data-[variant=line]/tabs-list:data-active:after:opacity-100",
           "reason": "`::after` pseudo-elements do not exist on native, so this content is lost there.",
           "suggestion": "Render the decoration as a real child element (e.g. an absolutely positioned `View`)."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/tabs.tsx",
+          "line": 113,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-color",
+          "construct": "after:bg-foreground",
+          "reason": "Theme colors in classes Tamagui leaves to Tailwind on web now read Tamagui's theme variables (`bg-(--primary)`): Tailwind compiles them with its default theme, which has no shadcn colors."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/tabs.tsx",
+          "line": 113,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-variant",
+          "construct": "group-data-horizontal/tabs:after:inset-x-0 group-data-horizontal/tabs:after:bottom-[-5px] group-data-horizontal/tabs:after:h-0.5 group-data-vertical/tabs:after:inset-y-0 group-data-vertical/tabs:after:-right-1 group-data-vertical/tabs:after:w-0.5 group-data-[variant=line]/tabs-list:data-active:after:opacity-100",
+          "reason": "Rewrote shadcn's custom variants (`data-open:`, `data-checked:`, ...) to the attributes Tamagui sets, and `dark:` to Tamagui's dark theme class: on web Tailwind compiles these classes without shadcn's CSS."
         }
       ]
     },
@@ -3776,6 +5316,26 @@
           "code": "selector/rewrite",
           "construct": "placeholder-muted-foreground",
           "reason": "Added `placeholder-*`, which maps to `placeholderTextColor` on native."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/textarea.tsx",
+          "line": 13,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-color",
+          "construct": "placeholder:text-muted-foreground focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40",
+          "reason": "Theme colors in classes Tamagui leaves to Tailwind on web now read Tamagui's theme variables (`bg-(--primary)`): Tailwind compiles them with its default theme, which has no shadcn colors."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/textarea.tsx",
+          "line": 13,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "aria-invalid:ring-3",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
         }
       ]
     },
@@ -3799,7 +5359,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/toggle-group.tsx",
-          "line": 54,
+          "line": 90,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -3809,7 +5369,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/toggle-group.tsx",
-          "line": 54,
+          "line": 90,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -3820,7 +5380,7 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/toggle-group.tsx",
-          "line": 54,
+          "line": 90,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -3829,9 +5389,29 @@
           "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
         },
         {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/toggle-group.tsx",
+          "line": 90,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "data-[spacing=0]:data-[variant=outline]:shadow-xs",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/toggle-group.tsx",
+          "line": 90,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-variant",
+          "construct": "data-vertical:flex-col data-vertical:items-stretch",
+          "reason": "Rewrote shadcn's custom variants (`data-open:`, `data-checked:`, ...) to the attributes Tamagui sets, and `dark:` to Tamagui's dark theme class: on web Tailwind compiles these classes without shadcn's CSS."
+        },
+        {
           "pass": "classes",
           "file": "converted/src/components/ui/toggle-group.tsx",
-          "line": 85,
+          "line": 121,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
@@ -3841,13 +5421,53 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/toggle-group.tsx",
-          "line": 85,
+          "line": 121,
           "column": 9,
           "severity": "warning",
           "code": "class/web-only",
           "construct": "data-[state=on]:bg-muted",
           "reason": "`data-*` attribute selectors are web-only, so this style does not apply on native.",
           "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/toggle-group.tsx",
+          "line": 121,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/rewrite",
+          "construct": "border-border",
+          "reason": "Added `border-border`: shadcn gives every border that color in its base CSS, and native defaults to black."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/toggle-group.tsx",
+          "line": 121,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-color",
+          "construct": "data-[state=on]:bg-muted",
+          "reason": "Theme colors in classes Tamagui leaves to Tailwind on web now read Tamagui's theme variables (`bg-(--primary)`): Tailwind compiles them with its default theme, which has no shadcn colors."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/toggle-group.tsx",
+          "line": 121,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "group-data-[spacing=0]/toggle-group:rounded-none group-data-[spacing=0]/toggle-group:px-2 group-data-[spacing=0]/toggle-group:shadow-none group-data-[spacing=0]/toggle-group:has-data-[icon=inline-end]:pr-1.5 group-data-[spacing=0]/toggle-group:has-data-[icon=inline-start]:pl-1.5",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/toggle-group.tsx",
+          "line": 121,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/web-variant",
+          "construct": "group-data-horizontal/toggle-group:data-[spacing=0]:first:rounded-l-md group-data-vertical/toggle-group:data-[spacing=0]:first:rounded-t-md group-data-horizontal/toggle-group:data-[spacing=0]:last:rounded-r-md group-data-vertical/toggle-group:data-[spacing=0]:last:rounded-b-md group-data-horizontal/toggle-group:data-[spacing=0]:data-[variant=outline]:border-l-0 group-data-vertical/toggle-group:data-[spacing=0]:data-[variant=outline]:border-t-0 group-data-horizontal/toggle-group:data-[spacing=0]:data-[variant=outline]:first:border-l group-data-vertical/toggle-group:data-[spacing=0]:data-[variant=outline]:first:border-t",
+          "reason": "Rewrote shadcn's custom variants (`data-open:`, `data-checked:`, ...) to the attributes Tamagui sets, and `dark:` to Tamagui's dark theme class: on web Tailwind compiles these classes without shadcn's CSS."
         }
       ]
     },
@@ -3951,7 +5571,17 @@
           "severity": "info",
           "code": "selector/rewrite",
           "construct": "flex-row",
-          "reason": "Added `flex-row`: native drops `inline-flex` and would lay the children out as a column."
+          "reason": "Added `flex-row`: Tamagui views and native lay out a `flex` container as a column."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/toggle.tsx",
+          "line": 10,
+          "column": 3,
+          "severity": "info",
+          "code": "selector/web-color",
+          "construct": "focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 aria-pressed:bg-muted dark:aria-invalid:ring-destructive/40",
+          "reason": "Theme colors in classes Tamagui leaves to Tailwind on web now read Tamagui's theme variables (`bg-(--primary)`): Tailwind compiles them with its default theme, which has no shadcn colors."
         },
         {
           "pass": "classes",
@@ -3964,6 +5594,16 @@
           "reason": "`:has()` selectors are web-only."
         },
         {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/toggle.tsx",
+          "line": 19,
+          "column": 11,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
+        },
+        {
           "pass": "classes",
           "file": "converted/src/components/ui/toggle.tsx",
           "line": 20,
@@ -3974,6 +5614,16 @@
           "reason": "`:has()` selectors are web-only."
         },
         {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/toggle.tsx",
+          "line": 20,
+          "column": 13,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
+        },
+        {
           "pass": "classes",
           "file": "converted/src/components/ui/toggle.tsx",
           "line": 21,
@@ -3982,6 +5632,16 @@
           "code": "class/web-only",
           "construct": "has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
           "reason": "`:has()` selectors are web-only."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/toggle.tsx",
+          "line": 21,
+          "column": 13,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
         }
       ]
     },
@@ -4025,8 +5685,8 @@
         {
           "pass": "radix",
           "file": "converted/src/components/ui/tooltip.tsx",
-          "line": 34,
-          "column": 10,
+          "line": 27,
+          "column": 72,
           "severity": "warning",
           "code": "radix/unsupported-prop",
           "construct": "Tooltip.Content sideOffset",
@@ -4035,8 +5695,8 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/tooltip.tsx",
-          "line": 36,
-          "column": 13,
+          "line": 27,
+          "column": 96,
           "severity": "warning",
           "code": "class/web-only",
           "construct": "inline-flex",
@@ -4045,8 +5705,8 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/tooltip.tsx",
-          "line": 36,
-          "column": 13,
+          "line": 27,
+          "column": 96,
           "severity": "warning",
           "code": "class/web-only",
           "construct": "w-fit",
@@ -4055,8 +5715,8 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/tooltip.tsx",
-          "line": 36,
-          "column": 13,
+          "line": 27,
+          "column": 96,
           "severity": "warning",
           "code": "class/web-only",
           "construct": "origin-(--radix-tooltip-content-transform-origin)",
@@ -4066,8 +5726,8 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/tooltip.tsx",
-          "line": 36,
-          "column": 13,
+          "line": 27,
+          "column": 96,
           "severity": "warning",
           "code": "class/web-only",
           "construct": "has-data-[slot=kbd]:pr-1.5",
@@ -4076,8 +5736,8 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/tooltip.tsx",
-          "line": 36,
-          "column": 13,
+          "line": 27,
+          "column": 96,
           "severity": "warning",
           "code": "class/web-only",
           "construct": "data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-[state=delayed-open]:animate-in data-[state=delayed-open]:fade-in-0 data-[state=delayed-open]:zoom-in-95 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
@@ -4087,8 +5747,8 @@
         {
           "pass": "classes",
           "file": "converted/src/components/ui/tooltip.tsx",
-          "line": 36,
-          "column": 13,
+          "line": 27,
+          "column": 96,
           "severity": "warning",
           "code": "class/web-only",
           "construct": "**:data-[slot=kbd]:relative **:data-[slot=kbd]:isolate **:data-[slot=kbd]:z-50 **:data-[slot=kbd]:rounded-sm",
@@ -4097,17 +5757,37 @@
         {
           "pass": "selectors",
           "file": "converted/src/components/ui/tooltip.tsx",
-          "line": 36,
-          "column": 13,
+          "line": 27,
+          "column": 96,
           "severity": "info",
           "code": "selector/rewrite",
           "construct": "flex-row",
-          "reason": "Added `flex-row`: native drops `inline-flex` and would lay the children out as a column."
+          "reason": "Added `flex-row`: Tamagui views and native lay out a `flex` container as a column."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/tooltip.tsx",
+          "line": 27,
+          "column": 96,
+          "severity": "info",
+          "code": "selector/web-state",
+          "construct": "has-data-[slot=kbd]:pr-1.5 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-[state=delayed-open]:animate-in data-[state=delayed-open]:fade-in-0 data-[state=delayed-open]:zoom-in-95",
+          "reason": "Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/tooltip.tsx",
+          "line": 27,
+          "column": 96,
+          "severity": "info",
+          "code": "selector/web-variant",
+          "construct": "data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
+          "reason": "Rewrote shadcn's custom variants (`data-open:`, `data-checked:`, ...) to the attributes Tamagui sets, and `dark:` to Tamagui's dark theme class: on web Tailwind compiles these classes without shadcn's CSS."
         },
         {
           "pass": "radix",
           "file": "converted/src/components/ui/tooltip.tsx",
-          "line": 52,
+          "line": 88,
           "column": 9,
           "severity": "warning",
           "code": "radix/css-variable",

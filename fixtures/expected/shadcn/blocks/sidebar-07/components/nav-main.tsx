@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/sidebar"
 import { html, View } from "@tamagui/tailwind"
 import { ChevronRightIcon } from "@/components/icons"
+import { isWeb } from "tamagui"
 
 export function NavMain({
   items,
@@ -50,9 +51,11 @@ export function NavMain({
                   <html.span>{item.title}</html.span>
                   <View
                     asChild
-                    className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90"
+                    className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90!"
                   >
-                    <ChevronRightIcon />
+                    <ChevronRightIcon
+                      stroke={isWeb ? "currentColor" : undefined}
+                    />
                   </View>
                 </SidebarMenuButton>
               </CollapsibleTrigger>

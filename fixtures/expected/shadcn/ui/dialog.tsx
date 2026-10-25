@@ -6,12 +6,51 @@ import { Button } from "@/components/ui/button"
 import { html, styled } from "@tamagui/tailwind"
 import { Dialog as DialogPrimitive } from "tamagui/unstyled"
 import { XIcon } from "@/components/icons"
+import { isWeb } from "tamagui"
 
 // Lets Tailwind classes (className) style a Tamagui UI primitive on web and native.
 const tw = <C extends React.ComponentType<any>>(component: C) =>
   styled(component as never) as unknown as React.ComponentType<
     React.ComponentProps<C> & { className?: string }
   >
+// Native views cannot render raw text: wraps string children in html.span,
+// with the part's text classes applied to it on native.
+const twText = <C extends React.ComponentType<any>>(component: C) => {
+  const Styled = tw(component) as React.ComponentType<any>
+  return ({
+    className,
+    children,
+    ...props
+  }: React.ComponentProps<C> & {
+    className?: string
+    children?: React.ReactNode
+  }) => {
+    const textClasses = className
+      ?.split(/\s+/)
+      .filter((c: string) =>
+        /^(?:text|font|leading|tracking)-|^(?:italic|underline|line-through|uppercase|lowercase|capitalize)$/.test(
+          c
+        )
+      )
+      .map((c: string) => `native:${c}`)
+      .join(" ")
+    const wrap = (child: React.ReactNode) =>
+      typeof child === "string" || typeof child === "number" ? (
+        <html.span className={textClasses}>{child}</html.span>
+      ) : (
+        child
+      )
+    return (
+      <Styled className={className} {...props}>
+        {Array.isArray(children)
+          ? React.Children.map(children, wrap)
+          : wrap(children)}
+      </Styled>
+    )
+  }
+}
+const StyledDialogTrigger = twText(DialogPrimitive.Trigger)
+const StyledDialogClose = twText(DialogPrimitive.Close)
 const StyledDialogOverlay = tw(DialogPrimitive.Overlay)
 const StyledDialogContent = tw(DialogPrimitive.Content)
 const StyledDialogTitle = tw(DialogPrimitive.Title)
@@ -24,7 +63,7 @@ function Dialog({ ...props }: React.ComponentProps<typeof DialogPrimitive>) {
 function DialogTrigger({
   ...props
 }: React.ComponentProps<typeof DialogPrimitive.Trigger>) {
-  return <DialogPrimitive.Trigger data-slot="dialog-trigger" {...props} />
+  return <StyledDialogTrigger data-slot="dialog-trigger" {...props} />
 }
 
 function DialogPortal({
@@ -36,7 +75,7 @@ function DialogPortal({
 function DialogClose({
   ...props
 }: React.ComponentProps<typeof DialogPrimitive.Close>) {
-  return <DialogPrimitive.Close data-slot="dialog-close" {...props} />
+  return <StyledDialogClose data-slot="dialog-close" {...props} />
 }
 
 function DialogOverlay({
@@ -47,7 +86,7 @@ function DialogOverlay({
     <StyledDialogOverlay
       data-slot="dialog-overlay"
       className={cn(
-        "fixed inset-0 isolate z-50 bg-black/10 duration-100 supports-backdrop-filter:backdrop-blur-xs data-open:animate-in data-open:fade-in-0 data-closed:animate-out data-closed:fade-out-0",
+        "fixed inset-0 isolate z-50 bg-black/10 duration-100 supports-backdrop-filter:backdrop-blur-xs! data-[state=open]:animate-in! data-[state=open]:fade-in-0! data-[state=closed]:animate-out! data-[state=closed]:fade-out-0!",
         className
       )}
       {...props}
@@ -72,23 +111,23 @@ function DialogContent({
       <StyledDialogContent
         data-slot="dialog-content"
         className={cn(
-          "fixed top-1/2 left-1/2 z-50 grid w-full max-w-[calc(100%-2rem)] -translate-x-1/2 -translate-y-1/2 gap-6 rounded-xl bg-popover p-6 text-sm text-popover-foreground ring-1 ring-foreground/10 duration-100 outline-none sm:max-w-md data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
+          "fixed top-1/2 left-1/2 z-50 grid w-full max-w-[calc(100%-2rem)] -translate-x-1/2 -translate-y-1/2 gap-6 rounded-xl bg-popover p-6 text-sm text-popover-foreground ring-1 ring-(--foreground)/10 ring-foreground/10 duration-100 outline-none sm:max-w-md data-[state=open]:animate-in! data-[state=open]:fade-in-0! data-[state=open]:zoom-in-95! data-[state=closed]:animate-out! data-[state=closed]:fade-out-0! data-[state=closed]:zoom-out-95!",
           className
         )}
         {...props}
       >
         {children}
         {showCloseButton && (
-          <DialogPrimitive.Close data-slot="dialog-close" asChild>
+          <StyledDialogClose data-slot="dialog-close" asChild>
             <Button
               variant="ghost"
               className="absolute top-4 right-4"
               size="icon-sm"
             >
-              <XIcon />
+              <XIcon stroke={isWeb ? "currentColor" : undefined} />
               <html.span className="sr-only">Close</html.span>
             </Button>
-          </DialogPrimitive.Close>
+          </StyledDialogClose>
         )}
       </StyledDialogContent>
     </DialogPortal>
@@ -127,9 +166,9 @@ function DialogFooter({
     >
       {children}
       {showCloseButton && (
-        <DialogPrimitive.Close asChild>
+        <StyledDialogClose asChild>
           <Button variant="outline">Close</Button>
-        </DialogPrimitive.Close>
+        </StyledDialogClose>
       )}
     </html.div>
   )
@@ -142,7 +181,7 @@ function DialogTitle({
   return (
     <StyledDialogTitle
       data-slot="dialog-title"
-      className={cn("font-heading leading-none font-medium", className)}
+      className={cn("text-sm font-heading leading-none font-medium", className)}
       {...props}
     />
   )
@@ -156,7 +195,7 @@ function DialogDescription({
     <StyledDialogDescription
       data-slot="dialog-description"
       className={cn(
-        "text-sm text-muted-foreground *:[a]:underline *:[a]:underline-offset-3 *:[a]:hover:text-foreground",
+        "text-sm text-muted-foreground *:[a]:underline *:[a]:underline-offset-3 *:[a]:hover:text-(--foreground)",
         className
       )}
       {...props}

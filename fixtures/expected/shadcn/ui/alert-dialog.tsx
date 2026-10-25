@@ -8,12 +8,49 @@ const tw = <C extends React.ComponentType<any>>(component: C) =>
   styled(component as never) as unknown as React.ComponentType<
     React.ComponentProps<C> & { className?: string }
   >
+// Native views cannot render raw text: wraps string children in html.span,
+// with the part's text classes applied to it on native.
+const twText = <C extends React.ComponentType<any>>(component: C) => {
+  const Styled = tw(component) as React.ComponentType<any>
+  return ({
+    className,
+    children,
+    ...props
+  }: React.ComponentProps<C> & {
+    className?: string
+    children?: React.ReactNode
+  }) => {
+    const textClasses = className
+      ?.split(/\s+/)
+      .filter((c: string) =>
+        /^(?:text|font|leading|tracking)-|^(?:italic|underline|line-through|uppercase|lowercase|capitalize)$/.test(
+          c
+        )
+      )
+      .map((c: string) => `native:${c}`)
+      .join(" ")
+    const wrap = (child: React.ReactNode) =>
+      typeof child === "string" || typeof child === "number" ? (
+        <html.span className={textClasses}>{child}</html.span>
+      ) : (
+        child
+      )
+    return (
+      <Styled className={className} {...props}>
+        {Array.isArray(children)
+          ? React.Children.map(children, wrap)
+          : wrap(children)}
+      </Styled>
+    )
+  }
+}
+const StyledAlertDialogTrigger = twText(AlertDialogPrimitive.Trigger)
 const StyledAlertDialogOverlay = tw(AlertDialogPrimitive.Overlay)
 const StyledAlertDialogContent = tw(AlertDialogPrimitive.Content)
 const StyledAlertDialogTitle = tw(AlertDialogPrimitive.Title)
 const StyledAlertDialogDescription = tw(AlertDialogPrimitive.Description)
-const StyledAlertDialogAction = tw(AlertDialogPrimitive.Action)
-const StyledAlertDialogCancel = tw(AlertDialogPrimitive.Cancel)
+const StyledAlertDialogAction = twText(AlertDialogPrimitive.Action)
+const StyledAlertDialogCancel = twText(AlertDialogPrimitive.Cancel)
 
 function AlertDialog({
   ...props
@@ -25,7 +62,7 @@ function AlertDialogTrigger({
   ...props
 }: React.ComponentProps<typeof AlertDialogPrimitive.Trigger>) {
   return (
-    <AlertDialogPrimitive.Trigger data-slot="alert-dialog-trigger" {...props} />
+    <StyledAlertDialogTrigger data-slot="alert-dialog-trigger" {...props} />
   )
 }
 
@@ -45,7 +82,7 @@ function AlertDialogOverlay({
     <StyledAlertDialogOverlay
       data-slot="alert-dialog-overlay"
       className={cn(
-        "fixed inset-0 z-50 bg-black/10 duration-100 supports-backdrop-filter:backdrop-blur-xs data-open:animate-in data-open:fade-in-0 data-closed:animate-out data-closed:fade-out-0",
+        "fixed inset-0 z-50 bg-black/10 duration-100 supports-backdrop-filter:backdrop-blur-xs! data-[state=open]:animate-in! data-[state=open]:fade-in-0! data-[state=closed]:animate-out! data-[state=closed]:fade-out-0!",
         className
       )}
       {...props}
@@ -67,7 +104,7 @@ function AlertDialogContent({
         data-slot="alert-dialog-content"
         data-size={size}
         className={cn(
-          "group/alert-dialog-content fixed top-1/2 left-1/2 z-50 grid w-full -translate-x-1/2 -translate-y-1/2 gap-6 rounded-xl bg-popover p-6 text-popover-foreground ring-1 ring-foreground/10 duration-100 outline-none data-[size=default]:max-w-xs data-[size=sm]:max-w-xs data-[size=default]:sm:max-w-lg data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
+          "group/alert-dialog-content fixed top-1/2 left-1/2 z-50 grid w-full -translate-x-1/2 -translate-y-1/2 gap-6 rounded-xl bg-popover p-6 text-popover-foreground ring-1 ring-(--foreground)/10 ring-foreground/10 duration-100 outline-none data-[size=default]:max-w-xs! data-[size=sm]:max-w-xs! data-[size=default]:sm:max-w-lg! data-[state=open]:animate-in! data-[state=open]:fade-in-0! data-[state=open]:zoom-in-95! data-[state=closed]:animate-out! data-[state=closed]:fade-out-0! data-[state=closed]:zoom-out-95!",
           className
         )}
         {...props}
@@ -84,7 +121,7 @@ function AlertDialogHeader({
     <html.div
       data-slot="alert-dialog-header"
       className={cn(
-        "grid grid-rows-[auto_1fr] place-items-center gap-1.5 text-center has-data-[slot=alert-dialog-media]:grid-rows-[auto_auto_1fr] has-data-[slot=alert-dialog-media]:gap-x-6 sm:group-data-[size=default]/alert-dialog-content:place-items-start sm:group-data-[size=default]/alert-dialog-content:text-left sm:group-data-[size=default]/alert-dialog-content:has-data-[slot=alert-dialog-media]:grid-rows-[auto_1fr]",
+        "grid grid-rows-[auto_1fr] place-items-center gap-1.5 text-center has-data-[slot=alert-dialog-media]:grid-rows-[auto_auto_1fr]! has-data-[slot=alert-dialog-media]:gap-x-6! sm:group-data-[size=default]/alert-dialog-content:place-items-start! sm:group-data-[size=default]/alert-dialog-content:text-left! sm:group-data-[size=default]/alert-dialog-content:has-data-[slot=alert-dialog-media]:grid-rows-[auto_1fr]!",
         className
       )}
       {...props}
@@ -100,7 +137,7 @@ function AlertDialogFooter({
     <html.div
       data-slot="alert-dialog-footer"
       className={cn(
-        "flex flex-col-reverse gap-2 group-data-[size=sm]/alert-dialog-content:grid group-data-[size=sm]/alert-dialog-content:grid-cols-2 sm:flex-row sm:justify-end",
+        "flex flex-col-reverse gap-2 group-data-[size=sm]/alert-dialog-content:grid! group-data-[size=sm]/alert-dialog-content:grid-cols-2! sm:flex-row sm:justify-end",
         className
       )}
       {...props}
@@ -116,7 +153,7 @@ function AlertDialogMedia({
     <html.div
       data-slot="alert-dialog-media"
       className={cn(
-        "mb-2 inline-flex flex-row size-16 items-center justify-center rounded-md bg-muted sm:group-data-[size=default]/alert-dialog-content:row-span-2 *:[svg:not([class*='size-'])]:size-8",
+        "mb-2 inline-flex flex-row size-16 items-center justify-center rounded-md bg-muted sm:group-data-[size=default]/alert-dialog-content:row-span-2! *:[svg:not([class*='size-'])]:size-8",
         className
       )}
       {...props}
@@ -132,7 +169,7 @@ function AlertDialogTitle({
     <StyledAlertDialogTitle
       data-slot="alert-dialog-title"
       className={cn(
-        "font-heading text-lg font-medium sm:group-data-[size=default]/alert-dialog-content:group-has-data-[slot=alert-dialog-media]/alert-dialog-content:col-start-2",
+        "font-heading text-lg font-medium sm:group-data-[size=default]/alert-dialog-content:group-has-data-[slot=alert-dialog-media]/alert-dialog-content:col-start-2!",
         className
       )}
       {...props}
@@ -148,7 +185,7 @@ function AlertDialogDescription({
     <StyledAlertDialogDescription
       data-slot="alert-dialog-description"
       className={cn(
-        "text-sm text-balance text-muted-foreground md:text-pretty *:[a]:underline *:[a]:underline-offset-3 *:[a]:hover:text-foreground",
+        "text-sm text-balance text-muted-foreground md:text-pretty *:[a]:underline *:[a]:underline-offset-3 *:[a]:hover:text-(--foreground)",
         className
       )}
       {...props}

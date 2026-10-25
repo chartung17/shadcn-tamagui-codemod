@@ -8,7 +8,7 @@
 | Native class coverage | 62.5% |
 | TODOs | 0 |
 | Warnings | 4 |
-| Notes | 1 |
+| Notes | 3 |
 | Classes (supported / web-only / unknown / unsupported) | 5 / 3 / 0 / 0 |
 | Constructs (converted / flagged) | 11 / 0 |
 
@@ -30,6 +30,8 @@ npx @tamagui/cli icons add FolderIcon=Folder MoreHorizontalIcon=MoreHorizontal S
 | `class/web-only` | warning | 3 |
 | `element/native-caveat` | warning | 1 |
 | `icon/wrapped` | info | 1 |
+| `selector/web-color` | info | 1 |
+| `selector/web-state` | info | 1 |
 
 ## shadcn/blocks/dashboard-01/components/nav-documents.tsx
 
@@ -37,8 +39,10 @@ Auto-converted 100% · 0 TODO(s) · 4 warning(s)
 
 | Line | Severity | Code | Construct | Reason | Suggested fix |
 | ---: | --- | --- | --- | --- | --- |
-| 39 | warning | `class/web-only` | `group-data-[collapsible=icon]:hidden` | `group-*` variants other than interaction states (hover, press, focus, focus-visible, focus-within, disabled) use selectors that native does not have. |  |
-| 45 | warning | `element/native-caveat` | `<a>` | Native caveat: native has no navigation for href, target, rel, download or referrerPolicy. |  |
-| 54 | warning | `class/web-only` | `data-[state=open]:bg-accent` | `data-*` attribute selectors are web-only, so this style does not apply on native. | Drive the style from a prop or state instead (e.g. a styled() variant). |
-| 57 | warning | `class/web-only` | `sr-only` | `sr-only` relies on clipping CSS that native drops, so the element becomes visible. | Render the text only on web (e.g. `web:sr-only native:hidden`) or move it into `aria-label`. |
-| 84 | info | `icon/wrapped` | `text-sidebar-foreground/70` | Tamagui icons take size and color as props, not classes; the other classes moved to a `View asChild` wrapper. |  |
+| 40 | warning | `class/web-only` | `group-data-[collapsible=icon]:hidden` | `group-*` variants other than interaction states (hover, press, focus, focus-visible, focus-within, disabled) use selectors that native does not have. |  |
+| 40 | info | `selector/web-state` | `group-data-[collapsible=icon]:hidden` | Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web. |  |
+| 46 | warning | `element/native-caveat` | `<a>` | Native caveat: native has no navigation for href, target, rel, download or referrerPolicy. |  |
+| 55 | warning | `class/web-only` | `data-[state=open]:bg-accent` | `data-*` attribute selectors are web-only, so this style does not apply on native. | Drive the style from a prop or state instead (e.g. a styled() variant). |
+| 55 | info | `selector/web-color` | `data-[state=open]:bg-accent` | Theme colors in classes Tamagui leaves to Tailwind on web now read Tamagui's theme variables (`bg-(--primary)`): Tailwind compiles them with its default theme, which has no shadcn colors. |  |
+| 60 | warning | `class/web-only` | `sr-only` | `sr-only` relies on clipping CSS that native drops, so the element becomes visible. | Render the text only on web (e.g. `web:sr-only native:hidden`) or move it into `aria-label`. |
+| 81 | info | `icon/wrapped` | `text-sidebar-foreground/70` | Tamagui icons take size and color as props, not classes; the other classes moved to a `View asChild` wrapper. |  |

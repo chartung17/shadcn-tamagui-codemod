@@ -5,7 +5,15 @@ import {
   type PropertyAccessExpression,
   type SourceFile,
 } from 'ts-morph'
-import { collectClassSources, isStaticString, setStringValue } from '../ast/classNames.js'
+import {
+  CLASS_HELPER_NAMES,
+  classSourcesIn,
+  collectClassSources,
+  getAttributeExpression,
+  isStaticString,
+  setStringValue,
+} from '../ast/classNames.js'
+import { parseClass, splitClasses } from '../tailwind/tokenize.js'
 import { declaredNames, ensureNamedImport, TAMAGUI_TAILWIND } from '../ast/imports.js'
 import type { ElementNode } from '../ast/jsx.js'
 import type { DiagnosticCollector } from '../diagnostics.js'
@@ -67,14 +75,12 @@ function collectBindings(
   return out
 }
 
-function wrapperHelper(sourceFile: SourceFile, shared: Map<string, unknown>): string {
-  const key = 'radix:twHelper'
-  const existing = shared.get(key)
-  if (typeof existing === 'string') return existing
-  const styledLocal = ensureNamedImport(sourceFile, TAMAGUI_TAILWIND, 'styled')
-  const taken = declaredNames(sourceFile)
-  let name = 'tw'
-  for (let i = 2; taken.has(name); i++) name = `tw${i}`
+function reactNames(sourceFile: SourceFile): {
+  ComponentType: string
+  ComponentProps: string
+  ReactNode: string
+  Children: string
+} {
   const hasReactNamespace = sourceFile
     .getImportDeclarations()
     .some(
@@ -82,16 +88,38 @@ function wrapperHelper(sourceFile: SourceFile, shared: Map<string, unknown>): st
         d.getModuleSpecifierValue() === 'react' &&
         d.getNamespaceImport()?.getText() === 'React',
     )
-  let ComponentType = 'React.ComponentType'
-  let ComponentProps = 'React.ComponentProps'
-  if (!hasReactNamespace) {
-    ComponentType = ensureNamedImport(sourceFile, 'react', 'ComponentType', {
-      typeOnly: true,
-    })
-    ComponentProps = ensureNamedImport(sourceFile, 'react', 'ComponentProps', {
-      typeOnly: true,
-    })
+  if (hasReactNamespace) {
+    return {
+      ComponentType: 'React.ComponentType',
+      ComponentProps: 'React.ComponentProps',
+      ReactNode: 'React.ReactNode',
+      Children: 'React.Children',
+    }
   }
+  const type = (name: string) =>
+    ensureNamedImport(sourceFile, 'react', name, { typeOnly: true })
+  return {
+    ComponentType: type('ComponentType'),
+    ComponentProps: type('ComponentProps'),
+    ReactNode: type('ReactNode'),
+    Children: ensureNamedImport(sourceFile, 'react', 'Children'),
+  }
+}
+
+function freeName(sourceFile: SourceFile, base: string): string {
+  const taken = declaredNames(sourceFile)
+  let name = base
+  for (let i = 2; taken.has(name); i++) name = `${base}${i}`
+  return name
+}
+
+function wrapperHelper(sourceFile: SourceFile, shared: Map<string, unknown>): string {
+  const key = 'radix:twHelper'
+  const existing = shared.get(key)
+  if (typeof existing === 'string') return existing
+  const styledLocal = ensureNamedImport(sourceFile, TAMAGUI_TAILWIND, 'styled')
+  const name = freeName(sourceFile, 'tw')
+  const { ComponentType, ComponentProps } = reactNames(sourceFile)
   const imports = sourceFile.getImportDeclarations()
   const index = imports[imports.length - 1]!.getChildIndex() + 1
   sourceFile.insertStatements(
@@ -106,29 +134,90 @@ function wrapperHelper(sourceFile: SourceFile, shared: Map<string, unknown>): st
   return name
 }
 
+/**
+ * `twText`: like `tw`, for a primitive that is a view and receives text. A
+ * native view cannot render a raw string, so string children are wrapped in
+ * `html.span`, which gets the part's text classes on native (on web the span
+ * inherits them through CSS).
+ */
+function textWrapperHelper(sourceFile: SourceFile, shared: Map<string, unknown>): string {
+  const key = 'radix:twTextHelper'
+  const existing = shared.get(key)
+  if (typeof existing === 'string') return existing
+  const tw = wrapperHelper(sourceFile, shared)
+  const html = ensureNamedImport(sourceFile, TAMAGUI_TAILWIND, 'html')
+  const name = freeName(sourceFile, 'twText')
+  const { ComponentType, ComponentProps, ReactNode, Children } = reactNames(sourceFile)
+  const twDecl = sourceFile.getVariableStatement((s) =>
+    s.getDeclarations().some((d) => d.getName() === tw),
+  )!
+  sourceFile.insertStatements(
+    twDecl.getChildIndex() + 1,
+    `// Native views cannot render raw text: wraps string children in html.span,
+// with the part's text classes applied to it on native.
+const ${name} = <C extends ${ComponentType}<any>>(component: C) => {
+  const Styled = ${tw}(component) as ${ComponentType}<any>
+  return ({
+    className,
+    children,
+    ...props
+  }: ${ComponentProps}<C> & { className?: string; children?: ${ReactNode} }) => {
+    const textClasses = className
+      ?.split(/\\s+/)
+      .filter((c: string) => /^(?:text|font|leading|tracking)-|^(?:italic|underline|line-through|uppercase|lowercase|capitalize)$/.test(c))
+      .map((c: string) => \`native:\${c}\`)
+      .join(" ")
+    const wrap = (child: ${ReactNode}) =>
+      typeof child === "string" || typeof child === "number" ? (
+        <${html}.span className={textClasses}>{child}</${html}.span>
+      ) : (
+        child
+      )
+    return (
+      <Styled className={className} {...props}>
+        {Array.isArray(children) ? ${Children}.map(children, wrap) : wrap(children)}
+      </Styled>
+    )
+  }
+}`,
+  )
+  shared.set(key, name)
+  return name
+}
+
 function ensureWrapper(
   sourceFile: SourceFile,
   context: PassContext,
   wrappers: Map<string, string>,
   target: string,
+  wrapsText = false,
 ): string {
-  const existing = wrappers.get(target)
+  const key = wrapsText ? `${target}:text` : target
+  const existing = wrappers.get(key)
   if (existing) return existing
-  const helper = wrapperHelper(sourceFile, context.shared)
-  const taken = declaredNames(sourceFile)
+  const helper = wrapsText
+    ? textWrapperHelper(sourceFile, context.shared)
+    : wrapperHelper(sourceFile, context.shared)
+  const tw = wrapperHelper(sourceFile, context.shared)
   const stem = target.replace(/Primitive/g, '').replace(/\./g, '')
-  let name = `Styled${stem}`
-  for (let i = 2; taken.has(name) || [...wrappers.values()].includes(name); i++)
-    name = `Styled${stem}${i}`
-  // Wrappers go right after the helper, in order of first use.
-  const helperDecl = sourceFile.getVariableStatement((s) =>
-    s.getDeclarations().some((d) => d.getName() === helper),
-  )!
+  let name = freeName(sourceFile, `Styled${stem}`)
+  for (let i = 2; [...wrappers.values()].includes(name); i++)
+    name = freeName(sourceFile, `Styled${stem}${i}`)
+  // Wrappers go after the helpers, in order of first use.
+  const helpers = [tw, context.shared.get('radix:twTextHelper')].filter(Boolean)
+  const last = Math.max(
+    ...helpers.map(
+      (h) =>
+        sourceFile
+          .getVariableStatement((s) => s.getDeclarations().some((d) => d.getName() === h))
+          ?.getChildIndex() ?? -1,
+    ),
+  )
   sourceFile.insertStatements(
-    helperDecl.getChildIndex() + 1 + wrappers.size,
+    last + 1 + wrappers.size,
     `const ${name} = ${helper}(${target})`,
   )
-  wrappers.set(target, name)
+  wrappers.set(key, name)
   return name
 }
 
@@ -211,6 +300,16 @@ export function rewriteRadixComponents(
       return part.part === '' ? root : `${root}.${part.part}`
     }
 
+    // Font sizes that text parts inherit in Radix, read before tags are renamed.
+    const fontSizes = new Map<string, string>()
+    for (const part of Object.values(mapping.parts)) {
+      if (part.fontSizeFrom && !fontSizes.has(part.fontSizeFrom))
+        fontSizes.set(
+          part.fontSizeFrom,
+          fontSizeOfPart(sourceFile, `${local}.${part.fontSizeFrom}`) ?? 'text-base',
+        )
+    }
+
     // Keep Radix-only props in wrapper signatures (`orientation` on Separator).
     restoreRadixPropTypes(sourceFile, local, mapping)
     omitShadowedProps(sourceFile, local)
@@ -247,6 +346,24 @@ export function rewriteRadixComponents(
           continue
         }
         const part = mapping.parts[partName]!
+        if (part.classNameTo)
+          moveClassName(element, `${local}.${part.classNameTo}`, diagnostics)
+        if (part.fontSizeFrom)
+          addFontSize(element, fontSizes.get(part.fontSizeFrom)!, diagnostics)
+        for (const [name, value] of Object.entries(part.defaults ?? {})) {
+          if (attributesOf(element).some((a) => a.getNameNode().getText() === name))
+            continue
+          const spread = element
+            .getAttributes()
+            .findIndex((a) => Node.isJsxSpreadAttribute(a))
+          element.insertAttribute(
+            spread === -1 ? element.getAttributes().length : spread,
+            {
+              name,
+              initializer: value,
+            },
+          )
+        }
         for (const attr of attributesOf(element)) {
           const name = attr.getNameNode().getText()
           const conversion = part.convert?.[name]
@@ -306,11 +423,11 @@ export function rewriteRadixComponents(
             })
           }
         }
-        const styledTag = attributesOf(element).some(
-          (a) => a.getNameNode().getText() === 'className',
-        )
-          ? ensureWrapper(sourceFile, context, wrappers, target)
-          : target
+        const styledTag =
+          part.wrapsText ||
+          attributesOf(element).some((a) => a.getNameNode().getText() === 'className')
+            ? ensureWrapper(sourceFile, context, wrappers, target, part.wrapsText)
+            : target
         element.getTagNameNode().replaceWithText(styledTag)
         const jsx = element.getParent()
         if (Node.isJsxOpeningElement(element) && Node.isJsxElement(jsx)) {
@@ -411,6 +528,143 @@ export function rewriteRadixComponents(
     }
   }
   return changed
+}
+
+const FONT_SIZE = /^text-(?:xs|sm|base|lg|xl|[2-9]xl|\[[^\]]+\])$/
+
+function classNameOf(element: ElementNode): JsxAttribute | undefined {
+  return attributesOf(element).find((a) => a.getNameNode().getText() === 'className')
+}
+
+/** A base-level font size class (`text-sm`) in the element's static classes. */
+function fontSizeIn(element: ElementNode): string | undefined {
+  const attr = classNameOf(element)
+  for (const source of attr ? classSourcesIn(getAttributeExpression(attr)) : []) {
+    for (const raw of splitClasses(source.text)) {
+      const token = parseClass(raw)
+      if (token && token.variants.length === 0 && FONT_SIZE.test(token.base)) return raw
+    }
+  }
+  return undefined
+}
+
+function fontSizeOfPart(sourceFile: SourceFile, tag: string): string | undefined {
+  for (const element of sourceFile.getDescendants()) {
+    if (
+      (Node.isJsxOpeningElement(element) || Node.isJsxSelfClosingElement(element)) &&
+      element.getTagNameNode().getText() === tag
+    ) {
+      const size = fontSizeIn(element)
+      if (size) return size
+    }
+  }
+  return undefined
+}
+
+/**
+ * Radix text parts inherit their font size; Tamagui's (Dialog.Title is an H2)
+ * have their own. Give a part without a size class the size it would inherit.
+ */
+function addFontSize(
+  element: ElementNode,
+  size: string,
+  diagnostics: DiagnosticCollector,
+): void {
+  if (fontSizeIn(element)) return
+  const attr = classNameOf(element)
+  const expr = attr && getAttributeExpression(attr)
+  if (!attr) {
+    element.addAttribute({ name: 'className', initializer: `"${size}"` })
+  } else if (expr && isStaticString(expr)) {
+    setStringValue(expr, `${size} ${expr.getLiteralText()}`)
+  } else if (
+    expr &&
+    Node.isCallExpression(expr) &&
+    CLASS_HELPER_NAMES.has(expr.getExpression().getText())
+  ) {
+    const first = expr.getArguments()[0]
+    if (first && isStaticString(first))
+      setStringValue(first, `${size} ${first.getLiteralText()}`)
+    else expr.insertArgument(0, `"${size}"`)
+  } else {
+    return
+  }
+  diagnostics.info(element, {
+    code: 'radix/font-size',
+    construct: size,
+    reason: `Added \`${size}\`: the Tamagui part has a font size of its own, while the Radix part inherits this one from its content.`,
+  })
+}
+
+/** The JSX source of an attribute's value: `"a b"` or the expression in `{...}`. */
+function valueText(attr: JsxAttribute): string | undefined {
+  const init = attr.getInitializer()
+  if (!init) return undefined
+  if (Node.isJsxExpression(init)) return init.getExpression()?.getText()
+  return init.getText()
+}
+
+/**
+ * Tamagui's Select.Content renders no frame (the Viewport is the visible list),
+ * so its classes move to the Viewport inside it.
+ */
+function moveClassName(
+  element: ElementNode,
+  targetTag: string,
+  diagnostics: DiagnosticCollector,
+): void {
+  const attr = classNameOf(element)
+  const jsx = element.getParent()
+  if (!attr || !Node.isJsxOpeningElement(element) || !Node.isJsxElement(jsx)) return
+  const target = jsx
+    .getDescendants()
+    .find(
+      (n): n is ElementNode =>
+        (Node.isJsxOpeningElement(n) || Node.isJsxSelfClosingElement(n)) &&
+        n.getTagNameNode().getText() === targetTag,
+    )
+  const source = valueText(attr)
+  if (!target || !source) return
+  const targetAttr = classNameOf(target)
+  const targetSource = targetAttr && valueText(targetAttr)
+  const helperCall = (expr: Node | undefined) =>
+    expr &&
+    Node.isCallExpression(expr) &&
+    CLASS_HELPER_NAMES.has(expr.getExpression().getText())
+      ? expr
+      : undefined
+  let merged = source
+  if (targetAttr && targetSource) {
+    const fromCall = helperCall(getAttributeExpression(attr))
+    const toCall = helperCall(getAttributeExpression(targetAttr))
+    const call = fromCall ?? toCall
+    if (call) {
+      const args = (node: Node | undefined, text: string) =>
+        node && helperCall(node)
+          ? helperCall(node)!
+              .getArguments()
+              .map((a) => a.getText())
+          : [text]
+      merged = `${call.getExpression().getText()}(${[
+        // The moved classes go last: they end in the caller's `className`.
+        ...args(getAttributeExpression(targetAttr), targetSource),
+        ...args(getAttributeExpression(attr), source),
+      ].join(', ')})`
+    } else {
+      merged = `\`\${${targetSource}} \${${source}}\``
+    }
+    targetAttr.remove()
+  }
+  target.addAttribute({
+    name: 'className',
+    initializer: merged.startsWith('"') ? merged : `{${merged}}`,
+  })
+  attr.remove()
+  diagnostics.info(target, {
+    code: 'radix/class-moved',
+    construct: targetTag,
+    reason: `Moved the classes of the parent part here: in Tamagui the \`${targetTag.split('.').pop()}\` is the visible frame.`,
+  })
 }
 
 /**

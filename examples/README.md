@@ -23,6 +23,7 @@ pnpm install && pnpm build
 
 # in examples/
 npm install
+npm dedupe            # one copy of each @tamagui/* package (see below)
 npm run sync          # re-vendor shadcn sources, run the codemod, generate icons
 ```
 
@@ -46,52 +47,57 @@ npm run export:native  # expo export for iOS and Android (bundles only)
 
 `npm run screenshots` uses `playwright-core`. Set `CHROMIUM_PATH` to a Chromium
 binary, or run `npx playwright-core install chromium` once. It takes a
-full-page screenshot of each app, opens each overlay (dialog, alert dialog,
-popover, tooltip, dropdown menu, select) and screenshots it, then prints any
-console errors.
+full-page screenshot of each app in the light and dark themes (`?theme=dark`),
+opens each overlay (dialog, alert dialog, popover, tooltip, dropdown menu,
+select) and screenshots it, then prints any console errors.
 
-The web app needs two things the codemod doesn't write:
+The apps need a few things the codemod doesn't write (see "App setup" in the
+main README):
 
-- `import "@tamagui/core/reset.css"` in the entry. It gives Tamagui's `html.*`
-  elements the browser reset Tailwind's preflight gives the original.
+- `import "@tamagui/core/reset.css"` in the web entry. It gives Tamagui's
+  `html.*` elements the browser reset Tailwind's preflight gives the original.
 - `TamaguiProvider` from `tamagui` (not `@tamagui/core`). It adds the
   `PortalProvider` that Dialog, Popover and the other overlays render into.
+- A wrapper with `bg-background text-foreground`, which the original gets from
+  its base CSS on `<body>`.
+- One copy of each `@tamagui/*` package. A plain `npm install` put six copies
+  of `@tamagui/popper` here, each with its own React context, and Tooltip threw
+  `Cannot read properties of undefined (reading 'setReference')`. `npm dedupe`
+  fixes it; `@tamagui/native` is a direct dependency so it hoists too.
 
 ## Known differences
 
-From the screenshots in `screenshots/` (web, light theme):
+The codemod now handles the differences M7's screenshots found (see
+"Selectors and state variants" and "Radix components" in the main README).
+What is left, from `screenshots/` (web):
 
-1. **Borders without a color are black.** shadcn's CSS gives every element
-   `border-color: var(--border)` in its base layer (`* { @apply border-border }`).
-   The converted app has no such rule, and React Native's default border color
-   is black too. Visible on the Accordion dividers and the Avatar outline.
-2. **Some classes produce no CSS at all.** These are classes that only apply
-   in a state (`data-*` and `aria-*` variants) and use shadcn colors.
-   `@tamagui/tailwind/vite` compiles any class Tamagui's grammar doesn't handle
-   with Tailwind's _default_ theme, so shadcn colors such as `bg-primary`
-   don't exist there. It also lacks the custom variants defined in
-   `shadcn/tailwind.css` (`data-open`, `data-checked`, `data-active`,
-   `data-horizontal`, and so on). Visible on the checkbox (not filled), the
-   switch track, the radio indicator, the active tab and the slider (the
-   track's height is set by `data-horizontal:h-1.5`). On native these classes
-   are dropped, which the report already warns about.
-3. **Icons don't inherit the text color.** Lucide icons draw with
-   `currentColor`. The generated Tamagui icons default to the theme's
-   color, so the `+` icon in the primary icon button is black on black.
-4. **`DialogTitle` renders much larger** than the original.
-5. **`DropdownMenuItem` text is centered** instead of left-aligned.
-6. **`SelectContent` has no background, border or shadow**, and overlaps the
-   content below the trigger.
-7. **Tooltip throws on hover**:
-   `TypeError: Cannot read properties of undefined (reading 'setReference')`.
-8. **Native: `toggle.tsx` stays on Radix**, since Tamagui has no `Toggle`.
-   The codemod flags it with a TODO. `ToggleGroup` imports `toggleVariants`
-   from it, so `radix-ui` ends up in the native bundle. The bundle compiles;
-   whether the app runs on a device is part of the on-device check.
+1. **Animations.** `tw-animate-css` classes (`animate-in`, `fade-in-0`,
+   `zoom-in-95`, ...) are not part of Tamagui's Tailwind build, so overlays
+   open without the fade and zoom.
+2. **Select placeholder color.** shadcn colors the placeholder with
+   `data-placeholder:text-muted-foreground`; Tamagui's Select trigger does not
+   set `data-placeholder`.
+3. **ToggleGroup spacing.** `gap-[--spacing(var(--gap))]` uses Tailwind's
+   `--spacing()` function, which Tamagui claims but cannot resolve, so the items
+   touch.
+4. **Small spacing and color differences**, e.g. a few pixels less space after
+   Tabs, and the dark theme's Switch thumb.
+5. **Dev-mode console errors** ("Unexpected text node: ... cannot be a child of
+   a `<button>`"): Tamagui's web runtime warns about text in view-backed
+   `html.*` elements. They are harmless: Tamagui wraps that text on native.
 
-Popover, AlertDialog, Button (except item 3), Badge, Card, Input, Label,
-Separator, Textarea, Accordion (except item 1) and the `login-01` block match
-the original closely.
+On native (not covered by the screenshots):
+
+6. **`toggle.tsx` stays on Radix**, since Tamagui has no `Toggle`. The codemod
+   flags it with a TODO. `ToggleGroup` imports `toggleVariants` from it, so
+   `radix-ui` ends up in the native bundle. The bundle compiles; whether the
+   app runs on a device is part of the on-device check.
+7. **State styling is dropped.** `data-*`/`aria-*` classes (the checked
+   checkbox, the active tab, open/closed states) only apply on web; the report
+   lists them.
+8. **Icon colors** are the theme color, not the surrounding text color: pass
+   `color` to an icon on a colored background (the `+` in the primary icon
+   button).
 
 The native bundles compile (`npm run export:native`). The screenshots do not
 cover how the app looks on a device.

@@ -8,7 +8,7 @@
 | Native class coverage | 75.6% |
 | TODOs | 0 |
 | Warnings | 9 |
-| Notes | 2 |
+| Notes | 4 |
 | Classes (supported / web-only / unknown / unsupported) | 34 / 11 / 0 / 0 |
 | Constructs (converted / flagged) | 8 / 0 |
 
@@ -21,6 +21,8 @@
 | --- | --- | ---: |
 | `class/web-only` | warning | 9 |
 | `element/view` | info | 2 |
+| `selector/web-state` | info | 1 |
+| `selector/web-variant` | info | 1 |
 
 ## shadcn/blocks/sidebar-07/app/dashboard/page.tsx
 
@@ -31,8 +33,10 @@ Auto-converted 100% · 0 TODO(s) · 9 warning(s)
 | 23 | warning | `class/web-only` | `transition-[width,height]` | CSS transitions are web-only. | Use Tamagui's `transition` prop with an animation driver for native. |
 | 23 | warning | `class/web-only` | `ease-linear` | CSS transitions are web-only. |  |
 | 23 | warning | `class/web-only` | `group-has-data-[collapsible=icon]/sidebar-wrapper:h-12` | `group-*` variants other than interaction states (hover, press, focus, focus-visible, focus-within, disabled) use selectors that native does not have. |  |
+| 23 | info | `selector/web-state` | `group-has-data-[collapsible=icon]/sidebar-wrapper:h-12` | Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web. |  |
 | 24 | info | `element/view` | `<div>` | Flex container converted to `View`; `flex-row` added because `View` is a column by default. |  |
 | 28 | warning | `class/web-only` | `data-vertical:h-4 data-vertical:self-auto` | `data-*` attribute selectors are web-only, so this style does not apply on native. | Drive the style from a prop or state instead (e.g. a styled() variant). |
+| 28 | info | `selector/web-variant` | `data-vertical:h-4 data-vertical:self-auto` | Rewrote shadcn's custom variants (`data-open:`, `data-checked:`, ...) to the attributes Tamagui sets, and `dark:` to Tamagui's dark theme class: on web Tailwind compiles these classes without shadcn's CSS. |  |
 | 32 | warning | `class/web-only` | `md:block` | React Native has no block layout; `display: block` is dropped on native. |  |
 | 37 | warning | `class/web-only` | `md:block` | React Native has no block layout; `display: block` is dropped on native. |  |
 | 45 | info | `element/view` | `<div>` | Flex container converted to `View`. |  |

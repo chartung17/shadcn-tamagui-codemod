@@ -4,7 +4,7 @@ import { html, View } from "@tamagui/tailwind"
 export function Layout({ title, items }: { title: string; items: string[] }) {
   return (
     <html.main className="mx-auto max-w-3xl p-6">
-      <html.header className="flex items-center justify-between border-b pb-4">
+      <html.header className="flex items-center justify-between border-b border-border pb-4">
         <html.h1 className="text-2xl font-semibold">{title}</html.h1>
         <html.nav className="text-sm">
           <html.a href="/docs" className="underline">

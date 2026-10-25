@@ -25,6 +25,7 @@ import {
   PieChartIcon,
   MapIcon,
 } from "@/components/icons"
+import { isWeb } from "tamagui"
 
 // This is sample data.
 const data = {
@@ -36,17 +37,19 @@ const data = {
   teams: [
     {
       name: "Acme Inc",
-      logo: <GalleryVerticalEndIcon />,
+      logo: (
+        <GalleryVerticalEndIcon stroke={isWeb ? "currentColor" : undefined} />
+      ),
       plan: "Enterprise",
     },
     {
       name: "Acme Corp.",
-      logo: <AudioLinesIcon />,
+      logo: <AudioLinesIcon stroke={isWeb ? "currentColor" : undefined} />,
       plan: "Startup",
     },
     {
       name: "Evil Corp.",
-      logo: <TerminalIcon />,
+      logo: <TerminalIcon stroke={isWeb ? "currentColor" : undefined} />,
       plan: "Free",
     },
   ],
@@ -54,7 +57,7 @@ const data = {
     {
       title: "Playground",
       url: "#",
-      icon: <TerminalSquareIcon />,
+      icon: <TerminalSquareIcon stroke={isWeb ? "currentColor" : undefined} />,
       isActive: true,
       items: [
         {
@@ -74,7 +77,7 @@ const data = {
     {
       title: "Models",
       url: "#",
-      icon: <BotIcon />,
+      icon: <BotIcon stroke={isWeb ? "currentColor" : undefined} />,
       items: [
         {
           title: "Genesis",
@@ -93,7 +96,7 @@ const data = {
     {
       title: "Documentation",
       url: "#",
-      icon: <BookOpenIcon />,
+      icon: <BookOpenIcon stroke={isWeb ? "currentColor" : undefined} />,
       items: [
         {
           title: "Introduction",
@@ -116,7 +119,7 @@ const data = {
     {
       title: "Settings",
       url: "#",
-      icon: <Settings2Icon />,
+      icon: <Settings2Icon stroke={isWeb ? "currentColor" : undefined} />,
       items: [
         {
           title: "General",
@@ -141,17 +144,17 @@ const data = {
     {
       name: "Design Engineering",
       url: "#",
-      icon: <FrameIcon />,
+      icon: <FrameIcon stroke={isWeb ? "currentColor" : undefined} />,
     },
     {
       name: "Sales & Marketing",
       url: "#",
-      icon: <PieChartIcon />,
+      icon: <PieChartIcon stroke={isWeb ? "currentColor" : undefined} />,
     },
     {
       name: "Travel",
       url: "#",
-      icon: <MapIcon />,
+      icon: <MapIcon stroke={isWeb ? "currentColor" : undefined} />,
     },
   ],
 }

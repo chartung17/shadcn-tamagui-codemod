@@ -8,7 +8,7 @@
 | Native class coverage | 77.8% |
 | TODOs | 0 |
 | Warnings | 3 |
-| Notes | 0 |
+| Notes | 2 |
 | Classes (supported / web-only / unknown / unsupported) | 14 / 4 / 0 / 0 |
 | Constructs (converted / flagged) | 5 / 0 |
 
@@ -28,6 +28,8 @@ npx @tamagui/cli icons add CirclePlusIcon=CirclePlus MailIcon=Mail
 | Code | Severity | Count |
 | --- | --- | ---: |
 | `class/web-only` | warning | 3 |
+| `selector/rewrite` | info | 1 |
+| `selector/web-state` | info | 1 |
 
 ## shadcn/blocks/dashboard-01/components/nav-main.tsx
 
@@ -35,6 +37,8 @@ Auto-converted 100% · 0 TODO(s) · 3 warning(s)
 
 | Line | Severity | Code | Construct | Reason | Suggested fix |
 | ---: | --- | --- | --- | --- | --- |
-| 30 | warning | `class/web-only` | `duration-200 ease-linear` | CSS transitions are web-only. |  |
-| 37 | warning | `class/web-only` | `group-data-[collapsible=icon]:opacity-0` | `group-*` variants other than interaction states (hover, press, focus, focus-visible, focus-within, disabled) use selectors that native does not have. |  |
-| 41 | warning | `class/web-only` | `sr-only` | `sr-only` relies on clipping CSS that native drops, so the element becomes visible. | Render the text only on web (e.g. `web:sr-only native:hidden`) or move it into `aria-label`. |
+| 28 | info | `selector/rewrite` | `flex-row` | Added `flex-row`: Tamagui views and native lay out a `flex` container as a column. |  |
+| 31 | warning | `class/web-only` | `duration-200 ease-linear` | CSS transitions are web-only. |  |
+| 38 | warning | `class/web-only` | `group-data-[collapsible=icon]:opacity-0` | `group-*` variants other than interaction states (hover, press, focus, focus-visible, focus-within, disabled) use selectors that native does not have. |  |
+| 38 | info | `selector/web-state` | `group-data-[collapsible=icon]:opacity-0` | Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web. |  |
+| 42 | warning | `class/web-only` | `sr-only` | `sr-only` relies on clipping CSS that native drops, so the element becomes visible. | Render the text only on web (e.g. `web:sr-only native:hidden`) or move it into `aria-label`. |

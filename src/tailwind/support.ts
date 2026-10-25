@@ -289,7 +289,7 @@ function analyzeUtility(
   }
 }
 
-function analyzeVariant(
+export function analyzeVariant(
   variant: Variant,
   context: SupportContext,
 ): RuleEntry & { caveat?: string } {
@@ -314,6 +314,85 @@ function analyzeVariant(
     status: 'web-only',
     reason: `\`${variant.raw}:\` is not a variant Tamagui resolves (not a configured media query, theme, platform or interaction state), so it only works on web.`,
   }
+}
+
+const WEB = supportData.webPassthrough
+const WEB_PASSTHROUGH_PREFIXES = new Set(WEB.prefixes)
+const CUSTOM_VARIANTS = new Map(
+  Object.entries(WEB.customVariants).filter(([name]) => !name.startsWith('$')),
+)
+const CUSTOM_VARIANT_PATTERN = new RegExp(
+  `(^|-)(${[...CUSTOM_VARIANTS.keys()].join('|')})(?=$|/)`,
+)
+const COLOR_PREFIX_RULES = PREFIX_RULES.filter((rule) => rule.values.includes('color'))
+
+/**
+ * True when Tamagui does not claim the class on web, so `@tamagui/tailwind/vite`
+ * compiles it with Tailwind's default theme: a variant Tamagui does not resolve,
+ * or a utility its web grammar leaves to Tailwind (`ring-*`).
+ */
+export function isWebPassthrough(token: ClassToken, context: SupportContext): boolean {
+  if (token.variants.some((v) => analyzeVariant(v, context).status !== 'supported'))
+    return true
+  return [...WEB_PASSTHROUGH_PREFIXES].some(
+    (prefix) => token.base === prefix || token.base.startsWith(`${prefix}-`),
+  )
+}
+
+/**
+ * The variant with a shadcn custom variant (`data-open`, `group-data-vertical/tabs`)
+ * spelled as the attribute selector it stands for, or undefined if it has none.
+ */
+export function expandCustomVariant(raw: string): string | undefined {
+  const match = CUSTOM_VARIANT_PATTERN.exec(raw)
+  if (!match) return undefined
+  return raw.replace(
+    CUSTOM_VARIANT_PATTERN,
+    (_, lead: string, name: string) => `${lead}${CUSTOM_VARIANTS.get(name)}`,
+  )
+}
+
+const NATIVE_ASSUMED = WEB.nativeAssumedVariants.variants
+
+/**
+ * True for a variant assumed to hold on native (`data-[orientation=horizontal]`,
+ * also as `group-data-[orientation=horizontal]/tabs`).
+ */
+export function isAssumedOnNative(raw: string): boolean {
+  return NATIVE_ASSUMED.some(
+    (variant) =>
+      raw === variant ||
+      raw === `group-${variant}` ||
+      raw.startsWith(`group-${variant}/`),
+  )
+}
+
+/** The `dark:` variant as a selector on Tamagui's dark theme class. */
+export const WEB_DARK_VARIANT = WEB.darkVariant
+
+/**
+ * For a color utility whose value is a theme key Tailwind's default theme does
+ * not have (`bg-primary/50`), the same utility reading Tamagui's theme CSS
+ * variable (`bg-(--primary)/50`). Undefined for any other class.
+ */
+export function themeColorAsVariable(
+  token: ClassToken,
+  context: SupportContext,
+): string | undefined {
+  if (token.arbitraryValue !== undefined || token.arbitraryProperty) return undefined
+  const utility =
+    token.modifier !== undefined
+      ? token.base.slice(0, token.base.lastIndexOf('/'))
+      : token.base
+  for (const rule of COLOR_PREFIX_RULES) {
+    if (!utility.startsWith(`${rule.prefix}-`)) continue
+    const value = utility.slice(rule.prefix.length + 1)
+    if (!context.themeColors.has(value) || WEB.tailwindColorKeywords.includes(value))
+      continue
+    const modifier = token.modifier !== undefined ? `/${token.modifier}` : ''
+    return `${rule.prefix}-(--${value})${modifier}`
+  }
+  return undefined
 }
 
 /** Classify one parsed class against the support table. */
