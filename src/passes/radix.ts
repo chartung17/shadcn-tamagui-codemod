@@ -7,6 +7,7 @@ import {
 import { collectElements, addAttribute, renameElement } from '../ast/jsx.js'
 import { isInScope } from '../ast/scope.js'
 import { DiagnosticCollector } from '../diagnostics.js'
+import { rewriteRadixComponents } from './radixComponents.js'
 import type { FilePass, PassContext } from '../types.js'
 
 const SLOT_MODULES = ['radix-ui', '@radix-ui/react-slot']
@@ -181,8 +182,8 @@ function flagRemainingSlots(
 }
 
 /**
- * Pass 6. Replaces Radix-based constructs with Tamagui ones. This milestone
- * covers `asChild`/`Slot`; component mappings follow in `src/mappings/radix.ts`.
+ * Pass 6. Replaces Radix-based constructs with Tamagui ones: `asChild`/`Slot`
+ * switches, and the components in `src/mappings/radix.ts`.
  */
 export const radixPass: FilePass = {
   name: 'radix',
@@ -192,6 +193,7 @@ export const radixPass: FilePass = {
     if (!isInScope(sourceFile, context)) return { changed: false, diagnostics: [] }
     let changed = rewriteSlotSwitches(sourceFile, context, diagnostics)
     flagRemainingSlots(sourceFile, context, diagnostics)
+    changed = rewriteRadixComponents(sourceFile, context, diagnostics) || changed
     if (changed) {
       for (const module of SLOT_MODULES)
         changed = removeUnusedImports(sourceFile, module) || changed

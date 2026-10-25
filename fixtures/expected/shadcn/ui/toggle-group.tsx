@@ -3,6 +3,7 @@
 import * as React from "react"
 import { type VariantProps } from "class-variance-authority"
 import { cn } from "cn"
+// TODO(native): `ToggleGroup (ToggleGroupPrimitive)`: There is no Tamagui mapping for Radix `ToggleGroup` yet, so it stays on Radix, which is web-only.
 import { ToggleGroup as ToggleGroupPrimitive } from "radix-ui"
 
 import { toggleVariants } from "@/components/ui/toggle"

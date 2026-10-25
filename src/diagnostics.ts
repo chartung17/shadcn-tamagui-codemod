@@ -98,10 +98,11 @@ export function placeTodos(
   const ordered = [...insertions.values()].sort((a, b) => b.pos - a.pos)
   let out = text
   for (const insertion of ordered) {
+    const lines = insertion.texts.map((t) => `// ${t}`).join('\n')
+    // In a tag, keep the comment on its own line without adding a blank one.
+    const nextIsNewline = /^[ \t]*\r?\n/.test(out.slice(insertion.pos))
     const snippet =
-      insertion.style === 'jsx'
-        ? `\n${insertion.texts.map((t) => `// ${t}\n`).join('')}`
-        : insertion.texts.map((t) => `// ${t}\n`).join('')
+      insertion.style === 'jsx' ? `\n${lines}${nextIsNewline ? '' : '\n'}` : `${lines}\n`
     out = out.slice(0, insertion.pos) + snippet + out.slice(insertion.pos)
     for (const a of anchored) {
       if (a.pos >= insertion.pos) a.pos += snippet.length

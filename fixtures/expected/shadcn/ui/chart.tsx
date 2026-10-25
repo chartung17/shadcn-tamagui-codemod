@@ -93,7 +93,6 @@ const ChartStyle = ({ id, config }: { id: string; config: ChartConfig }) => {
   return (
     <style
       // TODO(native): `<style>`: `<style>` has no `html.*` equivalent, so it renders on web only.
-
       dangerouslySetInnerHTML={{
         __html: Object.entries(THEMES)
           .map(

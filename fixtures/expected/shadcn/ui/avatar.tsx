@@ -1,5 +1,6 @@
 import * as React from "react"
 import { cn } from "cn"
+// TODO(native): `Avatar (AvatarPrimitive)`: There is no Tamagui mapping for Radix `Avatar` yet, so it stays on Radix, which is web-only.
 import { Avatar as AvatarPrimitive } from "radix-ui"
 import { html } from "@tamagui/tailwind"
 
@@ -13,7 +14,6 @@ function Avatar({
   return (
     <AvatarPrimitive.Root
       // TODO(native): `after:absolute after:inset-0 after:rounded-full after:border after:border-bor...`: `::after` pseudo-elements do not exist on native, so this content is lost there.
-
       data-slot="avatar"
       data-size={size}
       className={cn(

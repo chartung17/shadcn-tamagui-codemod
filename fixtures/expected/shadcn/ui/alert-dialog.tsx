@@ -1,5 +1,6 @@
 import * as React from "react"
 import { cn } from "cn"
+// TODO(native): `AlertDialog (AlertDialogPrimitive)`: There is no Tamagui mapping for Radix `AlertDialog` yet, so it stays on Radix, which is web-only.
 import { AlertDialog as AlertDialogPrimitive } from "radix-ui"
 
 import { Button } from "@/components/ui/button"

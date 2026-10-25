@@ -1,7 +1,12 @@
 import { cva } from "class-variance-authority"
-import { Tabs as TabsPrimitive } from "radix-ui"
 import { cn } from "cn"
-import { html } from "@tamagui/tailwind"
+import { html, styled } from "@tamagui/tailwind"
+import { Tabs as TabsPrimitive } from "tamagui/unstyled"
+import type { ComponentType, ComponentProps } from "react"
+// Lets Tailwind classes (className) style a Tamagui UI primitive on web and native.
+const tw = <C extends ComponentType<any>>(component: C) =>
+  styled(component as never) as unknown as ComponentType<ComponentProps<C>>
+const StyledTabsList = tw(TabsPrimitive.List)
 
 // Exported: other modules may call it for class strings.
 export const chipVariants = cva("rounded-full px-2", {
@@ -33,7 +38,7 @@ const markVariants = cva("relative after:absolute after:inset-0", {
 export function Box({ size }: { size: "sm" | "lg" }) {
   return (
     <html.div className={cn(boxVariants({ size, tone: "muted" }))}>
-      <TabsPrimitive.List className={cn(listVariants({ variant: "line" }))} />
+      <StyledTabsList className={cn(listVariants({ variant: "line" }))} />
       <html.span className={markVariants({ on: true })} />
     </html.div>
   )

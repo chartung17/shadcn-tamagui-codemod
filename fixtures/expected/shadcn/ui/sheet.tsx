@@ -2,14 +2,22 @@
 
 import * as React from "react"
 import { cn } from "cn"
-import { Dialog as SheetPrimitive } from "radix-ui"
-
 import { Button } from "@/components/ui/button"
 import { XIcon } from "lucide-react"
-import { html } from "@tamagui/tailwind"
+import { html, styled } from "@tamagui/tailwind"
+import { Dialog as SheetPrimitive } from "tamagui/unstyled"
+// Lets Tailwind classes (className) style a Tamagui UI primitive on web and native.
+const tw = <C extends React.ComponentType<any>>(component: C) =>
+  styled(component as never) as unknown as React.ComponentType<
+    React.ComponentProps<C>
+  >
+const StyledSheetOverlay = tw(SheetPrimitive.Overlay)
+const StyledSheetContent = tw(SheetPrimitive.Content)
+const StyledSheetTitle = tw(SheetPrimitive.Title)
+const StyledSheetDescription = tw(SheetPrimitive.Description)
 
-function Sheet({ ...props }: React.ComponentProps<typeof SheetPrimitive.Root>) {
-  return <SheetPrimitive.Root data-slot="sheet" {...props} />
+function Sheet({ ...props }: React.ComponentProps<typeof SheetPrimitive>) {
+  return <SheetPrimitive data-slot="sheet" {...props} />
 }
 
 function SheetTrigger({
@@ -35,7 +43,7 @@ function SheetOverlay({
   ...props
 }: React.ComponentProps<typeof SheetPrimitive.Overlay>) {
   return (
-    <SheetPrimitive.Overlay
+    <StyledSheetOverlay
       data-slot="sheet-overlay"
       className={cn(
         "fixed inset-0 z-50 bg-black/10 duration-100 supports-backdrop-filter:backdrop-blur-xs data-open:animate-in data-open:fade-in-0 data-closed:animate-out data-closed:fade-out-0",
@@ -59,7 +67,7 @@ function SheetContent({
   return (
     <SheetPortal>
       <SheetOverlay />
-      <SheetPrimitive.Content
+      <StyledSheetContent
         data-slot="sheet-content"
         data-side={side}
         className={cn(
@@ -81,7 +89,7 @@ function SheetContent({
             </Button>
           </SheetPrimitive.Close>
         )}
-      </SheetPrimitive.Content>
+      </StyledSheetContent>
     </SheetPortal>
   )
 }
@@ -117,7 +125,7 @@ function SheetTitle({
   ...props
 }: React.ComponentProps<typeof SheetPrimitive.Title>) {
   return (
-    <SheetPrimitive.Title
+    <StyledSheetTitle
       data-slot="sheet-title"
       className={cn("font-heading font-medium text-foreground", className)}
       {...props}
@@ -130,7 +138,7 @@ function SheetDescription({
   ...props
 }: React.ComponentProps<typeof SheetPrimitive.Description>) {
   return (
-    <SheetPrimitive.Description
+    <StyledSheetDescription
       data-slot="sheet-description"
       className={cn("text-sm text-muted-foreground", className)}
       {...props}

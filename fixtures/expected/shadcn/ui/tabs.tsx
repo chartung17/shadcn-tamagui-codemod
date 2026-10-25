@@ -1,15 +1,25 @@
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "cn"
-import { Tabs as TabsPrimitive } from "radix-ui"
+import { Tabs as TabsPrimitive } from "tamagui/unstyled"
+import { styled } from "@tamagui/tailwind"
+// Lets Tailwind classes (className) style a Tamagui UI primitive on web and native.
+const tw = <C extends React.ComponentType<any>>(component: C) =>
+  styled(component as never) as unknown as React.ComponentType<
+    React.ComponentProps<C>
+  >
+const StyledTabs = tw(TabsPrimitive)
+const StyledTabsList = tw(TabsPrimitive.List)
+const StyledTabsTab = tw(TabsPrimitive.Tab)
+const StyledTabsContent = tw(TabsPrimitive.Content)
 
 function Tabs({
   className,
   orientation = "horizontal",
   ...props
-}: React.ComponentProps<typeof TabsPrimitive.Root>) {
+}: React.ComponentProps<typeof TabsPrimitive>) {
   return (
-    <TabsPrimitive.Root
+    <StyledTabs
       data-slot="tabs"
       data-orientation={orientation}
       className={cn(
@@ -43,7 +53,7 @@ function TabsList({
 }: React.ComponentProps<typeof TabsPrimitive.List> &
   VariantProps<typeof tabsListVariants>) {
   return (
-    <TabsPrimitive.List
+    <StyledTabsList
       data-slot="tabs-list"
       data-variant={variant}
       className={cn(tabsListVariants({ variant }), className)}
@@ -55,11 +65,10 @@ function TabsList({
 function TabsTrigger({
   className,
   ...props
-}: React.ComponentProps<typeof TabsPrimitive.Trigger>) {
+}: React.ComponentProps<typeof TabsPrimitive.Tab>) {
   return (
-    <TabsPrimitive.Trigger
+    <StyledTabsTab
       // TODO(native): `after:absolute after:bg-foreground after:opacity-0 after:transition-opacity g...`: `::after` pseudo-elements do not exist on native, so this content is lost there.
-
       data-slot="tabs-trigger"
       className={cn(
         "relative inline-flex flex-row h-[calc(100%-1px)] flex-1 items-center justify-center gap-1.5 rounded-md border border-transparent px-2 py-1 text-sm font-medium whitespace-nowrap text-foreground/60 transition-all group-data-vertical/tabs:w-full group-data-vertical/tabs:justify-start hover:text-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-1 focus-visible:outline-ring disabled:pointer-events-none disabled:opacity-50 has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 dark:text-muted-foreground dark:hover:text-foreground group-data-[variant=default]/tabs-list:data-active:shadow-sm group-data-[variant=line]/tabs-list:data-active:shadow-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
@@ -78,7 +87,7 @@ function TabsContent({
   ...props
 }: React.ComponentProps<typeof TabsPrimitive.Content>) {
   return (
-    <TabsPrimitive.Content
+    <StyledTabsContent
       data-slot="tabs-content"
       className={cn("flex-1 text-sm outline-none", className)}
       {...props}

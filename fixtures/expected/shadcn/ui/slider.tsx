@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import { cn } from "cn"
+// TODO(native): `Slider (SliderPrimitive)`: There is no Tamagui mapping for Radix `Slider` yet, so it stays on Radix, which is web-only.
 import { Slider as SliderPrimitive } from "radix-ui"
 
 function Slider({

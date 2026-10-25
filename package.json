@@ -31,8 +31,9 @@
     "format:check": "prettier --check .",
     "test": "vitest run",
     "test:watch": "vitest",
-    "check": "pnpm typecheck && pnpm lint && pnpm format:check && pnpm test",
-    "generate:data": "node scripts/generate-data.ts"
+    "check": "pnpm typecheck && pnpm typecheck:fixtures && pnpm lint && pnpm format:check && pnpm test",
+    "generate:data": "node scripts/generate-data.ts",
+    "typecheck:fixtures": "tsc -p fixtures/tsconfig.typecheck.json"
   },
   "dependencies": {
     "diff": "^9.0.0",
@@ -51,11 +52,14 @@
     "@types/node": "^20.19.0",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
+    "class-variance-authority": "^0.7.1",
     "cn": "~0.5.0",
     "eslint": "^10.13.0",
+    "lucide-react": "^1.61.0",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
     "react-native-web": "~0.21.4",
+    "tamagui": "3.1.3",
     "typescript": "~6.0.3",
     "typescript-eslint": "^8.72.0",
     "vitest": "^4.1.12"
