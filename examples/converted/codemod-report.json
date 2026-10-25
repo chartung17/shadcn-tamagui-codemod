@@ -1,0 +1,4120 @@
+{
+  "totals": {
+    "files": 25,
+    "changedFiles": 25,
+    "diagnostics": {
+      "todo": 8,
+      "warning": 294,
+      "info": 34
+    },
+    "metrics": {
+      "classes": {
+        "supported": 832,
+        "web-only": 552,
+        "unsupported": 28,
+        "unknown": 0
+      },
+      "constructs": {
+        "converted": 162,
+        "flagged": 2
+      }
+    },
+    "autoConvertedPercent": 98.1,
+    "nativeClassCoveragePercent": 58.9
+  },
+  "byCode": [
+    {
+      "code": "class/unsupported",
+      "severity": "todo",
+      "count": 6
+    },
+    {
+      "code": "element/unsupported",
+      "severity": "todo",
+      "count": 1
+    },
+    {
+      "code": "radix/unmapped",
+      "severity": "todo",
+      "count": 1
+    },
+    {
+      "code": "class/web-only",
+      "severity": "warning",
+      "count": 267
+    },
+    {
+      "code": "radix/unsupported-prop",
+      "severity": "warning",
+      "count": 8
+    },
+    {
+      "code": "radix/css-variable",
+      "severity": "warning",
+      "count": 7
+    },
+    {
+      "code": "radix/caveat",
+      "severity": "warning",
+      "count": 6
+    },
+    {
+      "code": "cva/kept",
+      "severity": "warning",
+      "count": 2
+    },
+    {
+      "code": "element/native-caveat",
+      "severity": "warning",
+      "count": 2
+    },
+    {
+      "code": "class/caveat",
+      "severity": "warning",
+      "count": 1
+    },
+    {
+      "code": "element/input-type",
+      "severity": "warning",
+      "count": 1
+    },
+    {
+      "code": "element/view",
+      "severity": "info",
+      "count": 13
+    },
+    {
+      "code": "selector/rewrite",
+      "severity": "info",
+      "count": 11
+    },
+    {
+      "code": "icon/wrapped",
+      "severity": "info",
+      "count": 5
+    },
+    {
+      "code": "cva/kept-as-child",
+      "severity": "info",
+      "count": 2
+    },
+    {
+      "code": "radix/as-child",
+      "severity": "info",
+      "count": 2
+    },
+    {
+      "code": "cva/styled",
+      "severity": "info",
+      "count": 1
+    }
+  ],
+  "icons": {
+    "names": {
+      "PlusIcon": "Plus",
+      "MailIcon": "Mail",
+      "BoldIcon": "Bold",
+      "ItalicIcon": "Italic",
+      "UnderlineIcon": "Underline",
+      "ChevronDownIcon": "ChevronDown",
+      "ChevronUpIcon": "ChevronUp",
+      "CheckIcon": "Check",
+      "XIcon": "X",
+      "ChevronRightIcon": "ChevronRight"
+    },
+    "command": "npx @tamagui/cli icons add BoldIcon=Bold CheckIcon=Check ChevronDownIcon=ChevronDown ChevronRightIcon=ChevronRight ChevronUpIcon=ChevronUp ItalicIcon=Italic MailIcon=Mail PlusIcon=Plus UnderlineIcon=Underline XIcon=X"
+  },
+  "theme": {
+    "source": "original/src/index.css",
+    "output": "converted/tamagui.config.ts",
+    "themeKeys": [
+      "background",
+      "foreground",
+      "card",
+      "card-foreground",
+      "popover",
+      "popover-foreground",
+      "primary",
+      "primary-foreground",
+      "secondary",
+      "secondary-foreground",
+      "muted",
+      "muted-foreground",
+      "accent",
+      "accent-foreground",
+      "destructive",
+      "border",
+      "input",
+      "ring",
+      "chart-1",
+      "chart-2",
+      "chart-3",
+      "chart-4",
+      "chart-5",
+      "sidebar",
+      "sidebar-foreground",
+      "sidebar-primary",
+      "sidebar-primary-foreground",
+      "sidebar-accent",
+      "sidebar-accent-foreground",
+      "sidebar-border",
+      "sidebar-ring"
+    ],
+    "notes": [
+      {
+        "severity": "warning",
+        "construct": "fonts",
+        "reason": "Font families ('Inter Variable', sans-serif) must also be loaded on native (e.g. with expo-font) under the same names."
+      }
+    ]
+  },
+  "files": [
+    {
+      "file": "converted/src/App.tsx",
+      "changed": true,
+      "metrics": {
+        "classes": {
+          "supported": 68,
+          "web-only": 0,
+          "unsupported": 0,
+          "unknown": 0
+        },
+        "constructs": {
+          "converted": 19,
+          "flagged": 0
+        }
+      },
+      "autoConvertedPercent": 100,
+      "diagnostics": [
+        {
+          "pass": "elements",
+          "file": "converted/src/App.tsx",
+          "line": 109,
+          "column": 11,
+          "severity": "info",
+          "code": "element/view",
+          "construct": "<div>",
+          "reason": "Flex container converted to `View`; `flex-row` added because `View` is a column by default."
+        },
+        {
+          "pass": "elements",
+          "file": "converted/src/App.tsx",
+          "line": 117,
+          "column": 11,
+          "severity": "info",
+          "code": "element/view",
+          "construct": "<div>",
+          "reason": "Flex container converted to `View`; `flex-row` added because `View` is a column by default."
+        },
+        {
+          "pass": "elements",
+          "file": "converted/src/App.tsx",
+          "line": 131,
+          "column": 11,
+          "severity": "info",
+          "code": "element/view",
+          "construct": "<div>",
+          "reason": "Flex container converted to `View`; `flex-row` added because `View` is a column by default."
+        },
+        {
+          "pass": "elements",
+          "file": "converted/src/App.tsx",
+          "line": 159,
+          "column": 11,
+          "severity": "info",
+          "code": "element/view",
+          "construct": "<div>",
+          "reason": "Flex container converted to `View`; `flex-row` added because `View` is a column by default."
+        },
+        {
+          "pass": "elements",
+          "file": "converted/src/App.tsx",
+          "line": 163,
+          "column": 11,
+          "severity": "info",
+          "code": "element/view",
+          "construct": "<div>",
+          "reason": "Flex container converted to `View`; `flex-row` added because `View` is a column by default."
+        },
+        {
+          "pass": "elements",
+          "file": "converted/src/App.tsx",
+          "line": 168,
+          "column": 13,
+          "severity": "info",
+          "code": "element/view",
+          "construct": "<div>",
+          "reason": "Flex container converted to `View`; `flex-row` added because `View` is a column by default."
+        },
+        {
+          "pass": "elements",
+          "file": "converted/src/App.tsx",
+          "line": 172,
+          "column": 13,
+          "severity": "info",
+          "code": "element/view",
+          "construct": "<div>",
+          "reason": "Flex container converted to `View`; `flex-row` added because `View` is a column by default."
+        },
+        {
+          "pass": "elements",
+          "file": "converted/src/App.tsx",
+          "line": 232,
+          "column": 11,
+          "severity": "info",
+          "code": "element/view",
+          "construct": "<div>",
+          "reason": "Flex container converted to `View`; `flex-row` added because `View` is a column by default."
+        },
+        {
+          "pass": "elements",
+          "file": "converted/src/App.tsx",
+          "line": 260,
+          "column": 11,
+          "severity": "info",
+          "code": "element/view",
+          "construct": "<div>",
+          "reason": "Flex container converted to `View`; `flex-row` added because `View` is a column by default."
+        }
+      ]
+    },
+    {
+      "file": "converted/src/components/login-form.tsx",
+      "changed": true,
+      "metrics": {
+        "classes": {
+          "supported": 10,
+          "web-only": 2,
+          "unsupported": 0,
+          "unknown": 0
+        },
+        "constructs": {
+          "converted": 5,
+          "flagged": 0
+        }
+      },
+      "autoConvertedPercent": 100,
+      "diagnostics": [
+        {
+          "pass": "elements",
+          "file": "converted/src/components/login-form.tsx",
+          "line": 46,
+          "column": 17,
+          "severity": "info",
+          "code": "element/view",
+          "construct": "<div>",
+          "reason": "Flex container converted to `View`; `flex-row` added because `View` is a column by default."
+        },
+        {
+          "pass": "elements",
+          "file": "converted/src/components/login-form.tsx",
+          "line": 48,
+          "column": 19,
+          "severity": "warning",
+          "code": "element/native-caveat",
+          "construct": "<a>",
+          "reason": "Native caveat: native has no navigation for href, target, rel, download or referrerPolicy."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/login-form.tsx",
+          "line": 50,
+          "column": 31,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "inline-block",
+          "reason": "React Native has no inline layout."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/login-form.tsx",
+          "line": 50,
+          "column": 31,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "underline-offset-4",
+          "reason": "`text-underline-offset` is web-only."
+        },
+        {
+          "pass": "elements",
+          "file": "converted/src/components/login-form.tsx",
+          "line": 63,
+          "column": 47,
+          "severity": "warning",
+          "code": "element/native-caveat",
+          "construct": "<a>",
+          "reason": "Native caveat: native has no navigation for href, target, rel, download or referrerPolicy."
+        }
+      ]
+    },
+    {
+      "file": "converted/src/components/ui/accordion.tsx",
+      "changed": true,
+      "metrics": {
+        "classes": {
+          "supported": 33,
+          "web-only": 14,
+          "unsupported": 1,
+          "unknown": 0
+        },
+        "constructs": {
+          "converted": 8,
+          "flagged": 0
+        }
+      },
+      "autoConvertedPercent": 98.2,
+      "diagnostics": [
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/accordion.tsx",
+          "line": 40,
+          "column": 21,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "not-last:border-b",
+          "reason": "`:not()` selectors are web-only."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/accordion.tsx",
+          "line": 57,
+          "column": 11,
+          "severity": "todo",
+          "code": "class/unsupported",
+          "construct": "focus-visible:after:border-ring",
+          "reason": "`::after` pseudo-elements do not exist on native, so this content is lost there.",
+          "suggestion": "Render the decoration as a real child element (e.g. an absolutely positioned `View`)."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/accordion.tsx",
+          "line": 57,
+          "column": 11,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "transition-all",
+          "reason": "CSS transitions are web-only.",
+          "suggestion": "Use Tamagui's `transition` prop with an animation driver for native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/accordion.tsx",
+          "line": 57,
+          "column": 11,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "**:data-[slot=accordion-trigger-icon]:ml-auto **:data-[slot=accordion-trigger-icon]:size-4 **:data-[slot=accordion-trigger-icon]:text-muted-foreground",
+          "reason": "Descendant selectors (`**:`) are web-only."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/accordion.tsx",
+          "line": 57,
+          "column": 100,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "group-aria-expanded/accordion-trigger:hidden",
+          "reason": "`group-*` variants other than interaction states (hover, press, focus, focus-visible, focus-within, disabled) use selectors that native does not have."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/accordion.tsx",
+          "line": 57,
+          "column": 248,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "group-aria-expanded/accordion-trigger:inline",
+          "reason": "`group-*` variants other than interaction states (hover, press, focus, focus-visible, focus-within, disabled) use selectors that native does not have."
+        },
+        {
+          "pass": "icons",
+          "file": "converted/src/components/ui/accordion.tsx",
+          "line": 63,
+          "column": 9,
+          "severity": "info",
+          "code": "icon/wrapped",
+          "construct": "pointer-events-none shrink-0 group-aria-expanded/accordion-trigger:hidden",
+          "reason": "Tamagui icons take size and color as props, not classes; the other classes moved to a `View asChild` wrapper."
+        },
+        {
+          "pass": "icons",
+          "file": "converted/src/components/ui/accordion.tsx",
+          "line": 67,
+          "column": 54,
+          "severity": "info",
+          "code": "icon/wrapped",
+          "construct": "pointer-events-none hidden shrink-0 group-aria-expanded/accordion-trigger:inline",
+          "reason": "Tamagui icons take size and color as props, not classes; the other classes moved to a `View asChild` wrapper."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/accordion.tsx",
+          "line": 88,
+          "column": 17,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "data-open:animate-accordion-down data-closed:animate-accordion-up",
+          "reason": "`data-*` attribute selectors are web-only, so this style does not apply on native.",
+          "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/accordion.tsx",
+          "line": 93,
+          "column": 11,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "h-(--radix-accordion-content-height)",
+          "reason": "CSS variables and functions other than `calc()`/`clamp()` do not resolve on native.",
+          "suggestion": "Use a token or a plain value (px, %, rem) that native can resolve."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/accordion.tsx",
+          "line": 93,
+          "column": 11,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "[&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:text-foreground [&_p:not(:last-child)]:mb-4",
+          "reason": "Arbitrary selector variants are web-only, so this style does not apply on native."
+        },
+        {
+          "pass": "radix",
+          "file": "converted/src/components/ui/accordion.tsx",
+          "line": 93,
+          "column": 11,
+          "severity": "warning",
+          "code": "radix/css-variable",
+          "construct": "--radix-accordion-content-height",
+          "reason": "Tamagui `Accordion` does not set `--radix-accordion-content-height`, so classes using it fall back to their defaults."
+        }
+      ]
+    },
+    {
+      "file": "converted/src/components/ui/alert-dialog.tsx",
+      "changed": true,
+      "metrics": {
+        "classes": {
+          "supported": 36,
+          "web-only": 38,
+          "unsupported": 0,
+          "unknown": 0
+        },
+        "constructs": {
+          "converted": 12,
+          "flagged": 0
+        }
+      },
+      "autoConvertedPercent": 100,
+      "diagnostics": [
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/alert-dialog.tsx",
+          "line": 48,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "fixed",
+          "reason": "`position: fixed` is dropped on native.",
+          "suggestion": "Use `absolute` inside a full-screen container, or a Tamagui overlay/Portal."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/alert-dialog.tsx",
+          "line": 48,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "duration-100",
+          "reason": "CSS transitions are web-only."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/alert-dialog.tsx",
+          "line": 48,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "supports-backdrop-filter:backdrop-blur-xs",
+          "reason": "`@supports` queries are web-only."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/alert-dialog.tsx",
+          "line": 48,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "data-open:animate-in data-open:fade-in-0 data-closed:animate-out data-closed:fade-out-0",
+          "reason": "`data-*` attribute selectors are web-only, so this style does not apply on native.",
+          "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/alert-dialog.tsx",
+          "line": 70,
+          "column": 11,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "fixed",
+          "reason": "`position: fixed` is dropped on native.",
+          "suggestion": "Use `absolute` inside a full-screen container, or a Tamagui overlay/Portal."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/alert-dialog.tsx",
+          "line": 70,
+          "column": 11,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "grid",
+          "reason": "CSS grid is not available on native; grid classes are dropped there.",
+          "suggestion": "Use flex rows/columns (or `web:grid native:flex`) for layouts that must match on native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/alert-dialog.tsx",
+          "line": 70,
+          "column": 11,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "duration-100",
+          "reason": "CSS transitions are web-only."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/alert-dialog.tsx",
+          "line": 70,
+          "column": 11,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "data-[size=default]:max-w-xs data-[size=sm]:max-w-xs data-[size=default]:sm:max-w-lg data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
+          "reason": "`data-*` attribute selectors are web-only, so this style does not apply on native.",
+          "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/alert-dialog.tsx",
+          "line": 87,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "grid",
+          "reason": "CSS grid is not available on native; grid classes are dropped there.",
+          "suggestion": "Use flex rows/columns (or `web:grid native:flex`) for layouts that must match on native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/alert-dialog.tsx",
+          "line": 87,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "grid-rows-[auto_1fr]",
+          "reason": "CSS grid is not available on native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/alert-dialog.tsx",
+          "line": 87,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "place-items-center",
+          "reason": "`place-*` is a grid shorthand; not available on native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/alert-dialog.tsx",
+          "line": 87,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "has-data-[slot=alert-dialog-media]:grid-rows-[auto_auto_1fr] has-data-[slot=alert-dialog-media]:gap-x-6",
+          "reason": "`:has()` selectors are web-only."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/alert-dialog.tsx",
+          "line": 87,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "sm:group-data-[size=default]/alert-dialog-content:place-items-start sm:group-data-[size=default]/alert-dialog-content:text-left sm:group-data-[size=default]/alert-dialog-content:has-data-[slot=alert-dialog-media]:grid-rows-[auto_1fr]",
+          "reason": "`group-*` variants other than interaction states (hover, press, focus, focus-visible, focus-within, disabled) use selectors that native does not have."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/alert-dialog.tsx",
+          "line": 103,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "group-data-[size=sm]/alert-dialog-content:grid group-data-[size=sm]/alert-dialog-content:grid-cols-2",
+          "reason": "`group-*` variants other than interaction states (hover, press, focus, focus-visible, focus-within, disabled) use selectors that native does not have."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/alert-dialog.tsx",
+          "line": 119,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "inline-flex",
+          "reason": "`display: inline-flex` is dropped on native, where elements are flex containers anyway."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/alert-dialog.tsx",
+          "line": 119,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "sm:group-data-[size=default]/alert-dialog-content:row-span-2",
+          "reason": "`group-*` variants other than interaction states (hover, press, focus, focus-visible, focus-within, disabled) use selectors that native does not have."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/alert-dialog.tsx",
+          "line": 119,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "*:[svg:not([class*='size-'])]:size-8",
+          "reason": "Child selectors (`*:`) are web-only."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/alert-dialog.tsx",
+          "line": 119,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/rewrite",
+          "construct": "flex-row",
+          "reason": "Added `flex-row`: native drops `inline-flex` and would lay the children out as a column."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/alert-dialog.tsx",
+          "line": 135,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "sm:group-data-[size=default]/alert-dialog-content:group-has-data-[slot=alert-dialog-media]/alert-dialog-content:col-start-2",
+          "reason": "`group-*` variants other than interaction states (hover, press, focus, focus-visible, focus-within, disabled) use selectors that native does not have."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/alert-dialog.tsx",
+          "line": 151,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "text-balance md:text-pretty",
+          "reason": "`text-wrap` is web-only."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/alert-dialog.tsx",
+          "line": 151,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "*:[a]:underline *:[a]:underline-offset-3 *:[a]:hover:text-foreground",
+          "reason": "Child selectors (`*:`) are web-only."
+        }
+      ]
+    },
+    {
+      "file": "converted/src/components/ui/avatar.tsx",
+      "changed": true,
+      "metrics": {
+        "classes": {
+          "supported": 44,
+          "web-only": 20,
+          "unsupported": 7,
+          "unknown": 0
+        },
+        "constructs": {
+          "converted": 6,
+          "flagged": 0
+        }
+      },
+      "autoConvertedPercent": 90.9,
+      "diagnostics": [
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/avatar.tsx",
+          "line": 27,
+          "column": 9,
+          "severity": "todo",
+          "code": "class/unsupported",
+          "construct": "after:absolute after:inset-0 after:rounded-full after:border after:border-border after:mix-blend-darken dark:after:mix-blend-lighten",
+          "reason": "`::after` pseudo-elements do not exist on native, so this content is lost there.",
+          "suggestion": "Render the decoration as a real child element (e.g. an absolutely positioned `View`)."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/avatar.tsx",
+          "line": 27,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "data-[size=lg]:size-10 data-[size=sm]:size-6",
+          "reason": "`data-*` attribute selectors are web-only, so this style does not apply on native.",
+          "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/avatar.tsx",
+          "line": 43,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "object-cover",
+          "reason": "`object-fit` is dropped on native.",
+          "suggestion": "Use the Image `resizeMode`/`objectFit` prop on native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/avatar.tsx",
+          "line": 59,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "group-data-[size=sm]/avatar:text-xs",
+          "reason": "`group-*` variants other than interaction states (hover, press, focus, focus-visible, focus-within, disabled) use selectors that native does not have."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/avatar.tsx",
+          "line": 75,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "inline-flex",
+          "reason": "`display: inline-flex` is dropped on native, where elements are flex containers anyway."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/avatar.tsx",
+          "line": 75,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "bg-blend-color",
+          "reason": "Blend modes are web-only."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/avatar.tsx",
+          "line": 75,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/rewrite",
+          "construct": "flex-row",
+          "reason": "Added `flex-row`: native drops `inline-flex` and would lay the children out as a column."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/avatar.tsx",
+          "line": 76,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "group-data-[size=sm]/avatar:size-2 group-data-[size=sm]/avatar:[&>svg]:hidden",
+          "reason": "`group-*` variants other than interaction states (hover, press, focus, focus-visible, focus-within, disabled) use selectors that native does not have."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/avatar.tsx",
+          "line": 77,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "group-data-[size=default]/avatar:size-2.5 group-data-[size=default]/avatar:[&>svg]:size-2",
+          "reason": "`group-*` variants other than interaction states (hover, press, focus, focus-visible, focus-within, disabled) use selectors that native does not have."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/avatar.tsx",
+          "line": 78,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "group-data-[size=lg]/avatar:size-3 group-data-[size=lg]/avatar:[&>svg]:size-2",
+          "reason": "`group-*` variants other than interaction states (hover, press, focus, focus-visible, focus-within, disabled) use selectors that native does not have."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/avatar.tsx",
+          "line": 94,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "-space-x-2",
+          "reason": "`space-*` uses child selectors, which native does not have.",
+          "suggestion": "Use `gap-x-*` on a flex container instead."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/avatar.tsx",
+          "line": 94,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "*:data-[slot=avatar]:ring-2 *:data-[slot=avatar]:ring-background",
+          "reason": "Child selectors (`*:`) are web-only."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/avatar.tsx",
+          "line": 110,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "group-has-data-[size=lg]/avatar-group:size-10 group-has-data-[size=sm]/avatar-group:size-6 group-has-data-[size=lg]/avatar-group:[&>svg]:size-5 group-has-data-[size=sm]/avatar-group:[&>svg]:size-3",
+          "reason": "`group-*` variants other than interaction states (hover, press, focus, focus-visible, focus-within, disabled) use selectors that native does not have."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/avatar.tsx",
+          "line": 110,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "[&>svg]:size-4",
+          "reason": "Arbitrary selector variants are web-only, so this style does not apply on native."
+        }
+      ]
+    },
+    {
+      "file": "converted/src/components/ui/badge.tsx",
+      "changed": true,
+      "metrics": {
+        "classes": {
+          "supported": 33,
+          "web-only": 17,
+          "unsupported": 0,
+          "unknown": 0
+        },
+        "constructs": {
+          "converted": 2,
+          "flagged": 0
+        }
+      },
+      "autoConvertedPercent": 100,
+      "diagnostics": [
+        {
+          "pass": "cn-cva",
+          "file": "converted/src/components/ui/badge.tsx",
+          "line": 6,
+          "column": 7,
+          "severity": "info",
+          "code": "cva/kept-as-child",
+          "construct": "badgeVariants = cva(...)",
+          "reason": "Kept as cva(): the component supports `asChild`, and Tamagui's `asChild` does not forward `styled()` styles. Its classes still apply at runtime through className."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/badge.tsx",
+          "line": 7,
+          "column": 3,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "inline-flex",
+          "reason": "`display: inline-flex` is dropped on native, where elements are flex containers anyway."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/badge.tsx",
+          "line": 7,
+          "column": 3,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "w-fit",
+          "reason": "`min-content`/`max-content`/`fit-content` sizing is dropped on native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/badge.tsx",
+          "line": 7,
+          "column": 3,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "whitespace-nowrap",
+          "reason": "`white-space` is not supported on native.",
+          "suggestion": "Use `line-clamp-*` to limit lines on native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/badge.tsx",
+          "line": 7,
+          "column": 3,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "transition-all",
+          "reason": "CSS transitions are web-only.",
+          "suggestion": "Use Tamagui's `transition` prop with an animation driver for native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/badge.tsx",
+          "line": 7,
+          "column": 3,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5",
+          "reason": "`:has()` selectors are web-only."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/badge.tsx",
+          "line": 7,
+          "column": 3,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40",
+          "reason": "`aria-*` attribute selectors are web-only, so this style does not apply on native.",
+          "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/badge.tsx",
+          "line": 7,
+          "column": 3,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "[&>svg]:pointer-events-none [&>svg]:size-3!",
+          "reason": "Arbitrary selector variants are web-only, so this style does not apply on native."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/badge.tsx",
+          "line": 7,
+          "column": 3,
+          "severity": "info",
+          "code": "selector/rewrite",
+          "construct": "flex-row",
+          "reason": "Added `flex-row`: native drops `inline-flex` and would lay the children out as a column."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/badge.tsx",
+          "line": 11,
+          "column": 18,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "[a]:hover:bg-primary/80",
+          "reason": "Arbitrary selector variants are web-only, so this style does not apply on native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/badge.tsx",
+          "line": 13,
+          "column": 11,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "[a]:hover:bg-secondary/80",
+          "reason": "Arbitrary selector variants are web-only, so this style does not apply on native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/badge.tsx",
+          "line": 15,
+          "column": 11,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "[a]:hover:bg-destructive/20",
+          "reason": "Arbitrary selector variants are web-only, so this style does not apply on native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/badge.tsx",
+          "line": 17,
+          "column": 11,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "[a]:hover:bg-muted [a]:hover:text-muted-foreground",
+          "reason": "Arbitrary selector variants are web-only, so this style does not apply on native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/badge.tsx",
+          "line": 20,
+          "column": 15,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "underline-offset-4",
+          "reason": "`text-underline-offset` is web-only."
+        },
+        {
+          "pass": "radix",
+          "file": "converted/src/components/ui/badge.tsx",
+          "line": 37,
+          "column": 5,
+          "severity": "info",
+          "code": "radix/as-child",
+          "construct": "asChild ? Slot : html.span",
+          "reason": "Radix `Slot` replaced with Tamagui's `asChild` on `html.span`."
+        }
+      ]
+    },
+    {
+      "file": "converted/src/components/ui/button.tsx",
+      "changed": true,
+      "metrics": {
+        "classes": {
+          "supported": 59,
+          "web-only": 40,
+          "unsupported": 0,
+          "unknown": 0
+        },
+        "constructs": {
+          "converted": 2,
+          "flagged": 0
+        }
+      },
+      "autoConvertedPercent": 100,
+      "diagnostics": [
+        {
+          "pass": "cn-cva",
+          "file": "converted/src/components/ui/button.tsx",
+          "line": 6,
+          "column": 7,
+          "severity": "info",
+          "code": "cva/kept-as-child",
+          "construct": "buttonVariants = cva(...)",
+          "reason": "Kept as cva(): the component supports `asChild`, and Tamagui's `asChild` does not forward `styled()` styles. Its classes still apply at runtime through className."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/button.tsx",
+          "line": 7,
+          "column": 3,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "inline-flex",
+          "reason": "`display: inline-flex` is dropped on native, where elements are flex containers anyway."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/button.tsx",
+          "line": 7,
+          "column": 3,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "bg-clip-padding",
+          "reason": "`background-clip` is web-only."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/button.tsx",
+          "line": 7,
+          "column": 3,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "whitespace-nowrap",
+          "reason": "`white-space` is not supported on native.",
+          "suggestion": "Use `line-clamp-*` to limit lines on native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/button.tsx",
+          "line": 7,
+          "column": 3,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "transition-all",
+          "reason": "CSS transitions are web-only.",
+          "suggestion": "Use Tamagui's `transition` prop with an animation driver for native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/button.tsx",
+          "line": 7,
+          "column": 3,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "active:not-aria-[haspopup]:translate-y-px",
+          "reason": "`:not()` selectors are web-only."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/button.tsx",
+          "line": 7,
+          "column": 3,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40",
+          "reason": "`aria-*` attribute selectors are web-only, so this style does not apply on native.",
+          "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/button.tsx",
+          "line": 7,
+          "column": 3,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+          "reason": "Arbitrary selector variants are web-only, so this style does not apply on native."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/button.tsx",
+          "line": 7,
+          "column": 3,
+          "severity": "info",
+          "code": "selector/rewrite",
+          "construct": "flex-row",
+          "reason": "Added `flex-row`: native drops `inline-flex` and would lay the children out as a column."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/button.tsx",
+          "line": 13,
+          "column": 11,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "aria-expanded:bg-muted aria-expanded:text-foreground",
+          "reason": "`aria-*` attribute selectors are web-only, so this style does not apply on native.",
+          "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/button.tsx",
+          "line": 15,
+          "column": 11,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "hover:bg-[color-mix(in_oklch,var(--secondary),var(--foreground)_5%)]",
+          "reason": "CSS variables and functions other than `calc()`/`clamp()` do not resolve on native.",
+          "suggestion": "Use a token or a plain value (px, %, rem) that native can resolve."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/button.tsx",
+          "line": 15,
+          "column": 11,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "aria-expanded:bg-secondary aria-expanded:text-secondary-foreground",
+          "reason": "`aria-*` attribute selectors are web-only, so this style does not apply on native.",
+          "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/button.tsx",
+          "line": 17,
+          "column": 11,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "aria-expanded:bg-muted aria-expanded:text-foreground",
+          "reason": "`aria-*` attribute selectors are web-only, so this style does not apply on native.",
+          "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/button.tsx",
+          "line": 20,
+          "column": 15,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "underline-offset-4",
+          "reason": "`text-underline-offset` is web-only."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/button.tsx",
+          "line": 24,
+          "column": 11,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "in-data-[slot=button-group]:rounded-md",
+          "reason": "`in-*` (ancestor) selectors are web-only."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/button.tsx",
+          "line": 24,
+          "column": 11,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
+          "reason": "`:has()` selectors are web-only."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/button.tsx",
+          "line": 25,
+          "column": 13,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "rounded-[min(var(--radius-md),8px)]",
+          "reason": "CSS variables and functions other than `calc()`/`clamp()` do not resolve on native.",
+          "suggestion": "Use a token or a plain value (px, %, rem) that native can resolve."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/button.tsx",
+          "line": 25,
+          "column": 13,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "in-data-[slot=button-group]:rounded-md",
+          "reason": "`in-*` (ancestor) selectors are web-only."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/button.tsx",
+          "line": 25,
+          "column": 13,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5",
+          "reason": "`:has()` selectors are web-only."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/button.tsx",
+          "line": 25,
+          "column": 13,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "[&_svg:not([class*='size-'])]:size-3",
+          "reason": "Arbitrary selector variants are web-only, so this style does not apply on native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/button.tsx",
+          "line": 26,
+          "column": 13,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "rounded-[min(var(--radius-md),10px)]",
+          "reason": "CSS variables and functions other than `calc()`/`clamp()` do not resolve on native.",
+          "suggestion": "Use a token or a plain value (px, %, rem) that native can resolve."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/button.tsx",
+          "line": 26,
+          "column": 13,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "in-data-[slot=button-group]:rounded-md",
+          "reason": "`in-*` (ancestor) selectors are web-only."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/button.tsx",
+          "line": 26,
+          "column": 13,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5",
+          "reason": "`:has()` selectors are web-only."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/button.tsx",
+          "line": 27,
+          "column": 13,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
+          "reason": "`:has()` selectors are web-only."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/button.tsx",
+          "line": 30,
+          "column": 11,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "rounded-[min(var(--radius-md),8px)]",
+          "reason": "CSS variables and functions other than `calc()`/`clamp()` do not resolve on native.",
+          "suggestion": "Use a token or a plain value (px, %, rem) that native can resolve."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/button.tsx",
+          "line": 30,
+          "column": 11,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "in-data-[slot=button-group]:rounded-md",
+          "reason": "`in-*` (ancestor) selectors are web-only."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/button.tsx",
+          "line": 30,
+          "column": 11,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "[&_svg:not([class*='size-'])]:size-3",
+          "reason": "Arbitrary selector variants are web-only, so this style does not apply on native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/button.tsx",
+          "line": 32,
+          "column": 11,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "rounded-[min(var(--radius-md),10px)]",
+          "reason": "CSS variables and functions other than `calc()`/`clamp()` do not resolve on native.",
+          "suggestion": "Use a token or a plain value (px, %, rem) that native can resolve."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/button.tsx",
+          "line": 32,
+          "column": 11,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "in-data-[slot=button-group]:rounded-md",
+          "reason": "`in-*` (ancestor) selectors are web-only."
+        },
+        {
+          "pass": "radix",
+          "file": "converted/src/components/ui/button.tsx",
+          "line": 54,
+          "column": 5,
+          "severity": "info",
+          "code": "radix/as-child",
+          "construct": "asChild ? Slot : html.button",
+          "reason": "Radix `Slot` replaced with Tamagui's `asChild` on `html.button`."
+        }
+      ]
+    },
+    {
+      "file": "converted/src/components/ui/card.tsx",
+      "changed": true,
+      "metrics": {
+        "classes": {
+          "supported": 29,
+          "web-only": 21,
+          "unsupported": 0,
+          "unknown": 0
+        },
+        "constructs": {
+          "converted": 7,
+          "flagged": 0
+        }
+      },
+      "autoConvertedPercent": 100,
+      "diagnostics": [
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/card.tsx",
+          "line": 15,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "gap-(--card-spacing) py-(--card-spacing)",
+          "reason": "CSS variables and functions other than `calc()`/`clamp()` do not resolve on native.",
+          "suggestion": "Use a token or a plain value (px, %, rem) that native can resolve."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/card.tsx",
+          "line": 15,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "[--card-spacing:--spacing(6)]",
+          "reason": "Arbitrary CSS properties (`[prop:value]`) pass through to CSS on web and are dropped on native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/card.tsx",
+          "line": 15,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "has-[>img:first-child]:pt-0",
+          "reason": "`:has()` selectors are web-only."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/card.tsx",
+          "line": 15,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "data-[size=sm]:[--card-spacing:--spacing(4)]",
+          "reason": "`data-*` attribute selectors are web-only, so this style does not apply on native.",
+          "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/card.tsx",
+          "line": 15,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "*:[img:first-child]:rounded-t-xl *:[img:last-child]:rounded-b-xl",
+          "reason": "Child selectors (`*:`) are web-only."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/card.tsx",
+          "line": 31,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "grid",
+          "reason": "CSS grid is not available on native; grid classes are dropped there.",
+          "suggestion": "Use flex rows/columns (or `web:grid native:flex`) for layouts that must match on native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/card.tsx",
+          "line": 31,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "auto-rows-min",
+          "reason": "CSS grid is not available on native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/card.tsx",
+          "line": 31,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "px-(--card-spacing)",
+          "reason": "CSS variables and functions other than `calc()`/`clamp()` do not resolve on native.",
+          "suggestion": "Use a token or a plain value (px, %, rem) that native can resolve."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/card.tsx",
+          "line": 31,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "has-data-[slot=card-action]:grid-cols-[1fr_auto] has-data-[slot=card-description]:grid-rows-[auto_auto]",
+          "reason": "`:has()` selectors are web-only."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/card.tsx",
+          "line": 31,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "[.border-b]:pb-(--card-spacing)",
+          "reason": "Arbitrary selector variants are web-only, so this style does not apply on native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/card.tsx",
+          "line": 47,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "group-data-[size=sm]/card:text-sm",
+          "reason": "`group-*` variants other than interaction states (hover, press, focus, focus-visible, focus-within, disabled) use selectors that native does not have."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/card.tsx",
+          "line": 76,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "col-start-2 row-span-2 row-start-1",
+          "reason": "CSS grid is not available on native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/card.tsx",
+          "line": 76,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "justify-self-end",
+          "reason": "`justify-self` applies to grid; not available on native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/card.tsx",
+          "line": 91,
+          "column": 21,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "px-(--card-spacing)",
+          "reason": "CSS variables and functions other than `calc()`/`clamp()` do not resolve on native.",
+          "suggestion": "Use a token or a plain value (px, %, rem) that native can resolve."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/card.tsx",
+          "line": 105,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "px-(--card-spacing)",
+          "reason": "CSS variables and functions other than `calc()`/`clamp()` do not resolve on native.",
+          "suggestion": "Use a token or a plain value (px, %, rem) that native can resolve."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/card.tsx",
+          "line": 105,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "[.border-t]:pt-(--card-spacing)",
+          "reason": "Arbitrary selector variants are web-only, so this style does not apply on native."
+        }
+      ]
+    },
+    {
+      "file": "converted/src/components/ui/checkbox.tsx",
+      "changed": true,
+      "metrics": {
+        "classes": {
+          "supported": 16,
+          "web-only": 22,
+          "unsupported": 3,
+          "unknown": 0
+        },
+        "constructs": {
+          "converted": 3,
+          "flagged": 0
+        }
+      },
+      "autoConvertedPercent": 93.2,
+      "diagnostics": [
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/checkbox.tsx",
+          "line": 24,
+          "column": 9,
+          "severity": "todo",
+          "code": "class/unsupported",
+          "construct": "after:absolute after:-inset-x-3 after:-inset-y-2",
+          "reason": "`::after` pseudo-elements do not exist on native, so this content is lost there.",
+          "suggestion": "Render the decoration as a real child element (e.g. an absolutely positioned `View`)."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/checkbox.tsx",
+          "line": 24,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "peer",
+          "reason": "`peer` markers drive sibling selectors, which native does not have."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/checkbox.tsx",
+          "line": 24,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "transition-shadow",
+          "reason": "CSS transitions are web-only.",
+          "suggestion": "Use Tamagui's `transition` prop with an animation driver for native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/checkbox.tsx",
+          "line": 24,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "group-has-disabled/field:opacity-50 group-has-[:focus-visible]/field-label:ring-0 group-has-[:focus-visible]/field-label:not-data-checked:border-input group-has-[:focus-visible]/field-label:data-checked:border-primary",
+          "reason": "`group-*` variants other than interaction states (hover, press, focus, focus-visible, focus-within, disabled) use selectors that native does not have."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/checkbox.tsx",
+          "line": 24,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "disabled:cursor-not-allowed",
+          "reason": "Cursors other than `auto`/`pointer` are dropped on native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/checkbox.tsx",
+          "line": 24,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 aria-invalid:aria-checked:border-primary dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40",
+          "reason": "`aria-*` attribute selectors are web-only, so this style does not apply on native.",
+          "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/checkbox.tsx",
+          "line": 24,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "data-checked:border-primary data-checked:bg-primary data-checked:text-primary-foreground dark:data-checked:bg-primary",
+          "reason": "`data-*` attribute selectors are web-only, so this style does not apply on native.",
+          "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/checkbox.tsx",
+          "line": 31,
+          "column": 19,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "grid",
+          "reason": "CSS grid is not available on native; grid classes are dropped there.",
+          "suggestion": "Use flex rows/columns (or `web:grid native:flex`) for layouts that must match on native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/checkbox.tsx",
+          "line": 31,
+          "column": 19,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "place-content-center",
+          "reason": "`place-*` is a grid shorthand; not available on native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/checkbox.tsx",
+          "line": 31,
+          "column": 19,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "text-current",
+          "reason": "`currentColor` and `inherit` are not resolved on native.",
+          "suggestion": "Use a theme color such as `foreground`."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/checkbox.tsx",
+          "line": 31,
+          "column": 19,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "transition-none",
+          "reason": "CSS transitions are web-only."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/checkbox.tsx",
+          "line": 31,
+          "column": 19,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "[&>svg]:size-3.5",
+          "reason": "Arbitrary selector variants are web-only, so this style does not apply on native."
+        }
+      ]
+    },
+    {
+      "file": "converted/src/components/ui/dialog.tsx",
+      "changed": true,
+      "metrics": {
+        "classes": {
+          "supported": 37,
+          "web-only": 20,
+          "unsupported": 0,
+          "unknown": 0
+        },
+        "constructs": {
+          "converted": 14,
+          "flagged": 0
+        }
+      },
+      "autoConvertedPercent": 100,
+      "diagnostics": [
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/dialog.tsx",
+          "line": 50,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "fixed",
+          "reason": "`position: fixed` is dropped on native.",
+          "suggestion": "Use `absolute` inside a full-screen container, or a Tamagui overlay/Portal."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/dialog.tsx",
+          "line": 50,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "duration-100",
+          "reason": "CSS transitions are web-only."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/dialog.tsx",
+          "line": 50,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "supports-backdrop-filter:backdrop-blur-xs",
+          "reason": "`@supports` queries are web-only."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/dialog.tsx",
+          "line": 50,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "data-open:animate-in data-open:fade-in-0 data-closed:animate-out data-closed:fade-out-0",
+          "reason": "`data-*` attribute selectors are web-only, so this style does not apply on native.",
+          "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/dialog.tsx",
+          "line": 75,
+          "column": 11,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "fixed",
+          "reason": "`position: fixed` is dropped on native.",
+          "suggestion": "Use `absolute` inside a full-screen container, or a Tamagui overlay/Portal."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/dialog.tsx",
+          "line": 75,
+          "column": 11,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "grid",
+          "reason": "CSS grid is not available on native; grid classes are dropped there.",
+          "suggestion": "Use flex rows/columns (or `web:grid native:flex`) for layouts that must match on native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/dialog.tsx",
+          "line": 75,
+          "column": 11,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "duration-100",
+          "reason": "CSS transitions are web-only."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/dialog.tsx",
+          "line": 75,
+          "column": 11,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
+          "reason": "`data-*` attribute selectors are web-only, so this style does not apply on native.",
+          "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/dialog.tsx",
+          "line": 89,
+          "column": 36,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "sr-only",
+          "reason": "`sr-only` relies on clipping CSS that native drops, so the element becomes visible.",
+          "suggestion": "Render the text only on web (e.g. `web:sr-only native:hidden`) or move it into `aria-label`."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/dialog.tsx",
+          "line": 159,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "*:[a]:underline *:[a]:underline-offset-3 *:[a]:hover:text-foreground",
+          "reason": "Child selectors (`*:`) are web-only."
+        }
+      ]
+    },
+    {
+      "file": "converted/src/components/ui/dropdown-menu.tsx",
+      "changed": true,
+      "metrics": {
+        "classes": {
+          "supported": 98,
+          "web-only": 67,
+          "unsupported": 0,
+          "unknown": 0
+        },
+        "constructs": {
+          "converted": 22,
+          "flagged": 0
+        }
+      },
+      "autoConvertedPercent": 100,
+      "diagnostics": [
+        {
+          "pass": "radix",
+          "file": "converted/src/components/ui/dropdown-menu.tsx",
+          "line": 4,
+          "column": 1,
+          "severity": "warning",
+          "code": "radix/caveat",
+          "construct": "Menu",
+          "reason": "Tamagui Menu highlights items with `focus:` (shadcn already uses it); Radix `data-highlighted` and `data-side` attributes are not set."
+        },
+        {
+          "pass": "radix",
+          "file": "converted/src/components/ui/dropdown-menu.tsx",
+          "line": 4,
+          "column": 1,
+          "severity": "warning",
+          "code": "radix/caveat",
+          "construct": "Menu",
+          "reason": "On native, Tamagui Menu renders a popover by default; platform-native menus need the Expo UI or Zeego adapter (see the Tamagui Menu docs)."
+        },
+        {
+          "pass": "radix",
+          "file": "converted/src/components/ui/dropdown-menu.tsx",
+          "line": 57,
+          "column": 7,
+          "severity": "warning",
+          "code": "radix/unsupported-prop",
+          "construct": "DropdownMenu.Content sideOffset",
+          "reason": "Removed `sideOffset`: Tamagui positions this content from the root (`placement`, `offset`, `allowFlip`, `stayInFrame` on the root component)."
+        },
+        {
+          "pass": "radix",
+          "file": "converted/src/components/ui/dropdown-menu.tsx",
+          "line": 57,
+          "column": 7,
+          "severity": "warning",
+          "code": "radix/unsupported-prop",
+          "construct": "DropdownMenu.Content align",
+          "reason": "Removed `align`: Tamagui positions this content from the root (`placement`, `offset`, `allowFlip`, `stayInFrame` on the root component)."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/dropdown-menu.tsx",
+          "line": 60,
+          "column": 11,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "max-h-(--radix-dropdown-menu-content-available-height) w-(--radix-dropdown-menu-trigger-width) origin-(--radix-dropdown-menu-content-transform-origin)",
+          "reason": "CSS variables and functions other than `calc()`/`clamp()` do not resolve on native.",
+          "suggestion": "Use a token or a plain value (px, %, rem) that native can resolve."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/dropdown-menu.tsx",
+          "line": 60,
+          "column": 11,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "overflow-x-hidden",
+          "reason": "`overflow-x` is not supported on native.",
+          "suggestion": "Use a horizontal ScrollView."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/dropdown-menu.tsx",
+          "line": 60,
+          "column": 11,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "overflow-y-auto",
+          "reason": "`overflow-y` is not supported on native.",
+          "suggestion": "Use a ScrollView."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/dropdown-menu.tsx",
+          "line": 60,
+          "column": 11,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "duration-100",
+          "reason": "CSS transitions are web-only."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/dropdown-menu.tsx",
+          "line": 60,
+          "column": 11,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-[state=closed]:overflow-hidden data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
+          "reason": "`data-*` attribute selectors are web-only, so this style does not apply on native.",
+          "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/dropdown-menu.tsx",
+          "line": 95,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "cursor-default",
+          "reason": "Cursors other than `auto`/`pointer` are dropped on native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/dropdown-menu.tsx",
+          "line": 95,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "not-data-[variant=destructive]:focus:**:text-accent-foreground",
+          "reason": "`:not()` selectors are web-only."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/dropdown-menu.tsx",
+          "line": 95,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "data-inset:pl-8 data-[variant=destructive]:text-destructive data-[variant=destructive]:focus:bg-destructive/10 data-[variant=destructive]:focus:text-destructive dark:data-[variant=destructive]:focus:bg-destructive/20 data-disabled:pointer-events-none data-disabled:opacity-50 data-[variant=destructive]:*:[svg]:text-destructive",
+          "reason": "`data-*` attribute selectors are web-only, so this style does not apply on native.",
+          "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/dropdown-menu.tsx",
+          "line": 95,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+          "reason": "Arbitrary selector variants are web-only, so this style does not apply on native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/dropdown-menu.tsx",
+          "line": 120,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "cursor-default",
+          "reason": "Cursors other than `auto`/`pointer` are dropped on native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/dropdown-menu.tsx",
+          "line": 120,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "focus:**:text-accent-foreground",
+          "reason": "Descendant selectors (`**:`) are web-only."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/dropdown-menu.tsx",
+          "line": 120,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "data-inset:pl-8 data-disabled:pointer-events-none data-disabled:opacity-50",
+          "reason": "`data-*` attribute selectors are web-only, so this style does not apply on native.",
+          "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/dropdown-menu.tsx",
+          "line": 120,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+          "reason": "Arbitrary selector variants are web-only, so this style does not apply on native."
+        },
+        {
+          "pass": "elements",
+          "file": "converted/src/components/ui/dropdown-menu.tsx",
+          "line": 126,
+          "column": 7,
+          "severity": "info",
+          "code": "element/view",
+          "construct": "<span>",
+          "reason": "Flex container converted to `View`; `flex-row` added because `View` is a column by default."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/dropdown-menu.tsx",
+          "line": 166,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "cursor-default",
+          "reason": "Cursors other than `auto`/`pointer` are dropped on native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/dropdown-menu.tsx",
+          "line": 166,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "focus:**:text-accent-foreground",
+          "reason": "Descendant selectors (`**:`) are web-only."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/dropdown-menu.tsx",
+          "line": 166,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "data-inset:pl-8 data-disabled:pointer-events-none data-disabled:opacity-50",
+          "reason": "`data-*` attribute selectors are web-only, so this style does not apply on native.",
+          "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/dropdown-menu.tsx",
+          "line": 166,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+          "reason": "Arbitrary selector variants are web-only, so this style does not apply on native."
+        },
+        {
+          "pass": "elements",
+          "file": "converted/src/components/ui/dropdown-menu.tsx",
+          "line": 171,
+          "column": 7,
+          "severity": "info",
+          "code": "element/view",
+          "construct": "<span>",
+          "reason": "Flex container converted to `View`; `flex-row` added because `View` is a column by default."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/dropdown-menu.tsx",
+          "line": 196,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "data-inset:pl-8",
+          "reason": "`data-*` attribute selectors are web-only, so this style does not apply on native.",
+          "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/dropdown-menu.tsx",
+          "line": 255,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "cursor-default",
+          "reason": "Cursors other than `auto`/`pointer` are dropped on native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/dropdown-menu.tsx",
+          "line": 255,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "not-data-[variant=destructive]:focus:**:text-accent-foreground",
+          "reason": "`:not()` selectors are web-only."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/dropdown-menu.tsx",
+          "line": 255,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "data-inset:pl-8 data-open:bg-accent data-open:text-accent-foreground",
+          "reason": "`data-*` attribute selectors are web-only, so this style does not apply on native.",
+          "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/dropdown-menu.tsx",
+          "line": 255,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+          "reason": "Arbitrary selector variants are web-only, so this style does not apply on native."
+        },
+        {
+          "pass": "icons",
+          "file": "converted/src/components/ui/dropdown-menu.tsx",
+          "line": 261,
+          "column": 7,
+          "severity": "info",
+          "code": "icon/wrapped",
+          "construct": "ml-auto",
+          "reason": "Tamagui icons take size and color as props, not classes; the other classes moved to a `View asChild` wrapper."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/dropdown-menu.tsx",
+          "line": 276,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "origin-(--radix-dropdown-menu-content-transform-origin)",
+          "reason": "CSS variables and functions other than `calc()`/`clamp()` do not resolve on native.",
+          "suggestion": "Use a token or a plain value (px, %, rem) that native can resolve."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/dropdown-menu.tsx",
+          "line": 276,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "duration-100",
+          "reason": "CSS transitions are web-only."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/dropdown-menu.tsx",
+          "line": 276,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
+          "reason": "`data-*` attribute selectors are web-only, so this style does not apply on native.",
+          "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+        }
+      ]
+    },
+    {
+      "file": "converted/src/components/ui/field.tsx",
+      "changed": true,
+      "metrics": {
+        "classes": {
+          "supported": 60,
+          "web-only": 47,
+          "unsupported": 0,
+          "unknown": 0
+        },
+        "constructs": {
+          "converted": 12,
+          "flagged": 1
+        }
+      },
+      "autoConvertedPercent": 99.2,
+      "diagnostics": [
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/field.tsx",
+          "line": 17,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "has-[>[data-slot=checkbox-group]]:gap-3 has-[>[data-slot=radio-group]]:gap-3",
+          "reason": "`:has()` selectors are web-only."
+        },
+        {
+          "pass": "elements",
+          "file": "converted/src/components/ui/field.tsx",
+          "line": 31,
+          "column": 5,
+          "severity": "todo",
+          "code": "element/unsupported",
+          "construct": "<legend>",
+          "reason": "`<legend>` has no `html.*` equivalent, so it renders on web only.",
+          "suggestion": "Replace it with a supported `html.*` element or a Tamagui component, or keep it web-only in a `.web.tsx` file."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/field.tsx",
+          "line": 36,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "data-[variant=label]:text-sm data-[variant=legend]:text-base",
+          "reason": "`data-*` attribute selectors are web-only, so this style does not apply on native.",
+          "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/field.tsx",
+          "line": 52,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "data-[slot=checkbox-group]:gap-3",
+          "reason": "`data-*` attribute selectors are web-only, so this style does not apply on native.",
+          "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/field.tsx",
+          "line": 52,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "*:data-[slot=field-group]:gap-4",
+          "reason": "Child selectors (`*:`) are web-only."
+        },
+        {
+          "pass": "cn-cva",
+          "file": "converted/src/components/ui/field.tsx",
+          "line": 60,
+          "column": 7,
+          "severity": "info",
+          "code": "cva/styled",
+          "construct": "fieldVariants = cva(...)",
+          "reason": "Converted to `FieldFrame = styled(html.div, ...)` with the same variants."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/field.tsx",
+          "line": 62,
+          "column": 3,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "data-[invalid=true]:text-destructive",
+          "reason": "`data-*` attribute selectors are web-only, so this style does not apply on native.",
+          "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/field.tsx",
+          "line": 66,
+          "column": 19,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "*:w-full",
+          "reason": "Child selectors (`*:`) are web-only."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/field.tsx",
+          "line": 66,
+          "column": 19,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "[&>.sr-only]:w-auto",
+          "reason": "Arbitrary selector variants are web-only, so this style does not apply on native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/field.tsx",
+          "line": 68,
+          "column": 11,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "has-[>[data-slot=field-content]]:items-start has-[>[data-slot=field-content]]:[&>[role=checkbox],[role=radio]]:mt-px",
+          "reason": "`:has()` selectors are web-only."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/field.tsx",
+          "line": 68,
+          "column": 11,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "*:data-[slot=field-label]:flex-auto",
+          "reason": "Child selectors (`*:`) are web-only."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/field.tsx",
+          "line": 70,
+          "column": 11,
+          "severity": "warning",
+          "code": "class/caveat",
+          "construct": "@md/field-group:flex-row @md/field-group:items-center",
+          "reason": "Tamagui resolves `@<size>:` container queries against the media query of that name (e.g. `@md` is 768px), while Tailwind's container sizes are smaller (`@md` is 28rem); check the breakpoint."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/field.tsx",
+          "line": 70,
+          "column": 11,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "*:w-full @md/field-group:*:w-auto @md/field-group:*:data-[slot=field-label]:flex-auto",
+          "reason": "Child selectors (`*:`) are web-only."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/field.tsx",
+          "line": 70,
+          "column": 11,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "@md/field-group:has-[>[data-slot=field-content]]:items-start @md/field-group:has-[>[data-slot=field-content]]:[&>[role=checkbox],[role=radio]]:mt-px",
+          "reason": "`:has()` selectors are web-only."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/field.tsx",
+          "line": 70,
+          "column": 11,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "[&>.sr-only]:w-auto",
+          "reason": "Arbitrary selector variants are web-only, so this style does not apply on native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/field.tsx",
+          "line": 121,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "peer/field-label",
+          "reason": "`peer` markers drive sibling selectors, which native does not have."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/field.tsx",
+          "line": 121,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "w-fit",
+          "reason": "`min-content`/`max-content`/`fit-content` sizing is dropped on native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/field.tsx",
+          "line": 121,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "group-data-[disabled=true]/field:opacity-50",
+          "reason": "`group-*` variants other than interaction states (hover, press, focus, focus-visible, focus-within, disabled) use selectors that native does not have."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/field.tsx",
+          "line": 121,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "has-data-checked:border-primary/30 has-data-checked:bg-primary/5 has-[>[data-slot=field]]:rounded-md has-[>[data-slot=field]]:border has-[>[data-slot=field]]:not-has-[:disabled,[data-disabled]]:hover:bg-muted/50 has-[>[data-slot=field]]:has-[:focus-visible]:border-ring has-[>[data-slot=field]]:has-[:focus-visible]:ring-3 has-[>[data-slot=field]]:has-[:focus-visible]:ring-ring/50 dark:has-data-checked:border-primary/20 dark:has-data-checked:bg-primary/10",
+          "reason": "`:has()` selectors are web-only."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/field.tsx",
+          "line": 121,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "*:data-[slot=field]:p-3",
+          "reason": "Child selectors (`*:`) are web-only."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/field.tsx",
+          "line": 122,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "has-[>[data-slot=field]]:w-full has-[>[data-slot=field]]:flex-col",
+          "reason": "`:has()` selectors are web-only."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/field.tsx",
+          "line": 138,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "w-fit",
+          "reason": "`min-content`/`max-content`/`fit-content` sizing is dropped on native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/field.tsx",
+          "line": 138,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "group-data-[disabled=true]/field:opacity-50",
+          "reason": "`group-*` variants other than interaction states (hover, press, focus, focus-visible, focus-within, disabled) use selectors that native does not have."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/field.tsx",
+          "line": 154,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "group-has-data-horizontal/field:text-balance",
+          "reason": "`group-*` variants other than interaction states (hover, press, focus, focus-visible, focus-within, disabled) use selectors that native does not have."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/field.tsx",
+          "line": 154,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "[[data-variant=legend]+&]:-mt-1.5",
+          "reason": "Arbitrary selector variants are web-only, so this style does not apply on native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/field.tsx",
+          "line": 155,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "last:mt-0",
+          "reason": "Structural pseudo-classes (`:last-child`) are web-only."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/field.tsx",
+          "line": 155,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "nth-last-2:-mt-1",
+          "reason": "Structural pseudo-classes are web-only."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/field.tsx",
+          "line": 156,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "[&>a]:underline [&>a]:underline-offset-4 [&>a:hover]:text-primary",
+          "reason": "Arbitrary selector variants are web-only, so this style does not apply on native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/field.tsx",
+          "line": 176,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "group-data-[variant=outline]/field-group:-mb-2",
+          "reason": "`group-*` variants other than interaction states (hover, press, focus, focus-visible, focus-within, disabled) use selectors that native does not have."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/field.tsx",
+          "line": 184,
+          "column": 21,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "block",
+          "reason": "React Native has no block layout; `display: block` is dropped on native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/field.tsx",
+          "line": 184,
+          "column": 21,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "w-fit",
+          "reason": "`min-content`/`max-content`/`fit-content` sizing is dropped on native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/field.tsx",
+          "line": 220,
+          "column": 26,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "list-disc",
+          "reason": "List markers are not rendered on native (or by `html.li`)."
+        }
+      ]
+    },
+    {
+      "file": "converted/src/components/ui/input.tsx",
+      "changed": true,
+      "metrics": {
+        "classes": {
+          "supported": 19,
+          "web-only": 15,
+          "unsupported": 0,
+          "unknown": 0
+        },
+        "constructs": {
+          "converted": 1,
+          "flagged": 0
+        }
+      },
+      "autoConvertedPercent": 100,
+      "diagnostics": [
+        {
+          "pass": "elements",
+          "file": "converted/src/components/ui/input.tsx",
+          "line": 11,
+          "column": 5,
+          "severity": "warning",
+          "code": "element/input-type",
+          "construct": "<input type={...}>",
+          "reason": "`html.input` renders a TextInput on native; only email, number, password, search, tel, text, url types work there."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/input.tsx",
+          "line": 15,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "transition-[color,box-shadow]",
+          "reason": "CSS transitions are web-only.",
+          "suggestion": "Use Tamagui's `transition` prop with an animation driver for native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/input.tsx",
+          "line": 15,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground",
+          "reason": "`file:` styles the file selector button, which native does not have."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/input.tsx",
+          "line": 15,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "placeholder:text-muted-foreground",
+          "reason": "The `placeholder:` variant styles `::placeholder`, which native does not have.",
+          "suggestion": "Use the `placeholder-<color>` utility, which maps to `placeholderTextColor` on native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/input.tsx",
+          "line": 15,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "disabled:cursor-not-allowed",
+          "reason": "Cursors other than `auto`/`pointer` are dropped on native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/input.tsx",
+          "line": 15,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40",
+          "reason": "`aria-*` attribute selectors are web-only, so this style does not apply on native.",
+          "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/input.tsx",
+          "line": 15,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/rewrite",
+          "construct": "placeholder-muted-foreground",
+          "reason": "Added `placeholder-*`, which maps to `placeholderTextColor` on native."
+        }
+      ]
+    },
+    {
+      "file": "converted/src/components/ui/label.tsx",
+      "changed": true,
+      "metrics": {
+        "classes": {
+          "supported": 7,
+          "web-only": 4,
+          "unsupported": 0,
+          "unknown": 0
+        },
+        "constructs": {
+          "converted": 1,
+          "flagged": 0
+        }
+      },
+      "autoConvertedPercent": 100,
+      "diagnostics": [
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/label.tsx",
+          "line": 20,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50",
+          "reason": "`group-*` variants other than interaction states (hover, press, focus, focus-visible, focus-within, disabled) use selectors that native does not have."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/label.tsx",
+          "line": 20,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "peer-disabled:cursor-not-allowed peer-disabled:opacity-50",
+          "reason": "`peer-*` variants use sibling selectors, which native does not have."
+        }
+      ]
+    },
+    {
+      "file": "converted/src/components/ui/popover.tsx",
+      "changed": true,
+      "metrics": {
+        "classes": {
+          "supported": 20,
+          "web-only": 12,
+          "unsupported": 0,
+          "unknown": 0
+        },
+        "constructs": {
+          "converted": 7,
+          "flagged": 0
+        }
+      },
+      "autoConvertedPercent": 100,
+      "diagnostics": [
+        {
+          "pass": "radix",
+          "file": "converted/src/components/ui/popover.tsx",
+          "line": 4,
+          "column": 1,
+          "severity": "warning",
+          "code": "radix/caveat",
+          "construct": "Popover",
+          "reason": "Tamagui Popover sets `data-placement` instead of Radix `data-side`/`data-align`, so `data-[side=...]:` classes no longer match."
+        },
+        {
+          "pass": "radix",
+          "file": "converted/src/components/ui/popover.tsx",
+          "line": 19,
+          "column": 44,
+          "severity": "warning",
+          "code": "radix/unsupported-prop",
+          "construct": "Popover.Content align",
+          "reason": "Removed `align`: Tamagui positions this content from the root (`placement`, `offset`, `allowFlip`, `stayInFrame` on the root component)."
+        },
+        {
+          "pass": "radix",
+          "file": "converted/src/components/ui/popover.tsx",
+          "line": 19,
+          "column": 44,
+          "severity": "warning",
+          "code": "radix/unsupported-prop",
+          "construct": "Popover.Content sideOffset",
+          "reason": "Removed `sideOffset`: Tamagui positions this content from the root (`placement`, `offset`, `allowFlip`, `stayInFrame` on the root component)."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/popover.tsx",
+          "line": 22,
+          "column": 17,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "origin-(--radix-popover-content-transform-origin)",
+          "reason": "CSS variables and functions other than `calc()`/`clamp()` do not resolve on native.",
+          "suggestion": "Use a token or a plain value (px, %, rem) that native can resolve."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/popover.tsx",
+          "line": 22,
+          "column": 17,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "duration-100",
+          "reason": "CSS transitions are web-only."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/popover.tsx",
+          "line": 22,
+          "column": 17,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
+          "reason": "`data-*` attribute selectors are web-only, so this style does not apply on native.",
+          "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+        },
+        {
+          "pass": "radix",
+          "file": "converted/src/components/ui/popover.tsx",
+          "line": 35,
+          "column": 9,
+          "severity": "warning",
+          "code": "radix/css-variable",
+          "construct": "--radix-popover-content-transform-origin",
+          "reason": "Tamagui `Popover` does not set `--radix-popover-content-transform-origin`, so classes using it fall back to their defaults."
+        }
+      ]
+    },
+    {
+      "file": "converted/src/components/ui/radio-group.tsx",
+      "changed": true,
+      "metrics": {
+        "classes": {
+          "supported": 29,
+          "web-only": 16,
+          "unsupported": 3,
+          "unknown": 0
+        },
+        "constructs": {
+          "converted": 4,
+          "flagged": 0
+        }
+      },
+      "autoConvertedPercent": 94.2,
+      "diagnostics": [
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/radio-group.tsx",
+          "line": 21,
+          "column": 21,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "grid",
+          "reason": "CSS grid is not available on native; grid classes are dropped there.",
+          "suggestion": "Use flex rows/columns (or `web:grid native:flex`) for layouts that must match on native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/radio-group.tsx",
+          "line": 36,
+          "column": 9,
+          "severity": "todo",
+          "code": "class/unsupported",
+          "construct": "after:absolute after:-inset-x-3 after:-inset-y-2",
+          "reason": "`::after` pseudo-elements do not exist on native, so this content is lost there.",
+          "suggestion": "Render the decoration as a real child element (e.g. an absolutely positioned `View`)."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/radio-group.tsx",
+          "line": 36,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "peer",
+          "reason": "`peer` markers drive sibling selectors, which native does not have."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/radio-group.tsx",
+          "line": 36,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "group-has-[:focus-visible]/field-label:ring-0 group-has-[:focus-visible]/field-label:not-data-checked:border-input group-has-[:focus-visible]/field-label:data-checked:border-primary",
+          "reason": "`group-*` variants other than interaction states (hover, press, focus, focus-visible, focus-within, disabled) use selectors that native does not have."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/radio-group.tsx",
+          "line": 36,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "disabled:cursor-not-allowed",
+          "reason": "Cursors other than `auto`/`pointer` are dropped on native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/radio-group.tsx",
+          "line": 36,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 aria-invalid:aria-checked:border-primary dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40",
+          "reason": "`aria-*` attribute selectors are web-only, so this style does not apply on native.",
+          "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/radio-group.tsx",
+          "line": 36,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "data-checked:border-primary data-checked:bg-primary data-checked:text-primary-foreground dark:data-checked:bg-primary",
+          "reason": "`data-*` attribute selectors are web-only, so this style does not apply on native.",
+          "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+        }
+      ]
+    },
+    {
+      "file": "converted/src/components/ui/select.tsx",
+      "changed": true,
+      "metrics": {
+        "classes": {
+          "supported": 77,
+          "web-only": 57,
+          "unsupported": 0,
+          "unknown": 0
+        },
+        "constructs": {
+          "converted": 18,
+          "flagged": 0
+        }
+      },
+      "autoConvertedPercent": 100,
+      "diagnostics": [
+        {
+          "pass": "radix",
+          "file": "converted/src/components/ui/select.tsx",
+          "line": 6,
+          "column": 1,
+          "severity": "warning",
+          "code": "radix/caveat",
+          "construct": "Select",
+          "reason": "On native, Tamagui Select renders its items inline unless an `Adapt` target (e.g. a Sheet) is active; add `<Select.Adapt>` for a native picker experience."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/select.tsx",
+          "line": 35,
+          "column": 21,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "scroll-my-1",
+          "reason": "Scroll snapping/margins are web-only."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/select.tsx",
+          "line": 60,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "w-fit",
+          "reason": "`min-content`/`max-content`/`fit-content` sizing is dropped on native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/select.tsx",
+          "line": 60,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "whitespace-nowrap",
+          "reason": "`white-space` is not supported on native.",
+          "suggestion": "Use `line-clamp-*` to limit lines on native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/select.tsx",
+          "line": 60,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "transition-[color,box-shadow]",
+          "reason": "CSS transitions are web-only.",
+          "suggestion": "Use Tamagui's `transition` prop with an animation driver for native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/select.tsx",
+          "line": 60,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "disabled:cursor-not-allowed",
+          "reason": "Cursors other than `auto`/`pointer` are dropped on native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/select.tsx",
+          "line": 60,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40",
+          "reason": "`aria-*` attribute selectors are web-only, so this style does not apply on native.",
+          "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/select.tsx",
+          "line": 60,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "data-placeholder:text-muted-foreground data-[size=default]:h-9 data-[size=sm]:h-8",
+          "reason": "`data-*` attribute selectors are web-only, so this style does not apply on native.",
+          "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/select.tsx",
+          "line": 60,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "*:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-1.5",
+          "reason": "Child selectors (`*:`) are web-only."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/select.tsx",
+          "line": 60,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+          "reason": "Arbitrary selector variants are web-only, so this style does not apply on native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/select.tsx",
+          "line": 60,
+          "column": 641,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "max-h-(--radix-select-content-available-height) origin-(--radix-select-content-transform-origin)",
+          "reason": "CSS variables and functions other than `calc()`/`clamp()` do not resolve on native.",
+          "suggestion": "Use a token or a plain value (px, %, rem) that native can resolve."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/select.tsx",
+          "line": 60,
+          "column": 641,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "overflow-x-hidden",
+          "reason": "`overflow-x` is not supported on native.",
+          "suggestion": "Use a horizontal ScrollView."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/select.tsx",
+          "line": 60,
+          "column": 641,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "overflow-y-auto",
+          "reason": "`overflow-y` is not supported on native.",
+          "suggestion": "Use a ScrollView."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/select.tsx",
+          "line": 60,
+          "column": 641,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "duration-100",
+          "reason": "CSS transitions are web-only."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/select.tsx",
+          "line": 60,
+          "column": 641,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "data-[align-trigger=true]:animate-none data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
+          "reason": "`data-*` attribute selectors are web-only, so this style does not apply on native.",
+          "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+        },
+        {
+          "pass": "icons",
+          "file": "converted/src/components/ui/select.tsx",
+          "line": 67,
+          "column": 9,
+          "severity": "info",
+          "code": "icon/wrapped",
+          "construct": "pointer-events-none",
+          "reason": "Tamagui icons take size and color as props, not classes; the other classes moved to a `View asChild` wrapper."
+        },
+        {
+          "pass": "radix",
+          "file": "converted/src/components/ui/select.tsx",
+          "line": 68,
+          "column": 29,
+          "severity": "warning",
+          "code": "radix/unsupported-prop",
+          "construct": "Select.Content position",
+          "reason": "Removed `position`: Tamagui Select always renders a floating list (or an adapted Sheet)."
+        },
+        {
+          "pass": "radix",
+          "file": "converted/src/components/ui/select.tsx",
+          "line": 68,
+          "column": 29,
+          "severity": "warning",
+          "code": "radix/unsupported-prop",
+          "construct": "Select.Content align",
+          "reason": "Removed `align`: Tamagui positions this content from the root (`placement`, `offset`, `allowFlip`, `stayInFrame` on the root component)."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/select.tsx",
+          "line": 82,
+          "column": 6,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1",
+          "reason": "`data-*` attribute selectors are web-only, so this style does not apply on native.",
+          "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+        },
+        {
+          "pass": "radix",
+          "file": "converted/src/components/ui/select.tsx",
+          "line": 94,
+          "column": 9,
+          "severity": "warning",
+          "code": "radix/css-variable",
+          "construct": "--radix-select-content-available-height",
+          "reason": "Tamagui `Select` does not set `--radix-select-content-available-height`, so classes using it fall back to their defaults."
+        },
+        {
+          "pass": "radix",
+          "file": "converted/src/components/ui/select.tsx",
+          "line": 94,
+          "column": 9,
+          "severity": "warning",
+          "code": "radix/css-variable",
+          "construct": "--radix-select-content-transform-origin",
+          "reason": "Tamagui `Select` does not set `--radix-select-content-transform-origin`, so classes using it fall back to their defaults."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/select.tsx",
+          "line": 94,
+          "column": 26,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "data-[position=popper]:h-(--radix-select-trigger-height) data-[position=popper]:w-full data-[position=popper]:min-w-(--radix-select-trigger-width)",
+          "reason": "`data-*` attribute selectors are web-only, so this style does not apply on native.",
+          "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+        },
+        {
+          "pass": "radix",
+          "file": "converted/src/components/ui/select.tsx",
+          "line": 105,
+          "column": 11,
+          "severity": "warning",
+          "code": "radix/css-variable",
+          "construct": "--radix-select-trigger-width",
+          "reason": "Tamagui `Select` does not set `--radix-select-trigger-width`, so classes using it fall back to their defaults."
+        },
+        {
+          "pass": "radix",
+          "file": "converted/src/components/ui/select.tsx",
+          "line": 105,
+          "column": 11,
+          "severity": "warning",
+          "code": "radix/css-variable",
+          "construct": "--radix-select-trigger-height",
+          "reason": "Tamagui `Select` does not set `--radix-select-trigger-height`, so classes using it fall back to their defaults."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/select.tsx",
+          "line": 138,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "cursor-default",
+          "reason": "Cursors other than `auto`/`pointer` are dropped on native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/select.tsx",
+          "line": 138,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "not-data-[variant=destructive]:focus:**:text-accent-foreground",
+          "reason": "`:not()` selectors are web-only."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/select.tsx",
+          "line": 138,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "data-disabled:pointer-events-none data-disabled:opacity-50",
+          "reason": "`data-*` attribute selectors are web-only, so this style does not apply on native.",
+          "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/select.tsx",
+          "line": 138,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+          "reason": "Arbitrary selector variants are web-only, so this style does not apply on native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/select.tsx",
+          "line": 138,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "*:[span]:last:flex *:[span]:last:items-center *:[span]:last:gap-2",
+          "reason": "Child selectors (`*:`) are web-only."
+        },
+        {
+          "pass": "elements",
+          "file": "converted/src/components/ui/select.tsx",
+          "line": 143,
+          "column": 7,
+          "severity": "info",
+          "code": "element/view",
+          "construct": "<span>",
+          "reason": "Flex container converted to `View`; `flex-row` added because `View` is a column by default."
+        },
+        {
+          "pass": "icons",
+          "file": "converted/src/components/ui/select.tsx",
+          "line": 144,
+          "column": 24,
+          "severity": "info",
+          "code": "icon/wrapped",
+          "construct": "pointer-events-none",
+          "reason": "Tamagui icons take size and color as props, not classes; the other classes moved to a `View asChild` wrapper."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/select.tsx",
+          "line": 176,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "cursor-default",
+          "reason": "Cursors other than `auto`/`pointer` are dropped on native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/select.tsx",
+          "line": 176,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "[&_svg:not([class*='size-'])]:size-4",
+          "reason": "Arbitrary selector variants are web-only, so this style does not apply on native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/select.tsx",
+          "line": 194,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "cursor-default",
+          "reason": "Cursors other than `auto`/`pointer` are dropped on native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/select.tsx",
+          "line": 194,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "[&_svg:not([class*='size-'])]:size-4",
+          "reason": "Arbitrary selector variants are web-only, so this style does not apply on native."
+        }
+      ]
+    },
+    {
+      "file": "converted/src/components/ui/separator.tsx",
+      "changed": true,
+      "metrics": {
+        "classes": {
+          "supported": 2,
+          "web-only": 4,
+          "unsupported": 0,
+          "unknown": 0
+        },
+        "constructs": {
+          "converted": 1,
+          "flagged": 0
+        }
+      },
+      "autoConvertedPercent": 100,
+      "diagnostics": [
+        {
+          "pass": "radix",
+          "file": "converted/src/components/ui/separator.tsx",
+          "line": 24,
+          "column": 5,
+          "severity": "warning",
+          "code": "radix/unsupported-prop",
+          "construct": "Separator.Root decorative",
+          "reason": "Removed `decorative`: Tamagui Separator has no `decorative` option (it always renders `role=\"separator\"`)."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/separator.tsx",
+          "line": 29,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "data-horizontal:h-px data-horizontal:w-full data-vertical:w-px data-vertical:self-stretch",
+          "reason": "`data-*` attribute selectors are web-only, so this style does not apply on native.",
+          "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+        }
+      ]
+    },
+    {
+      "file": "converted/src/components/ui/slider.tsx",
+      "changed": true,
+      "metrics": {
+        "classes": {
+          "supported": 27,
+          "web-only": 14,
+          "unsupported": 0,
+          "unknown": 0
+        },
+        "constructs": {
+          "converted": 4,
+          "flagged": 0
+        }
+      },
+      "autoConvertedPercent": 100,
+      "diagnostics": [
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/slider.tsx",
+          "line": 43,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "touch-none",
+          "reason": "`touch-action` is web-only."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/slider.tsx",
+          "line": 43,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "data-disabled:opacity-50 data-vertical:h-full data-vertical:min-h-40 data-vertical:w-auto data-vertical:flex-col",
+          "reason": "`data-*` attribute selectors are web-only, so this style does not apply on native.",
+          "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/slider.tsx",
+          "line": 50,
+          "column": 19,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "data-horizontal:h-1.5 data-horizontal:w-full data-vertical:h-full data-vertical:w-1.5",
+          "reason": "`data-*` attribute selectors are web-only, so this style does not apply on native.",
+          "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/slider.tsx",
+          "line": 54,
+          "column": 21,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "data-horizontal:h-full data-vertical:w-full",
+          "reason": "`data-*` attribute selectors are web-only, so this style does not apply on native.",
+          "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/slider.tsx",
+          "line": 61,
+          "column": 21,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "block",
+          "reason": "React Native has no block layout; `display: block` is dropped on native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/slider.tsx",
+          "line": 61,
+          "column": 21,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "transition-[color,box-shadow]",
+          "reason": "CSS transitions are web-only.",
+          "suggestion": "Use Tamagui's `transition` prop with an animation driver for native."
+        }
+      ]
+    },
+    {
+      "file": "converted/src/components/ui/switch.tsx",
+      "changed": true,
+      "metrics": {
+        "classes": {
+          "supported": 16,
+          "web-only": 29,
+          "unsupported": 3,
+          "unknown": 0
+        },
+        "constructs": {
+          "converted": 2,
+          "flagged": 0
+        }
+      },
+      "autoConvertedPercent": 94,
+      "diagnostics": [
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/switch.tsx",
+          "line": 28,
+          "column": 9,
+          "severity": "todo",
+          "code": "class/unsupported",
+          "construct": "after:absolute after:-inset-x-3 after:-inset-y-2",
+          "reason": "`::after` pseudo-elements do not exist on native, so this content is lost there.",
+          "suggestion": "Render the decoration as a real child element (e.g. an absolutely positioned `View`)."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/switch.tsx",
+          "line": 28,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "peer",
+          "reason": "`peer` markers drive sibling selectors, which native does not have."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/switch.tsx",
+          "line": 28,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "inline-flex",
+          "reason": "`display: inline-flex` is dropped on native, where elements are flex containers anyway."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/switch.tsx",
+          "line": 28,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "transition-all",
+          "reason": "CSS transitions are web-only.",
+          "suggestion": "Use Tamagui's `transition` prop with an animation driver for native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/switch.tsx",
+          "line": 28,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "group-has-[:focus-visible]/field-label:border-transparent group-has-[:focus-visible]/field-label:ring-0",
+          "reason": "`group-*` variants other than interaction states (hover, press, focus, focus-visible, focus-within, disabled) use selectors that native does not have."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/switch.tsx",
+          "line": 28,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40",
+          "reason": "`aria-*` attribute selectors are web-only, so this style does not apply on native.",
+          "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/switch.tsx",
+          "line": 28,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "data-[size=default]:h-[18.4px] data-[size=default]:w-[32px] data-[size=sm]:h-[14px] data-[size=sm]:w-[24px] data-checked:bg-primary data-unchecked:bg-input dark:data-unchecked:bg-input/80 data-disabled:cursor-not-allowed data-disabled:opacity-50",
+          "reason": "`data-*` attribute selectors are web-only, so this style does not apply on native.",
+          "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/switch.tsx",
+          "line": 28,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/rewrite",
+          "construct": "flex-row",
+          "reason": "Added `flex-row`: native drops `inline-flex` and would lay the children out as a column."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/switch.tsx",
+          "line": 35,
+          "column": 19,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "block",
+          "reason": "React Native has no block layout; `display: block` is dropped on native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/switch.tsx",
+          "line": 35,
+          "column": 19,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "transition-transform",
+          "reason": "CSS transitions are web-only.",
+          "suggestion": "Use Tamagui's `transition` prop with an animation driver for native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/switch.tsx",
+          "line": 35,
+          "column": 19,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "group-data-[size=default]/switch:size-4 group-data-[size=sm]/switch:size-3 group-data-[size=default]/switch:data-checked:translate-x-[calc(100%-2px)] group-data-[size=sm]/switch:data-checked:translate-x-[calc(100%-2px)] group-data-[size=default]/switch:data-unchecked:translate-x-0 group-data-[size=sm]/switch:data-unchecked:translate-x-0",
+          "reason": "`group-*` variants other than interaction states (hover, press, focus, focus-visible, focus-within, disabled) use selectors that native does not have."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/switch.tsx",
+          "line": 35,
+          "column": 19,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "dark:data-checked:bg-primary-foreground dark:data-unchecked:bg-foreground",
+          "reason": "`data-*` attribute selectors are web-only, so this style does not apply on native.",
+          "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+        }
+      ]
+    },
+    {
+      "file": "converted/src/components/ui/tabs.tsx",
+      "changed": true,
+      "metrics": {
+        "classes": {
+          "supported": 39,
+          "web-only": 28,
+          "unsupported": 11,
+          "unknown": 0
+        },
+        "constructs": {
+          "converted": 4,
+          "flagged": 0
+        }
+      },
+      "autoConvertedPercent": 86.6,
+      "diagnostics": [
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/tabs.tsx",
+          "line": 26,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "data-horizontal:flex-col",
+          "reason": "`data-*` attribute selectors are web-only, so this style does not apply on native.",
+          "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+        },
+        {
+          "pass": "cn-cva",
+          "file": "converted/src/components/ui/tabs.tsx",
+          "line": 34,
+          "column": 7,
+          "severity": "warning",
+          "code": "cva/kept",
+          "construct": "tabsListVariants = cva(...)",
+          "reason": "Kept as cva(): it is exported, so other modules may call it for class strings. Its classes still apply at runtime through className.",
+          "suggestion": "Convert it to `styled()` from `@tamagui/tailwind` by hand if it can be simplified."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/tabs.tsx",
+          "line": 35,
+          "column": 3,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "inline-flex",
+          "reason": "`display: inline-flex` is dropped on native, where elements are flex containers anyway."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/tabs.tsx",
+          "line": 35,
+          "column": 3,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "w-fit",
+          "reason": "`min-content`/`max-content`/`fit-content` sizing is dropped on native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/tabs.tsx",
+          "line": 35,
+          "column": 3,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "group-data-horizontal/tabs:h-9 group-data-vertical/tabs:h-fit group-data-vertical/tabs:flex-col",
+          "reason": "`group-*` variants other than interaction states (hover, press, focus, focus-visible, focus-within, disabled) use selectors that native does not have."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/tabs.tsx",
+          "line": 35,
+          "column": 3,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "data-[variant=line]:rounded-none",
+          "reason": "`data-*` attribute selectors are web-only, so this style does not apply on native.",
+          "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/tabs.tsx",
+          "line": 35,
+          "column": 3,
+          "severity": "info",
+          "code": "selector/rewrite",
+          "construct": "flex-row",
+          "reason": "Added `flex-row`: native drops `inline-flex` and would lay the children out as a column."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/tabs.tsx",
+          "line": 74,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "inline-flex",
+          "reason": "`display: inline-flex` is dropped on native, where elements are flex containers anyway."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/tabs.tsx",
+          "line": 74,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "whitespace-nowrap",
+          "reason": "`white-space` is not supported on native.",
+          "suggestion": "Use `line-clamp-*` to limit lines on native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/tabs.tsx",
+          "line": 74,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "transition-all",
+          "reason": "CSS transitions are web-only.",
+          "suggestion": "Use Tamagui's `transition` prop with an animation driver for native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/tabs.tsx",
+          "line": 74,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "group-data-vertical/tabs:w-full group-data-vertical/tabs:justify-start group-data-[variant=default]/tabs-list:data-active:shadow-sm group-data-[variant=line]/tabs-list:data-active:shadow-none",
+          "reason": "`group-*` variants other than interaction states (hover, press, focus, focus-visible, focus-within, disabled) use selectors that native does not have."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/tabs.tsx",
+          "line": 74,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5",
+          "reason": "`:has()` selectors are web-only."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/tabs.tsx",
+          "line": 74,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+          "reason": "Arbitrary selector variants are web-only, so this style does not apply on native."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/tabs.tsx",
+          "line": 74,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/rewrite",
+          "construct": "flex-row",
+          "reason": "Added `flex-row`: native drops `inline-flex` and would lay the children out as a column."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/tabs.tsx",
+          "line": 75,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "group-data-[variant=line]/tabs-list:bg-transparent group-data-[variant=line]/tabs-list:data-active:bg-transparent dark:group-data-[variant=line]/tabs-list:data-active:border-transparent dark:group-data-[variant=line]/tabs-list:data-active:bg-transparent",
+          "reason": "`group-*` variants other than interaction states (hover, press, focus, focus-visible, focus-within, disabled) use selectors that native does not have."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/tabs.tsx",
+          "line": 76,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "data-active:bg-background data-active:text-foreground dark:data-active:border-input dark:data-active:bg-input/30 dark:data-active:text-foreground",
+          "reason": "`data-*` attribute selectors are web-only, so this style does not apply on native.",
+          "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/tabs.tsx",
+          "line": 77,
+          "column": 9,
+          "severity": "todo",
+          "code": "class/unsupported",
+          "construct": "after:absolute after:bg-foreground after:opacity-0 after:transition-opacity group-data-horizontal/tabs:after:inset-x-0 group-data-horizontal/tabs:after:bottom-[-5px] group-data-horizontal/tabs:after:h-0.5 group-data-vertical/tabs:after:inset-y-0 group-data-vertical/tabs:after:-right-1 group-data-vertical/tabs:after:w-0.5 group-data-[variant=line]/tabs-list:data-active:after:opacity-100",
+          "reason": "`::after` pseudo-elements do not exist on native, so this content is lost there.",
+          "suggestion": "Render the decoration as a real child element (e.g. an absolutely positioned `View`)."
+        }
+      ]
+    },
+    {
+      "file": "converted/src/components/ui/textarea.tsx",
+      "changed": true,
+      "metrics": {
+        "classes": {
+          "supported": 18,
+          "web-only": 9,
+          "unsupported": 0,
+          "unknown": 0
+        },
+        "constructs": {
+          "converted": 1,
+          "flagged": 0
+        }
+      },
+      "autoConvertedPercent": 100,
+      "diagnostics": [
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/textarea.tsx",
+          "line": 13,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "field-sizing-content",
+          "reason": "`field-sizing` is web-only."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/textarea.tsx",
+          "line": 13,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "transition-[color,box-shadow]",
+          "reason": "CSS transitions are web-only.",
+          "suggestion": "Use Tamagui's `transition` prop with an animation driver for native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/textarea.tsx",
+          "line": 13,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "placeholder:text-muted-foreground",
+          "reason": "The `placeholder:` variant styles `::placeholder`, which native does not have.",
+          "suggestion": "Use the `placeholder-<color>` utility, which maps to `placeholderTextColor` on native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/textarea.tsx",
+          "line": 13,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "disabled:cursor-not-allowed",
+          "reason": "Cursors other than `auto`/`pointer` are dropped on native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/textarea.tsx",
+          "line": 13,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40",
+          "reason": "`aria-*` attribute selectors are web-only, so this style does not apply on native.",
+          "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/textarea.tsx",
+          "line": 13,
+          "column": 9,
+          "severity": "info",
+          "code": "selector/rewrite",
+          "construct": "placeholder-muted-foreground",
+          "reason": "Added `placeholder-*`, which maps to `placeholderTextColor` on native."
+        }
+      ]
+    },
+    {
+      "file": "converted/src/components/ui/toggle-group.tsx",
+      "changed": true,
+      "metrics": {
+        "classes": {
+          "supported": 8,
+          "web-only": 19,
+          "unsupported": 0,
+          "unknown": 0
+        },
+        "constructs": {
+          "converted": 2,
+          "flagged": 0
+        }
+      },
+      "autoConvertedPercent": 100,
+      "diagnostics": [
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/toggle-group.tsx",
+          "line": 54,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "w-fit",
+          "reason": "`min-content`/`max-content`/`fit-content` sizing is dropped on native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/toggle-group.tsx",
+          "line": 54,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "gap-[--spacing(var(--gap))]",
+          "reason": "CSS variables and functions other than `calc()`/`clamp()` do not resolve on native.",
+          "suggestion": "Use a token or a plain value (px, %, rem) that native can resolve."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/toggle-group.tsx",
+          "line": 54,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "data-[spacing=0]:data-[variant=outline]:shadow-xs data-vertical:flex-col data-vertical:items-stretch",
+          "reason": "`data-*` attribute selectors are web-only, so this style does not apply on native.",
+          "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/toggle-group.tsx",
+          "line": 85,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "group-data-[spacing=0]/toggle-group:rounded-none group-data-[spacing=0]/toggle-group:px-2 group-data-[spacing=0]/toggle-group:shadow-none group-data-[spacing=0]/toggle-group:has-data-[icon=inline-end]:pr-1.5 group-data-[spacing=0]/toggle-group:has-data-[icon=inline-start]:pl-1.5 group-data-horizontal/toggle-group:data-[spacing=0]:first:rounded-l-md group-data-vertical/toggle-group:data-[spacing=0]:first:rounded-t-md group-data-horizontal/toggle-group:data-[spacing=0]:last:rounded-r-md group-data-vertical/toggle-group:data-[spacing=0]:last:rounded-b-md group-data-horizontal/toggle-group:data-[spacing=0]:data-[variant=outline]:border-l-0 group-data-vertical/toggle-group:data-[spacing=0]:data-[variant=outline]:border-t-0 group-data-horizontal/toggle-group:data-[spacing=0]:data-[variant=outline]:first:border-l group-data-vertical/toggle-group:data-[spacing=0]:data-[variant=outline]:first:border-t",
+          "reason": "`group-*` variants other than interaction states (hover, press, focus, focus-visible, focus-within, disabled) use selectors that native does not have."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/toggle-group.tsx",
+          "line": 85,
+          "column": 9,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "data-[state=on]:bg-muted",
+          "reason": "`data-*` attribute selectors are web-only, so this style does not apply on native.",
+          "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+        }
+      ]
+    },
+    {
+      "file": "converted/src/components/ui/toggle.tsx",
+      "changed": true,
+      "metrics": {
+        "classes": {
+          "supported": 30,
+          "web-only": 16,
+          "unsupported": 0,
+          "unknown": 0
+        },
+        "constructs": {
+          "converted": 0,
+          "flagged": 1
+        }
+      },
+      "autoConvertedPercent": 97.9,
+      "diagnostics": [
+        {
+          "pass": "radix",
+          "file": "converted/src/components/ui/toggle.tsx",
+          "line": 7,
+          "column": 1,
+          "severity": "todo",
+          "code": "radix/unmapped",
+          "construct": "Toggle (TogglePrimitive)",
+          "reason": "There is no Tamagui mapping for Radix `Toggle` yet, so it stays on Radix, which is web-only.",
+          "suggestion": "Rebuild it from Tamagui primitives, or keep this component web-only in a `.web.tsx` file."
+        },
+        {
+          "pass": "cn-cva",
+          "file": "converted/src/components/ui/toggle.tsx",
+          "line": 9,
+          "column": 7,
+          "severity": "warning",
+          "code": "cva/kept",
+          "construct": "toggleVariants = cva(...)",
+          "reason": "Kept as cva(): it is exported, so other modules may call it for class strings. Its classes still apply at runtime through className.",
+          "suggestion": "Convert it to `styled()` from `@tamagui/tailwind` by hand if it can be simplified."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/toggle.tsx",
+          "line": 10,
+          "column": 3,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "inline-flex",
+          "reason": "`display: inline-flex` is dropped on native, where elements are flex containers anyway."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/toggle.tsx",
+          "line": 10,
+          "column": 3,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "whitespace-nowrap",
+          "reason": "`white-space` is not supported on native.",
+          "suggestion": "Use `line-clamp-*` to limit lines on native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/toggle.tsx",
+          "line": 10,
+          "column": 3,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "transition-[color,box-shadow]",
+          "reason": "CSS transitions are web-only.",
+          "suggestion": "Use Tamagui's `transition` prop with an animation driver for native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/toggle.tsx",
+          "line": 10,
+          "column": 3,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "aria-invalid:border-destructive aria-invalid:ring-destructive/20 aria-pressed:bg-muted dark:aria-invalid:ring-destructive/40",
+          "reason": "`aria-*` attribute selectors are web-only, so this style does not apply on native.",
+          "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/toggle.tsx",
+          "line": 10,
+          "column": 3,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+          "reason": "Arbitrary selector variants are web-only, so this style does not apply on native."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/toggle.tsx",
+          "line": 10,
+          "column": 3,
+          "severity": "info",
+          "code": "selector/rewrite",
+          "construct": "flex-row",
+          "reason": "Added `flex-row`: native drops `inline-flex` and would lay the children out as a column."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/toggle.tsx",
+          "line": 19,
+          "column": 11,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
+          "reason": "`:has()` selectors are web-only."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/toggle.tsx",
+          "line": 20,
+          "column": 13,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5",
+          "reason": "`:has()` selectors are web-only."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/toggle.tsx",
+          "line": 21,
+          "column": 13,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
+          "reason": "`:has()` selectors are web-only."
+        }
+      ]
+    },
+    {
+      "file": "converted/src/components/ui/tooltip.tsx",
+      "changed": true,
+      "metrics": {
+        "classes": {
+          "supported": 17,
+          "web-only": 21,
+          "unsupported": 0,
+          "unknown": 0
+        },
+        "constructs": {
+          "converted": 5,
+          "flagged": 0
+        }
+      },
+      "autoConvertedPercent": 100,
+      "diagnostics": [
+        {
+          "pass": "radix",
+          "file": "converted/src/components/ui/tooltip.tsx",
+          "line": 5,
+          "column": 1,
+          "severity": "warning",
+          "code": "radix/caveat",
+          "construct": "Tooltip",
+          "reason": "Tamagui Tooltip does not render on native; there it only provides accessibility output."
+        },
+        {
+          "pass": "radix",
+          "file": "converted/src/components/ui/tooltip.tsx",
+          "line": 5,
+          "column": 1,
+          "severity": "warning",
+          "code": "radix/caveat",
+          "construct": "Tooltip",
+          "reason": "Tamagui Tooltip sets `data-placement` instead of Radix `data-side`, so `data-[side=...]:` classes no longer match."
+        },
+        {
+          "pass": "radix",
+          "file": "converted/src/components/ui/tooltip.tsx",
+          "line": 34,
+          "column": 10,
+          "severity": "warning",
+          "code": "radix/unsupported-prop",
+          "construct": "Tooltip.Content sideOffset",
+          "reason": "Removed `sideOffset`: Tamagui positions this content from the root (`placement`, `offset`, `allowFlip`, `stayInFrame` on the root component)."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/tooltip.tsx",
+          "line": 36,
+          "column": 13,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "inline-flex",
+          "reason": "`display: inline-flex` is dropped on native, where elements are flex containers anyway."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/tooltip.tsx",
+          "line": 36,
+          "column": 13,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "w-fit",
+          "reason": "`min-content`/`max-content`/`fit-content` sizing is dropped on native."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/tooltip.tsx",
+          "line": 36,
+          "column": 13,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "origin-(--radix-tooltip-content-transform-origin)",
+          "reason": "CSS variables and functions other than `calc()`/`clamp()` do not resolve on native.",
+          "suggestion": "Use a token or a plain value (px, %, rem) that native can resolve."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/tooltip.tsx",
+          "line": 36,
+          "column": 13,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "has-data-[slot=kbd]:pr-1.5",
+          "reason": "`:has()` selectors are web-only."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/tooltip.tsx",
+          "line": 36,
+          "column": 13,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-[state=delayed-open]:animate-in data-[state=delayed-open]:fade-in-0 data-[state=delayed-open]:zoom-in-95 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
+          "reason": "`data-*` attribute selectors are web-only, so this style does not apply on native.",
+          "suggestion": "Drive the style from a prop or state instead (e.g. a styled() variant)."
+        },
+        {
+          "pass": "classes",
+          "file": "converted/src/components/ui/tooltip.tsx",
+          "line": 36,
+          "column": 13,
+          "severity": "warning",
+          "code": "class/web-only",
+          "construct": "**:data-[slot=kbd]:relative **:data-[slot=kbd]:isolate **:data-[slot=kbd]:z-50 **:data-[slot=kbd]:rounded-sm",
+          "reason": "Descendant selectors (`**:`) are web-only."
+        },
+        {
+          "pass": "selectors",
+          "file": "converted/src/components/ui/tooltip.tsx",
+          "line": 36,
+          "column": 13,
+          "severity": "info",
+          "code": "selector/rewrite",
+          "construct": "flex-row",
+          "reason": "Added `flex-row`: native drops `inline-flex` and would lay the children out as a column."
+        },
+        {
+          "pass": "radix",
+          "file": "converted/src/components/ui/tooltip.tsx",
+          "line": 52,
+          "column": 9,
+          "severity": "warning",
+          "code": "radix/css-variable",
+          "construct": "--radix-tooltip-content-transform-origin",
+          "reason": "Tamagui `Tooltip` does not set `--radix-tooltip-content-transform-origin`, so classes using it fall back to their defaults."
+        }
+      ]
+    }
+  ]
+}
