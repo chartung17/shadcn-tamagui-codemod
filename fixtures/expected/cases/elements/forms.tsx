@@ -16,19 +16,22 @@ export function SignupForm({
         <html.input
           id="email"
           type="email"
-          className="h-9 rounded-md border px-3"
+          className="h-9 rounded-md border border-border px-3"
         />
-        <html.input type={type} className="h-9 rounded-md border px-3" />
+        <html.input
+          type={type}
+          className="h-9 rounded-md border border-border px-3"
+        />
         <html.input
           // TODO(native): `<input type="checkbox">`: `html.input` supports only text-like types on native; `type="checkbox"` is a native build error.
           id="terms"
           type="checkbox"
           className="size-4"
         />
-        <html.textarea className="min-h-16 rounded-md border px-3 py-2" />
+        <html.textarea className="min-h-16 rounded-md border border-border px-3 py-2" />
         <html.select
           // TODO(native): `<select>`: `html.select` fails native builds because React Native has no menu-based select control.
-          className="h-9 rounded-md border"
+          className="h-9 rounded-md border border-border"
         >
           <html.option value="a">A</html.option>
           <html.optgroup label="More">

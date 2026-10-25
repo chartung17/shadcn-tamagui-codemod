@@ -8,7 +8,7 @@
 | Native class coverage | 94.6% |
 | TODOs | 1 |
 | Warnings | 3 |
-| Notes | 1 |
+| Notes | 2 |
 | Classes (supported / web-only / unknown / unsupported) | 35 / 2 / 0 / 0 |
 | Constructs (converted / flagged) | 18 / 1 |
 
@@ -23,6 +23,7 @@
 | `class/web-only` | warning | 2 |
 | `element/native-caveat` | warning | 1 |
 | `element/view` | info | 1 |
+| `selector/rewrite` | info | 1 |
 
 ## cases/elements/layout.tsx
 
@@ -30,6 +31,7 @@ Auto-converted 98.2% · 1 TODO(s) · 3 warning(s)
 
 | Line | Severity | Code | Construct | Reason | Suggested fix |
 | ---: | --- | --- | --- | --- | --- |
+| 7 | info | `selector/rewrite` | `border-border` | Added `border-border`: shadcn gives every border that color in its base CSS, and native defaults to black. |  |
 | 10 | warning | `element/native-caveat` | `<a>` | Native caveat: native has no navigation for href, target, rel, download or referrerPolicy. |  |
 | 15 | warning | `class/web-only` | `space-y-4` | `space-*` uses child selectors, which native does not have. | Use `gap-y-*` on a flex container instead. |
 | 16 | info | `element/view` | `<div>` | Flex container converted to `View`. |  |

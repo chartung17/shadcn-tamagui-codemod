@@ -8,7 +8,7 @@
 | Native class coverage | 66.7% |
 | TODOs | 0 |
 | Warnings | 5 |
-| Notes | 1 |
+| Notes | 3 |
 | Classes (supported / web-only / unknown / unsupported) | 18 / 9 / 0 / 0 |
 | Constructs (converted / flagged) | 1 / 0 |
 
@@ -21,6 +21,8 @@
 | --- | --- | ---: |
 | `class/web-only` | warning | 5 |
 | `selector/rewrite` | info | 1 |
+| `selector/web-color` | info | 1 |
+| `selector/web-state` | info | 1 |
 
 ## shadcn/ui/textarea.tsx
 
@@ -34,3 +36,5 @@ Auto-converted 100% · 0 TODO(s) · 5 warning(s)
 | 13 | warning | `class/web-only` | `disabled:cursor-not-allowed` | Cursors other than `auto`/`pointer` are dropped on native. |  |
 | 13 | warning | `class/web-only` | `aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40` | `aria-*` attribute selectors are web-only, so this style does not apply on native. | Drive the style from a prop or state instead (e.g. a styled() variant). |
 | 13 | info | `selector/rewrite` | `placeholder-muted-foreground` | Added `placeholder-*`, which maps to `placeholderTextColor` on native. |  |
+| 13 | info | `selector/web-color` | `placeholder:text-muted-foreground focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40` | Theme colors in classes Tamagui leaves to Tailwind on web now read Tamagui's theme variables (`bg-(--primary)`): Tailwind compiles them with its default theme, which has no shadcn colors. |  |
+| 13 | info | `selector/web-state` | `aria-invalid:ring-3` | Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web. |  |

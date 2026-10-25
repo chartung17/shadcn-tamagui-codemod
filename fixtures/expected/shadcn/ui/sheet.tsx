@@ -6,12 +6,51 @@ import { Button } from "@/components/ui/button"
 import { html, styled } from "@tamagui/tailwind"
 import { Dialog as SheetPrimitive } from "tamagui/unstyled"
 import { XIcon } from "@/components/icons"
+import { isWeb } from "tamagui"
 
 // Lets Tailwind classes (className) style a Tamagui UI primitive on web and native.
 const tw = <C extends React.ComponentType<any>>(component: C) =>
   styled(component as never) as unknown as React.ComponentType<
     React.ComponentProps<C> & { className?: string }
   >
+// Native views cannot render raw text: wraps string children in html.span,
+// with the part's text classes applied to it on native.
+const twText = <C extends React.ComponentType<any>>(component: C) => {
+  const Styled = tw(component) as React.ComponentType<any>
+  return ({
+    className,
+    children,
+    ...props
+  }: React.ComponentProps<C> & {
+    className?: string
+    children?: React.ReactNode
+  }) => {
+    const textClasses = className
+      ?.split(/\s+/)
+      .filter((c: string) =>
+        /^(?:text|font|leading|tracking)-|^(?:italic|underline|line-through|uppercase|lowercase|capitalize)$/.test(
+          c
+        )
+      )
+      .map((c: string) => `native:${c}`)
+      .join(" ")
+    const wrap = (child: React.ReactNode) =>
+      typeof child === "string" || typeof child === "number" ? (
+        <html.span className={textClasses}>{child}</html.span>
+      ) : (
+        child
+      )
+    return (
+      <Styled className={className} {...props}>
+        {Array.isArray(children)
+          ? React.Children.map(children, wrap)
+          : wrap(children)}
+      </Styled>
+    )
+  }
+}
+const StyledSheetTrigger = twText(SheetPrimitive.Trigger)
+const StyledSheetClose = twText(SheetPrimitive.Close)
 const StyledSheetOverlay = tw(SheetPrimitive.Overlay)
 const StyledSheetContent = tw(SheetPrimitive.Content)
 const StyledSheetTitle = tw(SheetPrimitive.Title)
@@ -24,13 +63,13 @@ function Sheet({ ...props }: React.ComponentProps<typeof SheetPrimitive>) {
 function SheetTrigger({
   ...props
 }: React.ComponentProps<typeof SheetPrimitive.Trigger>) {
-  return <SheetPrimitive.Trigger data-slot="sheet-trigger" {...props} />
+  return <StyledSheetTrigger data-slot="sheet-trigger" {...props} />
 }
 
 function SheetClose({
   ...props
 }: React.ComponentProps<typeof SheetPrimitive.Close>) {
-  return <SheetPrimitive.Close data-slot="sheet-close" {...props} />
+  return <StyledSheetClose data-slot="sheet-close" {...props} />
 }
 
 function SheetPortal({
@@ -47,7 +86,7 @@ function SheetOverlay({
     <StyledSheetOverlay
       data-slot="sheet-overlay"
       className={cn(
-        "fixed inset-0 z-50 bg-black/10 duration-100 supports-backdrop-filter:backdrop-blur-xs data-open:animate-in data-open:fade-in-0 data-closed:animate-out data-closed:fade-out-0",
+        "fixed inset-0 z-50 bg-black/10 duration-100 supports-backdrop-filter:backdrop-blur-xs! data-[state=open]:animate-in! data-[state=open]:fade-in-0! data-[state=closed]:animate-out! data-[state=closed]:fade-out-0!",
         className
       )}
       {...props}
@@ -75,23 +114,23 @@ function SheetContent({
         data-slot="sheet-content"
         data-side={side}
         className={cn(
-          "fixed z-50 flex flex-col gap-4 bg-popover bg-clip-padding text-sm text-popover-foreground shadow-lg transition duration-200 ease-in-out data-[side=bottom]:inset-x-0 data-[side=bottom]:bottom-0 data-[side=bottom]:h-auto data-[side=bottom]:border-t data-[side=left]:inset-y-0 data-[side=left]:left-0 data-[side=left]:h-full data-[side=left]:w-3/4 data-[side=left]:border-r data-[side=right]:inset-y-0 data-[side=right]:right-0 data-[side=right]:h-full data-[side=right]:w-3/4 data-[side=right]:border-l data-[side=top]:inset-x-0 data-[side=top]:top-0 data-[side=top]:h-auto data-[side=top]:border-b data-[side=left]:sm:max-w-sm data-[side=right]:sm:max-w-sm data-open:animate-in data-open:fade-in-0 data-[side=bottom]:data-open:slide-in-from-bottom-10 data-[side=left]:data-open:slide-in-from-left-10 data-[side=right]:data-open:slide-in-from-right-10 data-[side=top]:data-open:slide-in-from-top-10 data-closed:animate-out data-closed:fade-out-0 data-[side=bottom]:data-closed:slide-out-to-bottom-10 data-[side=left]:data-closed:slide-out-to-left-10 data-[side=right]:data-closed:slide-out-to-right-10 data-[side=top]:data-closed:slide-out-to-top-10",
+          "fixed z-50 flex flex-col gap-4 bg-popover bg-clip-padding text-sm text-popover-foreground shadow-lg transition duration-200 ease-in-out data-[side=bottom]:inset-x-0! data-[side=bottom]:bottom-0! data-[side=bottom]:h-auto! data-[side=bottom]:border-t! border-border data-[side=left]:inset-y-0! data-[side=left]:left-0! data-[side=left]:h-full! data-[side=left]:w-3/4! data-[side=left]:border-r! data-[side=right]:inset-y-0! data-[side=right]:right-0! data-[side=right]:h-full! data-[side=right]:w-3/4! data-[side=right]:border-l! data-[side=top]:inset-x-0! data-[side=top]:top-0! data-[side=top]:h-auto! data-[side=top]:border-b! data-[side=left]:sm:max-w-sm! data-[side=right]:sm:max-w-sm! data-[state=open]:animate-in! data-[state=open]:fade-in-0! data-[side=bottom]:data-[state=open]:slide-in-from-bottom-10! data-[side=left]:data-[state=open]:slide-in-from-left-10! data-[side=right]:data-[state=open]:slide-in-from-right-10! data-[side=top]:data-[state=open]:slide-in-from-top-10! data-[state=closed]:animate-out! data-[state=closed]:fade-out-0! data-[side=bottom]:data-[state=closed]:slide-out-to-bottom-10! data-[side=left]:data-[state=closed]:slide-out-to-left-10! data-[side=right]:data-[state=closed]:slide-out-to-right-10! data-[side=top]:data-[state=closed]:slide-out-to-top-10!",
           className
         )}
         {...props}
       >
         {children}
         {showCloseButton && (
-          <SheetPrimitive.Close data-slot="sheet-close" asChild>
+          <StyledSheetClose data-slot="sheet-close" asChild>
             <Button
               variant="ghost"
               className="absolute top-4 right-4"
               size="icon-sm"
             >
-              <XIcon />
+              <XIcon stroke={isWeb ? "currentColor" : undefined} />
               <html.span className="sr-only">Close</html.span>
             </Button>
-          </SheetPrimitive.Close>
+          </StyledSheetClose>
         )}
       </StyledSheetContent>
     </SheetPortal>
@@ -131,7 +170,10 @@ function SheetTitle({
   return (
     <StyledSheetTitle
       data-slot="sheet-title"
-      className={cn("font-heading font-medium text-foreground", className)}
+      className={cn(
+        "text-sm font-heading font-medium text-foreground",
+        className
+      )}
       {...props}
     />
   )

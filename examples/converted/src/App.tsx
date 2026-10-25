@@ -83,6 +83,7 @@ import {
   ItalicIcon,
   UnderlineIcon,
 } from "@/components/icons"
+import { isWeb } from "tamagui"
 
 function Section({
   title,
@@ -118,11 +119,12 @@ export function App() {
             <Button size="sm">Small</Button>
             <Button size="lg">Large</Button>
             <Button size="icon" aria-label="Add">
-              <PlusIcon />
+              <PlusIcon stroke={isWeb ? "currentColor" : undefined} />
             </Button>
             <Button disabled>Disabled</Button>
             <Button variant="outline">
-              <MailIcon /> Login with Email
+              <MailIcon stroke={isWeb ? "currentColor" : undefined} /> Login
+              with Email
             </Button>
           </View>
         </Section>
@@ -148,7 +150,7 @@ export function App() {
               <Label htmlFor="project-name">Name</Label>
               <Input id="project-name" placeholder="Name of your project" />
             </CardContent>
-            <CardFooter className="flex justify-between">
+            <CardFooter className="flex flex-row justify-between">
               <Button variant="outline">Cancel</Button>
               <Button>Deploy</Button>
             </CardFooter>
@@ -243,13 +245,13 @@ export function App() {
               defaultValue={["bold"]}
             >
               <ToggleGroupItem value="bold" aria-label="Toggle bold">
-                <BoldIcon />
+                <BoldIcon stroke={isWeb ? "currentColor" : undefined} />
               </ToggleGroupItem>
               <ToggleGroupItem value="italic" aria-label="Toggle italic">
-                <ItalicIcon />
+                <ItalicIcon stroke={isWeb ? "currentColor" : undefined} />
               </ToggleGroupItem>
               <ToggleGroupItem value="underline" aria-label="Toggle underline">
-                <UnderlineIcon />
+                <UnderlineIcon stroke={isWeb ? "currentColor" : undefined} />
               </ToggleGroupItem>
             </ToggleGroup>
           </View>

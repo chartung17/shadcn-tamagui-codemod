@@ -19,6 +19,26 @@ import type { FilePass, PassContext } from '../types.js'
 export const DEFAULT_ICONS_IMPORT = '@/components/icons'
 const LUCIDE = 'lucide-react'
 const ICON_HELPERS = '@tamagui/helpers-icon'
+const TAMAGUI = 'tamagui'
+
+/**
+ * Lucide icons draw with `currentColor`; Tamagui icons default to the theme
+ * color. On web, `currentColor` keeps the icon the color of the text around it
+ * (a primary button's foreground); native has no inherited color, so it keeps
+ * the theme color there.
+ */
+function addCurrentColor(sourceFile: SourceFile, element: ElementNode): void {
+  const names = element
+    .getAttributes()
+    .map((a) => (Node.isJsxAttribute(a) ? a.getNameNode().getText() : '...'))
+  if (names.some((n) => n === 'color' || n === 'stroke' || n === '...')) return
+  const isWeb = ensureNamedImport(sourceFile, TAMAGUI, 'isWeb')
+  // `stroke` (an SVG prop) takes any color; `color` only takes theme colors.
+  element.addAttribute({
+    name: 'stroke',
+    initializer: `{${isWeb} ? "currentColor" : undefined}`,
+  })
+}
 
 /** Lucide source icon for an imported name: `ChevronDownIcon` -> `ChevronDown`. */
 export function lucideSource(name: string): string {
@@ -137,6 +157,7 @@ function rewriteIconElement(
       initializer: value.startsWith('"') ? value : `{${value}}`,
     }))
   if (added.length) element.insertAttributes(index, added)
+  addCurrentColor(sourceFile, element)
 
   if (restExpression) {
     // Tamagui icons take size/color props but not classes; a View with
@@ -243,10 +264,10 @@ export const iconsPass: FilePass = {
     // Elements are rewritten from the innermost out, since wrapping replaces text.
     for (const element of collectElements(sourceFile).reverse()) {
       if (element.wasForgotten() || !isIconElement(element, locals)) continue
-      const attr = getClassNameAttribute(element)
-      if (!attr) continue
-      rewriteIconElement(sourceFile, element, attr, diagnostics, support)
       changed = true
+      const attr = getClassNameAttribute(element)
+      if (attr) rewriteIconElement(sourceFile, element, attr, diagnostics, support)
+      else addCurrentColor(sourceFile, element)
     }
     return { changed, diagnostics: diagnostics.items }
   },

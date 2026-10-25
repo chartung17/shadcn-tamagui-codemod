@@ -8,7 +8,7 @@
 | Native class coverage | 60.4% |
 | TODOs | 1 |
 | Warnings | 6 |
-| Notes | 0 |
+| Notes | 4 |
 | Classes (supported / web-only / unknown / unsupported) | 29 / 16 / 0 / 3 |
 | Constructs (converted / flagged) | 4 / 0 |
 
@@ -21,6 +21,9 @@
 | --- | --- | ---: |
 | `class/unsupported` | todo | 1 |
 | `class/web-only` | warning | 6 |
+| `selector/rewrite` | info | 2 |
+| `selector/web-color` | info | 1 |
+| `selector/web-state` | info | 1 |
 
 ## shadcn/ui/radio-group.tsx
 
@@ -35,3 +38,7 @@ Auto-converted 94.2% · 1 TODO(s) · 6 warning(s)
 | 36 | warning | `class/web-only` | `disabled:cursor-not-allowed` | Cursors other than `auto`/`pointer` are dropped on native. |  |
 | 36 | warning | `class/web-only` | `aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 aria-invalid:aria-checked:border-primary dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40` | `aria-*` attribute selectors are web-only, so this style does not apply on native. | Drive the style from a prop or state instead (e.g. a styled() variant). |
 | 36 | warning | `class/web-only` | `data-checked:border-primary data-checked:bg-primary data-checked:text-primary-foreground dark:data-checked:bg-primary` | `data-*` attribute selectors are web-only, so this style does not apply on native. | Drive the style from a prop or state instead (e.g. a styled() variant). |
+| 36 | info | `selector/rewrite` | `flex-row` | Added `flex-row`: Tamagui views and native lay out a `flex` container as a column. |  |
+| 36 | info | `selector/web-color` | `group-has-[:focus-visible]/field-label:not-data-checked:border-input focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 aria-invalid:aria-checked:border-primary dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 data-checked:border-primary data-checked:bg-primary data-checked:text-primary-foreground group-has-[:focus-visible]/field-label:data-checked:border-primary dark:data-checked:bg-primary` | Theme colors in classes Tamagui leaves to Tailwind on web now read Tamagui's theme variables (`bg-(--primary)`): Tailwind compiles them with its default theme, which has no shadcn colors. |  |
+| 36 | info | `selector/web-state` | `group-has-[:focus-visible]/field-label:ring-0 aria-invalid:ring-3` | Marked `!important`: Tamagui renders the base classes of a runtime className as inline styles, which a state variant (`data-*:`, `aria-*:`) has to beat on web. |  |
+| 43 | info | `selector/rewrite` | `flex-row` | Added `flex-row`: Tamagui views and native lay out a `flex` container as a column. |  |

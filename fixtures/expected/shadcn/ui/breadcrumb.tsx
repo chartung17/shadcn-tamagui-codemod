@@ -2,6 +2,7 @@ import * as React from "react"
 import { cn } from "cn"
 import { html } from "@tamagui/tailwind"
 import { ChevronRightIcon, MoreHorizontalIcon } from "@/components/icons"
+import { isWeb } from "tamagui"
 
 function Breadcrumb({
   className,
@@ -92,7 +93,9 @@ function BreadcrumbSeparator({
       className={cn("[&>svg]:size-3.5", className)}
       {...props}
     >
-      {children ?? <ChevronRightIcon />}
+      {children ?? (
+        <ChevronRightIcon stroke={isWeb ? "currentColor" : undefined} />
+      )}
     </html.li>
   )
 }
@@ -112,7 +115,7 @@ function BreadcrumbEllipsis({
       )}
       {...props}
     >
-      <MoreHorizontalIcon />
+      <MoreHorizontalIcon stroke={isWeb ? "currentColor" : undefined} />
       <html.span className="sr-only">More</html.span>
     </html.span>
   )

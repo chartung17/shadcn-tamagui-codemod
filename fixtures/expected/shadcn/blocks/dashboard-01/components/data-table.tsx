@@ -111,6 +111,7 @@ import {
   ChevronsRightIcon,
   TrendingUpIcon,
 } from "@/components/icons"
+import { isWeb } from "tamagui"
 
 // New in v9: declare the features this table uses — anything you don't
 // register is tree-shaken out of the bundle.
@@ -215,10 +216,13 @@ const columns = columnHelper.columns([
       <Badge variant="outline" className="px-1.5 text-muted-foreground">
         {row.original.status === "Done" ? (
           <View asChild className="dark:fill-green-400">
-            <CircleCheckIcon fill="green-500" />
+            <CircleCheckIcon
+              fill="green-500"
+              stroke={isWeb ? "currentColor" : undefined}
+            />
           </View>
         ) : (
-          <LoaderIcon />
+          <LoaderIcon stroke={isWeb ? "currentColor" : undefined} />
         )}
         {row.original.status}
       </Badge>
@@ -314,10 +318,10 @@ const columns = columnHelper.columns([
         <DropdownMenuTrigger asChild>
           <Button
             variant="ghost"
-            className="flex size-8 text-muted-foreground data-[state=open]:bg-muted"
+            className="flex flex-row size-8 text-muted-foreground data-[state=open]:bg-(--muted)!"
             size="icon"
           >
-            <EllipsisVerticalIcon />
+            <EllipsisVerticalIcon stroke={isWeb ? "currentColor" : undefined} />
             <html.span className="sr-only">Open menu</html.span>
           </Button>
         </DropdownMenuTrigger>
@@ -347,7 +351,7 @@ function DraggableRow({
       data-state={row.getIsSelected() && "selected"}
       data-dragging={isDragging}
       ref={setNodeRef}
-      className="relative z-0 data-[dragging=true]:z-10 data-[dragging=true]:opacity-80"
+      className="relative z-0 data-[dragging=true]:z-10! data-[dragging=true]:opacity-80!"
       style={{
         transform: CSS.Transform.toString(transform),
         transition: transition,
@@ -433,7 +437,7 @@ export function DataTable({
         </Label>
         <Select defaultValue="outline">
           <SelectTrigger
-            className="flex w-fit @4xl/main:hidden"
+            className="flex flex-row w-fit @4xl/main:hidden!"
             size="sm"
             id="view-selector"
           >
@@ -448,7 +452,7 @@ export function DataTable({
             </SelectGroup>
           </SelectContent>
         </Select>
-        <TabsList className="hidden **:data-[slot=badge]:size-5 **:data-[slot=badge]:rounded-full **:data-[slot=badge]:bg-muted-foreground/30 **:data-[slot=badge]:px-1 @4xl/main:flex">
+        <TabsList className="hidden **:data-[slot=badge]:size-5 **:data-[slot=badge]:rounded-full **:data-[slot=badge]:bg-(--muted-foreground)/30 **:data-[slot=badge]:px-1 @4xl/main:flex!">
           <TabsTrigger value="outline">Outline</TabsTrigger>
           <TabsTrigger value="past-performance">
             Past Performance <Badge variant="secondary">3</Badge>
@@ -462,9 +466,15 @@ export function DataTable({
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" size="sm">
-                <Columns3Icon data-icon="inline-start" />
+                <Columns3Icon
+                  data-icon="inline-start"
+                  stroke={isWeb ? "currentColor" : undefined}
+                />
                 Columns
-                <ChevronDownIcon data-icon="inline-end" />
+                <ChevronDownIcon
+                  data-icon="inline-end"
+                  stroke={isWeb ? "currentColor" : undefined}
+                />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-32">
@@ -492,7 +502,7 @@ export function DataTable({
             </DropdownMenuContent>
           </DropdownMenu>
           <Button variant="outline" size="sm">
-            <PlusIcon />
+            <PlusIcon stroke={isWeb ? "currentColor" : undefined} />
             <html.span className="hidden lg:inline">Add Section</html.span>
           </Button>
         </View>
@@ -501,7 +511,7 @@ export function DataTable({
         value="outline"
         className="relative flex flex-col gap-4 overflow-auto px-4 lg:px-6"
       >
-        <html.div className="overflow-hidden rounded-lg border">
+        <html.div className="overflow-hidden rounded-lg border border-border">
           <DndContext
             collisionDetection={closestCenter}
             modifiers={[restrictToVerticalAxis]}
@@ -591,7 +601,7 @@ export function DataTable({
                 disabled={!table.getCanPreviousPage()}
               >
                 <html.span className="sr-only">Go to first page</html.span>
-                <ChevronsLeftIcon />
+                <ChevronsLeftIcon stroke={isWeb ? "currentColor" : undefined} />
               </Button>
               <Button
                 variant="outline"
@@ -601,7 +611,7 @@ export function DataTable({
                 disabled={!table.getCanPreviousPage()}
               >
                 <html.span className="sr-only">Go to previous page</html.span>
-                <ChevronLeftIcon />
+                <ChevronLeftIcon stroke={isWeb ? "currentColor" : undefined} />
               </Button>
               <Button
                 variant="outline"
@@ -611,7 +621,7 @@ export function DataTable({
                 disabled={!table.getCanNextPage()}
               >
                 <html.span className="sr-only">Go to next page</html.span>
-                <ChevronRightIcon />
+                <ChevronRightIcon stroke={isWeb ? "currentColor" : undefined} />
               </Button>
               <Button
                 variant="outline"
@@ -621,7 +631,9 @@ export function DataTable({
                 disabled={!table.getCanNextPage()}
               >
                 <html.span className="sr-only">Go to last page</html.span>
-                <ChevronsRightIcon />
+                <ChevronsRightIcon
+                  stroke={isWeb ? "currentColor" : undefined}
+                />
               </Button>
             </View>
           </View>
@@ -631,16 +643,16 @@ export function DataTable({
         value="past-performance"
         className="flex flex-col px-4 lg:px-6"
       >
-        <html.div className="aspect-video w-full flex-1 rounded-lg border border-dashed"></html.div>
+        <html.div className="aspect-video w-full flex-1 rounded-lg border border-border border-dashed"></html.div>
       </TabsContent>
       <TabsContent value="key-personnel" className="flex flex-col px-4 lg:px-6">
-        <html.div className="aspect-video w-full flex-1 rounded-lg border border-dashed"></html.div>
+        <html.div className="aspect-video w-full flex-1 rounded-lg border border-border border-dashed"></html.div>
       </TabsContent>
       <TabsContent
         value="focus-documents"
         className="flex flex-col px-4 lg:px-6"
       >
-        <html.div className="aspect-video w-full flex-1 rounded-lg border border-dashed"></html.div>
+        <html.div className="aspect-video w-full flex-1 rounded-lg border border-border border-dashed"></html.div>
       </TabsContent>
     </Tabs>
   )
@@ -729,7 +741,11 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
               <Separator />
               <html.div className="grid gap-2">
                 <html.div className="flex gap-2 leading-none font-medium">
-                  Trending up by 5.2% this month <TrendingUpIcon size={16} />
+                  Trending up by 5.2% this month{" "}
+                  <TrendingUpIcon
+                    size={16}
+                    stroke={isWeb ? "currentColor" : undefined}
+                  />
                 </html.div>
                 <html.div className="text-muted-foreground">
                   Showing total visitors for the last 6 months. This is just

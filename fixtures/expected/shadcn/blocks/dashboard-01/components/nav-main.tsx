@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/sidebar"
 import { html } from "@tamagui/tailwind"
 import { CirclePlusIcon, MailIcon } from "@/components/icons"
+import { isWeb } from "tamagui"
 
 export function NavMain({
   items,
@@ -24,20 +25,20 @@ export function NavMain({
     <SidebarGroup>
       <SidebarGroupContent className="flex flex-col gap-2">
         <SidebarMenu>
-          <SidebarMenuItem className="flex items-center gap-2">
+          <SidebarMenuItem className="flex flex-row items-center gap-2">
             <SidebarMenuButton
               tooltip="Quick Create"
               className="min-w-8 bg-primary text-primary-foreground duration-200 ease-linear hover:bg-primary/90 hover:text-primary-foreground active:bg-primary/90 active:text-primary-foreground"
             >
-              <CirclePlusIcon />
+              <CirclePlusIcon stroke={isWeb ? "currentColor" : undefined} />
               <html.span>Quick Create</html.span>
             </SidebarMenuButton>
             <Button
               size="icon"
-              className="size-8 group-data-[collapsible=icon]:opacity-0"
+              className="size-8 group-data-[collapsible=icon]:opacity-0!"
               variant="outline"
             >
-              <MailIcon />
+              <MailIcon stroke={isWeb ? "currentColor" : undefined} />
               <html.span className="sr-only">Inbox</html.span>
             </Button>
           </SidebarMenuItem>

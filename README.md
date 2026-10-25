@@ -36,6 +36,25 @@ Paths can be files, directories (scanned for `.tsx`, `.ts`, `.jsx`, `.js`) or
 globs. `node_modules`, `dist`, `build`, `.next` and `.d.ts` files are skipped.
 Changed files are formatted with the target project's Prettier config.
 
+### App setup
+
+The converted code needs Tamagui's build plugins and a few app-level pieces the
+codemod does not write. [`examples/`](examples/README.md) has a working Vite
+app and Expo app.
+
+- **Web (Vite):** `tamaguiPlugin` from `@tamagui/tailwind/vite`, with
+  `tailwindcss@4.3.0` installed. Import `@tamagui/core/reset.css` in the entry:
+  it is the browser reset Tailwind's preflight gave the original.
+- **Native (Expo/Metro):** `withTamagui` from `@tamagui/cli/metro` in
+  `metro.config.js`. The compiler is required on native for `html.*`.
+- **Provider:** wrap the app in `TamaguiProvider` from `tamagui` (not
+  `@tamagui/core`), with the generated config. It adds the `PortalProvider`
+  that Dialog, Popover, Select and the other overlays render into.
+- **One copy of each Tamagui package.** npm can install several copies of the
+  same `@tamagui/*` version (e.g. `@tamagui/popper`), each with its own React
+  context; Tooltip then throws `Cannot read properties of undefined (reading
+'setReference')`. Run `npm dedupe` after installing.
+
 ### Diagnostics
 
 Every diagnostic has a severity:
@@ -171,16 +190,57 @@ Diagnostics for the same string and reason are grouped into one row.
 
 `hover:`, `active:` (Tamagui's `press:`), `focus:`, `focus-visible:`,
 `focus-within:`, `disabled:`, `dark:`, configured breakpoints and `group-hover:`
-style states work as written. The `selectors` pass rewrites two cases that have
-a cross-platform form:
+style states work as written. The `selectors` pass rewrites classes that
+would otherwise behave differently after conversion:
 
-- `inline-flex` without a direction gets `flex-row`, because native drops
-  `inline-flex` and would lay the children out as a column.
+- `flex` and `inline-flex` without a direction get `flex-row`. Tamagui views
+  and native lay a `flex` container out as a column, while Tailwind's default
+  is a row. A plain `flex` on an `html.*` element is left alone: it is already
+  a row there. A direction behind `data-horizontal:` counts as the default,
+  because Radix and Tamagui components are horizontal unless told otherwise.
+- A border width without a border color gets `border-border`. shadcn's base
+  CSS (`* { @apply border-border }`) gives every border that color, and native
+  defaults to black.
 - `placeholder:text-<color>` gets a `placeholder-<color>` twin, which maps to
   `placeholderTextColor` on native. The original stays for web.
+- A supported class behind `data-horizontal:` gets a `native:` copy
+  (`data-horizontal:h-1.5` adds `native:h-1.5`). Native drops `data-*`
+  variants, and the Slider track and Tabs layout depend on these classes.
+
+#### Classes Tamagui leaves to Tailwind on web
+
+On web, `@tamagui/tailwind/vite` compiles the classes Tamagui does not claim
+(`data-*`, `aria-*`, `has-*`, `[&...]` variants, and `ring-*`) with **Tailwind's
+default theme and variants**, not the app's CSS. shadcn's colors and its custom
+variants are missing there, so the pass rewrites these classes:
+
+| shadcn                    | Converted                              | Why                                                                    |
+| ------------------------- | -------------------------------------- | ---------------------------------------------------------------------- |
+| `data-checked:bg-primary` | `data-[state=checked]:bg-(--primary)!` | custom variant → the attribute Tamagui sets; color → theme variable    |
+| `dark:aria-invalid:...`   | `in-[.t_dark]:aria-invalid:...!`       | `dark:` → Tamagui's dark theme class instead of `prefers-color-scheme` |
+| `ring-ring/50`            | `ring-(--ring)/50 ring-ring/50`        | web form added; native keeps using the original                        |
+
+- shadcn's custom variants (`data-open`, `data-closed`, `data-checked`,
+  `data-unchecked`, `data-active`, `data-selected`, `data-horizontal`,
+  `data-vertical`, from `shadcn/tailwind.css`) become the Radix-style
+  attributes Tamagui's primitives set (`data-state`, `data-orientation`).
+- Theme colors become Tamagui's theme CSS variables (`bg-(--primary)`). The
+  `(--var)` form is dropped on native, so a class native also resolves keeps
+  its original, placed _after_ the web form so it wins in Tamagui's runtime.
+- State variants get `!important`. For a `className` built at runtime with
+  `cn()`, Tamagui renders the classes it claims as inline styles, and a state
+  class such as `data-[state=active]:text-(--foreground)` has to beat the
+  inline base color, as it beats the base class in shadcn's CSS. Pseudo-element
+  and descendant variants (`after:`, `[&_svg]:`, `*:`) are left alone.
+
+`test/web-passthrough.test.ts` checks which classes Tamagui leaves to Tailwind
+against `@tamagui/style-grammar`'s classifier.
 
 `group-*` (other states), `peer-*`, `data-*`, `aria-*`, `has-*` and arbitrary
-`[&...]` variants are reported as web-only; `before:`/`after:` get a TODO.
+`[&...]` variants are still reported as web-only, since native drops them;
+`before:`/`after:` get a TODO. Animations from `tw-animate-css`
+(`animate-in`, `fade-in-0`, ...) are not part of Tamagui's Tailwind build and
+do nothing on web or native.
 
 ### asChild and Slot
 
@@ -194,14 +254,27 @@ Radix primitives are replaced with Tamagui's unstyled UI primitives from
 `tamagui/unstyled` (shadcn supplies all styling as classes), using the mapping
 table in `src/mappings/radix.ts`:
 
-| Radix                                                                       | Tamagui                   | Notes                                                                                                                           |
-| --------------------------------------------------------------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| Dialog (Root, Trigger, Portal, Overlay, Content, Title, Description, Close) | `Dialog`                  | `onOpenAutoFocus`/`onCloseAutoFocus` removed (Tamagui uses `Dialog.FocusScope`)                                                 |
-| Popover (Root, Trigger, Anchor, Content, Close, Arrow; Portal removed)      | `Popover`                 | Content positioning props (`side`, `align`, `sideOffset`, ...) removed; Tamagui positions from the root (`placement`, `offset`) |
-| Tooltip (Provider, Root, Trigger, Content, Arrow; Portal removed)           | `TooltipGroup`, `Tooltip` | `delayDuration` becomes `delay`; Tooltip only provides accessibility output on native                                           |
-| Tabs (Root, List, Trigger, Content)                                         | `Tabs`                    | `Trigger` becomes `Tabs.Tab`                                                                                                    |
-| Checkbox (Root, Indicator)                                                  | `Checkbox`                |                                                                                                                                 |
-| Switch (Root, Thumb)                                                        | `Switch`                  |                                                                                                                                 |
+| Radix                                                                                                                                                               | Tamagui                   | Notes                                                                                                                                                     |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Dialog (also shadcn's Sheet): Root, Trigger, Portal, Overlay, Content, Title, Description, Close                                                                    | `Dialog`                  | `onOpenAutoFocus`/`onCloseAutoFocus` removed (Tamagui uses `Dialog.FocusScope`); Title/Description get the Content's font size                            |
+| AlertDialog: Root, Trigger, Portal, Overlay, Content, Title, Description, Action, Cancel                                                                            | `AlertDialog`             | as Dialog                                                                                                                                                 |
+| Popover: Root, Trigger, Anchor, Content, Close, Arrow; Portal removed                                                                                               | `Popover`                 | Content positioning props (`side`, `align`, `sideOffset`, ...) removed; Tamagui positions from the root (`placement`, `offset`) and sets `data-placement` |
+| Tooltip: Provider, Root, Trigger, Content, Arrow; Portal removed                                                                                                    | `TooltipGroup`, `Tooltip` | `delayDuration` becomes `delay`; the root gets `placement="top"` (Radix's default side); only accessibility output on native                              |
+| DropdownMenu: Root, Trigger, Portal, Content, Group, Label, Item, CheckboxItem, RadioGroup, RadioItem, ItemIndicator, Separator, Arrow, Sub, SubTrigger, SubContent | `Menu`                    | items highlight with `focus:`; no `data-highlighted`/`data-side`; a popover on native unless an Expo UI or Zeego adapter is added                         |
+| Select: Root, Trigger, Value, Icon, Content, Viewport, Group, Label, Item, ItemText, ItemIndicator, ScrollUpButton, ScrollDownButton, Separator; Portal removed     | `Select`                  | Content's classes move to the Viewport (Tamagui's visible list); `position` removed; add `<Select.Adapt>` for a native picker                             |
+| Tabs: Root, List, Trigger, Content                                                                                                                                  | `Tabs`                    | `Trigger` becomes `Tabs.Tab`                                                                                                                              |
+| Accordion: Root, Item, Header, Trigger, Content                                                                                                                     | `Accordion`               |                                                                                                                                                           |
+| Collapsible: Root, Trigger, Content                                                                                                                                 | `Collapsible`             |                                                                                                                                                           |
+| Checkbox: Root, Indicator                                                                                                                                           | `Checkbox`                |                                                                                                                                                           |
+| Switch: Root, Thumb                                                                                                                                                 | `Switch`                  |                                                                                                                                                           |
+| RadioGroup: Root, Item, Indicator                                                                                                                                   | `RadioGroup`              |                                                                                                                                                           |
+| Slider: Root, Track, Range, Thumb                                                                                                                                   | `Slider`                  | `Range` becomes `Slider.TrackActive`; `Thumb` gets `index` from its `key`                                                                                 |
+| ToggleGroup: Root, Item                                                                                                                                             | `ToggleGroup`             |                                                                                                                                                           |
+| Avatar: Root, Image, Fallback                                                                                                                                       | `Avatar`                  | `delayMs` becomes `delay`                                                                                                                                 |
+| Separator: Root                                                                                                                                                     | `Separator`               | `orientation` becomes `vertical` (plus `data-orientation`)                                                                                                |
+| Label: Root                                                                                                                                                         | `Label`                   |                                                                                                                                                           |
+
+Radix Toggle has no Tamagui equivalent and stays on Radix with a TODO.
 
 The import keeps its local name (`import { Dialog as DialogPrimitive } from
 "tamagui/unstyled"`), so `DialogPrimitive.Root` becomes `DialogPrimitive` and
@@ -220,8 +293,26 @@ const tw = <C extends React.ComponentType<any>>(component: C) =>
 const StyledDialogContent = tw(DialogPrimitive.Content)
 ```
 
-`test/runtime.test.ts` pins this behavior (and that Tamagui still sets
-`data-state`, which shadcn's `data-open:`/`data-checked:` variants use on web).
+**Text in primitives.** Most parts are views, and shadcn passes them text
+(`<TabsTrigger>Account</TabsTrigger>`, `<AvatarFallback>CN</AvatarFallback>`).
+A native view cannot render a raw string, so the parts that commonly receive
+text (marked `wrapsText` in the mapping: triggers, tab and accordion parts,
+menu items, tooltip and popover content, avatar fallback, toggle group items,
+alert dialog actions) are wrapped with `twText` instead. It wraps string
+children in `html.span` and gives that span the part's text classes
+(`text-*`, `font-*`, `leading-*`, ...) as `native:` classes, since native text
+does not inherit styles from a view. On web the span inherits them through CSS.
+
+**Mapping options.** Besides part names and props, a mapping entry can say:
+`wrapsText` (above); `classNameTo`, to move a part's classes to a descendant
+part (Select.Content to Select.Viewport); `fontSizeFrom`, for text parts that
+inherit their font size in Radix but have their own in Tamagui (Dialog.Title
+is an `H2`); and `defaults`, for props whose Radix default differs (Tooltip
+`placement="top"`). Defaults are inserted before any `{...props}` spread, so
+callers can still override them.
+
+`test/runtime.test.ts` pins the `styled()` behavior (and that Tamagui sets
+`data-state`, which the converted `data-[state=...]` variants use on web).
 Tamagui does not document `styled()` over UI kit components in Tailwind mode,
 so this is the part of the output most likely to need attention after a
 Tamagui upgrade.
@@ -253,6 +344,11 @@ icons you use with `npx @tamagui/cli icons add ...` (they need
   `opacity-*`, `stroke-*`). Tamagui icons do not take classes, so any other
   classes move to a `<View asChild className="...">` wrapper, which applies
   them to the icon on web and native;
+- gives an icon without a color `stroke={isWeb ? "currentColor" : undefined}`
+  (`isWeb` from `tamagui`). Lucide icons draw with `currentColor`, so an icon
+  in a primary button takes the button's text color; Tamagui icons default to
+  the theme color instead. Native has no inherited color, so there the icon
+  keeps the theme color: pass `color` when it sits on a colored background;
 - maps the `LucideIcon`/`LucideProps` types to `IconProps` from
   `@tamagui/helpers-icon`.
 

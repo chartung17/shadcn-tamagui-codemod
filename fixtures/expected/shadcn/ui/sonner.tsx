@@ -11,6 +11,7 @@ import {
   OctagonXIcon,
   Loader2Icon,
 } from "@/components/icons"
+import { isWeb } from "tamagui"
 import { View } from "@tamagui/tailwind"
 
 const Toaster = ({ ...props }: ToasterProps) => {
@@ -21,13 +22,30 @@ const Toaster = ({ ...props }: ToasterProps) => {
       theme={theme as ToasterProps["theme"]}
       className="toaster group"
       icons={{
-        success: <CircleCheckIcon size={16} />,
-        info: <InfoIcon size={16} />,
-        warning: <TriangleAlertIcon size={16} />,
-        error: <OctagonXIcon size={16} />,
+        success: (
+          <CircleCheckIcon
+            size={16}
+            stroke={isWeb ? "currentColor" : undefined}
+          />
+        ),
+        info: (
+          <InfoIcon size={16} stroke={isWeb ? "currentColor" : undefined} />
+        ),
+        warning: (
+          <TriangleAlertIcon
+            size={16}
+            stroke={isWeb ? "currentColor" : undefined}
+          />
+        ),
+        error: (
+          <OctagonXIcon size={16} stroke={isWeb ? "currentColor" : undefined} />
+        ),
         loading: (
           <View asChild className="animate-spin">
-            <Loader2Icon size={16} />
+            <Loader2Icon
+              size={16}
+              stroke={isWeb ? "currentColor" : undefined}
+            />
           </View>
         ),
       }}

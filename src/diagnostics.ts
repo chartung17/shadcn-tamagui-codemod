@@ -85,7 +85,15 @@ export function placeTodos(
       continue
     }
     const comment = todoText(draft)
-    if (hasNearbyComment(text, target.pos, comment)) continue
+    // A TODO from an earlier run may name the classes before a later pass
+    // rewrote them (`after:bg-primary` -> `after:bg-(--primary)`): the same
+    // reason at the same place is the same TODO.
+    const reason = draft.reason.replace(/\s+/g, ' ').trim()
+    if (
+      hasNearbyComment(text, target.pos, comment) ||
+      (draft.construct && hasNearbyComment(text, target.pos, `\`: ${reason}`))
+    )
+      continue
     const existing = insertions.get(target.pos)
     if (existing) {
       if (!existing.texts.includes(comment)) existing.texts.push(comment)

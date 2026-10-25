@@ -40,6 +40,6 @@ Auto-converted 86.7% · 2 TODO(s) · 2 warning(s)
 | ---: | --- | --- | --- | --- | --- |
 | 4 | todo | `import/web-only-package` | `"next-themes"` | next-themes reads and writes the DOM (`document`, `localStorage`) and does not run on native. | Switch themes with Tamagui's `TamaguiProvider defaultTheme` / `Theme` and the platform color scheme. |
 | 6 | todo | `import/web-only-package` | `"sonner"` | sonner (toasts) renders DOM elements and does not run on native. | Use Tamagui `Toast` (`tamagui/toast`). |
-| 22 | warning | `class/unknown` | `toaster` | Not a Tailwind utility or config token the codemod recognizes (a custom CSS class, or a value missing from the Tamagui config); it passes through on web and is dropped on native. |  |
-| 29 | info | `icon/wrapped` | `animate-spin` | Tamagui icons take size and color as props, not classes; the other classes moved to a `View asChild` wrapper. |  |
-| 29 | warning | `class/web-only` | `animate-spin` | CSS keyframe animations are web-only. | Use Tamagui's `transition` prop (and enter/exit styles) for native animation. |
+| 23 | warning | `class/unknown` | `toaster` | Not a Tailwind utility or config token the codemod recognizes (a custom CSS class, or a value missing from the Tamagui config); it passes through on web and is dropped on native. |  |
+| 36 | warning | `class/web-only` | `animate-spin` | CSS keyframe animations are web-only. | Use Tamagui's `transition` prop (and enter/exit styles) for native animation. |
+| 37 | info | `icon/wrapped` | `animate-spin` | Tamagui icons take size and color as props, not classes; the other classes moved to a `View asChild` wrapper. |  |

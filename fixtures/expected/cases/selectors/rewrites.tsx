@@ -6,7 +6,7 @@ export function Field({ invalid }: { invalid: boolean }) {
     <html.div className="inline-flex flex-row items-center gap-2">
       <html.input
         className={cn(
-          "h-9 placeholder:text-muted-foreground placeholder-muted-foreground placeholder:text-sm",
+          "h-9 placeholder:text-(--muted-foreground) placeholder-muted-foreground placeholder:text-sm",
           invalid && "border-destructive"
         )}
       />

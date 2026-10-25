@@ -37,7 +37,7 @@ Auto-converted 100% · 0 TODO(s) · 3 warning(s)
 
 | Line | Severity | Code | Construct | Reason | Suggested fix |
 | ---: | --- | --- | --- | --- | --- |
-| 161 | warning | `class/web-only` | `data-[slot=sidebar-menu-button]:p-1.5!` | `data-*` attribute selectors are web-only, so this style does not apply on native. | Drive the style from a prop or state instead (e.g. a styled() variant). |
-| 163 | warning | `element/native-caveat` | `<a>` | Native caveat: native has no navigation for href, target, rel, download or referrerPolicy. |  |
-| 164 | info | `icon/wrapped` | `size-5!` | Tamagui icons take size and color as props, not classes; the other classes moved to a `View asChild` wrapper. |  |
-| 164 | warning | `class/web-only` | `size-5!` | `!important` classes are not resolved by Tamagui; they pass through to CSS on web and are dropped on native. | Remove the `!` and rely on class order (the last class wins in Tamagui). |
+| 144 | warning | `class/web-only` | `size-5!` | `!important` classes are not resolved by Tamagui; they pass through to CSS on web and are dropped on native. | Remove the `!` and rely on class order (the last class wins in Tamagui). |
+| 144 | info | `icon/wrapped` | `size-5!` | Tamagui icons take size and color as props, not classes; the other classes moved to a `View asChild` wrapper. |  |
+| 162 | warning | `class/web-only` | `data-[slot=sidebar-menu-button]:p-1.5!` | `data-*` attribute selectors are web-only, so this style does not apply on native. | Drive the style from a prop or state instead (e.g. a styled() variant). |
+| 164 | warning | `element/native-caveat` | `<a>` | Native caveat: native has no navigation for href, target, rel, download or referrerPolicy. |  |

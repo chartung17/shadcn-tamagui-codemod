@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/sidebar"
 import { html, View } from "@tamagui/tailwind"
 import { ChevronsUpDownIcon, PlusIcon } from "@/components/icons"
+import { isWeb } from "tamagui"
 
 export function TeamSwitcher({
   teams,
@@ -43,7 +44,7 @@ export function TeamSwitcher({
           <DropdownMenuTrigger asChild>
             <SidebarMenuButton
               size="lg"
-              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+              className="data-[state=open]:bg-(--sidebar-accent)! data-[state=open]:text-(--sidebar-accent-foreground)!"
             >
               <html.div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
                 {activeTeam.logo}
@@ -57,7 +58,9 @@ export function TeamSwitcher({
                 </html.span>
               </html.div>
               <View asChild className="ml-auto">
-                <ChevronsUpDownIcon />
+                <ChevronsUpDownIcon
+                  stroke={isWeb ? "currentColor" : undefined}
+                />
               </View>
             </SidebarMenuButton>
           </DropdownMenuTrigger>
@@ -76,7 +79,7 @@ export function TeamSwitcher({
                 onClick={() => setActiveTeam(team)}
                 className="gap-2 p-2"
               >
-                <html.div className="flex size-6 items-center justify-center rounded-md border">
+                <html.div className="flex size-6 items-center justify-center rounded-md border border-border">
                   {team.logo}
                 </html.div>
                 {team.name}
@@ -85,8 +88,11 @@ export function TeamSwitcher({
             ))}
             <DropdownMenuSeparator />
             <DropdownMenuItem className="gap-2 p-2">
-              <View className="flex flex-row size-6 items-center justify-center rounded-md border bg-transparent">
-                <PlusIcon size={16} />
+              <View className="flex flex-row size-6 items-center justify-center rounded-md border border-border bg-transparent">
+                <PlusIcon
+                  size={16}
+                  stroke={isWeb ? "currentColor" : undefined}
+                />
               </View>
               <html.div className="font-medium text-muted-foreground">
                 Add team

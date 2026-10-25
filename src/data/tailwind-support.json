@@ -1884,5 +1884,26 @@
     "basis",
     "translate-x",
     "translate-y"
-  ]
+  ],
+  "webPassthrough": {
+    "$comment": "Classes Tamagui does not claim on web are compiled by @tamagui/tailwind/vite with Tailwind's default theme and default variants, not the app's CSS. test/web-passthrough.test.ts checks the prediction against @tamagui/style-grammar's classifier.",
+    "prefixes": ["ring", "ring-offset", "divide"],
+    "customVariants": {
+      "$comment": "shadcn/tailwind.css custom variants, as the Radix-style attributes Tamagui UI primitives set.",
+      "data-open": "data-[state=open]",
+      "data-closed": "data-[state=closed]",
+      "data-checked": "data-[state=checked]",
+      "data-unchecked": "data-[state=unchecked]",
+      "data-active": "data-[state=active]",
+      "data-selected": "data-[selected=true]",
+      "data-horizontal": "data-[orientation=horizontal]",
+      "data-vertical": "data-[orientation=vertical]"
+    },
+    "darkVariant": "in-[.t_dark]",
+    "tailwindColorKeywords": ["transparent", "black", "white", "current", "inherit"],
+    "nativeAssumedVariants": {
+      "$comment": "Variants assumed true on native, where data-* variants are dropped: Radix and Tamagui components default to horizontal. A supported class behind one of these (also as group-*) gets a native: twin.",
+      "variants": ["data-[orientation=horizontal]"]
+    }
+  }
 }

@@ -32,6 +32,7 @@ import {
   FileIcon,
   CommandIcon,
 } from "@/components/icons"
+import { isWeb } from "tamagui"
 
 const data = {
   user: {
@@ -43,33 +44,33 @@ const data = {
     {
       title: "Dashboard",
       url: "#",
-      icon: <LayoutDashboardIcon />,
+      icon: <LayoutDashboardIcon stroke={isWeb ? "currentColor" : undefined} />,
     },
     {
       title: "Lifecycle",
       url: "#",
-      icon: <ListIcon />,
+      icon: <ListIcon stroke={isWeb ? "currentColor" : undefined} />,
     },
     {
       title: "Analytics",
       url: "#",
-      icon: <ChartBarIcon />,
+      icon: <ChartBarIcon stroke={isWeb ? "currentColor" : undefined} />,
     },
     {
       title: "Projects",
       url: "#",
-      icon: <FolderIcon />,
+      icon: <FolderIcon stroke={isWeb ? "currentColor" : undefined} />,
     },
     {
       title: "Team",
       url: "#",
-      icon: <UsersIcon />,
+      icon: <UsersIcon stroke={isWeb ? "currentColor" : undefined} />,
     },
   ],
   navClouds: [
     {
       title: "Capture",
-      icon: <CameraIcon />,
+      icon: <CameraIcon stroke={isWeb ? "currentColor" : undefined} />,
       isActive: true,
       url: "#",
       items: [
@@ -85,7 +86,7 @@ const data = {
     },
     {
       title: "Proposal",
-      icon: <FileTextIcon />,
+      icon: <FileTextIcon stroke={isWeb ? "currentColor" : undefined} />,
       url: "#",
       items: [
         {
@@ -100,7 +101,7 @@ const data = {
     },
     {
       title: "Prompts",
-      icon: <FileTextIcon />,
+      icon: <FileTextIcon stroke={isWeb ? "currentColor" : undefined} />,
       url: "#",
       items: [
         {
@@ -118,34 +119,34 @@ const data = {
     {
       title: "Settings",
       url: "#",
-      icon: <Settings2Icon />,
+      icon: <Settings2Icon stroke={isWeb ? "currentColor" : undefined} />,
     },
     {
       title: "Get Help",
       url: "#",
-      icon: <CircleHelpIcon />,
+      icon: <CircleHelpIcon stroke={isWeb ? "currentColor" : undefined} />,
     },
     {
       title: "Search",
       url: "#",
-      icon: <SearchIcon />,
+      icon: <SearchIcon stroke={isWeb ? "currentColor" : undefined} />,
     },
   ],
   documents: [
     {
       name: "Data Library",
       url: "#",
-      icon: <DatabaseIcon />,
+      icon: <DatabaseIcon stroke={isWeb ? "currentColor" : undefined} />,
     },
     {
       name: "Reports",
       url: "#",
-      icon: <FileChartColumnIcon />,
+      icon: <FileChartColumnIcon stroke={isWeb ? "currentColor" : undefined} />,
     },
     {
       name: "Word Assistant",
       url: "#",
-      icon: <FileIcon />,
+      icon: <FileIcon stroke={isWeb ? "currentColor" : undefined} />,
     },
   ],
 }
@@ -162,7 +163,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             >
               <html.a href="#">
                 <View asChild className="size-5!">
-                  <CommandIcon />
+                  <CommandIcon stroke={isWeb ? "currentColor" : undefined} />
                 </View>
                 <html.span className="text-base font-semibold">
                   Acme Inc.

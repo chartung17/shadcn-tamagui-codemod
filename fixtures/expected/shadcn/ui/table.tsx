@@ -23,7 +23,7 @@ function TableHeader({ className, ...props }: React.ComponentProps<"thead">) {
     <thead
       // TODO(native): `<thead>`: `<thead>` has no `html.*` equivalent, so it renders on web only.
       data-slot="table-header"
-      className={cn("[&_tr]:border-b", className)}
+      className={cn("[&_tr]:border-b border-border", className)}
       {...props}
     />
   )
@@ -46,7 +46,7 @@ function TableFooter({ className, ...props }: React.ComponentProps<"tfoot">) {
       // TODO(native): `<tfoot>`: `<tfoot>` has no `html.*` equivalent, so it renders on web only.
       data-slot="table-footer"
       className={cn(
-        "border-t bg-muted/50 font-medium [&>tr]:last:border-b-0",
+        "border-t border-border bg-muted/50 font-medium [&>tr]:last:border-b-0",
         className
       )}
       {...props}
@@ -60,7 +60,7 @@ function TableRow({ className, ...props }: React.ComponentProps<"tr">) {
       // TODO(native): `<tr>`: `<tr>` has no `html.*` equivalent, so it renders on web only.
       data-slot="table-row"
       className={cn(
-        "border-b transition-colors hover:bg-muted/50 has-aria-expanded:bg-muted/50 data-[state=selected]:bg-muted",
+        "border-b border-border transition-colors hover:bg-muted/50 has-aria-expanded:bg-(--muted)/50! data-[state=selected]:bg-(--muted)!",
         className
       )}
       {...props}

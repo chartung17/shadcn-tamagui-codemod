@@ -24,6 +24,7 @@ import {
   BellIcon,
   LogOutIcon,
 } from "@/components/icons"
+import { isWeb } from "tamagui"
 
 export function NavUser({
   user,
@@ -43,7 +44,7 @@ export function NavUser({
           <DropdownMenuTrigger asChild>
             <SidebarMenuButton
               size="lg"
-              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+              className="data-[state=open]:bg-(--sidebar-accent)! data-[state=open]:text-(--sidebar-accent-foreground)!"
             >
               <Avatar className="h-8 w-8 rounded-lg grayscale">
                 <AvatarImage src={user.avatar} alt={user.name} />
@@ -58,7 +59,10 @@ export function NavUser({
                 </html.span>
               </html.div>
               <View asChild className="ml-auto">
-                <EllipsisVerticalIcon size={16} />
+                <EllipsisVerticalIcon
+                  size={16}
+                  stroke={isWeb ? "currentColor" : undefined}
+                />
               </View>
             </SidebarMenuButton>
           </DropdownMenuTrigger>
@@ -87,21 +91,23 @@ export function NavUser({
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem>
-                <CircleUserRoundIcon />
+                <CircleUserRoundIcon
+                  stroke={isWeb ? "currentColor" : undefined}
+                />
                 Account
               </DropdownMenuItem>
               <DropdownMenuItem>
-                <CreditCardIcon />
+                <CreditCardIcon stroke={isWeb ? "currentColor" : undefined} />
                 Billing
               </DropdownMenuItem>
               <DropdownMenuItem>
-                <BellIcon />
+                <BellIcon stroke={isWeb ? "currentColor" : undefined} />
                 Notifications
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
-              <LogOutIcon />
+              <LogOutIcon stroke={isWeb ? "currentColor" : undefined} />
               Log out
             </DropdownMenuItem>
           </DropdownMenuContent>

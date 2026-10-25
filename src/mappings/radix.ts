@@ -42,6 +42,23 @@ export interface PartMapping {
   radixTypes?: Record<string, string>
   /** Add this prop from the element's `key` when it is missing (Slider.Thumb `index`). */
   propFromKey?: string
+  /**
+   * The Tamagui part is a view that shadcn passes text to (`<TabsTrigger>Account</TabsTrigger>`).
+   * Native views cannot render raw text, so the part is wrapped with `twText`.
+   */
+  wrapsText?: boolean
+  /**
+   * Props added where the Radix default differs from Tamagui's, before any
+   * spread so callers can still override them. Values are JSX initializers.
+   */
+  defaults?: Record<string, string>
+  /** Move the part's `className` to this descendant part (Select.Content -> Viewport). */
+  classNameTo?: string
+  /**
+   * Tamagui gives this text part a font size of its own, where Radix's inherits
+   * it; a part without a size class gets the size of this part (`Content`).
+   */
+  fontSizeFrom?: string
 }
 
 export interface RadixMapping {
@@ -96,7 +113,7 @@ export const RADIX_MAPPINGS: readonly RadixMapping[] = [
     tamagui: 'Dialog',
     parts: {
       Root: { part: '' },
-      Trigger: { part: 'Trigger' },
+      Trigger: { part: 'Trigger', wrapsText: true },
       Portal: { part: 'Portal' },
       Overlay: { part: 'Overlay' },
       Content: {
@@ -110,9 +127,9 @@ export const RADIX_MAPPINGS: readonly RadixMapping[] = [
           onCloseAutoFocus: '(event: Event) => void',
         },
       },
-      Title: { part: 'Title' },
-      Description: { part: 'Description' },
-      Close: { part: 'Close' },
+      Title: { part: 'Title', fontSizeFrom: 'Content' },
+      Description: { part: 'Description', fontSizeFrom: 'Content' },
+      Close: { part: 'Close', wrapsText: true },
     },
   },
   {
@@ -126,6 +143,7 @@ export const RADIX_MAPPINGS: readonly RadixMapping[] = [
       Portal: { part: null },
       Content: {
         part: 'Content',
+        wrapsText: true,
         unsupported: {
           side: POSITIONING,
           sideOffset: POSITIONING,
@@ -174,11 +192,14 @@ export const RADIX_MAPPINGS: readonly RadixMapping[] = [
         part: '',
         rename: { delayDuration: 'delay' },
         radixTypes: { delayDuration: 'number' },
+        // Radix tooltips open above the trigger; Tamagui's default is below.
+        defaults: { placement: '"top"' },
       },
       Trigger: { part: 'Trigger' },
       Portal: { part: null },
       Content: {
         part: 'Content',
+        wrapsText: true,
         unsupported: {
           side: POSITIONING,
           sideOffset: POSITIONING,
@@ -211,8 +232,8 @@ export const RADIX_MAPPINGS: readonly RadixMapping[] = [
     parts: {
       Root: { part: '' },
       List: { part: 'List' },
-      Trigger: { part: 'Tab' },
-      Content: { part: 'Content' },
+      Trigger: { part: 'Tab', wrapsText: true },
+      Content: { part: 'Content', wrapsText: true },
     },
   },
   {
@@ -269,7 +290,7 @@ export const RADIX_MAPPINGS: readonly RadixMapping[] = [
     tamagui: 'AlertDialog',
     parts: {
       Root: { part: '' },
-      Trigger: { part: 'Trigger' },
+      Trigger: { part: 'Trigger', wrapsText: true },
       Portal: { part: 'Portal' },
       Overlay: { part: 'Overlay' },
       Content: {
@@ -283,10 +304,10 @@ export const RADIX_MAPPINGS: readonly RadixMapping[] = [
           onCloseAutoFocus: '(event: Event) => void',
         },
       },
-      Title: { part: 'Title' },
-      Description: { part: 'Description' },
-      Action: { part: 'Action' },
-      Cancel: { part: 'Cancel' },
+      Title: { part: 'Title', fontSizeFrom: 'Content' },
+      Description: { part: 'Description', fontSizeFrom: 'Content' },
+      Action: { part: 'Action', wrapsText: true },
+      Cancel: { part: 'Cancel', wrapsText: true },
     },
   },
   {
@@ -304,10 +325,10 @@ export const RADIX_MAPPINGS: readonly RadixMapping[] = [
       },
       Group: { part: 'Group' },
       Label: { part: 'Label' },
-      Item: { part: 'Item' },
-      CheckboxItem: { part: 'CheckboxItem' },
+      Item: { part: 'Item', wrapsText: true },
+      CheckboxItem: { part: 'CheckboxItem', wrapsText: true },
       RadioGroup: { part: 'RadioGroup' },
-      RadioItem: { part: 'RadioItem' },
+      RadioItem: { part: 'RadioItem', wrapsText: true },
       ItemIndicator: { part: 'ItemIndicator' },
       Separator: { part: 'Separator' },
       Arrow: { part: 'Arrow' },
@@ -346,6 +367,7 @@ export const RADIX_MAPPINGS: readonly RadixMapping[] = [
       Portal: { part: null },
       Content: {
         part: 'Content',
+        classNameTo: 'Viewport',
         unsupported: {
           ...POSITIONING_PROPS,
           position: 'Tamagui Select always renders a floating list (or an adapted Sheet)',
@@ -387,8 +409,8 @@ export const RADIX_MAPPINGS: readonly RadixMapping[] = [
       Root: { part: '' },
       Item: { part: 'Item' },
       Header: { part: 'Header' },
-      Trigger: { part: 'Trigger' },
-      Content: { part: 'Content' },
+      Trigger: { part: 'Trigger', wrapsText: true },
+      Content: { part: 'Content', wrapsText: true },
     },
     cssVariables: {
       '--radix-accordion-content-height': null,
@@ -425,6 +447,7 @@ export const RADIX_MAPPINGS: readonly RadixMapping[] = [
       Image: { part: 'Image' },
       Fallback: {
         part: 'Fallback',
+        wrapsText: true,
         rename: { delayMs: 'delay' },
         radixTypes: { delayMs: 'number' },
       },
@@ -436,7 +459,7 @@ export const RADIX_MAPPINGS: readonly RadixMapping[] = [
     tamagui: 'ToggleGroup',
     parts: {
       Root: { part: '' },
-      Item: { part: 'Item' },
+      Item: { part: 'Item', wrapsText: true },
     },
   },
   {
@@ -446,10 +469,10 @@ export const RADIX_MAPPINGS: readonly RadixMapping[] = [
     tamagui: 'Collapsible',
     parts: {
       Root: { part: '' },
-      Trigger: { part: 'Trigger' },
-      Content: { part: 'Content' },
-      CollapsibleTrigger: { part: 'Trigger' },
-      CollapsibleContent: { part: 'Content' },
+      Trigger: { part: 'Trigger', wrapsText: true },
+      Content: { part: 'Content', wrapsText: true },
+      CollapsibleTrigger: { part: 'Trigger', wrapsText: true },
+      CollapsibleContent: { part: 'Content', wrapsText: true },
     },
   },
 ]
